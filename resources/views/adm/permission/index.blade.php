@@ -44,6 +44,7 @@
                         </div>
                         <div class="">
                             <a class="btn-green-500 btn text-white btn-sm" href="{{ route('adm.permissions.create') }}">Registrar</a>
+                            {{-- <a class="btn-green-500 btn text-white btn-sm" href="{{ route('adm.permissions.create') }}">Importar</a> --}}
 
                             {{-- <x-jet-button type="button" data-bs-toggle="modal" data-bs-target="#register-country">
                                 Registrar

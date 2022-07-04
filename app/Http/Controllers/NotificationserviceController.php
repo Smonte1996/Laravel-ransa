@@ -88,7 +88,11 @@ class NotificationserviceController extends Controller
 
         if ($request->file('file')) {
             foreach ($request->file('file') as $image) {
-                $url = $image->store('dissatisfaction_service');
+                if ($image->extension() == 'xlsx' || $image->extension() == 'xls') {
+                    $url = $image->store('notification_service/analisis/');   
+                }else{
+                    $url = $image->store('notification_service');
+                }
                 $notification_service->attached_files()->create([
                     'name' => $image->hashName(),
                     'ext' => $image->extension(),

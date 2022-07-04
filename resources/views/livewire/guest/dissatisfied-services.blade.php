@@ -105,7 +105,7 @@
     </div>
 
     <div class="text-center mt-2">
-        <x-jet-button wire:click="save">Notificar Novedad</x-jet-button>
+        <x-jet-button wire:click="save" wire:loading.attr="disabled">Notificar Novedad  </x-jet-button>
     </div>
     <div>
         <fieldset class="border border-2 rounded p-2">

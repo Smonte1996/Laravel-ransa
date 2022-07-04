@@ -74,7 +74,7 @@ class DissatisfiedServices extends Component
         ]);
         if (!is_null($this->images)) {
             foreach ($this->images as $image) {
-                $url =  $image->storePublicly('images');
+                $url =  $image->store('notification_service');
                 $notification_service->attached_files()->create([
                     'name' => $image->hashName(),
                     'ext' => $image->extension(),
