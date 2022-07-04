@@ -1,0 +1,41 @@
+// Body
+$body-bg: #f8fafc;
+// Typography
+$font-family-sans-serif: 'Univia-Regular',
+sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$lead:( "lead-100": #ededec, "lead-200": #d9d9d8, "lead-300": #c5c5c4, "lead-400": #b1b1b0, "lead-500": #9D9D9C, "lead-600": #898988, "lead-700": #757574, "lead-800": #616160, "lead-900": #4d4d4c);
+$lead500: #9D9D9C;
+
+$orange:("orange-100": #ffe250, "orange-200": #ffce3c, "orange-300": #ffba28, "orange-400": #ffa614, "orange-500": #F39200, "orange-600": #df7e00, "orange-700": #cb6a00, "orange-800": #b75600, "orange-900": #a34200);
+
+$orange500: #F39200;
+
+$green:( "green-100":#50ea8f, "green-200":#3cd67b, "green-300":#28c267, "green-400":#14ae53, "green-500":#009A3F, "green-600":#00862b, "green-700":#007217, "green-800":#005e03, "green-900":#004a00);
+
+$green300: #28c267;
+
+$green500: #009A3F;
+
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+//background de check
+$form-check-input-checked-bg-color : $green500;
+$form-check-input-checked-border-color: $green300;
+
+//datatable style
+$theme-colors:map-merge($theme-colors, $green);
+$theme-colors:map-merge($theme-colors, $orange);
+$theme-colors:map-merge($theme-colors, $lead);
+//modal
+$modal-content-border-color: $green300;
+// $modal-header-border-color: $green500;
+$modal-header-padding:0.5rem 1rem;
+$utilities: map-merge($utilities, ( "background-color": ( property: background-color, class: bg, values: map-merge( $theme-colors, ( "body": $body-bg, "white": $white, "transparent": transparent))), "color": ( property: color, class: text, values: map-merge( $theme-colors, ( "white": $white, "body": $body-color, "muted": $text-muted, "black-50": rgba($black, .5), "white-50": rgba($white, .5), "reset": inherit, )))));

@@ -6,19 +6,27 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" href="{{ asset('img/icono.png') }} " type="image/ico" />
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/custom2.css') }}">
 
         <!-- Scripts -->
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+        {{-- <script src="https://kit.fontawesome.com/098c4b6e65.js" crossorigin="anonymous"></script> --}}
+        <script defer src="https://kit.fontawesome.com/098c4b6e65.js" crossorigin="anonymous"></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
+        @livewireStyles
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
-        </div>
+
+        {{ $slot }}
+        @livewireScripts
+
+        @stack('scripts')
     </body>
 </html>

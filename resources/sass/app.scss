@@ -1,0 +1,21 @@
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+//Estilos y varibles de bootstrap
+@import '~bootstrap/scss/functions';
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/utilities";
+@import 'variables';
+@import '~bootstrap/scss/utilities/api';
+// Estilos de Bootstrap
+@import '~bootstrap/scss/bootstrap';
+//Estilos para biblioteca Datatable datatable bs5
+@import '~datatables.net-bs5/css/dataTables.bootstrap5';
+@import '~datatables.net-responsive-bs5/css/responsive.bootstrap5';
+// Estilos de Configuraciones Personales
+@import "custom";
+//Estilos para biblioteca Select2
+@import '~select2/dist/css/select2';
+//Estilos para biblioteca DropZone
+@import '~dropzone/src/dropzone'

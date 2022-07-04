@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="icon" href="{{ asset('img/icono.png') }} " type="image/ico" />
 
-        @livewireStyles
+    <!-- Fonts -->
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet"> --}}
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
-    </head>
-    <body class="font-sans antialiased">
-        <x-jet-banner />
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        <div class="min-h-screen bg-gray-100">
+    @livewireStyles
+
+</head>
+
+<body class="nav-md">
+    <div class="container body ">
+        <div class="main_container">
+            {{-- <x-jet-banner /> --}}
+
+            @include('layouts/menus')
             @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            {{-- <main class=""> --}}
+            {{ $slot }}
+            {{-- </main> --}}
+            @include('layouts/footer')
+            @stack('modals')
+
+
+            @livewireScripts
+
+            @stack('scripts')
         </div>
+    </div>
+</body>
+<!-- Scripts -->
 
-        @stack('modals')
-
-        @livewireScripts
-    </body>
+<script defer src="https://kit.fontawesome.com/098c4b6e65.js" crossorigin="anonymous"></script>
+<script defer src="{{ mix('js/app.js') }}"></script>
 </html>
