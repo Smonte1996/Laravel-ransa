@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PermissionImport;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use DataTables;
+use Maatwebsite\Excel\Excel;
 
 class PermissionController extends Controller
 {
@@ -25,7 +27,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        
+
         return view('adm.permission.create');
     }
 
@@ -103,6 +105,24 @@ class PermissionController extends Controller
 
         return redirect()->route('adm.permissions.index');
     }
+
+    public function import(Request $request)
+    {
+        // var_dump();
+        // Excel::import(new PermissionImport, request()->file('filexlsx'));
+
+        (new PermissionImport)->import(request()->file('filexlsx'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+
+        // return redirect('/')->with('success', 'All good!');
+
+        return redirect()->route('adm.dashboard');
+
+
+    }
+
+
+
+    //Presentacion en la tabla
     public function getData()
     {
         $permissions = Permission::select(['id', 'name', 'guard_name']);

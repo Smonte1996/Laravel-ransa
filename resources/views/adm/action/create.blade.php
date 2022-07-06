@@ -28,8 +28,10 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="">
-                            <a class="btn-orange-500 btn text-white btn-sm" href="{{ route('adm.actions.index') }}"><i
-                                    class="fa fa-solid fa-arrow-left"></i> Regresar</a>
+                            @can('adm.actions.index')
+                                <a class="btn-orange-500 btn text-white btn-sm" href="{{ route('adm.actions.index') }}"><i
+                                        class="fa fa-solid fa-arrow-left"></i> Regresar</a>
+                            @endcan
                         </div>
                         <div class="x_content">
                             <form action="{{ route('adm.actions.store') }}" method="post">
@@ -37,11 +39,13 @@
                                 <div class="row">
                                     <div class="mb-4 col-sm-12 col-md-4">
                                         <label for="" class="form-label fs-6 text-lead-500">Nuevo Pais</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"  name="name" id="name"
-                                            aria-describedby="namehelpId" placeholder="Nuevo Accion" value="{{ old('name') }}">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" id="name" aria-describedby="namehelpId"
+                                            placeholder="Nuevo Accion" value="{{ old('name') }}">
                                         @if ($errors->any())
                                             @error('name')
-                                                <small id="namehelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                                <small id="namehelpId"
+                                                    class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                             @enderror
                                         @endif
 

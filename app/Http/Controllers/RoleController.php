@@ -71,7 +71,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('adm.role.edit', compact('role'));
+        $permissions = Permission::all();
+        return view('adm.role.edit', compact('role','permissions'));
     }
 
     /**
@@ -84,10 +85,12 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:Spatie\Permission\Models\Role,name',
+            'name' => 'required',
         ]);
 
         $role->update($request->all());
+
+        $role->permissions()->sync($request->permission_id);
 
         return redirect()->route('adm.roles.index');
     }

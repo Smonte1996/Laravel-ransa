@@ -56,9 +56,10 @@
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-2">
                                             <label for="" class="form-label fs-6 text-lead-500">Nombres</label>
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                name="name" id="name" aria-describedby="namehelpId"
-                                                placeholder="Nombres" value="{{ $employee->name }}">
+                                            <input type="text"
+                                                class="form-control @error('name') is-invalid @enderror" name="name"
+                                                id="name" aria-describedby="namehelpId" placeholder="Nombres"
+                                                value="{{ $employee->name }}">
                                             @if ($errors->any())
                                                 @error('name')
                                                     <small id="namehelpId"
@@ -101,10 +102,15 @@
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-2">
                                             <label for="" class="form-label fs-6 text-lead-500">Cargo</label>
-                                            <input type="text"
-                                                class="form-control @error('position') is-invalid @enderror"
-                                                name="position" id="position" aria-describedby="positionhelpId"
-                                                placeholder="Cargo" value="{{ $employee->position->name }}">
+                                            <select class="form-select @error('position') is-invalid @enderror"
+                                                placeholder="Cargo" name="position_id" id="position_id">
+                                                <option value="">Selecciona un Cargo Laboral</option>
+                                                @foreach ($positions as $position)
+                                                    <option @selected($employee->position->name == $position->name) value="{{ $position->id }}">
+                                                        {{ $position->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             @if ($errors->any())
                                                 @error('position')
                                                     <small id="positionhelpId"
@@ -116,11 +122,11 @@
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-2">
                                             <label for="" class="form-label fs-6 text-lead-500">Bodega</label>
-                                            <select class="form-control @error('warehouse_id') is-invalid @enderror"
+                                            <select class="form-select @error('warehouse_id') is-invalid @enderror"
                                                 name="warehouse_id" id="warehouse_id">
                                                 <option value="">Selecciona una Bodega</option>
                                                 @foreach ($warehouses as $warehouse)
-                                                    <option @if ($warehouse->name == $employee->warehouse->name) selected @endif
+                                                    <option @selected($warehouse->name == $employee->warehouse->name)
                                                         value="{{ $warehouse->id }}">{{ $warehouse->name }}
                                                     </option>
                                                 @endforeach
@@ -135,8 +141,9 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-2">
-                                            <label for="" class="form-label fs-6 text-lead-500">Departamento:</label>
-                                            <select class="form-control @error('warehouse_id') is-invalid @enderror"
+                                            <label for=""
+                                                class="form-label fs-6 text-lead-500">Departamento:</label>
+                                            <select class="form-select @error('warehouse_id') is-invalid @enderror"
                                                 name="departament_id" id="departament_id">
                                                 <option value="">Selecciona una Departamento</option>
                                                 @foreach ($departaments as $departament)
@@ -156,20 +163,26 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-2">
-                                            <label for="" class="form-label fs-6 text-lead-500">Clientes:</label>
-                                            {{-- <select multiple class="form-control" name="client_id[]" id="client_id">
-                                                <option value="">Selecciona una Departamento</option>
+                                            <label for=""
+                                                class="form-label fs-6 text-lead-500">Clientes:</label>
+                                            <select multiple class="form-control select2"
+                                                data-placeholder="Selecciona un cliente" name="client_id[]"
+                                                id="client_id">
                                                 @foreach ($clients as $client)
-                                                    @foreach ($employee->clients as $eclient)
-                                                            {{ $real = $eclient->ruc; }}
-                                                        @continue
+                                                    @php
+                                                        $valor = false;
+                                                    @endphp
+                                                    @foreach ($employee->clients as $client2)
+                                                        @if ($client->id == $client2->id)
+                                                            @php
+                                                                $valor = true;
+                                                            @endphp
+                                                        @endif
                                                     @endforeach
-                                                    <option @selected($real == $client->ruc) value="{{ $client->id }}">
-                                                        {{ $client->social_reason . ' - ' . $client->ruc }}
-                                                    </option>
+                                                    <option @selected($valor) value="{{ $client->id }}">
+                                                        {{ $client->social_reason . ' - ' . $client->ruc }} </option>
                                                 @endforeach
-
-                                            </select> --}}
+                                            </select>
                                             @if ($errors->any())
                                                 @error('client_id')
                                                     <small id="client_idhelpId"
@@ -178,6 +191,46 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="mb-2">
+                                            <label for="" class="form-label fs-6 text-lead-500">¿Es lider de
+                                                un
+                                                grupo?</label>
+                                            <select class="form-control select2" name="leader" id="leader">
+                                                <option @selected($employee->leader == 1) value="true">Si</option>
+                                                <option @selected($employee->leader == 0) value="false">No</option>
+                                            </select>
+                                            @if ($errors->any())
+                                                @error('leader')
+                                                    <small id="leaderhelpId"
+                                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                                @enderror
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="mb-2">
+                                            
+                                            
+                                            <label for="" class="form-label fs-6 text-lead-500">Escoger el
+                                                lider</label>
+                                            <select class="form-control select2"
+                                                data-placeholder="Selecciona el lider del empleado" name="employee_id"
+                                                id="employee_id">
+                                                <option value="">Selecciona un lider</option>
+                                                @foreach ($employees as $employeet)
+                                                    <option @selected($employee->parent->id == $employeet->id)  value="{{ $employeet->id }}">
+                                                        {{ $employeet->name . ' - ' . $employeet->lastname }} </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->any())
+                                                @error('employee_id')
+                                                    <small id="employee_idhelpId"
+                                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                                @enderror
+                                            @endif
+                                        </div>
+                                    </div>                                                                        
                                 </div>
                                 <x-jet-button type="submit">Modificar</x-jet-button>
                             </form>

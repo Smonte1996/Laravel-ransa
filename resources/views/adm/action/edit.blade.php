@@ -28,21 +28,24 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="">
-                            <a class="btn-orange-500 btn text-white btn-sm" href="{{ route('adm.actions.index') }}"><i
-                                    class="fa fa-solid fa-arrow-left"></i> Regresar</a>
+                            @can('adm.actions.index')
+                                <a class="btn-orange-500 btn text-white btn-sm" href="{{ route('adm.actions.index') }}"><i
+                                        class="fa fa-solid fa-arrow-left"></i> Regresar</a>
+                            @endcan
                         </div>
                         <div class="x_content">
-                            <form action="{{ route('adm.actions.update',$action) }}" method="post">
+                            <form action="{{ route('adm.actions.update', $action) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
                                     <div class="mb-4 col-sm-12 col-md-12">
                                         <label for="" class="form-label fs-6 text-lead-500">Accion</label>
-                                        <textarea class="form-control @error('name') is-invalid @enderror"  name="name" id="name"
-                                        aria-describedby="namehelpId" placeholder="Editar Acción">{{ $action->name }}</textarea>
+                                        <textarea class="form-control @error('name') is-invalid @enderror" name="name" id="name"
+                                            aria-describedby="namehelpId" placeholder="Editar Acción">{{ $action->name }}</textarea>
                                         @if ($errors->any())
                                             @error('name')
-                                                <small id="namehelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                                <small id="namehelpId"
+                                                    class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                             @enderror
                                         @endif
 

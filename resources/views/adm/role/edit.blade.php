@@ -47,20 +47,44 @@
                                     class="fa fa-solid fa-arrow-left"></i> Regresar</a>
                         </div>
                         <div class="x_content">
-                            <form action="{{ route('adm.roles.update',$role) }}" method="post">
+                            <form action="{{ route('adm.roles.update', $role) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
                                     <div class="mb-4 col-sm-12 col-md-4">
                                         <label for="" class="form-label fs-6 text-lead-500">Rol</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"  name="name" id="name"
-                                            aria-describedby="namehelpId" placeholder="Editar Rol" value="{{ $role->name }}">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" id="name" aria-describedby="namehelpId"
+                                            placeholder="Editar Rol" value="{{ $role->name }}">
                                         @if ($errors->any())
                                             @error('name')
-                                                <small id="namehelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                                <small id="namehelpId"
+                                                    class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                             @enderror
                                         @endif
 
+                                    </div>
+                                    <div class="mb-4 col-sm-12 col-md-12">
+                                        <h2 class="text-orange-500">Permisos</h2>
+                                        @foreach ($permissions as $permission)
+                                            @php
+                                                $valor = false;
+                                            @endphp
+                                            @foreach ($role->permissions as $permission2)
+                                                @if ($permission->id == $permission2->id)
+                                                    @php
+                                                        $valor = true;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+                                            <div class="col-sm-4 col-md-4 mb-2">
+                                                <label class="fw-bold">
+                                                    <input type="checkbox" @checked($valor) value="{{ $permission->id }}"
+                                                        class="me-2" name="permission_id[]" id="permission_id">
+                                                    {{ Str::upper($permission->description) }}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <x-jet-button type="submit">Modificar</x-jet-button>

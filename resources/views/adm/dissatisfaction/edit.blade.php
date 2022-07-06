@@ -117,14 +117,6 @@
                                             <option @selected($valor) value="{{ $employee->id }}">
                                                 {{ $employee->name . ' ' . $employee->lastname }}</option>
                                         @endforeach
-
-
-
-
-                                            {{-- @foreach ($employees as $employee)
-                                                <option value="{{ $employee->id }}">
-                                                    {{ $employee->name . ' ' . $employee->lastname }}</option>
-                                            @endforeach --}}
                                         </select>
                                         @if ($errors->any())
                                             @error('employee_id')

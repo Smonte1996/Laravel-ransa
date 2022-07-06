@@ -100,8 +100,9 @@
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-2">
                                             <label for="" class="form-label fs-6 text-lead-500">Cargo</label>
-                                            <select class="form-control @error('position') is-invalid @enderror"
+                                            <select class="form-select @error('position') is-invalid @enderror"
                                                 placeholder="Cargo" name="position_id" id="position_id">
+                                                <option value="">Selecciona un Cargo Laboral</option>
                                                 @foreach ($positions as $position)
                                                     <option value="{{ $position->id }}">{{ $position->name }}
                                                     </option>
@@ -193,7 +194,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-2">
-                                            <label for="" class="form-label fs-6 text-lead-500">Escoge un
+                                            <label for="" class="form-label fs-6 text-lead-500">Escoger el
                                                 lider</label>
                                             <select class="form-control select2"
                                                 data-placeholder="Selecciona el lider del empleado" name="employee_id"

@@ -20,14 +20,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(1)->create();
         // \App\Models\Country::factory(20)->create();
         $this->call([
-            CountrySeeder::class,
-            CitySeeder::class,
-            WarehouseSeeder::class,
-            DepartamentSeeder::class,
-            ClientSeeder::class,
-            SupplierSeeder::class,
-            PositionSeeder::class,
-            EmployeeSeeder::class
+            // CountrySeeder::class,
+            // CitySeeder::class,
+            // WarehouseSeeder::class,
+            // DepartamentSeeder::class,
+            // ClientSeeder::class,
+            // SupplierSeeder::class,
+            // PositionSeeder::class,
+            // EmployeeSeeder::class
             // CommSeentSeeder::class,
         ]);
 

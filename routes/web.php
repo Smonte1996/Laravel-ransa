@@ -33,8 +33,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Ruta de Visitantes
 Route::get('servicio', DissatisfiedServices::class);
 
+
+// Rutas para usuarios administrador
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
     ->name('adm.')
     ->group(function () {
@@ -54,6 +57,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::post('datasuppliers', [SupplierController::class, 'getData'])->name('data');
         Route::resource('proveedores', SupplierController::class)->except(['show'])->parameters(['proveedores' => 'supplier'])->names('suppliers');
         Route::post('datapermissions', [PermissionController::class, 'getData'])->name('data');
+        Route::post('import', [PermissionController::class, 'import'])->name('permissions.import');
         Route::resource('permisos', PermissionController::class)->except(['show'])->parameters(['permisos' => 'permission'])->names('permissions');        
         Route::post('dataroles', [RoleController::class, 'getData'])->name('data');
         Route::resource('roles', RoleController::class)->except(['show'])->parameters(['roles' => 'role'])->names('roles');
@@ -70,6 +74,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::post('datacountries', [CountryController::class, 'getData'])->name('data');
         Route::resource('paises', CountryController::class)->except(['show'])->parameters(['paises' => 'country'])->names('countries');
     });
+
+    // Rutas para Usuarios que no son administradores
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'), 'verified'])->group(function () {
 
     Route::post('datanotificationdissatisfactions', [NotificationserviceController::class,'getData'])->name('data');

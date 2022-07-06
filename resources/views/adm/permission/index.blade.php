@@ -42,13 +42,19 @@
 
                             <div class="clearfix"></div>
                         </div>
-                        <div class="">
-                            <a class="btn-green-500 btn text-white btn-sm" href="{{ route('adm.permissions.create') }}">Registrar</a>
-                            {{-- <a class="btn-green-500 btn text-white btn-sm" href="{{ route('adm.permissions.create') }}">Importar</a> --}}
-
-                            {{-- <x-jet-button type="button" data-bs-toggle="modal" data-bs-target="#register-country">
-                                Registrar
-                            </x-jet-button> --}}
+                        <div class="d-inline-flex">
+                            <a class="btn-green-500 btn text-white btn-sm"
+                                href="{{ route('adm.permissions.create') }}">Registrar</a>
+                            <form action="{{ route('adm.permissions.import') }} " method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="btn-group btn-group-sm" role="group"
+                                    aria-label="Basic mixed styles example">
+                                    <input type="file" class="form-control form-control-sm" id="filexlsx"
+                                        aria-describedby="inputGroupFileAddon04" name="filexlsx" aria-label="Upload">
+                                    <button class="btn btn-green-500 text-white" type="submit"
+                                        id="inputGroupFileAddon04">Importar</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="x_content">
                             <table id="table_permissions" class="table align-middle table-hover" style="width:100%">

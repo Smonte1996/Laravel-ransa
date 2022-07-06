@@ -66,8 +66,6 @@ class EmployeeController extends Controller
             'leader' => 'required',
         ]);
 
-        // var_dump($request->all());
-
         $employee = Employee::create([
             'name' => $request->name,
             'lastname' => $request->lastname,
@@ -109,7 +107,9 @@ class EmployeeController extends Controller
         $warehouses = Warehouse::all();
         $departaments = Departament::all();
         $clients = Client::all();
-        return view('adm.employee.edit', compact('employee'))
+        $employees = Employee::all();        
+        $positions = Position::all();
+        return view('adm.employee.edit', compact('employee','warehouses','clients','departaments','positions','employees'))
             ->with(compact('departaments'))
             ->with(compact('clients'))
             ->with(compact('warehouses'));
@@ -133,6 +133,21 @@ class EmployeeController extends Controller
             'position' => 'nullable|string',
             'client_id' => 'nullable|array',
         ]);
+
+        $employee->update([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'identification_card' => $request->identification_card,
+            'position_id' => $request->position_id,
+            'warehouse_id' => $request->warehouse_id,
+            'departament_id' => $request->departament_id,
+            'parent_id' => $request->employee_id,
+            'leader' => $request->leader,            
+        ]);
+
+        $employee->clients()->sync($request->client_id);
+
+        return redirect()->route('adm.employees.index');
     }
 
     /**
@@ -143,7 +158,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('adm.employees.index');
     }
 
     public function getData()
