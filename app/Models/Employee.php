@@ -73,8 +73,9 @@ class Employee extends Model
      */
     public function position()
     {
-        return $this->belongsTo(Position::class);
+        return $this->belongsTo(Position::class, 'id', 'position_id');
     }
+
 
     /**
      * Get all of the responsibles for the Employee
@@ -85,6 +86,7 @@ class Employee extends Model
     {
         return $this->hasMany(Responsible::class);
     }
+
 
     /**
      * Get all of the notification_services for the Employee

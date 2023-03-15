@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('action_dissatisfaction_service', function (Blueprint $table) {
-            // $table->id();
-            $table->foreignId('dissatisfaction_service_id')->constrained();
-            $table->foreignId('action_id')->constrained();
-            // $table->timestamps();
+        Schema::create('detalle_causals', function (Blueprint $table) {
+            $table->id();
+            $table->char('name', 255);
+            $table->foreignId('causal_general_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('action_dissatisfaction_service');
+        Schema::dropIfExists('destalle_causals');
     }
 };

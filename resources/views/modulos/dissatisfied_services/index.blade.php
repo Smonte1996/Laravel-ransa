@@ -24,21 +24,28 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Listado de Notificaciones Pendientes</h2>
+                            <h2>Listado de Notificaciones Pendientes hola</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <div class="mb-2">
                                 <button data-bs-toggle="modal" data-bs-target="#downloadNotification"
                                     class="btn btn-green-400 text-white">Descargar Data</button>
+                                    {{--<input type="submit" data-bs-toggle="modal" id="almacen-GYE"
+                                    class="btn btn-green-400 text-white" value="Almacén GYE"/>
+                                    <input type="submit" data-bs-toggle="modal" id="almacen-UIO"
+                                    class="btn btn-green-400 text-white" value="Almacén UIO"/>--}}
+                                    </div>
                             </div>
+                           
                             <table id="table_notification_dissatisfactions"
                                 class="text-green-500 table align-middle table-hover dt-responsive" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>id</th>
+                                        <th data-priority="1">Almacen</th>
                                         <th>Tipo</th>
-                                        <th>Actividad</th>
+                                        <th>Proceso</th>
                                         <th data-priority="1">Cliente</th>
                                         <th data-priority="2">Reportado</th>
                                         <th>Estado</th>

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\NotificationservicesExport;
-use App\Models\Notification_service;
-use Illuminate\Http\Request;
-use DataTables;
 use Excel;
+use DataTables;
+use App\Models\Employee;
+use Illuminate\Http\Request;
+use App\Mail\Notificationservice;
+use App\Models\Notification_service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\NotificationservicesExport;
 
 class NotificationserviceController extends Controller
 {
@@ -84,7 +87,7 @@ class NotificationserviceController extends Controller
             'user_id' => Auth::user()->id,
             'date_check' => now(),
             'end_observations' => $request->endobservations,
-        ]);
+        ]); 
 
         if ($request->file('file')) {
             foreach ($request->file('file') as $image) {
@@ -99,6 +102,7 @@ class NotificationserviceController extends Controller
                     'path' => $url,
                 ]);
             }
+            Mail::to("stevemontenegro_9@hotmail.com")->send(new Notificationservice($notification_service));
             return route('adm.dashboard');
         } else {
             return redirect()->route('adm.dashboard');
@@ -132,11 +136,14 @@ class NotificationserviceController extends Controller
 
     public function getData()
     {
+        
         $notification_services = Notification_service::with('client')
             ->with('user')
             ->with('employee')
+            ->with('warehouse')
             ->with('dissatisfaction_service')
             ->select('notification_services.*');
+            //->where('warehouse_id', Auth::user()->warehouse());
         return DataTables::eloquent($notification_services)
             ->addColumn('estados', function ($notification_service) {
                 if (!empty($notification_service->date_check)) {
@@ -144,6 +151,7 @@ class NotificationserviceController extends Controller
                 } else {
                     return '<span class="bg-lead-500 p-1 rounded text-white">Pendiente</span>';
                 }
+                
             })
             ->filterColumn('estados', function ($query, $keyword) {
                 $query->whereRaw('CONVERT(date, created_at) like ?', ["%$keyword%"]);

@@ -24,7 +24,11 @@ class Client extends Model
     {
         return $this->morphMany(User::class, 'userable');
     }
-
+    
+    public function Encargado()
+    {
+        return $this->morphMany(Employee::class, 'parent_id')->with('user');
+    }
     /**
      * Get all of the notificationservices for the Client
      *

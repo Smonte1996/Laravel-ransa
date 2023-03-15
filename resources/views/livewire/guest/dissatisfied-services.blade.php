@@ -6,9 +6,10 @@
         <div class="ps-md-5 d-inline align-middle fs-2 fw-bold">
             Notificación de Servicio No Conforme
         </div>
+        
     </div>
 
-
+    
     <div class="mx-auto">
         <div class="border rounded p-4">
             <label class="text-lead-500 fw-bold fs-5">
@@ -38,14 +39,28 @@
                             @enderror
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 pt-2">
+                    <label class="col-sm-3 text-orange-500 col-form-label col-form-label-sm">Almacen</label>
+                    <div class="col-12 col-sm-9">
+                        <select class="form-control @error('city_id') is-invalid @enderror"  wire:model="almacen_id" name="almacen_id" >
+                            <option selected value="">Escoger una opción</option>
+                            @foreach ($almacenes as $almacen)
+                                <option value="{{ $almacen->id }}">{{ $almacen->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('city_id')
+                        <small id="city_idhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                        @enderror                        
+                    </div>
+                </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <label
-                        class="col-sm-12 col-md-3 text-orange-500 col-form-label col-form-label-sm">Actividad:</label>
+                        class="col-sm-12 col-md-3 text-orange-500 col-form-label col-form-label-sm">Procesos:</label>
                     <div class="col-12 col-md-9">
                         <select class="form-control @error('activity_id') is-invalid @enderror" wire:model="activity_id" name="" id="">
                             <option selected value="">Escoger una opción</option>
                             @foreach ($activities as $activity)
-                                @if ($activity->departament->name == 'Operaciones')
+                                @if ($activity->departament->name)
                                     <option value="{{ $activity->id }}">{{ $activity->name }}</option>
                                 @endif
                             @endforeach
@@ -58,7 +73,7 @@
                 <div class="col-lg-4 col-12 col-md-12 pt-2">
                     <label class="col-sm-3 text-orange-500 col-form-label col-form-label-sm">Cliente</label>
                     <div class="col-12 col-sm-9">
-                        <select class="form-control @error('client_id') is-invalid @enderror" wire:model="client_id" name="client_id" id="client_id">
+                        <select class="form-control @error('client_id') is-invalid @enderror"  wire:model="client_id" name="client_id" id="client_id">
                             <option selected value="">Escoger una opción</option>
                             @foreach ($clients as $client)
                                 <option value="{{ $client->id }}">{{ $client->social_reason }}</option>
@@ -117,23 +132,51 @@
                         <label
                             class="text-orange-500 fw-bold ms-5 fs-6">{{ $this->dissatisfaction_service->notification_type }}</label>
                     </div>
+                    
                     <div class="col-md-6">
-                        <label class="text-lead-500 fs-6">Responsables</label>
+                        <div class="col-md-6">
+                            <label class="text-lead-500 fs-10">Lider</label>
+                            <label class="text-orange-500 fw-bold ms-5 fs-6">
+                                {{--{@foreach ($this->client->dissatisfaction_service as $dissatisfaction_service)
+                                    {{ $dissatisfaction_service->employee->name . ' ' . $dissatisfaction_service->employee->lastname . ' ; ' }}
+                                @endforeach--}}
+                                {{ $lider }}
+                               
+                            </label>
+                        </div>
+                    <br>
+                        <label class="text-lead-500 fs-10">Responsables</label>
                         <label class="text-orange-500 fw-bold ms-5 fs-6">
-                            @foreach ($this->dissatisfaction_service->responsibles as $responsible)
-                                {{ $responsible->employee->name . ' ' . $responsible->employee->lastname . ' ; ' }}
-                            @endforeach
+                            {{--{@foreach ($this->client->dissatisfaction_service as $dissatisfaction_service)
+                                {{ $dissatisfaction_service->employee->name . ' ' . $dissatisfaction_service->employee->lastname . ' ; ' }}
+                            @endforeach--}}
+                            {{ $responsable }}
+                           
                         </label>
                     </div>
-                    <div class="col-md-12 pt-3">
+                    
+                    <div class="col-md-6 pt-3">
                         <div class="text-lead-500 fs-6 pb-2">
-                            Acciones a Realizar
+                        Acciones a Realizar 
                         </div>
                         <div class="text-orange-500">
                             <ul class="d-grid gap-2">
                                 @foreach ($this->dissatisfaction_service->actions as $action)
                                     <li>{{ $action->name }}</li>
                                 @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 pt-3">
+                        <div class="text-lead-500 fs-6 pb-2">
+                            Cliente
+                        </div>
+                        <div class="text-orange-500">
+                            <ul class="d-grid gap-2">
+                            {{--@foreach ($client->id->$clients as $client)--}}
+                                    <li>{{$client->social_reason }}</li>
+                                {{--@endforeach--}}
                             </ul>
                         </div>
                     </div>
@@ -154,7 +197,7 @@
             acceptedFiles: "image/*",
             method: "GET",
             paramName: "images",
-            maxFilesize: 2,
+            maxFilesize: 5,
             addRemoveLinks: true,
             dictRemoveFile: "Eliminar Imagen",
             dictInvalidFileType: "No se puede cargar este tipo de archivo",

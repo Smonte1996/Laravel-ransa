@@ -9,7 +9,7 @@ class Attached_file extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'ext', 'path'];
+    protected $fillable = ['name', 'ext', 'path', 'attached_fileable_id'];
 
     /**
      * Get the parent attachedfileable model (notification_service).

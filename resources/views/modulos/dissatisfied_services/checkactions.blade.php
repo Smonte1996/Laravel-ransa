@@ -66,7 +66,7 @@
                                     <div class="col-sm-12 col-md-3">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Actividad</label>
+                                                class="form-label text-lead-500">Proceso</label>
                                             <div class="text-orange-500 fs-6">
                                                 {{ $notification_service->dissatisfaction_service->activity->name }}
                                             </div>
@@ -164,7 +164,7 @@
                 <div class="modal-body">
                     <div class="overflow-scroll d-block">
                         @foreach ($notification_service->attached_files as $files)
-                            <img class="rounded img-thumbnail" width="200" src="{{ asset($files->path) }}" alt="">
+                            <img class="rounded img-thumbnail" width="250" src="{{ asset($files->path) }}" alt="">
                         @endforeach
                     </div>
 

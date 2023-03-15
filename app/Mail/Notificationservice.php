@@ -2,11 +2,12 @@
 
 namespace App\Mail;
 
-use App\Models\Notification_service;
+use App\Models\Warehouse;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use App\Models\Notification_service;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class Notificationservice extends Mailable
 {
@@ -22,6 +23,7 @@ class Notificationservice extends Mailable
      */
     public function __construct(Notification_service $notification_service)
     {
+    
         $this->notification = $notification_service;
     }
 
@@ -32,7 +34,7 @@ class Notificationservice extends Mailable
      */
     public function build()
     {
-        $email =  $this->markdown('mail.notificationservice')->subject('NOTIFICACIÓN DE UNA '.$this->notification->dissatisfaction_service->notification_type);
+        $email =  $this->markdown('mail.notificationservice')->subject('NOTIFICACIÓN DE UNA'.$this->notification->dissatisfaction_service->notification_type);
         // if (!is_null($this->notification->attached_files)) {
         //     foreach ($this->notification->attached_files as $file) {
         //         $email->attachFromStorage($file->path);

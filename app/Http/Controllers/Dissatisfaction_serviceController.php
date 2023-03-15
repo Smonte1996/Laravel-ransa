@@ -6,6 +6,7 @@ use App\Models\Action;
 use App\Models\Activity;
 use App\Models\Dissatisfaction_service;
 use App\Models\Employee;
+use App\Models\Client;
 // use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
@@ -21,7 +22,6 @@ class Dissatisfaction_serviceController extends Controller
     {
         return view('adm.dissatisfaction.index');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,8 +31,9 @@ class Dissatisfaction_serviceController extends Controller
     {
         $activities = Activity::all();
         $actions = Action::all();
-        $employees = Employee::has('users')->get();
-        return view('adm.dissatisfaction.create',compact('activities','actions','employees'));
+        $clients = Client::all();
+        $employees = Employee::has('users')->get(); 
+        return view('adm.dissatisfaction.create',compact('activities','actions','clients' ,'employees'));
     }
 
     /**
@@ -47,7 +48,8 @@ class Dissatisfaction_serviceController extends Controller
             'name' => 'required|unique:App\Models\Dissatisfaction_service,name',
             'notification_type' => 'required',
             'activity_id' => 'required',
-            'employee_id' => 'required'
+            'employee_id' => 'required',
+            'client_id' => 'required'
 
         ]);
 
@@ -60,11 +62,11 @@ class Dissatisfaction_serviceController extends Controller
             }
         }
 
-        $dissatisfaction_service->responsibles()->create([
+        $dissatisfaction_service->responsable()->create([
             'employee_id' => $request->employee_id
         ]);
 
-        return redirect()->route('adm.dissatisfaction_services.index');
+          return redirect()->route('adm.dissatisfaction_services.index');
 
     }
 
@@ -106,7 +108,9 @@ class Dissatisfaction_serviceController extends Controller
             'name' => 'required|unique:App\Models\Dissatisfaction_service,name',
             'notification_type' => 'required',
             'activity_id' => 'required',
-            'employee_id' => 'required'
+            'employee_id' => 'required',
+            'client_id' => 'required'
+
         ]);
 
         $dissatisfaction_service->update($request->all());
@@ -116,7 +120,7 @@ class Dissatisfaction_serviceController extends Controller
 
         }
 
-        $dissatisfaction_service->responsibles()->update([
+        $dissatisfaction_service->responsable()->update([
             'employee_id' => $request->employee_id
         ]);
 

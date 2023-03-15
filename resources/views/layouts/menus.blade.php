@@ -32,14 +32,14 @@
                     <li><a><i class="fa fa-whmcs"></i> Administración <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             @can('adm.activities.index')
-                                <li><a href="{{ route('adm.activities.index') }}">Actividades</a></li>
+                                <li><a href="{{ route('adm.activities.index') }}">Procesos</a></li>
                             @endcan
                             @can('adm.positions.index')
                                 <li><a href="{{ route('adm.positions.index') }}">Cargos Laborales</a></li>
                             @endcan
-                            @can('adm.users.index')
+                            {{-- @can('adm.users.index') --}}
                                 <li><a href="{{ route('adm.users.index') }}">Usuarios</a></li>
-                            @endcan
+                            {{-- @endcan --}}
                             @can('adm.countries.index')
                                 <li><a href="{{ route('adm.countries.index') }}">Paises</a></li>
                             @endcan
@@ -63,7 +63,7 @@
                             @endcan
                             @can('adm.departaments.index')
                                 <li><a href="{{ route('adm.departaments.index') }}">Departamentos</a></li>
-                            @endcan
+                           @endcan
                             @can('adm.clients.index')
                                 <li><a href="{{ route('adm.clients.index') }}">Clientes</a></li>
                             @endcan
@@ -74,21 +74,71 @@
                             @can('adm.employees.index')
                                 <li><a href="{{ route('adm.employees.index') }}">Empleados</a></li>
                             @endcan
-                            @can('adm.roles.index')
+                            {{-- @can('adm.roles.index') --}}
                                 <li><a href="{{ route('adm.roles.index') }}">Roles</a></li>
-                            @endcan
-                            @can('adm.permissions.index')
+                            {{-- @endcan --}}
+                            {{-- @can('adm.permissions.index') --}}
                                 <li><a href="{{ route('adm.permissions.index') }}">Permisos</a></li>
+                            {{-- @endcan --}}
+                        </ul>
+                    </li>
+                    <li><a><i class="fa fa-whmcs"></i> Administración Reclamo <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            {{-- @can('adm.activities.index') --}}
+                                
+                            {{-- @endcan --}}
+                            @can('adm.General.index') 
+                                <li><a href="{{ route('adm.General.index') }}">Causal General</a></li>
                             @endcan
+                            {{--@can('adm.users.index') --}}
+                                
+                            {{-- @endcan
+                            @can('adm.countries.index') --}}
+                                
+                            {{-- @endcan
+                            @can('adm.cities.index') --}}
+                               
+                            {{-- @endcan
+                            @can('adm.warehouses.index') --}}
+                                
+                            {{-- @endcan
+                            @can('adm.dissatisfaction_services.index') --}}
+
+                                        <li class=""><a
+                                                href="{{ route('adm.Detalle.index') }}">Detalle Causal</a>
+                                        </li> 
+                               
+                            {{-- @endcan
+                            @can('adm.departaments.index') --}}
+                                
+                           {{-- @endcan
+                            @can('adm.clients.index') --}}
+                                
+                            {{-- @endcan
+                            @can('adm.suppliers.index') --}}
+                                
+                            {{-- @endcan
+
+                            @can('adm.employees.index') --}}
+                                
+                            {{-- @endcan
+                            @can('adm.roles.index') --}}
+                                
+                            {{-- @endcan
+                            @can('adm.permissions.index') --}}
+                                
+                            {{-- @endcan --}}
                         </ul>
                     </li>
                     <li><a><i class="fa fa-edit"></i> Gestión Calidad <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            @can('notifications.index')
+                            {{-- @can('notifications.index') --}}
                                 <li><a href="{{ route('notifications.index') }}">Servicio No Conforme</a></li>
-                            @endcan
-                            {{-- <li><a href="form_advanced.html">Advanced Components</a></li>
-                            <li><a href="form_validation.html">Form Validation</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('notifications.index') --}}
+                            <li><a href="{{ route('adm.reclamo') }}">Reclamos </a></li>
+                            {{-- @endcan --}}
+                            {{-- <li><a href="form_validation.html">Form Validation</a></li>
                             <li><a href="form_wizards.html">Form Wizard</a></li>
                             <li><a href="form_upload.html">Form Upload</a></li>
                             <li><a href="form_buttons.html">Form Buttons</a></li> --}}

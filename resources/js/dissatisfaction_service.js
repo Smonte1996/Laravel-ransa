@@ -17,6 +17,10 @@ $('#table_notification_dissatisfactions').DataTable({
         name: 'notification_services.id'
     },
     {
+        data: 'warehouse.name',
+        name: 'warehouse.name'
+    },
+    {
         data: 'dissatisfaction_service.notification_type',
         name: 'dissatisfaction_service.notification_type'
     },

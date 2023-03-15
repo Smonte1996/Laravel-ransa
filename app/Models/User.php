@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -63,5 +64,16 @@ class User extends Authenticatable
     public function notification_services()
     {
         return $this->hasMany(Notification_service::class);
+    }
+
+    public function warehouse()
+    {
+        return Employee::where('id', $this->userable_id)->first()->warehouse_id;
+    }
+
+    public function Employee()
+    {
+        // return Employee::where('id', $this->userable_id);
+        return $this->belongsTo(Employee::class, 'userable_id', 'id');
     }
 }
