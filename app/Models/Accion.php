@@ -28,4 +28,10 @@ class Accion extends Model
      {
         return $this->hasOne(Employee::class, 'id', 'employee_id');
      }
+
+     public function userses()
+    {
+       return $this->hasMany(User::class, 'id', 'user_id');
+    }
+
 }

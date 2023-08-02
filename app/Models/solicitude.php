@@ -39,7 +39,7 @@ class solicitude extends Model
 
     public function tipo_reclamo()
     {
-        return $this->hasOne(tipo_reclamo::class, 'id', 'tipo_reclamo_id');
+        return $this->hasOne(tipo_reclamo::class, 'id','tipo_reclamo_id');
     }
     public function users()
     {
@@ -85,4 +85,13 @@ class solicitude extends Model
         return $this->hasMany(Evidencia_solicitude::class, 'solicitude_id');
      }
 
+     public function Analisis()
+     {
+        return $this->hasMany(Analisis_efecto:: class, 'solicitude_id');
+     }
+
+     public function ishikawa()
+     {
+        return $this->hasMany(Causa_ishikawa::class, 'solicitude_id');
+     }
 }

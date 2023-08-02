@@ -239,63 +239,6 @@
     @endif
    
 
-
-                            
-                            {{-- 
-                            
-                           
-                            
-                            
-                           
-                            
-                         
-                        
-                        
-                           
-                            
-                            
-                            
-                            
-                            
-                            <div class="col-sm-6 col-md-4">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1"
-                                        class="form-label text-lead-500">Supervisor Responsable</label>
-                                    <div class="text-orange-500 fs-6">
-                                        {{$solicitudes->investigacion->user->name}}
-                                    </div>
-                                </div>
-                            </div>  
-                            
-                            @isset($solicitudes->investigacion->cumplimiento)
-                            <div class="col-sm-6 col-md-6">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1"
-                                        class="form-label text-lead-500">Resultado Obtenido</label>
-                                    <div class="text-orange-500 fs-6">
-                                        {{$solicitudes->investigacion->observacion}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1"
-                                        class="form-label text-lead-500">Fecha de Cierre</label>
-                                    <div class="text-orange-500 fs-6">
-                                        {{$solicitudes->investigacion->date_check}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1"
-                                        class="form-label text-lead-500">Cumplimiento</label>
-                                    <div class="text-orange-500 fs-6">
-                                        {{$solicitudes->investigacion->cumplimiento}}
-                                    </div>
-                                </div>
-                            </div>    --}}
-
 </div>
 @push('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

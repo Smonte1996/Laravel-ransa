@@ -5,6 +5,11 @@ require('./custom.min');
 require('./login');
 require('./dissatisfaction_service');
 require('./reclamo_rqr');
+require('./muestreo');
+require('./Asignacion');
+require('./ConfirmacionEstibas');
+require('./user_clients');
+
 import select2 from 'select2';
 
 

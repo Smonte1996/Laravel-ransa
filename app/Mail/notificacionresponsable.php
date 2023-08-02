@@ -34,10 +34,10 @@ class notificacionresponsable extends Mailable
      */
     public function build()
     {
-        $this->solicitud = solicitude::find($this->notificacionCR)->last();
-        $nombreReclamo = strtoupper($this->solicitud->tipo_reclamo->name);
-
-        $email =  $this->markdown('mail.notificacionresponsable')->subject("NOTIFICACIÓN DE UN {$nombreReclamo}");
+        $this->solicitud = solicitude::find($this->notificacionCR->solicitude_id);
+        //  dd($this->solicitud);
+        // $nombreReclamo = strtoupper($this->solicitud->tipo_reclamo->name);
+        $email =  $this->markdown('mail.notificacionresponsable')->subject("Atencion al cliente");
 
         return $email;
     }

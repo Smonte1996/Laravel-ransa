@@ -36,7 +36,7 @@ class notificacionclasificacion extends Mailable
      */
     public function build()
     {
-        $this->solicitud = solicitude::find($this->notificacionC)->last();
+        $this->solicitud = solicitude::find($this->notificacionC->solicitude_id);
         $nombreReclamo = strtoupper($this->solicitud->tipo_reclamo->name);
         $email =  $this->markdown('mail.notificacionclasificacion')->subject("NOTIFICACIÓN DE UN {$nombreReclamo}");
 

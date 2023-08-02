@@ -7,8 +7,7 @@
             </div>
       <div class="border-bottom shadow-sm pb-4 pt-3 text-white" style="background:#009A3F">
         <div class=" pt-5 px-5 ">
-          <h1><P> Queremos entregarte la mejor experiencia de servicio.
-            Déjanos tu reclamo, felicitación.</P></h1>
+          <h1><P> Queremos entregarte la mejor experiencia de servicio.</P></h1>
         </div>
         <div class="text-white px-5">
           <br>
@@ -18,14 +17,14 @@
 
       <div class="form-control">
         <ul>
-            <li class="fw-bold text-center pt-4">
-                <p value="Satisfaccion">¿En términos generales qué tan satisfecho te encuentras con el proceso de tu reclamo? (Lo puede calificar del 1 al 10, si responde entre 0 al 6 se debe preguntar el porqué).</p>
+            <div class="fw-bold text-center mt-5">
+                <p value="Satisfaccion">1. ¿En términos generales qué tan satisfecho te encuentras con el proceso de tu reclamo?.</p>
                 <div class="pt-3">
-                <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline" wire:ignore>
                     <input class="form-check-input ob1" type="radio" wire:model.lazy="General" value="1" onclick='habilita()'>
                     <label class="form-check-label" for="inlineRadio1">1</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check form-check-inline" wire:ignore>
                     <input class="form-check-input ob1" type="radio" wire:model.lazy="General" value="2" onclick='habilita()'>
                     <label class="form-check-label" for="inlineRadio2">2</label>
                   </div>
@@ -65,64 +64,73 @@
                   <textarea  class="form-control ob1" wire:model.lazy='ob1' hidden></textarea>
                   </div>
                 </div>
-            </li>
+              </div>
             <br>
-
-            <li class="fw-bold text-center pt-4">
-                <p value="Atención">En términos generales, califique del 1 al 10 la gestión de su reclamo en cuanto a:<br>
-                Atención (calificar del 1 al 10). </p>
-
-                <div class="pt-3">
+            <br>
+            <br>
+            <div class="fw-bold text-center">
+                <p value="Atención">2. En términos generales, califique del 1 (Muy insatisfecho) al 10 (Muy satisfecho) la gestión de su reclamo en cuanto a:</p>
+            </div>
+                <div class="fw-bold pt-3 card">
+                  <table class="table">
+                    <tbody>
+                  <tr class="table-active">    
+                  <td scope="row">     
+                  2.1 Atención.
+                  </td>
+                  <td colspan="2" class="table-active">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input " type="radio" wire:model="Atencion" value="1" onclick='habilita2()'>
-                        <label class="form-check-label" for="inlineRadio1">1</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input " type="radio" wire:model="Atencion"  value="2" onclick='habilita2()'>
-                        <label class="form-check-label" for="inlineRadio2">2</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input " type="radio" wire:model="Atencion"  value="3" onclick='habilita2()'>
-                        <label class="form-check-label" for="inlineRadio3">3</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input " type="radio" wire:model="Atencion"  value="4" onclick='habilita2()'>
-                        <label class="form-check-label" for="inlineRadio3">4</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input " type="radio" wire:model="Atencion"  value="5" onclick='habilita2()'>
-                        <label class="form-check-label" for="inlineRadio3">5</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input " type="radio" wire:model="Atencion"  value="6" onclick='habilita2()'>
-                        <label class="form-check-label" for="inlineRadio3">6</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" wire:model="Atencion"  value="7" >
-                        <label class="form-check-label" for="inlineRadio3">7</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" wire:model="Atencion"  value="8" >
-                        <label class="form-check-label" for="inlineRadio3">8</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" wire:model="Atencion"  value="9" >
-                        <label class="form-check-label" for="inlineRadio3">9</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" wire:model="Atencion"  value="10" >
-                        <label class="form-check-label" for="inlineRadio3">10</label>
-                      </div>
-                      <div class="col-sm-6 col-md-12 "  id="divNumDemanda">
-                        <textarea  class="form-control ob2" wire:model.lazy='ob2' hidden></textarea>
-                        </div>
+                      <input class="form-check-input " type="radio" wire:model="Atencion" value="1" onclick='habilita2()'>
+                      <label class="form-check-label" for="inlineRadio1">1</label>
                     </div>
-            </li>
-             
-            <li class="fw-bold text-center pt-4">
-               <p value="Rapidez"> Rapidez (calificar del 1 al 10).</p>
-
-                <div class="pt-3">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input " type="radio" wire:model="Atencion"  value="2" onclick='habilita2()'>
+                      <label class="form-check-label" for="inlineRadio2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input " type="radio" wire:model="Atencion"  value="3" onclick='habilita2()'>
+                      <label class="form-check-label" for="inlineRadio3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input " type="radio" wire:model="Atencion"  value="4" onclick='habilita2()'>
+                      <label class="form-check-label" for="inlineRadio3">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input " type="radio" wire:model="Atencion"  value="5" onclick='habilita2()'>
+                      <label class="form-check-label" for="inlineRadio3">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input " type="radio" wire:model="Atencion"  value="6" onclick='habilita2()'>
+                      <label class="form-check-label" for="inlineRadio3">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" wire:model="Atencion"  value="7" >
+                      <label class="form-check-label" for="inlineRadio3">7</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" wire:model="Atencion"  value="8" >
+                      <label class="form-check-label" for="inlineRadio3">8</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" wire:model="Atencion"  value="9" >
+                      <label class="form-check-label" for="inlineRadio3">9</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" wire:model="Atencion"  value="10" >
+                      <label class="form-check-label" for="inlineRadio3">10</label>
+                    </div>
+                    <div class="col-sm-6 col-md-12 "  id="divNumDemanda">
+                      <textarea  class="form-control ob2" wire:model.lazy='ob2' hidden></textarea>
+                      </div>
+                  </td> 
+                  </tr> 
+                  
+               <tr>
+              <td scope="row">
+             2.2 Rapidez.
+              </td>
+              <td colspan="2" class="">
+                <div class="fw-bold ">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" wire:model="Rapidez"  value="1" onclick='habilita3()'>
                         <label class="form-check-label" for="inlineRadio1">1</label>
@@ -167,12 +175,14 @@
                         <textarea  class="form-control ob3" wire:model.lazy='ob3' hidden></textarea>
                         </div>
                     </div>
-            </li>
-
-            <li class="fw-bold text-center pt-4">
-               <p value="solucion">Solución final (calificar del 1 al 10).</p>
-                
-                <div class="pt-3">
+                  </td>     
+            </tr>
+              <tr class="table-active">
+                <td scope="row">
+               2.3 Solución final 
+              </td>
+              <td colspan="2" class="table-active">
+                <div class="fw-bold pt-3">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" wire:model="solucion" value="1" onclick='habilita4()'>
                         <label class="form-check-label" for="inlineRadio1">1</label>
@@ -217,7 +227,10 @@
                         <textarea  class="form-control ob4" wire:model.lazy='ob4' hidden></textarea>
                         </div>
                     </div>
-            </li>
+                  </td> 
+                  </tr>
+          </tbody>
+        </table>
         </ul>
         <div>
             @if ($errorMessage)

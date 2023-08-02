@@ -35,12 +35,12 @@ class InvestigacionNoProcede extends Component
 
     public function mount($clasificacion)
     {
-        $Investigacion = solicitude::find($clasificacion);
-        if (!empty($Investigacion->investigacion->solicitude_id)) {
-            abort(401);
-        } else {
+        // $Investigacion = solicitude::find($clasificacion);
+        // if (!empty($Investigacion->investigacion->solicitude_id)) {
+        //     abort(401);
+        // } else {
         $this->solicitude = solicitude::find($clasificacion);
-        }
+        // }
     }
 
     public function Registarargumento()

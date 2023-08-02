@@ -35,7 +35,7 @@ class ReclamoCliente extends Component
     public $servicios;
 
     protected $rules = [
-    'Nombres' => ['required', 'max:60'],
+    'Nombres' => ['required', 'max:60', 'regex:/^[\pL\s]+$/u'],
     'email' => ['required', 'email','max:50'],
     'celular' => ['required', 'max:10'],
     'Empresa' => 'required',
@@ -44,10 +44,9 @@ class ReclamoCliente extends Component
     'sub_servicio' => 'required',
     'servicio' => 'required',
     'fecha' => 'required',
-    'descripcion' => 'required',
+    'descripcion' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=[^{}[\]+*]+$)/'],
     'titulo' => 'required',
-    // 'codigo' => 'unique:solicitudes',
-    'imagen' => 'max:3024'
+    'imagen' => ['nullable','max:3024','image','mimes:jpeg,png,jpg']
     ];
 
     // public function updated($propertyName)
@@ -70,7 +69,7 @@ class ReclamoCliente extends Component
     {
           $datos = $this->validate();
 
-        if (!is_null($this->imagen)) {
+      if (!is_null($this->imagen)) {
         $imagen = $this->imagen->store('public/Reclamos');
         $datos['imagen'] = str_replace('public/Reclamos/',' ', $imagen);
         }

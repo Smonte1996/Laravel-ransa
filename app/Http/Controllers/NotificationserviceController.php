@@ -89,6 +89,8 @@ class NotificationserviceController extends Controller
             'end_observations' => $request->endobservations,
         ]); 
 
+        Mail::to("stevemontenegro_9@hotmail.com","smontenegrot@ransa.net")->send(new Notificationservice($notification_service));
+
         if ($request->file('file')) {
             foreach ($request->file('file') as $image) {
                 if ($image->extension() == 'xlsx' || $image->extension() == 'xls') {
@@ -102,7 +104,7 @@ class NotificationserviceController extends Controller
                     'path' => $url,
                 ]);
             }
-            Mail::to("stevemontenegro_9@hotmail.com")->send(new Notificationservice($notification_service));
+           
             return route('adm.dashboard');
         } else {
             return redirect()->route('adm.dashboard');

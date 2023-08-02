@@ -31,7 +31,7 @@ class Consultas extends Component
        }
 
         $this->solicitudes = solicitude::where('codigo_generado', 'like', '%'.$this->buscar.'%')->get();
-        
+         
     }
 
     public function render()

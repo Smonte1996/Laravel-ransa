@@ -18,7 +18,7 @@
 
         <script defer src="https://kit.fontawesome.com/098c4b6e65.js" crossorigin="anonymous"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
-        
+        @stack('style')
         @livewireStyles
     </head>
     <body>

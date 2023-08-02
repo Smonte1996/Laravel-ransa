@@ -7,18 +7,15 @@ use App\Mail\notificacioninvestigacion;
 use App\Mail\notificacionresponsableacciones;
 use App\Models\User;
 use App\Models\Accion;
+use App\Models\Analisis_efecto;
+use App\Models\Causa_ishikawa;
 use Livewire\Component;
 use App\Models\solicitude;
-use App\Models\Clasificacion;
 use App\Models\Employee;
 use App\Models\Investigacion;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Doctrine\Inflector\Rules\English\Rules;
-use PhpParser\Node\Expr\New_;
-use Symfony\Contracts\Service\Attribute\Required;
-
 class Investigaciones extends Component
 {    
     
@@ -31,7 +28,23 @@ class Investigaciones extends Component
          'fecha_programada' => '',
          ]
     ];
-    public $fieldsCount = 1;
+
+    public $campos =[ 
+        [
+            'porqueone' => '',
+            'porquetwo' => '',
+            'porquethree' => '',
+            'porquefour' => '',
+            'porquefive' => '',
+         ]
+    ];
+
+    public $campo =[
+      [
+        'categoria' => '',
+        'causa' => '',
+      ]
+    ];
     public $users;
     public $correccion;
     public $causa_raiz;
@@ -44,17 +57,13 @@ class Investigaciones extends Component
     public $empleado;
     public $Empleados;
     
-    // public $acciones;
-    // public $responsable;
-    // public $fecha_programada;
     
     protected $rules = [
      'correccion'=> 'required',
      'causa_raiz' => 'required',
      'evaluacion' => 'required',
      'Responsable' => 'required',
-     'fechaprog' => 'required',
-     'archivo' => 'required', 
+     'fechaprog' => 'required', 
     //  'acciones' => 'required',
     //  'responsable' => 'required',
     //  'fecha_programada' => 'required',
@@ -65,10 +74,10 @@ class Investigaciones extends Component
   
     public function mount($solicitud)
     {   
-            $Investigacion = solicitude::find($solicitud);
-        if (!empty($Investigacion->investigacion->solicitude_id)) {
-            abort(401);
-        } else {
+        //     $Investigacion = solicitude::find($solicitud);
+        // if (!empty($Investigacion->investigacion->solicitude_id)) {
+        //     abort(401);
+        // } else {
          $this->empleado = Employee::where('position_id', 3)->get();
         // $this->empleado = User::with('Employee')->whereHas('Employee', function($query){
         //    $query->Where('position_id', 3);  
@@ -76,7 +85,7 @@ class Investigaciones extends Component
         $this->Empleados = Employee::with('users')->whereIn('position_id', [1,2])->get();
         $this->clasificacion = $solicitud;
         $this->solicitude = solicitude::find($solicitud);
-        }
+        // }
     }
     public function addField()
     {
@@ -88,6 +97,37 @@ class Investigaciones extends Component
              'fecha_programada' => '',
         ];
     }
+    public function agregarcampos()
+    {
+        $this->campos[] = 
+        [
+            'porqueone' => '',
+            'porquetwo' => '',
+            'porquethree' => '',
+            'porquefour' => '',
+            'porquefive' => '',
+        ];
+    }
+    public function Añadircampos()
+    {
+        $this->campo[] =
+        [
+            'categoria' => '',
+            'causa' => '',
+        ];
+    }
+
+    public function Deshasercampo($inicio)
+    {
+        unset($this->campo[$inicio]);
+    }
+
+    public function QuitarCampos($indexs)
+    {
+        unset($this->campos[$indexs]);
+        
+    }
+
     public function removeField($index)
     {
         unset($this->inputs[$index]);
@@ -97,14 +137,9 @@ class Investigaciones extends Component
     public function ResgistroAnalisis()
     {
         $datos = $this->validate();
-        // $validatedData = $this->validate([
-        //     'inputs.*.acciones' => 'required',
-        //     'inputs.*.responsable' => 'required',
-        //     'inputs.*.fecha_programada' => 'required',
-        // ]);
 
-         $archivo = $this->archivo->store('public/Reclamos/Analisis');
-         $datos['archivo'] = str_replace('public/Reclamos/Analisis/', ' ', $archivo);
+        //  $archivo = $this->archivo->store('public/Reclamos/Analisis');
+        //  $datos['archivo'] = str_replace('public/Reclamos/Analisis/', ' ', $archivo);
 
          $notificacionInvestigacion = Investigacion::create([
          'solicitude_id' => $this->clasificacion, 
@@ -113,7 +148,7 @@ class Investigaciones extends Component
          'causa_raiz' =>$datos['causa_raiz'],
          'evaluacion_eficacia' => $datos['evaluacion'],
          'fecha_programada' => $datos['fechaprog'],
-         'archivo' => $datos['archivo'],
+        //  'archivo' => $datos['archivo'],
          
         //  'codigo_generado' => $this->clasificacion->codigo_generado,
         ]);
@@ -125,6 +160,26 @@ class Investigaciones extends Component
           'fecha_programacion' => $input['fecha_programada'],
          ]);
          }
+
+         foreach ($this->campos as $campo) {
+           $guardarefecto = Analisis_efecto::create([
+            'solicitude_id' => $this->clasificacion,
+            'porque1' => $campo['porqueone'],
+            'porque2' => $campo['porquetwo'],
+            'porque3' => $campo['porquethree'],
+            'porque4' => $campo['porquefour'],
+            'porque5' => $campo['porquefive'],
+           ]);
+         }
+
+         foreach ($this->campo as $camp) {
+            $guardarcausa = Causa_ishikawa::create([
+                'solicitude_id' => $this->clasificacion,
+                'categoria' => $camp['categoria'],
+                'causa' => $camp['causa'],
+               ]);
+         }
+
          $affected = DB::table('solicitudes')
          ->where('id', $this->clasificacion)
          ->update(['estado' => 3]);

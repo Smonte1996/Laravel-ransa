@@ -25,7 +25,7 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Acciones</h2>
+                                
                                 <ul class="nav navbar-right panel_toolbox">
                                     {{-- @if ($notification_service->dissatisfaction_service->notification_type == 'NO CONFORMIDAD')
                                         <x-jet-button type="button" id=""><i
@@ -39,11 +39,11 @@
                                         </x-jet-button>
                                     </li>
                                     <li> 
-                                        <input type="file" class="btn btn-success btn-sm btn-file @error('archivo') is-invalid @enderror" accept=".xlsx" wire:model='archivo'>
+                                        {{-- <input type="file" class="btn btn-success btn-sm btn-file @error('archivo') is-invalid @enderror" accept=".xlsx" wire:model='archivo'>
                                         @error('archivo')
                                         <small id="archivohelpId"
                                             class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
+                                        @enderror --}}
                                     </li>
                                     
                                 </ul>
@@ -55,20 +55,129 @@
                                 <livewire:reclamo.info-investigacion :clasificacion="$clasificacion">
                             
                                 <fieldset class="border border-2">
-                                    <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Ingreso de acciones</legend>
-                                        <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Ingreso de acciones</legend>                                        
+                                    <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Tratamiento del reclamo</legend>
+                                        <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Tratamiento del reclamo</legend>                                        
                                    
                                         <div class="ms-2">
                                             <div class="row mb-3">
                                                 <div class="col-sm-12">
-                                                            <input type="text" class="form-control @error('correccion') is-invalid @enderror" wire:model.lazy='correccion' id="correccion" placeholder="CORRECCION">
+                                                            <input type="text" class="form-control @error('correccion') is-invalid @enderror" wire:model.lazy='correccion' id="correccion" placeholder="Acciones inmediata (Corrección)">
                                                             @error('correccion')
                                                             <small id="correccionhelpId"
                                                                 class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                                             @enderror
                                                         </div>
                                             </div>
-                                            <div class="row mb-3">
+                                            <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Análisis causa - Metodologia Ishikawa</legend>
+                                             <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Análisis causa - Metodologia Ishikawa</legend>
+                                            <div class="card text-center mb-3">
+                                              <table class="table table-striped table-responsive">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Categoria
+                                                        </th>
+                                                        <th>
+                                                            Causa
+                                                        </th>
+                                                        <th>
+                                                            Acción
+                                                        </th>
+                                                    </tr>
+                                                    <tbody>
+                                                        @foreach ( $campo as $inicio => $camp )
+
+                                                        <tr>
+                                                            <td>
+                                                                <select class="form-control" id="" wire:model="campo.{{$inicio}}.categoria">
+                                                                    <option value="">Seleccionar Categoria</option>
+                                                                    <option value="Entorno"> Entorno </option>
+                                                                    <option value="Método"> Método </option>
+                                                                    <option value="Persona">Persona</option>
+                                                                    <option value="Equipos">Equipos</option>
+                                                                    <option value="Materiales">Materiales</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control" wire:model="campo.{{$inicio}}.causa">
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-md btn-danger" wire:click.prevent="Deshasercampo({{$inicio}})"><i class="fa-solid fa-trash"></i></button>
+                                                            </td>
+                                                        </tr>                                                      
+                                                        @endforeach
+                                                    </tbody>
+                                                </thead>
+                                              </table>
+                                              <div class="row">
+                                                <div class="col-md-2">
+                                            <button class="btn btn-sm"
+                                            wire:click.prevent='Añadircampos'><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
+                                        </div>
+                                            </div>
+                                            </div> 
+                                             <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Análisis causa - efecto: 5 porqués</legend>
+                                             <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Análisis causa - efecto: 5 porqués</legend>
+                                            <div class="card text-center">
+                                                <table class="table table-striped table-responsive">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                               Por que 1
+                                                            </th>
+                                                            <th>
+                                                                Por que 2
+                                                            </th>
+                                                            <th>
+                                                                Por que 3
+                                                            </th>
+                                                            <th>
+                                                                Por que 4
+                                                            </th>
+                                                            <th>
+                                                                Por que 5
+                                                            </th>
+                                                            <th>
+                                                                Accion
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ( $campos as $indexs => $campo )
+                                                          <tr>
+                                                            <td>
+                                                                <textarea wire:model="campos.{{$indexs}}.porqueone" class="form-control" name="" id=""></textarea>
+                                                            </td>
+                                                            <td>
+                                                                <textarea wire:model="campos.{{$indexs}}.porquetwo" class="form-control" name="" id=""></textarea>
+                                                            </td>
+                                                            <td>
+                                                                <textarea wire:model="campos.{{$indexs}}.porquethree" class="form-control" name="" id=""></textarea>
+                                                            </td>
+                                                            <td>
+                                                                <textarea wire:model="campos.{{$indexs}}.porquefour" class="form-control" name="" id=""></textarea>
+                                                            </td>
+                                                            <td>
+                                                                <textarea wire:model="campos.{{$indexs}}.porquefive" id="" cols="20" class="form-control"></textarea>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-md btn-danger" wire:click.prevent="QuitarCampos({{$indexs}})"><i class="fa-solid fa-trash"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                <button class="btn btn-sm"
+                                                wire:click.prevent='agregarcampos'><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
+                                            </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row mb-3 mt-3">
+                                                <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Causa fundamental</legend>
+                                            <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Causa fundamental</legend>
                                                 <div class="col-sm-12">
                                                 <input type="text" class="form-control @error('causa_raiz') is-invalid @enderror" wire:model.lazy='causa_raiz' id="causa_raiz" placeholder="Causa Raiz" aria-label="Causca Raiz">
                                                 @error('causa_raiz')
@@ -77,7 +186,8 @@
                                                  @enderror
                                                 </div>
                                             </div>
-                                
+                                            <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Planes de acciones</legend>
+                                            <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Planes de acciones</legend>
                                             <div class="card text-center">
                                                 <table id="" class="table table-striped table-responsive">
                                                     <thead>
@@ -99,51 +209,42 @@
                                                 <tbody>
                                                     @foreach ( $inputs as $index => $input )     
                                                     <tr>
-                                                    <td>
-                                                        <input type="text" class="form-control @error('acciones') is-invalid @enderror" id="acciones" 
-                                                        wire:model="inputs.{{$index}}.acciones" wire:model='acciones' name="acciones" placeholder="Acciones" aria-label="Acciones">
-                                                        @error('acciones')
-                                                 <small id="accioneshelpId"
-                                                     class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                                 @enderror
+                                                    <td> 
+                                                        <input type="text" class="form-control" id="acciones" 
+                                                        wire:model="inputs.{{$index}}.acciones" name="acciones" placeholder="Accion">
                                                     </td>
                                                     <td>
-                                                        <select class="form-control @error('responsable') is-invalid @enderror " name="responsable" id="responsable"  wire:model="inputs.{{$index}}.responsable" wire:model='responsable' placeholder="Responsable" > 
-                                                        <option value="">Seleccionar opcione</option>
+                                                        <select class="form-control " name="responsable" wire:model="inputs.{{$index}}.responsable"> 
+                                                        <option value="">Seleccionar opción</option>
                                                           @foreach ($Empleados as $Empleado )
                                                         <option value="{{$Empleado->id}}"> {{$Empleado->name .' '. $Empleado->lastname}} </option>
                                                           @endforeach
-                                                        </select>   
-                                                        @error('responsable')
-                                                        <small id="responsablehelpId"
-                                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                                        @enderror     
+                                                        </select>       
                                                     </td>
                                                     <td>
-                                                        <input type="date" class="form-control @error('fecha_programada') is-invalid @enderror" name="fecha_programada" id="fecha_programada"  wire:model="inputs.{{$index}}.fecha_programada" wire:model='fecha_programada' placeholder="Feha Programada" aria-label="Feha Programada">
-                                                        @error('fecha_programada')
-                                                        <small id="fecha_programadahelpId"
-                                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                                        @enderror
+                                                        <input type="date" class="form-control" name="fecha_programada" id="fecha_programada"  wire:model="inputs.{{$index}}.fecha_programada">
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-danger" wire:click.prevent="removeField({{$index}})">Eliminar</button>
+                                                        <button class="btn btn-md btn-danger" wire:click.prevent="removeField({{$index}})"><i class="fa-solid fa-trash"></i></button>
                                                     </td>
                                                 </tr>
                                                 @endforeach 
                                                 </tbody>
                                                 </table>
                                                 <div class="row">
-                                                    <div class="col-md-12">
-                                                <button class="btn btn-sm btn-secondary"
-                                                wire:click.prevent='addField'>Agregar campos</button>
+                                                <div class="col-md-2">
+                                                <button class="btn btn-sm"
+                                                wire:click.prevent='addField'><i class="fa-solid fa-plus" style="color: #27b050;"></i>  Agregar campos</button>
                                             </div>
                                                 </div>
                                         </div>
-                                
+                                        <div class="mt-2">
+                                        <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Eficacia</legend>
+                                        <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Eficacia</legend>
+                                       </div>
                                             <div class="row g-3 mb-3">
                                                 <div class="col-sm">
-                                                <input type="text" class="form-control @error('evaluacion') is-invalid @enderror" id="evaluacion" wire:model.lazy='evaluacion' placeholder="Evaluacion" >
+                                                <input type="text" class="form-control @error('evaluacion') is-invalid @enderror" id="evaluacion" wire:model.lazy='evaluacion' placeholder="Evaluación" >
                                                 @error('evaluacion')
                                                 <small id="evaluacionhelpId"
                                                     class="form-text text-muted invalid-feedback">{{ $message }}</small>
@@ -151,7 +252,7 @@
                                                 </div>
                                                 <div class="col-sm">
                                                 <select class="form-control @error('Responsable') is-invalid @enderror"  wire:model.defer='Responsable' id="Responsable" aria-label="Responsable">
-                                                    <option value="">Seleccionar opcione</option>
+                                                    <option value="">Seleccionar responsable</option>
                                                     @foreach ($empleado as $emplead )
                                                         <option value="{{$emplead->id}}"> {{$emplead->name .' '. $emplead->lastname}} </option>
                                                     @endforeach

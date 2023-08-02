@@ -25,7 +25,6 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Confirmación de Acciones</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     {{-- @if ($notification_service->dissatisfaction_service->notification_type == 'NO CONFORMIDAD')
                                         <x-jet-button type="button" id=""><i
@@ -50,12 +49,15 @@
                             
                             <div class="x_content">
                                 <div class="row">
+                                    <fieldset class="border border-2 m-0 mb-3">
+                                        <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Información general</legend>
+                                            <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Información general</legend>  
                                     <div class="col-sm-12 col-md-3">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">N° de ticket
+                                                class="form-label text-lead-900">N° de ticket
                                             </label>
-                                            <div class="text-orange-500 fs-6">
+                                            <div class="text-lead-500 fs-6">
                                                {{$solicitude->codigo_generado}}
                                             </div>
                                         </div>
@@ -63,8 +65,8 @@
                                     <div class="col-sm-12 col-md-3">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Tipo</label>
-                                            <div class="text-orange-500 fs-6">
+                                                class="form-label text-lead-900">Tipo</label>
+                                            <div class="text-lead-500 fs-6">
                                                 {{$solicitude->tipo_reclamo->name}}
                                             </div>
                                         </div>
@@ -72,8 +74,8 @@
                                     <div class="col-sm-12 col-md-3">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Sede</label>
-                                            <div class="text-orange-500 fw-bold fs-6">
+                                                class="form-label text-lead-900">Sede</label>
+                                            <div class="text-lead-500 fw-bold fs-6">
                                                {{$solicitude->sede->name}}
                                             </div>
                                         </div>
@@ -81,8 +83,8 @@
                                     <div class="col-sm-12 col-md-3">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Cliente</label>
-                                            <div class="text-orange-500 fw-bold fs-6">
+                                                class="form-label text-lead-900">Cliente</label>
+                                            <div class="text-lead-500 fw-bold fs-6">
                                                 {{$solicitude->cliente}}
                                             </div>
                                         </div>
@@ -90,8 +92,8 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Causal general</label>
-                                            <div class="text-orange-500 fs-6">
+                                                class="form-label text-lead-900">Causal general</label>
+                                            <div class="text-lead-500 fs-6">
                                                {{$solicitude->clasificacion->causal_general->name}}
                                             </div>
                                         </div>
@@ -99,8 +101,8 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Detalle causal</label>
-                                            <div class="text-orange-500 fs-6">
+                                                class="form-label text-lead-900">Detalle causal</label>
+                                            <div class="text-lead-500 fs-6">
                                                {{$solicitude->clasificacion->detalle_causal->name}}
                                             </div>
                                         </div>
@@ -108,8 +110,8 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Causa raiz</label>
-                                            <div class="text-orange-500 fs-6">
+                                                class="form-label text-lead-900">Causa raiz</label>
+                                            <div class="text-lead-500 fs-6">
                                                {{$solicitude->investigacion->causa_raiz}}
                                             </div>
                                         </div>
@@ -117,19 +119,19 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1"
-                                                class="form-label text-lead-500">Correcion</label>
-                                            <div class="text-orange-500 fs-6">
+                                                class="form-label text-lead-900">Correcion</label>
+                                            <div class="text-lead-500 fs-6">
                                                {{$solicitude->investigacion->correccion}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                            </fieldset> 
                                 <fieldset class="border border-2">
-                                    <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Da check a
+                                    <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Da check a
                                         las
                                         acciones cumplidas</legend>
-                                        <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Da check a
+                                        <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Da check a
                                             las
                                             acciones cumplidas</legend>                                        
                                     <div class="ms-4">
@@ -157,8 +159,8 @@
                                         <div class="col-sm-12 col-md-6">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlInput1"
-                                                    class="form-label text-lead-500">Evaluacion de eficacia</label>
-                                                <div class="text-orange-500 fs-6">
+                                                    class="form-label text-lead-900">Evaluacion de eficacia</label>
+                                                <div class="text-lead-500 fs-6">
                                                    {{$solicitude->investigacion->evaluacion_eficacia}}
                                                 </div>
                                             </div>
@@ -166,8 +168,8 @@
                                         <div class="col-sm-12 col-md-3">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlInput1"
-                                                    class="form-label text-lead-500">Fecha Programada</label>
-                                                <div class="text-orange-500 fs-6">
+                                                    class="form-label text-lead-900">Fecha Programada</label>
+                                                <div class="text-lead-500 fs-6">
                                                    {{$solicitude->investigacion->fecha_programada->format('d/m/y')}}
                                                 </div>
                                             </div>
@@ -175,7 +177,7 @@
                                         
                                         <div>
                                         <label for="exampleFormControlInput1"
-                                        class="form-label text-lead-500">¿ El plan de acción es eficaz ?</label>
+                                        class="form-label text-lead-900">¿ El plan de acción es eficaz ?</label>
                                        </div>
 
                                         <div class="col-sm-12 col-md-1">
@@ -201,13 +203,13 @@
                                 
                                 <div class="col-12 ">
                                     <label class="form-label text-orange-500">Resultado Obtenido *:</label>
-                                    <textarea class="form-control" wire:model.lazy='observacion'></textarea>
+                                    <textarea class="form-control" wire:model.prevent='observacion'></textarea>
                                 </div>
-                                <div>
+                                {{-- <div>
                                     @if ($errorMessage)
                                 <div class="alert alert-danger">{{ $errorMessage }}</div>
                                  @endif 
-                                </div>
+                                </div> --}}
                                 <div class="text-center">
                                     <x-jet-button wire:click.prevent="confirmarchekcData" wire:loading.attr='disabled' wire:target='confirmarchekcData' class="disabled:opacity-60" class="mt-4">Confirmar Acciones
                                     </x-jet-button>

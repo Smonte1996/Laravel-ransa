@@ -11,9 +11,14 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ReclamoController;
 use App\Http\Livewire\Guest\ReclamoCliente;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\Aql_defectoController;
+use App\Http\Controllers\AsignarCuadrillaController;
 use App\Http\Controllers\CalificacioneController;
 use App\Http\Controllers\Causal_generalController;
 use App\Http\Controllers\confirmaraccionesController;
+use App\Http\Controllers\ConfirmarActividades;
+use App\Http\Controllers\Data_logisticaController;
+use App\Http\Controllers\DefectosController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SupplierController;
@@ -24,8 +29,15 @@ use App\Http\Controllers\Detalle_causalController;
 use App\Http\Livewire\Guest\DissatisfiedServices;
 use App\Http\Controllers\NotificationserviceController;
 use App\Http\Controllers\Dissatisfaction_serviceController;
+use App\Http\Controllers\Matriz_defectoController;
+use App\Http\Controllers\MuestreoClientController;
+use App\Http\Controllers\Niveles_estandarController;
+use App\Http\Controllers\ProvedoresEstibas;
+use App\Http\Controllers\Tamano_muestraController;
+use App\Http\Controllers\User_clientController;
 use App\Http\Livewire\Guest\Consultas;
 use App\Http\Livewire\Guest\EncuestaCliente;
+use App\Http\Livewire\Guest\Muestreos;
 use App\Http\Livewire\Reclamo\Clasificaciones as ReclamoClasificaciones;
 use App\Http\Livewire\Reclamo\Confirmaracciones;
 use App\Http\Livewire\Reclamo\Correciones;
@@ -33,7 +45,9 @@ use App\Http\Livewire\Reclamo\InfnoProcede;
 use App\Http\Livewire\Reclamo\InfoAcciones;
 use App\Http\Livewire\Reclamo\Investigaciones;
 use App\Http\Livewire\Reclamo\InvestigacionNoProcede;
+use App\Http\Livewire\Reclamo\MuestreoContenedor;
 use App\Http\Livewire\Reclamo\ReclamoController as ReclamoReclamoController;
+use App\Models\Defecto;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +69,9 @@ Route::get('servicio', DissatisfiedServices::class);
 Route::get('Reclamo', ReclamoCliente::class)->name('reclamo.visita');
 Route::get('Consulta-cliente', Consultas::class)->name('consulta-qr');
 Route::get('Encuesta/cliente/{solicitude}', EncuestaCliente::class)->name('encuesta.cliente');
+Route::get('Muestreo-cliente', Muestreos::class)->name('muestreo.cliente');
 Route::get('prueba-correo', function(){
-    return view('mail.notificacionregistrocopia');
+    return view('mail.notificacionInformecopy');
 });
 
 
@@ -98,14 +113,32 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('paises', CountryController::class)->except(['show'])->parameters(['paises' => 'country'])->names('countries');
         
         //Rutas de gestion de reclamos.
-        //   Route::post('datasolicitudes',[ReclamoController::class, 'getData'])->name('data');
-          //Route::resource('Solicitudes', ReclamoController::class)->except(['show'])->parameters(['solicitud_reclamo'=> 'solicitud_reclamo'])->names('reclamo');
           Route::resource('General/causal', Causal_generalController::class)->except(['show'])->parameters(['Causal_general' => 'Causal_general'])->names('General');
           Route::resource('Detalles', Detalle_causalController::class)->except(['show'])->parameters(['Detalle_casual' => 'Detalle_causal'])->names('Detalle');
 
+          //url para administar los datos de la tabla data-logisticas.
+          Route::resource('Nivel estandar', Niveles_estandarController::class)->except(['show'])->parameters(['nivel' => 'nivel_estandar'])->names('Niveles');
+          Route::resource('Tamaño-niveles', Tamano_muestraController::class)->except(['show'])->parameters(['tamano_muestra'=>'tamaño_muestra'])->names('Tamaño_muestra');
+          Route::resource('data-logistica', Data_logisticaController::class)->except(['show'])->parameters(['dato_logistico' => 'Data_logistica'])->names('data_logisticas');
+          Route::resource('Matriz-defecto', Matriz_defectoController::class)->except(['show'])->parameters(['Matrices_defectos'=>'Matriz_defecto'])->names('Matriz');
+          Route::resource('Aql-Defectos', Aql_defectoController::class)->except(['show'])->parameters(['Aql_defectos'=>'Aql_defecto'])->names('Aql');
+          Route::resource('Defectos', DefectosController::class)->except(['show'])->parameters(['Defecto'=>'Defectos'])->names('Defectos');
+          // Url para cliente del muestreos
+          Route::resource('user-cliente', User_clientController::class)->except(['show'])->parameters(['Users-clintes'=>'User-cliente'])->names('usuario_clientes');
+          Route::resource('clientes-Muestreos', MuestreoClientController::class)->except(['show'])->parameters(['cliente_muestreo'=>'Muestreo'])->names('clients.muestreo');
+
+          Route::get('Muestreos-contenedor', MuestreoContenedor::class)->name('Muestreo.contenedor');
+          Route::get('pdf/{id}',[MuestreoContenedor::class, 'Generarpdf'])->name('view.pdf');
+          Route::get('pdf-horizontal/{id}',[MuestreoContenedor::class, 'GenerarpdfHorizontal'])->name('view.pdf.horizonntal');
+     
+          //urles para administrar la parte de los estibas.
+          Route::resource('Proveedores-estibas', ProvedoresEstibas::class)->except(['show'])->parameters(['Provedor' => 'Proveedores'])->names('Estibas');
+          Route::resource('Asgnacion-estibas', AsignarCuadrillaController::class)->except(['show'])->parameters(['Asignar-estibas'=>'Asignacion-estibas'])->names('Asignar-estibas');
+          Route::resource('Confirmacion-estibas', ConfirmarActividades::class)->except(['show'])->parameters(['Confirmar-estibas'=>'Confirmacion-estibas'])->names('Confirmar-estibas');
           
         Route::get('/Solicitudes', ReclamoReclamoController::class)->name('reclamo');
         Route::get('download/{id}',[ReclamoReclamoController::class, 'download'])->name('download.Archivo');
+        Route::get('Reclamo-pdf/{id}',[ReclamoReclamoController::class, 'ReclamoPdf'])->name('pdf.Reclamo');
         Route::get('/Investigacion/{solicitud}', Investigaciones::class)->name('Investigador');
         Route::get('/Investigacion/{clasificacion}/Noprocede', InvestigacionNoProcede::class)->name('Investigacion.noProcede');
         Route::get('/Clasificaciones/{solicitude}', ReclamoClasificaciones::class)->name('Clasificacion');

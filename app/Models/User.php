@@ -76,4 +76,9 @@ class User extends Authenticatable
         // return Employee::where('id', $this->userable_id);
         return $this->belongsTo(Employee::class, 'userable_id', 'id');
     }
+
+    public function client()
+    {
+        return Client::where('id', $this->userable_id)->first()->id;
+    }
 }

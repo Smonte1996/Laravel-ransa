@@ -17,7 +17,7 @@ class Confirmaracciones extends Component
     use WithFileUploads;
 
     public $solicitude;
-    public $evaluacion_check = null;
+    public $evaluacion_check;
     public $accion_check ;
     public $observacion ;
     public $imagen;
@@ -25,7 +25,9 @@ class Confirmaracciones extends Component
 
     protected $rules = [
      'accion_check' => 'required',
-     'imagen'=> 'max:3024'
+     'evaluacion_check' => 'required',
+     'observacion' => 'required',
+     'imagen'=> ['nullable','max:3024']
     ];
 
     public function render()
@@ -34,12 +36,12 @@ class Confirmaracciones extends Component
     }
     public function mount($solicitude)
     {
-         $solicitud = solicitude::find($solicitude);
-      if (!empty($solicitud->investigacion->date_check)) {
-        abort(401);
-    } else {
+    //      $solicitud = solicitude::find($solicitude);
+    //   if (!empty($solicitud->investigacion->date_check)) {
+    //     abort(401);
+    // } else {
         $this->solicitude = solicitude::find($solicitude);
-       }
+      //  }
     }
 
     public function confirmarchekcData()
@@ -61,7 +63,7 @@ class Confirmaracciones extends Component
               $image->store('public/Evidencia'); 
               $imagen_guardar = Evidencia_solicitude::create([
               'solicitude_id' => $this->solicitude->id,
-              'name' => $image->hashName(),
+              'name'=> $image->hashName(),
           ]);
         }   
         }

@@ -133,14 +133,19 @@
     @else
     <div class="mb-3">
       <label for="imagen" class="form-label">Por favor adjuntar evidencia si existe algun soporte de la novedad reportada.</label>
-      <input type="file" class="form-control " wire:model="imagen" accept="image/*">
+      <input type="file" class="form-control @error('imagen') is-invalid @enderror" id="imagen" wire:model="imagen" accept=".jpeg,.png,.jpg">
+      @error('imagen')
+        <small id="imagenhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+      @enderror
     </div>
     @endif
     <div class="card" style="width: 20rem;">
-      @if ($imagen)
+       @if($imagen)
       Preview Imagen:
       <img src="{{ $imagen->temporaryUrl() }}" class="card-img-top"> 
-     @endif
+      @else
+      <p>No se acepto otro tipo de archivo que no sea extenciones imagenes como .jpeg,.png,.jpg</P>
+     @endif 
     </div>
       
       {{-- <input type="text" name="codigo" value=""> --}}

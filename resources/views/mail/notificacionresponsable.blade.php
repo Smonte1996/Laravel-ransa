@@ -141,7 +141,7 @@ El reclamo ya a sido asignado responsable para su respectiva investigacion y ana
 </tr>
 <tr>
 <br>
-@switch($solicitud->clasificacion->causal_general_id)
+@switch($solicitud->clasificacion->causal_general_id) 
     @case(1)
     @component('mail::button', ['url' => route('adm.Investigacion.correccion', ['solicitud' =>$notificacionCR->solicitude_id]), 'color' => 'green'])
     Cumplimiento de acciones

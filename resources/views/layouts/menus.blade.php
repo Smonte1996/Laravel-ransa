@@ -40,6 +40,7 @@
                             {{-- @can('adm.users.index') --}}
                                 <li><a href="{{ route('adm.users.index') }}">Usuarios</a></li>
                             {{-- @endcan --}}
+                                <li><a href="{{route('adm.usuario_clientes.index')}}">Usuarios Clientes</a></li>
                             @can('adm.countries.index')
                                 <li><a href="{{ route('adm.countries.index') }}">Paises</a></li>
                             @endcan
@@ -49,7 +50,7 @@
                             @can('adm.warehouses.index')
                                 <li><a href="{{ route('adm.warehouses.index') }}">Almacenes</a></li>
                             @endcan
-                            @can('adm.dissatisfaction_services.index')
+                            {{-- @can('adm.dissatisfaction_services.index') --}}
                                 <li><a>M. Servicio No Conforme<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li class="sub_menu"><a
@@ -60,7 +61,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endcan
+                            {{-- @endcan --}}
                             @can('adm.departaments.index')
                                 <li><a href="{{ route('adm.departaments.index') }}">Departamentos</a></li>
                            @endcan
@@ -82,51 +83,42 @@
                             {{-- @endcan --}}
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-whmcs"></i> Administración Reclamo <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-whmcs"></i> Administración Calidad <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            {{-- @can('adm.activities.index') --}}
-                                
-                            {{-- @endcan --}}
-                            @can('adm.General.index') 
-                                <li><a href="{{ route('adm.General.index') }}">Causal General</a></li>
-                            @endcan
-                            {{--@can('adm.users.index') --}}
-                                
-                            {{-- @endcan
-                            @can('adm.countries.index') --}}
-                                
-                            {{-- @endcan
-                            @can('adm.cities.index') --}}
-                               
-                            {{-- @endcan
-                            @can('adm.warehouses.index') --}}
-                                
-                            {{-- @endcan
-                            @can('adm.dissatisfaction_services.index') --}}
-
-                                        <li class=""><a
-                                                href="{{ route('adm.Detalle.index') }}">Detalle Causal</a>
-                                        </li> 
-                               
-                            {{-- @endcan
-                            @can('adm.departaments.index') --}}
-                                
-                           {{-- @endcan
-                            @can('adm.clients.index') --}}
-                                
-                            {{-- @endcan
-                            @can('adm.suppliers.index') --}}
-                                
-                            {{-- @endcan
-
-                            @can('adm.employees.index') --}}
-                                
-                            {{-- @endcan
-                            @can('adm.roles.index') --}}
-                                
-                            {{-- @endcan
-                            @can('adm.permissions.index') --}}
-                                
+                            {{-- @can('adm.General.index') --}}
+                            <li><a>Adminstración Reclamo<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a
+                                            href="{{ route('adm.General.index') }}">Causal General</a>
+                                    </li>
+                                    <li><a href="{{ route('adm.Detalle.index') }}">Detalle Causal</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {{-- @endcan
+                            @can('adm.data_logisticas.index') --}}
+                            <li><a>Adminstración Muestreo<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a
+                                            href="{{ route('adm.data_logisticas.index') }}">Data Logistica</a>
+                                    </li>
+                                    <li class="sub_menu">
+                                        <a href="{{ route('adm.Niveles.index') }}">Niveles Estandar</a>
+                                    </li>
+                                    <li class="sub_menu">
+                                        <a href="{{ route('adm.Tamaño_muestra.index') }}">Tamaño de muestra</a>
+                                    </li>
+                                    <li class="sub_menu">
+                                        <a href="{{ route('adm.Matriz.index') }}">Matriz de defecto</a>
+                                    </li>
+                                    <li class="sub_menu">
+                                        <a href="{{ route('adm.Defectos.index') }}">Defectos</a>
+                                    </li>
+                                    <li class="sub_menu">
+                                        <a href="{{ route('adm.Aql.index') }}">Aql de defecto</a>
+                                    </li>
+                                </ul>
+                            </li>
                             {{-- @endcan --}}
                         </ul>
                     </li>
@@ -138,12 +130,51 @@
                             {{-- @can('notifications.index') --}}
                             <li><a href="{{ route('adm.reclamo') }}">Reclamos </a></li>
                             {{-- @endcan --}}
+                            <li><a href="{{route('adm.Muestreo.contenedor')}}">Muestreos - Contenedor </a></li>
                             {{-- <li><a href="form_validation.html">Form Validation</a></li>
                             <li><a href="form_wizards.html">Form Wizard</a></li>
                             <li><a href="form_upload.html">Form Upload</a></li>
                             <li><a href="form_buttons.html">Form Buttons</a></li> --}}
                         </ul>
                     </li>
+                    <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
+                       <ul class="nav child_menu">
+                        {{-- @can() --}}
+                        <li><a href="{{route('adm.Estibas.index')}}">Registrar Proveedor</a></li>
+                        {{-- @endcan --}}
+                         <li><a>Movimientos<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                {{-- @can() --}}
+                                <li class="sub_menu"><a
+                                    href="{{route('adm.Asignar-estibas.index')}}">Asignar Estibas</a>
+                                </li> 
+                                {{-- @endcan --}}
+                                {{-- @can() --}}
+                                @if (now()->toTimeString()<= "17:25")
+                                <li class="sub_menu"><a href="{{route('adm.Confirmar-estibas.index')}}"> Por Confirmar</a></li> 
+                                @else
+                                    
+                                @endif
+                                {{-- @endcan --}}
+                            </ul>
+                         </li>
+                       </ul>
+                    </li>
+                    {{-- @switch()
+                        @case() --}}
+                        <li><a><i class="fa-solid fa-list-ul"></i> Listado Muestreo Cliente <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu"><a
+                                    href="{{route('adm.clients.muestreo.index')}}">Muestreos</a>
+                                </li>
+                            </ul>
+                        </li>
+                            {{-- @break
+                    
+                        @default
+                            
+                    @endswitch --}}
+                    
                     {{-- <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="general_elements.html">General Elements</a></li>
