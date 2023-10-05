@@ -429,7 +429,7 @@
    <div class="text-center">
     <table align="left" cellspacing="0" cellspacing="3">
          <tr class="cabecera text-white" align="center">
-             <td colspan="8" class="border border-dark"><strong>Verificacion de los Productos</strong></td>
+             <td colspan="9" class="border border-dark"><strong>Verificacion de los Productos</strong></td>
          </tr>
          <tr>
             <td align="center" class="border border-dark">

@@ -83,6 +83,16 @@
                             {{-- @endcan --}}
                         </ul>
                     </li>
+                    <li><a><i class="fa fa-spell-check"></i> Check Calidad <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="sub_menu"><a
+                                href="{{route('adm.Check.list')}}">Check de Pasillo</a>
+                            </li>
+                            <li class="sub_menu"><a
+                                href="{{route('adm.practica.higiene')}}">Practicas de higiene</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a><i class="fa fa-whmcs"></i> Administración Calidad <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             {{-- @can('adm.General.index') --}}
@@ -95,8 +105,17 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a>Adminstración Pasillos<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a
+                                        href="{{ route('adm.check.pasillos.index') }}">Pasillos</a>
+                                </li>
+                                </ul>
+                            </li>
                         {{-- @endcan
                             @can('adm.data_logisticas.index') --}}
+                            @switch(auth()->user()->userable_type)
+                        @case('App\Models\Employee')
                             <li><a>Adminstración Muestreo<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li class="sub_menu"><a
@@ -130,45 +149,56 @@
                             {{-- @can('notifications.index') --}}
                             <li><a href="{{ route('adm.reclamo') }}">Reclamos </a></li>
                             {{-- @endcan --}}
-                            <li><a href="{{route('adm.Muestreo.contenedor')}}">Muestreos - Contenedor </a></li>
+                            <li><a href="{{route('adm.Muestreos.container.index')}}">Muestreos - Contenedor </a></li>
+                            <li><a href="{{route('adm.pasillos.vista.index')}}">Resultado - Checklist </a></li>
                             {{-- <li><a href="form_validation.html">Form Validation</a></li>
                             <li><a href="form_wizards.html">Form Wizard</a></li>
                             <li><a href="form_upload.html">Form Upload</a></li>
                             <li><a href="form_buttons.html">Form Buttons</a></li> --}}
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
-                       <ul class="nav child_menu">
-                        {{-- @can() --}}
-                        <li><a href="{{route('adm.Estibas.index')}}">Registrar Proveedor</a></li>
-                        {{-- @endcan --}}
-                         <li><a>Movimientos<span class="fa fa-chevron-down"></span></a>
+                    
+                        <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                {{-- @can() --}}
-                                <li class="sub_menu"><a
-                                    href="{{route('adm.Asignar-estibas.index')}}">Asignar Estibas</a>
-                                </li> 
-                                {{-- @endcan --}}
-                                {{-- @can() --}}
-                                @if (now()->toTimeString()<= "17:25")
-                                <li class="sub_menu"><a href="{{route('adm.Confirmar-estibas.index')}}"> Por Confirmar</a></li> 
-                                @else
-                                    
-                                @endif
-                                {{-- @endcan --}}
+                             {{-- @can() --}}
+                             <li><a href="{{route('adm.Estibas.index')}}">Registrar Proveedor</a></li>
+                             {{-- @endcan --}}
+                              <li><a>Movimientos<span class="fa fa-chevron-down"></span></a>
+                                 <ul class="nav child_menu">
+                                     {{-- @can() --}}
+                                     <li class="sub_menu"><a
+                                         href="{{route('adm.Asignar-estibas.index')}}">Asignar Estibas</a>
+                                     </li> 
+                                     {{-- @endcan --}}
+                                     {{-- @can() --}}
+                                     @if (now()->toTimeString()<= "17:25")
+                                     <li class="sub_menu"><a href="{{route('adm.Confirmar-estibas.index')}}"> Por Confirmar</a></li> 
+                                     @else
+                                         
+                                     @endif
+                                     {{-- @endcan --}}
+                                 </ul>
+                              </li>
                             </ul>
                          </li>
-                       </ul>
-                    </li>
+                            @break
+                            @case('App\Models\Client')
+                            <li><a><i class="fa-solid fa-list-ul"></i> Listado Muestreo Cliente <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a
+                                        href="{{route('adm.clients.muestreo.index')}}">Muestreos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @break
+                    
+                        @default
+                            
+                    @endswitch
+                    
                     {{-- @switch()
                         @case() --}}
-                        <li><a><i class="fa-solid fa-list-ul"></i> Listado Muestreo Cliente <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li class="sub_menu"><a
-                                    href="{{route('adm.clients.muestreo.index')}}">Muestreos</a>
-                                </li>
-                            </ul>
-                        </li>
+                        
                             {{-- @break
                     
                         @default

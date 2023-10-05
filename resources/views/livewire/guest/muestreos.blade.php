@@ -1,13 +1,14 @@
 <div>
         <div class="container pt-5 d-flex justify-content-center mb-5">
-          <div class="border rounded shadow p-5 col-sm-10 col-md-10">
-            <div class="rounded float-star pb-3 col-sm-12">
+          <div class="border rounded shadow p-5 col-sm-12 col-md-10">
+            <div class="rounded float-star mb-3 col-sm-12 col-md-12">
                     <img src="{{asset('img/logo.png')}}" width="200" alt="{{'Imagen del logo'}}">
-                      <img src="{{asset('img/logo2.png')}}" width="300" alt="{{'imagen de logo centro'}}">
+                      <img src="{{asset('img/checklist.png')}}" width="550" alt="{{'imagen de logo centro'}}">
             </div>
+            <div class="clearfix"></div>
               <div class="row">
               <div class="col-sm-12 col-md-4">
-                <div class="mb-3">
+                <div class="mb-2">
                     <label 
                         class="form-label text-lead-500 fw-bold" for="bodega" class="text-center" style="font-size:14px;">Almacen:
                     </label>
@@ -22,7 +23,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="mb-3">
+                <div class="mb-2">
                     <label 
                         class="form-label text-lead-500 fw-bold" for="clientes" style="font-size:14px;">Cliente:
                     </label>
@@ -38,7 +39,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="mb-3">
+                <div class="mb-2">
                     <label 
                         class="form-label text-lead-500 fw-bold" for="contenedor" style="font-size:14px;">Contenedor/placa:
                     </label>
@@ -49,7 +50,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="mb-3">
+                <div class="mb-2">
                     <label 
                         class="form-label text-lead-500 fw-bold" for="Guia" style="font-size:14px;">Guia de remisión:
                     </label>
@@ -60,7 +61,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="mb-3">
+                <div class="mb-2">
                     <label
                         class="form-label text-lead-500 fw-bold" for="fecha_recepcion" style="font-size:14px;">Fecha de recepción:
                     </label>
@@ -71,7 +72,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="mb-3">
+                <div class="mb-2">
                     <label 
                         class="form-label text-lead-500 fw-bold" for="hora_recepcion" style="font-size:14px;">Hora de recepción:
                     </label>
@@ -81,8 +82,8 @@
                        @enderror 
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="mb-3">
+            <div class="col-sm-12 col-md-4">
+                <div class="mb-2">
                     <label
                         class="form-label text-lead-500 fw-bold" for="pedido" style="font-size:14px;">N° pedido (según aplique):
                     </label>
@@ -92,8 +93,8 @@
                        @enderror
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="mb-5">
+            <div class="col-sm-12 col-md-4">
+                <div class="mb-2">
                     <label 
                         class="form-label text-lead-500 fw-bold" for="responsable" style="font-size:14px;">Responsable de validación:
                     </label>
@@ -103,8 +104,313 @@
                        @enderror
                 </div>
             </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="mb-2">
+                    <label 
+                        class="form-label text-lead-500 fw-bold" for="transportista" style="font-size:14px;">Nombre del transportista:
+                    </label>
+                       <input type="text" class="form-control @error('transportista') is-invalid @enderror"  wire:model.defer="transportista" id="transportista" :value="old('transportista')">
+                       @error('transportista')
+                       <small id="transportistarhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       @enderror
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="mb-2">
+                    <label 
+                        class="form-label text-lead-500 fw-bold" for="sello" style="font-size:14px;">Sello de seguridad:
+                    </label>
+                       <input type="text" class="form-control @error('sello') is-invalid @enderror"  wire:model.defer="sello" id="sello" :value="old('sello')">
+                       @error('sello')
+                       <small id="sellorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       @enderror
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8">
+                <div class="mb-2">
+                    <label 
+                        class="form-label text-lead-500 fw-bold" for="comentario" style="font-size:14px;">Observacion:
+                    </label>
+                       <input type="text" class="form-control @error('comentario') is-invalid @enderror"  wire:model.defer="comentario" id="comentario" :value="old('comentario')">
+                       @error('comentario')
+                       <small id="comentariorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       @enderror
+                </div>
+            </div>
         </div>
-        <div class="text-center mb-3">
+
+
+@if (!is_null($Muestreos))
+
+@else
+<table class="table-responsive col-sm-12 col-md-12 mt-5" width="100%">
+<thead>
+    <tr align="center">
+        <td colspan="1" class="border border-dark" style="font-size:14px;"><strong>Verificación General</strong></td>
+    </tr>
+    <tr>
+  <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+    <strong>
+   1. El transporte tiene protección (carpa, furgón).
+   </strong>  
+</td> 
+  <td  class="border border-dark">
+    <select name="" id="vr1" wire:model.defer="vr1" class="form-control">
+        <option value="">Selecionar una opción</option>
+        <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+    </select>
+  </td>
+   </tr>
+   <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+<strong>
+   2. No se presentan olores fuera de lo normal.
+   </strong>  
+</td> 
+  <td  class="border border-dark">
+    <select name="" id="vr2" wire:model.defer="vr2" class="form-control">
+        <option value="">Selecionar una opción</option>
+        <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+  </select>
+</td>
+ </tr>
+ <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+     3. Piso del contedor, furgón, en buenas condiciones y seco.  
+     </strong>  
+  </td> 
+    <td  class="border border-dark">
+      <select name="" id="vr3" wire:model.defer="vr3" class="form-control">
+  <option value="">Selecionar una opción</option>
+  <option value="Cumple">Cumple</option>
+  <option value="No cumple"> No cumple</option>
+  <option value="No aplica">No aplica</option>
+  </select>
+</td>
+ </tr>
+ <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+   4. Ausencia de orificios en el cajón. 
+   </strong>  
+</td> 
+  <td  class="border border-dark">
+    <select name="" id="vr4" wire:model.defer="vr4" class="form-control">
+        <option value="">Selecionar una opción</option>
+        <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+    </select>
+  </td>
+   </tr>
+   <tr>
+      <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+                <strong>
+   5. Limpieza del contenedor, furgón (piso, paredes, techo). 
+   </strong>  
+</td> 
+        <td  class="border border-dark">
+ <select name="" id="vr5" wire:model.defer="vr5" class="form-control">
+     <option value="">Selecionar una opción</option>
+     <option value="Cumple">Cumple</option>
+     <option value="No cumple"> No cumple</option>
+     <option value="No aplica">No aplica</option>
+  </select>
+</td>
+ </tr>
+ <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+     6. Ausencia de plagas.
+     </strong>  
+</td> 
+<td  class="border border-dark">
+<select name="" id="vr6" wire:model.defer="vr6" class="form-control">
+ <option value="">Selecionar una opción</option>
+ <option value="Cumple">Cumple</option>
+ <option value="No cumple"> No cumple</option>
+ <option value="No aplica">No aplica</option>
+ </select>
+</td>
+ </tr>
+ <tr>
+<td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+  <strong>
+ 7. Ausencia de quimicos y/o sustancias contaminantes (Combustible, solventes, aceites, entre otros). 
+ </strong>  
+ </td> 
+   <td  class="border border-dark">
+     <select name="" id="vr7" wire:model.defer="vr7" class="form-control">
+     <option value="">Selecionar una opción</option>
+     <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+     </select>
+</td>
+   </tr>
+</thead>
+  </table>
+
+<table class="table-responsive col-sm-12 col-md-12 mt-5" width="100%">
+<thead>
+ <tr align="center">
+     <td colspan="1" class="border border-dark" style="font-size:14px;"><strong>Verificación en el descargue</strong></td>
+ </tr>
+ <tr>
+     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+       <strong>
+      1. Puerta tiene el sello de seguidad. 
+      </strong>  
+   </td> 
+     <td  class="border border-dark">
+       <select name="" id="vd1" wire:model.defer="vd1" class="form-control">
+           <option value="">Selecionar una opción</option>
+           <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+       </select>
+     </td>
+      </tr>
+
+ <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+     2. Carga en buen estado (no rota, abierta, en mal estado, húmeda). 
+     </strong>  
+  </td> 
+    <td  class="border border-dark">
+      <select name="" id="vd2" wire:model.defer="vd2" class="form-control">
+          <option value="">Selecionar una opción</option>
+          <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+      </select>
+    </td>
+     </tr>
+
+ <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+     3. Cumple correcto estibaje de PT (se cumple el apile PT). 
+     </strong>  
+  </td> 
+    <td  class="border border-dark">
+      <select name="" id="vd3" wire:model.defer="vd3" class="form-control">
+          <option value="">Selecionar una opción</option>
+          <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+      </select>
+    </td>
+     </tr>
+
+<tr>
+   <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+     <strong>
+    4. Mantiene condiciones de embalaje (pallets en buen estado, strech film cubre el MP/ME/PT). 
+    </strong>  
+ </td> 
+   <td  class="border border-dark">
+     <select name="" id="vd4" wire:model.defer="vd4" class="form-control">
+         <option value="">Selecionar una opción</option>
+         <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+     </select>
+   </td>
+    </tr>
+
+<tr>
+   <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+     <strong>
+    5. Cumple orden en la carga. 
+    </strong>  
+ </td> 
+   <td  class="border border-dark">
+     <select name="" id="vd5" wire:model.defer="vd5" class="form-control">
+         <option value="">Selecionar una opción</option>
+         <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+     </select>
+   </td>
+    </tr>
+
+ <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+     6. No existe derrame de producto terminado, materias primas o material de empaque. 
+     </strong>  
+  </td> 
+    <td  class="border border-dark">
+      <select name="" id="vd6" wire:model.defer="vd6" class="form-control">
+          <option value="">Selecionar una opción</option>
+          <option value="Cumple">Cumple</option>
+          <option value="No cumple"> No cumple</option>
+          <option value="No aplica">No aplica</option>
+      </select>
+    </td>
+     </tr>
+
+<tr>
+   <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+     <strong>
+    7. Libre  de contaminación cruzada fisica, quimica y/o biológica. 
+    </strong>  
+ </td> 
+   <td  class="border border-dark">
+     <select name="" id="vd7" wire:model.defer="vd7" class="form-control">
+         <option value="">Selecionar una opción</option>
+         <option value="Cumple">Cumple</option>
+        <option value="No cumple"> No cumple</option>
+        <option value="No aplica">No aplica</option>
+     </select>
+   </td>
+    </tr>
+
+{{-- <tr>
+   <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+     <strong>
+    8. ME/MP ingreso con certificados de calidad. 
+    </strong>  
+ </td> 
+   <td  class="border border-dark">
+     <select name="" id="vd8" wire:model.defer="vd8" class="form-control">
+         <option value="">Selecionar una opción</option>
+         <option value="CUMPLE">Cumple</option>
+         <option value="NO CUMPLE"> No cumple</option>
+         <option value="No aplica">No aplica</option>
+     </select>
+   </td>
+    </tr> --}}
+
+ <tr>
+    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+     8. El material tiene minimo 70% de vida útil. 
+     </strong>  
+  </td> 
+    <td  class="border border-dark">
+      <select name="" id="vd9" wire:model.defer="vd9" class="form-control">
+          <option value="">Selecionar una opción</option>
+          <option value="Cumple">Cumple</option>
+          <option value="No cumple"> No cumple</option>
+          <option value="No aplica">No aplica</option>
+      </select>
+    </td>
+     </tr>
+     </thead>
+ </table>
+ @endif
+
+
+        <div class="row">
+        <div class="text-center mb-3 mt-3">
             @if (!is_null($Muestreos))
                 <span class="text-center">Hacer el respectivo Muestreo</span>
             @else
@@ -116,10 +422,11 @@
             <button class="btn bg-orange-600 text-white" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Tabla Militar Estandar</button>
         </div>
+    </div>
         
      <div class="row">
-        <div class="border table-responsive col-sm-12 col-md-12 justify-content-center mb-3" >
-            <table class="table-striped table-bordered border" >
+        <div class="border table-responsive col-sm-12 col-md-10 justify-content-center mb-3" >
+            {{-- <table class="table-striped table-bordered border">
                 <thead>
                     <tr>
                         <th class="bg-secondary text-white text-center" style="font-size:12px;">
@@ -138,26 +445,8 @@
                             Tamaño de la<br> muestra
                         </th>
                         <th class="bg-secondary text-white text-center" style="font-size:12px;">
-                            Registro <br> sanitario
-                        </th>
-                        <th class="text-center" style="font-size:12px;">
-                            Vida util acorde<br> a la data logistica
-                        </th>
-                        <th class="bg-secondary text-white text-center" style="font-size:12px;">
-                            Fecha de Elaboración
-                        </th>
-                        <th class="bg-secondary text-white text-center" style="font-size:12px;">
-                            Fecha de Vencimiento
-                        </th>
-                        <th class="bg-secondary text-white text-center" style="font-size:12px;">
-                            Pvp correcto
-                        </th>
-                        <th class="bg-secondary text-white text-center" style="font-size:12px;">
-                            Lote, fecha de elaboración y/o<br> expiración ilegible o borrable
-                        </th>
-                        <th class="bg-secondary text-white text-center" style="font-size:12px;">
                             Etiqueta diferente <br>al producto
-                        </th>
+                        </th> --}}
                         {{-- <th>
                             Tipo de defecto
                         </th>
@@ -167,7 +456,7 @@
                         <th>
                             Comentario u observación
                         </th> --}}
-                        <th>
+                        {{-- <th>
                             ACCIÓN
                         </th>
                     </tr>
@@ -224,51 +513,15 @@
                          </label>
                             </div> 
                     </td>
-
-                    <td>
-                        <div>
-                            <select class="form-control"  wire:model.defer="registro_sanitario" id="registro_sanitario" style="width: 180px">
-                                <option value="">Seleccionar una opcion</option>
-                                <option value="Si">Si</option>
-                                <option value="No">No</option>  
-                            </select>
-                               </div> 
-                    </td>
-
-                    <td>
-                        <div wire:ignore>
-                        <input type="text" class="form-control" wire:model="vida_logistica" id="vida_logistica" disabled style="width: 200px" 
-                        :value="{{$vida_logistica}}">
-                         </div>
-                    </td>
-                    <td>
-                        <input type="date" class="form-control  @error('fecha_elaboracion') is-invalid @enderror" id="fecha_elaboracion" wire:model="fecha_elaboracion" style="width: 150px">
-                    </td>
-                    <td>
-                        <input type="date" class="form-control  @error('fecha_vencimiento') is-invalid @enderror" id="fecha_vencimiento" wire:model="fecha_vencimiento" style="width: 150px">
-                    </td>
-                    <td>
-                        <select class="form-control" id="pvp" wire:model="pvp" style="width: 180px">
-                            <option value="">Seleccionar una opcion</option>
-                            <option value="Si">Si</option>
-                            <option value="No">No</option>
-                            <option value="No Aplica">No Aplica</option>  
-                        </select>
-                    </td>
-                    <td>
-                         <select name="" class="form-control @error('lote') is-invalid @enderror" id="lote" wire:model="lote" style="width: 200px">
-                            <option value="">Seleccionar una opcion</option>
-                            <option value="Si">Si</option>  
-                            <option value="No">No</option>  
-                        </select>
-                    </td>
                     <td>
                         <select name="" class="form-control @error('etiqueta') is-invalid @enderror" id="etiqueta" wire:model="etiqueta" style="width: 200px">
                             <option value="">Seleccionar una opcion</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
-                    </td>
+                    </td> --}}
+
+                    
                     {{-- <td>
                         <select name="" class="form-control" id="" wire:model="defecto" style="width: 200px">
                             <option value="">Seleccionar una opcion</option>
@@ -291,17 +544,81 @@
     
                         </textarea>
                     </td> --}}
-                    <td>
-                        <div class="text-center">
+                    {{-- <td>
+                        <div class="text-center"> --}}
                             
-                            {{-- <button type="button" class="btn bg-orange-600 text-white"  style="font-size: 23px;" wire:click.prevent="validarCampos"><i class="fa-solid fa-square-plus"></i></button> --}}
+                            {{-- <button type="button" class="btn bg-orange-600 text-white"  style="font-size: 22px;" wire:click.prevent="validarCampos"><i class="fa-solid fa-square-plus"></i></button> --}}
                             
-                            <a class="btn bg-green-600 text-white" style="font-size: 22px;" wire:click="$set('open', true)"><i class="fa-solid fa-square-plus"></i></a>
+                            {{-- <a class="btn bg-green-600 text-white" style="font-size: 22px;" wire:click="$set('open', true)"><i class="fa-solid fa-square-plus"></i></a>
                         </div>
                     </td>
                     </tr>
-                    
                 </tbody>
+                <thead>
+                    <tr>
+                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                         Registro <br> sanitario
+                     </th>
+                     <th class="text-center" style="font-size:12px;">
+                         Vida util acorde<br> a la data logistica
+                     </th>
+                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                         Fecha de Elaboración
+                     </th>
+                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                         Fecha de Vencimiento
+                     </th>
+                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                         Pvp correcto
+                     </th>
+                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                         Lote, fecha de elaboración y/o<br> expiración ilegible o borrable
+                     </th>
+                     
+                    </tr>
+                 </thead>
+                 <tbody>
+                     <tr>
+                         <td>
+                             <div>
+                                 <select class="form-control"  wire:model.defer="registro_sanitario" id="registro_sanitario" style="width: 180px">
+                                     <option value="">Seleccionar una opcion</option>
+                                     <option value="Si">Si</option>
+                                     <option value="No">No</option>  
+                                 </select>
+                                    </div> 
+                         </td>
+     
+                         <td>
+                             <div wire:ignore>
+                             <input type="text" class="form-control" wire:model="vida_logistica" id="vida_logistica" disabled style="width: 200px" 
+                             :value="{{$vida_logistica}}">
+                              </div>
+                         </td>
+                         <td>
+                             <input type="date" class="form-control  @error('fecha_elaboracion') is-invalid @enderror" id="fecha_elaboracion" wire:model="fecha_elaboracion" style="width: 150px">
+                         </td>
+                         <td>
+                             <input type="date" class="form-control  @error('fecha_vencimiento') is-invalid @enderror" id="fecha_vencimiento" wire:model="fecha_vencimiento" style="width: 150px">
+                         </td>
+                         <td>
+                             <select class="form-control" id="pvp" wire:model="pvp" style="width: 180px">
+                                 <option value="">Seleccionar una opcion</option>
+                                 <option value="Si">Si</option>
+                                 <option value="No">No</option>
+                                 <option value="No Aplica">No Aplica</option>  
+                             </select>
+                         </td>
+                         <td>
+                              <select name="" class="form-control @error('lote') is-invalid @enderror" id="lote" wire:model="lote" style="width: 200px">
+                                 <option value="">Seleccionar una opcion</option>
+                                 <option value="Si">Si</option>  
+                                 <option value="No">No</option>  
+                             </select>
+                         </td>
+                         
+                     </tr>
+                 </tbody>
                 @if (!is_null($sku))
                 <thead>
                     <tr>
@@ -318,19 +635,14 @@
                             Ean 14
                         </th>
                         <th class="text-center" style="font-size:12px;">
-                            Marca
+                            Pvp
                         </th>
                         <th class="text-center" style="font-size:12px;">
                            Registro Sanitario
                         </th>
-                        <th class="text-center" style="font-size:12px;">
-                            Vida Util
-                        </th>
-                        <th class="text-center" style="font-size:12px;">
-                            Pvp
-                        </th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     <tr>
                         <td>
@@ -373,7 +685,7 @@
                             <label class="form-label text-center" style="width: 200px">
                                 @if (!is_null($sku))
                                     @foreach ( $datas as $data )
-                                        {{$data->marca}}
+                                        {{$data->pvp}}
                                     @endforeach
                                 @endif
                               </label>
@@ -387,6 +699,20 @@
                             @endif
                             </label>
                         </td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th class="text-center" style="font-size:12px;">
+                            Vida Util
+                        </th>
+                        <th class="text-center" style="font-size:12px;">
+                           Marca
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
                         <td>
                             <label class="form-label text-center" style="width: 180px">
                                 @if (!is_null($sku))
@@ -400,17 +726,276 @@
                             <label class="form-label text-center" style="width: 180px">
                                 @if (!is_null($sku))
                                 @foreach ( $datas as $data )
-                                    {{$data->pvp}}
+                                    {{$data->marca}}
                                 @endforeach
                             @endif
                             </label>
                         </td>
                     </tr>
+
                 </tbody>
                 @endif
+            </table> --}}
+
+
+            <table class="mt-4 table-striped table-bordered border text-center">
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                     Sku
+                    </th>
+                    <td>
+                        <div wire:ignore>
+                            <select class="form-control Selector @error('sku') is-invalid @enderror" wire:model='sku' id="sku" style="width: 190px"> 
+                            <option>Seleccione una opción</option>
+                            @foreach ( $data_logis as $data_logi )
+                                <option value="{{$data_logi->id}}">{{$data_logi->sku_quala}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Sku Unilever
+                    </th>
+                    <td>
+                        <label class="form-label text-center" style="width: 180px">
+                            @if (!is_null($sku))
+                                @foreach ( $datas as $data )
+                                    {{$data->sku_unilever}}
+                                @endforeach
+                            @endif
+                          </label> 
+                    </td>
+                </tr>
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Cantidad recibida
+                    </th>
+                    <td>
+                        <input type="number" class="form-control @error('cantidad') is-invalid @enderror" wire:model.lazy="cantidad" id="cantidad" style="width: 190px" >
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Descripción del <br> Producto
+                    </th>
+                    <td>
+                        <label class="form-label text-center" style="width: 200px">
+                            @if (!is_null($sku))
+                                @foreach ( $datas as $data )
+                                    {{$data->descripcion}}
+                                @endforeach
+                            @endif
+                          </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Nivel de muestreo <br>aplicado
+                    </th>
+                    <td>
+                        <div>
+                        <select class="form-control @error('nivelesestandars') is-invalid @enderror" wire:model="nivelesestandars" id="nivelesestandars" style="width: 190px">
+                        <option selected>Seleccionar un opcion</option>
+                        @foreach ($Niveles as $Nivele)
+                            <option value="{{$Nivele->id}}">{{$Nivele->name}}</option>
+                        @endforeach      
+                        </select>
+                       </div>    
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Ean 13
+                    </th>
+                    <td>
+                        <label class="form-label text-center" style="width: 200px">
+                            @if (!is_null($sku))
+                                @foreach ( $datas as $data )
+                                    {{$data->ean13}}
+                                @endforeach
+                            @endif
+                          </label> 
+                    </td>
+                </tr>
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Nivel de muestreo <br>aplicado
+                    </th>
+                    <td>
+                        <div>
+                        <select class="form-control @error('letratamano') is-invalid @enderror" wire:model="letratamano" id="letratamano" style="width: 190px">
+                            <option selected>Seleccionar un opcion</option>
+                             @if (!is_null($Letras))  
+                            @foreach ($Letras as $Letra)
+                                <option value="{{$Letra->id}}">{{$Letra->nivel}}</option>
+                            @endforeach 
+                             @endif
+                            </select>
+                        </div> 
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Ean 14
+                    </th>
+                    <td>
+                        <label class="form-label text-center" style="width: 200px">
+                            @if (!is_null($sku))
+                                @foreach ( $datas as $data )
+                                    {{$data->ean14}}
+                                @endforeach
+                            @endif
+                          </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-center" style="font-size:12px;">
+                        Tamaño de la<br> muestra
+                    </th>
+                    <td>
+                        <div>
+                         <label class="form-label text-center  @error('tamaño_muestreo') is-invalid @enderror" wire:model="tamaño_muestreo" style="width: 150px">
+                             @if (!is_null($Muestras))
+                             @forelse ($Muestras as $Muestra )
+                             {{$Muestra->muestra}}
+                             @empty
+                             <p>No hay datos</p> 
+                             @endforelse
+                          @endif 
+                         </label>
+                            </div> 
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Marca
+                     </th>
+                     <td>
+                        <label class="form-label text-center" style="width: 180px">
+                            @if (!is_null($sku))
+                            @foreach ( $datas as $data )
+                                {{$data->marca}}
+                            @endforeach
+                        @endif
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Registro <br> sanitario
+                    </th>
+                    <td>
+                        <div>
+                            <select class="form-control"  wire:model.defer="registro_sanitario" id="registro_sanitario" style="width: 190px">
+                                <option value="">Seleccionar una opcion</option>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>  
+                            </select>
+                               </div> 
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Registro Sanitario
+                     </th>
+                     <td>
+                        <label class="form-label text-center" style="width: 180px">
+                            @if (!is_null($sku))
+                            @foreach ( $datas as $data )
+                                {{$data->registro_sanitario}}
+                            @endforeach
+                        @endif
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Pvp correcto
+                    </th>
+                    <td>
+                        <select class="form-control" id="pvp" wire:model="pvp" style="width: 190px">
+                            <option value="">Seleccionar una opcion</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                            <option value="No Aplica">No Aplica</option>  
+                        </select>
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Pvp
+                    </th>
+                    <td>
+                        <label class="form-label text-center" style="width: 200px">
+                            @if (!is_null($sku))
+                                @foreach ( $datas as $data )
+                                    {{$data->pvp}}
+                                @endforeach
+                            @endif
+                          </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Etiqueta diferente <br>al producto
+                    </th>
+                    <td>
+                        <select name="" class="form-control @error('etiqueta') is-invalid @enderror" id="etiqueta" wire:model="etiqueta" style="width: 190px">
+                            <option value="">Seleccionar una opcion</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </td>
+                </tr>  
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Lote, fecha de elaboración y/o<br> expiración ilegible o borrable
+                    </th>
+                    <td>
+                        <select name="" class="form-control @error('lote') is-invalid @enderror" id="lote" wire:model="lote" style="width: 190px">
+                           <option value="">Seleccionar una opcion</option>
+                           <option value="Si">Si</option>  
+                           <option value="No">No</option>  
+                       </select>
+                   </td>
+                </tr> 
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Fecha de Elaboración
+                    </th>
+                    <td>
+                        <input type="date" class="form-control  @error('fecha_elaboracion') is-invalid @enderror" id="fecha_elaboracion" wire:model="fecha_elaboracion" style="width: 150px">
+                    </td>
+                    <th class="text-center" style="font-size:12px;">
+                        Vida Util
+                    </th>
+                    <td>
+                        <label class="form-label text-center" style="width: 180px">
+                            @if (!is_null($sku))
+                            @foreach ( $datas as $data )
+                                {{$data->vida_util}}
+                            @endforeach
+                        @endif
+                        </label>
+                    </td>
+                </tr>   
+                <tr>
+                    <th class="bg-secondary text-white text-center" style="font-size:12px;">
+                        Fecha de Vencimiento
+                    </th>
+                    <td>
+                        <input type="date" class="form-control  @error('fecha_vencimiento') is-invalid @enderror" id="fecha_vencimiento" wire:model="fecha_vencimiento" style="width: 150px">
+                    </td>
+                    <td>
+                        <div wire:ignore>
+                        <input type="text" class="form-control" wire:model="vida_logistica" id="vida_logistica" disabled style="width: 130px" 
+                        :value="{{$vida_logistica}}">
+                         </div>
+                    </td>
+                        <td>
+                            <div class="text-center">
+                                 @if (!is_null($Evidencias)) 
+                                <button type="button" class="btn bg-orange-600 text-white"  style="font-size: 23px;" wire:click.prevent="$set('Abrir', true)"><i class="fa-solid fa-truck-fast"></i></button>
+                                 @else 
+
+                                 @endif 
+                                <a class="btn bg-green-600 text-white" style="font-size: 23px;" wire:click.prevent="$set('open', true)"><i class="fa-solid fa-square-plus"></i></a>
+                            </div>
+                        </td>
+                </tr>              
             </table>
           </div>
         </div>
+
           <x-jet-dialog-modal wire:model.prevent="open">
             <x-slot name='title'>
                 <label class="form label">
@@ -567,7 +1152,7 @@
                       <option value="Rechazado">Rechazado</option>
                     </select>
                   </div>
-                  
+
                 <div class=" mt-2 mb-2">
                   <textarea class="form-control" wire:model.defer="obsrva" cols="" rows=""></textarea>
                 </div>
@@ -598,9 +1183,9 @@
             </x-slot>
           </x-jet-dialog-modal>
            
-          @php
+          {{-- @php
               echo today()->diffInDays($fecha_elaboracion) + today()->diffInDays($fecha_vencimiento);
-          @endphp
+          @endphp --}}
 
           <div class="border table-responsive col-sm-12 col-md-12 justify-content-center mb-3 mt-5" >
             <table class="table-striped table-bordered border">
@@ -639,55 +1224,203 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($Evidencia_muestreos as $Evidencia_muestreo)
-                    <tr>
-                      <td>
-                         {{$Evidencia_muestreo->Data_logistica->sku_quala}}
-                      </td>
-                      <td>
-                        {{$Evidencia_muestreo->Data_logistica->cliente}}
-                      </td>
-                      <td>
-                        {{$Evidencia_muestreo->cantidad}}
-                      </td>
-                      <td>
-                        {{$Evidencia_muestreo->Tamaño_muestra->Niveles_estandar->name}}
-                      </td>
-                      <td class="text-center">
-                        {{$Evidencia_muestreo->Tamaño_muestra->nivel}}
-                      </td>
-                      <td class="text-center">
-                        {{$Evidencia_muestreo->Tamaño_muestra->muestra}}
-                      </td>
-                      <td>
-                        {{$Evidencia_muestreo->vida_util}}
-                      </td>
-                      <td>
-                        {{$Evidencia_muestreo->pvp}}
-                      </td>
-                      <td>
-                        {{$Evidencia_muestreo->etiqueta_producto}}
-                      </td>
-                      <td>
-                        @switch($Evidencia_muestreo->estatu_producto)
-                            @case('Aprobado')
-                                <label class="bg-green-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Aprobado</label>
+                    @if (!is_null($Muestreos))
+ 
+                    @switch($Muestreos->bodega)
+                        @case('BODEGA GYE')
+                        @foreach ($Evidencia_muestreos as $Evidencia_muestreo)
+                        <tr>
+                          <td>
+                             {{$Evidencia_muestreo->Data_logistica->sku_quala}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->Data_logistica->cliente}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->cantidad}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->Tamaño_muestra->Niveles_estandar->name}}
+                          </td>
+                          <td class="text-center">
+                            {{$Evidencia_muestreo->Tamaño_muestra->nivel}}
+                          </td>
+                          <td class="text-center">
+                            {{$Evidencia_muestreo->Tamaño_muestra->muestra}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->vida_util}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->pvp}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->etiqueta_producto}}
+                          </td>
+                          <td>
+                            @switch($Evidencia_muestreo->estatu_producto)
+                                @case('Aprobado')
+                                    <label class="bg-green-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Aprobado</label>
+                                    @break
+                                @case('Rechazado')
+                                    <label class="bg-orange-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Rechazado</label>
                                 @break
-                            @case('Rechazado')
-                                <label class="bg-orange-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Rechazado</label>
+                                @case('Cuarentena')
+                                <label class="bg-lead-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Cuarentena</label>
+                                @break
+                                @default
+                                    
+                            @endswitch
+                          </td>
+                        </tr>
+                        @endforeach
+                         
                             @break
-                            @case('Cuarentena')
-                            <label class="bg-lead-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Cuarentena</label>
+                            @case('BODEGA UIO')
+                            @foreach ($Evidencia_muestreos as $Evidencia_muestreo)
+                        <tr>
+                          <td>
+                             {{$Evidencia_muestreo->Data_logistica->sku_quala}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->Data_logistica->cliente}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->cantidad}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->Tamaño_muestra->Niveles_estandar->name}}
+                          </td>
+                          <td class="text-center">
+                            {{$Evidencia_muestreo->Tamaño_muestra->nivel}}
+                          </td>
+                          <td class="text-center">
+                            {{$Evidencia_muestreo->Tamaño_muestra->muestra}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->vida_util}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->pvp}}
+                          </td>
+                          <td>
+                            {{$Evidencia_muestreo->etiqueta_producto}}
+                          </td>
+                          <td>
+                            @switch($Evidencia_muestreo->estatu_producto)
+                                @case('Aprobado')
+                                    <label class="bg-green-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Aprobado</label>
+                                    @break
+                                @case('Rechazado')
+                                    <label class="bg-orange-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Rechazado</label>
+                                @break
+                                @case('Cuarentena')
+                                <label class="bg-lead-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Cuarentena</label>
+                                @break
+                                @default
+                                    
+                            @endswitch
+                          </td>
+                        </tr>
+                        @endforeach
                             @break
-                            @default
-                                
-                        @endswitch
-                      </td>
-                    </tr>
-                    @endforeach
+                    
+                        @default
+                            
+                    @endswitch
+                    @endif 
                 </tbody>
             </table>
           </div>
+          
+          <x-jet-dialog-modal wire:model.prevent="Abrir">
+            <x-slot name='title'>
+                <label class="form label">
+                    <span>Reporte de defectos</span>
+                </label>
+            </x-slot>
+            <x-slot name='content'>
+                <div class="mt-2 mb-2">
+                <select class="form-control Select2" id="skuchecklits" wire:model="skuchecklits">
+                  <option value="">Seleccionar un opción</option>
+                  @if (!is_null($dato_transporte))
+                  @foreach ($dato_transporte as $dato_transport)
+                  <option value="{{$dato_transport->Data_logistica->id}}">{{$dato_transport->Data_logistica->sku_quala}}</option>
+                  @endforeach
+                  @endif
+                </select>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-4 col-md-6 mt-2 mb-2 text-center">
+                 <label class="form-label" id="descripcion">
+                  @if (!is_null($sku_defectos))
+                      @foreach ($sku_defectos as $sku_defecto)
+                          {{$sku_defecto->descripcion}}
+                      @endforeach
+                  @endif
+                 </label>
+                </div>
+                  <div class="col-sm-4 col-md-6 mt-2 mb-2 text-center">
+                  <label class="form-label" id="clasificacion">
+                      @if (!is_null($sku_defectos))
+                      @foreach ($sku_defectos as $sku_defecto)
+                          {{$sku_defecto->marca}}
+                      @endforeach
+                  @endif
+                  </label>
+                  </div>
+              </div>
+
+              <div class=" mt-2 mb-2">
+                  <input type="text" class="form-control" id="defecto" wire:model.defer="estado" placeholder="Defecto del producto">
+              </div>
+                  
+                <div class="col-sm-4 col-md-4 mt-2 mb-2">
+                 <input type="number" class="form-control"  placeholder="Cantidad" wire:model.defer="cantidades">
+                </div>
+                
+                <div class="col-sm-4 col-md-4 mb-2 mt-2">
+                    <select class="form-control" wire:model.defer="caja_uni" id="cantidad_caja">
+                        <option value="">Selecciona una opción</option>
+                        <option value="Cajas">Cajas</option>
+                        <option value="Unidades">Unidades</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 col-md-4 mt-2 mb-2">
+                    <input type="text" class="form-control"  placeholder="Lotes" id="lotes" wire:model.defer="lotes">
+                </div>
+
+
+                <div class=" mt-2 mb-2">
+                  <textarea class="form-control" wire:model.defer="observacion" cols="" rows=""></textarea>
+                </div>
+                
+                <div class="mt-2 mb-2">
+                 <input type="file" wire:model="imagen_defectos" class="form-control" accept="image/*" multiple>
+                 @if ($imagen_defectos)
+                 Preview Imagen:
+                 @foreach ($imagen_defectos as $imagen )
+                 <img src="{{ $imagen->temporaryUrl() }}" width="80px" height="80px">    
+                 @endforeach
+                @endif
+                {{-- <div class="col-md-12 mt-2 mb-2">
+                    <div wire:ignore>
+                        <form class="dropzone" method="GET">
+                        </form>
+                    </div>
+                </div> --}}
+                </div>
+            </x-slot>
+            <x-slot name='footer'>
+                <x-jet-secondary-button wire:click.prevent="$set('Abrir', false)">
+                    Cancelar
+                </x-jet-secondary-button>
+                <x-jet-danger-button wire:click.prevent="Defectos()">
+                    Guardar
+                </x-jet-danger-button>
+            </x-slot>
+          </x-jet-dialog-modal>
           
           @if (!is_null($Evidencias))
           <div class="row">
@@ -701,7 +1434,7 @@
           
           </div>
         </div>
-    </div>  
+   
 
 <!--Imgen de la tabla -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -722,14 +1455,22 @@
             </div>
         </div>
     </div>
-</div>
-
-
+ </div>
+</div> 
  @push('scripts') 
+ {{-- <script>
+    document.addEventListener('livewire:load', function() {
+    $('.Select2').on('change', function(e){
+        @this.set('skuchecklits', e.target.value);
+    });
+    $(".Select2").select2();
+   });
+ </script> --}}
  <script>
     document.addEventListener('livewire:load', function() {
         $('.Selector').on('change', function(e){
             @this.set('sku', e.target.value);
+            @this.set('skuchecklits', e.target.value);
         });
         $(".Selector").select2();
        });
@@ -742,7 +1483,7 @@
             acceptedFiles: "image/*",
             method: "GET",
             paramName: "imagen_muestreo",
-            maxFilesize: 5,
+            maxFilesize: 3,
             addRemoveLinks: true,
             dictRemoveFile: "Eliminar Imagen",
             dictInvalidFileType: "No se puede cargar este tipo de archivo",

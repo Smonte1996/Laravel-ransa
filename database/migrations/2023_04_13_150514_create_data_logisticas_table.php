@@ -31,6 +31,7 @@ return new class extends Migration
             $table->double('cajas_estibas');
             $table->date('fecha_actualizacion');
             $table->string('origen')->nullable();
+            $table->text('observacion')->nullable();
             $table->timestamps();
         });
     }

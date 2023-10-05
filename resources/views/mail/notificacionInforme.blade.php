@@ -11,11 +11,11 @@
         font-size: 12px;
      }
      .naranja{
-        color: orange;
+        color: #ffa500;
         font-size: 12px;
      }
      .cuerpo{
-        color: green;
+        color: #008000;
         font-size: 12px;
      }
      .negrita{
@@ -23,8 +23,9 @@
         font: verdana;
      }
      .negro{
-        color: black;
+        color: #000;
         font-size: 12px;
+        font: verdana;
      }
      .tamaño_letra{
         font-size: 12px;
@@ -32,18 +33,14 @@
     </style>
 </head>
 <body>
-<label class="negro">Buenas estimados adjunto el Reporte de {{$Mustreo->clientes->social_reason}} recibidas el día de hoy {{$Mustreo->fecha_recepcion}}.</label><br>
+<p class="negro">Estimado cliente,</p>
 
-<label class="negro">Cualquier duda, quedo atento.</label>
-<br>
-<br>
-<label class="tamaño_letra">Ahora puedes ingresar tus reclamos en nuestro Portal de Clientes o ingresando <a class="naranja" href="https://ransa-reclamo.com/Reclamo">Aquí</a></label><br>
-<label class="cuerpo negrita">Ransa Ecuador</label><br>
-<label class="cuerpo">Vicepresidencia de Ransa Andina</label>
-<br>
-<br>
-<label class="cuerpo">Ecuador | Km. 22 Vía a Daule - Guayaquil</label><br>
-<label class="cuerpo"><a href="#" class="cuerpo">www.ransa.net</a></label>
+<p class="negro">En el documento adjunto puede encontrar el reporte de muestreo de la recepción de {{$Mustreo->clientes->social_reason}} recibida el día {{$Mustreo->fecha_recepcion}}.</p>
+
+<p class="negro">Cualquier duda, quedo atento.</p>
+<p class="tamaño_letra">Ahora puedes ingresar tus reclamos en nuestro Portal de Clientes o ingresando <a class="naranja" href="https://ransa-reclamo.com/Reclamo">Aquí</a></p>
+<p class="cuerpo negrita">Ransa Ecuador</p>
+<p class="cuerpo"><a href="#" class="cuerpo">www.ransa.net</a></p>
 <table>
 <tr>
 <td align="left">

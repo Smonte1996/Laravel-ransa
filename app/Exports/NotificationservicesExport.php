@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use PhpOffice\PhpSpreadsheet\Calculation\Database\DVar;
 
-class NotificationservicesExport implements FromQuery, WithMapping,WithHeadings, WithStrictNullComparison
+class NotificationservicesExport implements FromQuery, WithMapping, WithHeadings, WithStrictNullComparison
 {
     use Exportable;
     

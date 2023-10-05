@@ -68,7 +68,7 @@
                                         {{$Muestreo->fecha_recepcion}} 
                                      </td>
                                      <td>
-                                         {{$Muestreo->hora_recepcion }} 
+                                         {{$Muestreo->hora_recepcion->isoFormat('H:mm:ss A') }} 
                                      </td>
                                      <td>
                                          {{$Muestreo->n_pedido}} 
@@ -78,13 +78,17 @@
                                      </td>
                                      <td>
                                         <div class="btn-group btn-group-md " role="group" aria-label="">
-                                        {{-- <a href="{{ route('adm.view.pdf', $Muestreo->id) }}" class="btn btn-orange-500 text-white border" target="_blank" >
-                                            <i class="fa-solid fa-file-pdf"></i>
-                                        </a> --}} 
+                                            <a href="{{route('adm.view.reporte', $Muestreo->id)}}" class="btn bg-lead-500 text-white border" target="_blank" >
+                                                <i class="fa-solid fa-file-pdf"></i>
+                                            </a> 
 
-                                         <a href="{{ route('adm.view.pdf.horizonntal', $Muestreo->id) }}" class="btn btn-orange-500 text-white border" target="_blank" >
+                                         <a href="{{ route('adm.pdf.muestreo', $Muestreo->id) }}" class="btn btn-orange-500 text-white border" target="_blank" >
                                             <i class="fa-solid fa-file-pdf"></i>
                                         </a>
+
+                                        <a href="{{route('adm.muestreo.download', $Muestreo->id)}}" class="btn btn-green-500 text-white border" target="_blank" >
+                                            <i class="fa-solid fa-file-excel"></i>
+                                        </a> 
                                         </div>
                                      </td>
                                     </tr>

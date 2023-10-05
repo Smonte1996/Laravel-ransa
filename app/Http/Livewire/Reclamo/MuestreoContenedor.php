@@ -28,15 +28,15 @@ class MuestreoContenedor extends Component
        
     }
 
-    public function GenerarpdfHorizontal($id)
-    {
-        $pdf = Muestreo::find($id);
-        // $imagenes = Evidencia_muestreo::find($id);
+    // public function GenerarpdfHorizontal($id)
+    // {
+    //     $pdf = Muestreo::find($id);
+    //     // $imagenes = Evidencia_muestreo::find($id);
         
-        $pdfs = PDF::loadView('pdf.informeHorizontal', compact('pdf'));
+    //     $pdfs = PDF::loadView('pdf.informeHorizontal', compact('pdf'));
         
-        return $pdfs->setPaper('a4','landscape')->stream(strtoupper("$pdf->contenedor.pdf"));
-    }
+    //     return $pdfs->setPaper('a4','landscape')->stream(strtoupper("$pdf->contenedor.pdf"));
+    // }
 
     public function render()
     {

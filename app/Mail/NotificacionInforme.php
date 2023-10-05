@@ -37,10 +37,14 @@ class NotificacionInforme extends Mailable
         
         $pdfs = PDF::loadView('pdf.informeHorizontal', compact('pdf'));
 
+        $pdfv = PDF::loadView('pdf.informeVertical', compact('pdf'));
+
        $email = $this->markdown('mail.notificacionInforme')->subject('Recepción '.strtoupper($this->Mustreo->contenedor));
       
        $email->attachData($pdfs->setPaper('a4','landscape')->output(),"Reporte {$pdf->contenedor}.pdf");
 
+       $email->attachData($pdfv->output(),strtoupper("Reporte-Transporte.pdf"));
+       
        return $email;
     }
 }

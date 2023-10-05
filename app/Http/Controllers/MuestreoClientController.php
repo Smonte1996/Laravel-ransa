@@ -15,7 +15,7 @@ class MuestreoClientController extends Controller
      */
     public function index()
     {
-        // $Muestreos = Muestreo::where('client_id', Auth::user()->client())->get();
+       $Muestreos = Muestreo::where('client_id', Auth::user()->client())->where('estado',2)->get();
         return view('modulos.Muestreocliente.index', compact('Muestreos'));
     }
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\Aql_defectoController;
 use App\Http\Controllers\AsignarCuadrillaController;
 use App\Http\Controllers\CalificacioneController;
 use App\Http\Controllers\Causal_generalController;
+use App\Http\Controllers\CheckPasilloController;
 use App\Http\Controllers\confirmaraccionesController;
 use App\Http\Controllers\ConfirmarActividades;
 use App\Http\Controllers\Data_logisticaController;
@@ -31,13 +32,18 @@ use App\Http\Controllers\NotificationserviceController;
 use App\Http\Controllers\Dissatisfaction_serviceController;
 use App\Http\Controllers\Matriz_defectoController;
 use App\Http\Controllers\MuestreoClientController;
+use App\Http\Controllers\MuestreoContenedorController;
 use App\Http\Controllers\Niveles_estandarController;
+use App\Http\Controllers\PasilloController;
+use App\Http\Controllers\PasilloVistaController;
 use App\Http\Controllers\ProvedoresEstibas;
 use App\Http\Controllers\Tamano_muestraController;
 use App\Http\Controllers\User_clientController;
+use App\Http\Livewire\Checklist\FormularioChecklit;
 use App\Http\Livewire\Guest\Consultas;
 use App\Http\Livewire\Guest\EncuestaCliente;
 use App\Http\Livewire\Guest\Muestreos;
+use App\Http\Livewire\Higiene\FormularioHigiene;
 use App\Http\Livewire\Reclamo\Clasificaciones as ReclamoClasificaciones;
 use App\Http\Livewire\Reclamo\Confirmaracciones;
 use App\Http\Livewire\Reclamo\Correciones;
@@ -123,14 +129,26 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
           Route::resource('Matriz-defecto', Matriz_defectoController::class)->except(['show'])->parameters(['Matrices_defectos'=>'Matriz_defecto'])->names('Matriz');
           Route::resource('Aql-Defectos', Aql_defectoController::class)->except(['show'])->parameters(['Aql_defectos'=>'Aql_defecto'])->names('Aql');
           Route::resource('Defectos', DefectosController::class)->except(['show'])->parameters(['Defecto'=>'Defectos'])->names('Defectos');
+          Route::resource('Muestreos contenedor', MuestreoContenedorController::class)->except(['show'])->parameters(['Muestreo'=>'Muestreos'])->names('Muestreos.container');
+          Route::get('pdf Muestreos /{id}',[MuestreoContenedorController::class, 'GenerarpdfHorizontal'])->name('pdf.muestreo');
           // Url para cliente del muestreos
           Route::resource('user-cliente', User_clientController::class)->except(['show'])->parameters(['Users-clintes'=>'User-cliente'])->names('usuario_clientes');
           Route::resource('clientes-Muestreos', MuestreoClientController::class)->except(['show'])->parameters(['cliente_muestreo'=>'Muestreo'])->names('clients.muestreo');
-
           Route::get('Muestreos-contenedor', MuestreoContenedor::class)->name('Muestreo.contenedor');
           Route::get('pdf/{id}',[MuestreoContenedor::class, 'Generarpdf'])->name('view.pdf');
           Route::get('pdf-horizontal/{id}',[MuestreoContenedor::class, 'GenerarpdfHorizontal'])->name('view.pdf.horizonntal');
-     
+          Route::get('Reporte pdf transporte/ {id}',[MuestreoContenedorController::class, 'Generarpdf'])->name('view.reporte');
+          Route::get('Muestreo Excel/{id}', [MuestreoContenedorController::class, 'ExportarExcel'])->name('muestreo.download');
+
+          // url para el check de pasillo calidad
+          Route::resource('ChecksPasillos', PasilloController::class)->except(['show'])->parameters(['checkPasillos', 'checkPasillo'])->names('check.pasillos');
+          Route::get('Check Pasillo/ Crear', FormularioChecklit::class)->name('Check.list');
+          Route::resource('Resulta Checklist', PasilloVistaController::class)->except(['show'])->parameters(['Pasillos'=>'Pasillovista'])->names('pasillos.vista');
+          Route::get('Informe /pdf /{id}',[PasilloVistaController::class, 'Informepdf'])->name('Checklist.pdf');
+
+          // url para las practivas de higiene.
+          Route::get('Practicas-higiene', FormularioHigiene::class)->name('practica.higiene');
+
           //urles para administrar la parte de los estibas.
           Route::resource('Proveedores-estibas', ProvedoresEstibas::class)->except(['show'])->parameters(['Provedor' => 'Proveedores'])->names('Estibas');
           Route::resource('Asgnacion-estibas', AsignarCuadrillaController::class)->except(['show'])->parameters(['Asignar-estibas'=>'Asignacion-estibas'])->names('Asignar-estibas');

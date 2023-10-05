@@ -10,8 +10,11 @@ use App\Models\Data_logistica;
 use App\Models\File_evidencia;
 use App\Mail\NotificacionInforme;
 use App\Models\Aql_defecto;
+use App\Models\Check_muestreo;
 use App\Models\Defecto;
+use App\Models\Defecto_transporte;
 use App\Models\Evidencia_muestreo;
+use App\Models\file_transporte;
 use App\Models\Matriz_defecto;
 use App\Models\Niveles_estandar;
 use App\Models\Tamano_muestra;
@@ -72,35 +75,69 @@ class Muestreos extends Component
     public $Aceptaciones;
     public $cantidad_caja;
     public $caja_un;
+    public $sku_defectos;
+    public $skuchecklits;
+    public $Check;
+    public $transportista;
+    public $Abrir = false;
+    public $vr1;
+    public $vr2;
+    public $vr3;
+    public $vr4;
+    public $vr5;
+    public $vr6;
+    public $vr7;
+    public $vd1;
+    public $vd2;
+    public $vd3;
+    public $vd4;
+    public $vd5;
+    public $vd6;
+    public $vd7;
+    // public $vd8;
+    public $vd9;
+    public $Transporte_defecto;
+    public $estado;
+    public $cantidades;
+    public $caja_uni;
+    public $lotes;
+    public $sello;
+    public $observacion;
+    public $comentario;
+    public $imagen_defectos;
+    public $dato_transporte;
  
 
 
     protected $rules = [
         'bodega' => 'required',
         'clientes' => 'required',
-        // 'regex:/^(?=.*[a-zA-Z])(?=[^{}[\]+*]+$)/'
         'contenedor' => ['required'],
         'Guia' => ['required' , 'numeric'],
         'fecha_recepcion' => ['required', 'date'],
         'hora_recepcion' => ['required', 'date_format:H:i'],
         'pedido' => ['nullable','numeric'],
         'responsable' => ['required', 'regex:/^[\pL\s]+$/u'],
-        // 'sku' => 'required',
-        // 'cantidad' => 'required',
-        // 'nivelesestandars' => 'required',
-        // 'letratamano' => 'required',
-        // 'vida_logistica' => 'required',
-        // 'pvp' => 'required',
-        // 'lote' => 'required',
-        // 'etiqueta' => 'required',
-        // 'cantidad' => ['required' , 'numeric'],
-        // 'nivel_muestreo' => ['required'],
+        'vr1'=> 'required',
+        'vr2' => 'required',
+        'vr3'=> 'required',
+        'vr4'=> 'required',
+        'vr5'=> 'required',
+        'vr6'=> 'required',
+        'vr7'=> 'required',
+        'vd1'=> 'required',
+        'vd2'=> 'required',
+        'vd3'=> 'required',
+        'vd4'=> 'required',
+        'vd5'=> 'required',
+        'vd6'=> 'required',
+        'vd7'=> 'required',
+        // 'vd8'=> 'required',
+        'vd9'=> 'required',
+        'transportista'=> 'required',
+        'sello' => 'required'
     ];
 
-    // public function updated($propertyName)
-    // {
-    //     $this->validateOnly($propertyName);
-    // }
     
       public function RegistrarInfor() 
     {
@@ -114,11 +151,69 @@ class Muestreos extends Component
          'fecha_recepcion' => $dataInfor['fecha_recepcion'],
          'hora_recepcion' => $dataInfor['hora_recepcion'] ,
          'n_pedido' => $dataInfor['pedido'],
-         'responsable' => $dataInfor['responsable'] ,
+         'responsable' => $dataInfor['responsable'],
+         'transportista' => $dataInfor['transportista'],
+         'sello' => $dataInfor['sello'],
+         'observacion' => $this->comentario,
          'estado' => 1,
-        
     ]);
+
+         $this->Check = Check_muestreo::create([
+         'muestreo_id' => $this->Muestreos->id,
+         'vr1' => $dataInfor['vr1'],
+         'vr2' => $dataInfor['vr2'],
+          'vr3'=> $dataInfor['vr3'],
+          'vr4'=> $dataInfor['vr4'],
+          'vr5'=> $dataInfor['vr5'],
+          'vr6'=> $dataInfor['vr6'],
+          'vr7'=> $dataInfor['vr7'],
+          'vd1'=> $dataInfor['vd1'],
+          'vd2'=> $dataInfor['vd2'],
+          'vd3'=> $dataInfor['vd3'],
+          'vd4'=> $dataInfor['vd4'],
+          'vd5'=> $dataInfor['vd5'],
+          'vd6'=> $dataInfor['vd6'],
+          'vd7'=> $dataInfor['vd7'],
+          // 'vd8'=> $dataInfor['vd8'],
+          'vd9'=> $dataInfor['vd9'], 
+        ]);
       
+    }
+
+    public function Defectos()
+    {
+      $defectos = $this->validate([
+       'skuchecklits' => 'required',
+       'estado' => 'required',
+       'cantidades' => 'required',
+       'caja_uni' => 'required',
+       'lotes' => 'required',
+       'observacion' => 'required',
+      ]);
+       
+      $this->Transporte_defecto = Defecto_transporte::create([
+        'muestreo_id' => $this->Muestreos->id,
+        'data_logistica_id' => $defectos['skuchecklits'],
+        'estado' => $defectos['estado'],
+        'cantidades' => $defectos['cantidades'],
+        'caja_uni' => $defectos['caja_uni'],
+        'lotes' => $defectos['lotes'],
+        'observacion' => $defectos['observacion'],
+      ]);
+      
+      if (!is_null($this->imagen_defectos)) {
+        foreach ($this->imagen_defectos as $imagen) {
+            $url =  $imagen->store('public/evidencia_defectos');
+            $files_transporte = file_transporte::create([
+                'muestreo_id' => $this->Muestreos->id,
+                'defecto_transporte_id' => $this->Transporte_defecto->id,
+                'name' => $imagen->hashName(),
+            ]);
+        }
+    }
+     
+
+      $this->reset('skuchecklits', 'estado', 'cantidades', 'caja_uni', 'lotes', 'observacion', 'Abrir', 'imagen_defectos');
     }
 
     public function validarCampos()
@@ -209,6 +304,11 @@ class Muestreos extends Component
         $this->Nutribela_defectos = Matriz_defecto::where('Marca', 'NUTRIBELA')->get();
     }
 
+    public function updatedskuchecklits($id)
+    {
+      $this->sku_defectos = Data_logistica::where('id', $id)->get();
+    }
+
     public function updatednivelesestandars($niveles_estandar_id)
       {
          $this->Letras = Tamano_muestra::where('niveles_estandar_id', $niveles_estandar_id)->get();
@@ -245,6 +345,13 @@ class Muestreos extends Component
     public function render()
     {
           
+       if (empty($this->Muestreos->id)) {
+      //  $this->dato_transporte = Evidencia_muestreo::where('muestreo_id', $this->Muestreos->id)->get();
+       }else {
+        $this->dato_transporte = Evidencia_muestreo::where('muestreo_id', $this->Muestreos->id)->get();
+        // dd($this->dato_transporte);
+       }
+
         if (empty($this->sku)) {
             $this->datas = Data_logistica::where('id', $this->sku)->get();
        }else{
@@ -265,11 +372,11 @@ class Muestreos extends Component
             // $this->vida_logistica = "No aplica";
     }
   }
-    $this->Evidencia_muestreos = Evidencia_muestreo::where('estado', 1)->get();
-        //  }if([empty($this->logis->vida_util) <= "N/A"]) {
-
-        //     $this->vida_logistica = "No aplica";
-        //  }
+  if (empty($this->Muestreos->id)) {
+    # code...
+  }else{
+    $this->Evidencia_muestreos = Evidencia_muestreo::where('muestreo_id', $this->Muestreos->id)->where('estado', 1)->get();
+  }
 
         return view('livewire.guest.muestreos')->layout('layouts.guest2');
     }

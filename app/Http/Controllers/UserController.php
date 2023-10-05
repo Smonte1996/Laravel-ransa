@@ -60,7 +60,7 @@ class UserController extends Controller
             'employee_id' => Rule::requiredIf($request->tipo_user == 0),
             'client_id' => Rule::requiredIf($request->tipo_user == 1),
             'supplier_id' => Rule::requiredIf($request->tipo_user == 2)
-        ])->validate();
+        ])->validate(); 
 
         if ($request->tipo_user == 0) {
             $class = Employee::find($request->employee_id);

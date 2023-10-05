@@ -18,6 +18,9 @@ class Muestreo extends Model
       'hora_recepcion',
       'n_pedido',
       'responsable',  
+      'transportista', 
+      'sello',
+      'observacion',
       'estado'
     ];
 
@@ -35,4 +38,15 @@ class Muestreo extends Model
     {
       return $this->belongsTo(Client::class, 'client_id');
     }
+
+    function Checklist() 
+    {
+        return $this->hasOne(Check_muestreo::class, 'muestreo_id');  
+    }
+
+    function Defecto() 
+    {
+      return $this->hasMany(Defecto_transporte::class, 'muestreo_id'); 
+    }
+
 }

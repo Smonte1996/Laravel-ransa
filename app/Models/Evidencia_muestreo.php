@@ -39,7 +39,7 @@ class Evidencia_muestreo extends Model
       return $this->belongsTo(Data_logistica::class, 'data_logistica_id');
     }
 
-    function Tamaño_muestra()
+    function Tamaño_muestra() 
     {
       return $this->belongsTo(Tamano_muestra::class, 'tamano_muestra_id');
     }

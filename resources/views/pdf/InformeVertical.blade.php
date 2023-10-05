@@ -78,28 +78,28 @@
         }
     </style>
 
-    <title>Informe Muestreo</title>
+    <title>Checklist de Transporte</title>
   </head>
   <body>
     <header>
         <img src="img/logo.png" width="200">
-         <img src="img/Gestion_reclamo.png" width="400">
+         <img src="img/logoprincipal.png" width="400">
     </header>
     {{-- <h1 class="text-center">1. Datos Generales</h1>
     <hr class="grosor"/> --}}
-    <fieldset class="border border-2 border-dark">
+     <fieldset class="border border-2 border-dark">
         <legend class="rounded w-50 d-none d-sm-block float-none verde text-white ps-5 ms-4">Informacación general</legend>
         <legend class="rounded float-none d-sm-none verde text-white fs-6 p-1">Informacación general</legend>  
     <div class="text-center pt-4 m-2">   
-    <table width="100%" class="pt-3" cellspacing="1" cellpadding="2" >
+    <table width="100%" class="pt-3" cellspacing="0" cellpadding="3" >
             <tr>
                 <td align="left" class="" style="font-size:12px;">
                     <strong>
-                    N° ticket:
+                    Nombre responsable:
                     </strong>
                 </td>
                 <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->codigo_generado}}
+                     {{$pdf->responsable}}
                 </td>
 
                 <td align="left" class="" style="font-size:12px;">
@@ -108,7 +108,7 @@
                 </strong>
                 </td>
                 <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->sede->name}}
+                    {{$pdf->bodega}}
                 </td>
             </tr>
             <tr>
@@ -118,645 +118,385 @@
                     </strong>
                 </td>
                 <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->cliente}}
+                    {{$pdf->clientes->social_reason}} 
                 </td>
                 <td align="left" class="" style="font-size:12px;">
                     <strong>
-                    Tipo:
+                    Contenedor/Placa:
                     </strong>
                 </td>
                 <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->tipo_reclamo->name}}
+                    {{$pdf->contenedor}}
                 </td>
             </tr>
             
             <tr>
                 <td align="left" class="" style="font-size:12px;">
                     <strong>
-                   Causal general:
+                   Fecha recepción:
                     </strong>
                 </td>
                 <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->clasificacion->causal_general->name}}
+                     {{$pdf->fecha_recepcion}}
                 </td>
                 <td align="left" class="" style="font-size:12px;">
                     <strong>
-                    Detalle causal:
+                    Hora recepción:
                    </strong>
                 </td>
                 <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->clasificacion->detalle_causal->name}}
+                    {{$pdf->hora_recepcion}}
                 </td>
             </tr>
             <tr>
                 <td align="left" class="" style="font-size:12px;">
                     <strong>
-                Titulo:
+                Nombre del Transportista:
                    </strong>
                 </td>
-                <td colspan="5" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->titulo}}
+                <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
+                    {{$pdf->transportista}}
                 </td>
-            </tr>
+            
+                <td align="left" class="" style="font-size:12px;">
+                    <strong>
+                sello:
+                   </strong>
+                </td>
+                <td colspan="2" class="border-bottom border-dark text-center" style="font-size:12px;">
+                    {{$pdf->sello}}
+                </td>
+            </tr> 
             <tr>
                 <td align="left" class="" style="font-size:12px;">
                     <strong>
-                Descripción:
+                Observación:
                    </strong>
                 </td>
                 <td colspan="5" class="border-bottom border-dark text-center" style="font-size:12px;">
-                    {{$Solicitudes->Descripcion}}
+                    {{$pdf->observacion}}
                 </td>
-            </tr>
+            </tr> 
     </table>
   </div>
 </fieldset>
-      <fieldset class="border border-2 border-dark mt-4">
-        <legend class="rounded w-50 d-none d-sm-block float-none verde text-white ps-5 ms-4">Tratamiento del reclamo</legend>
-        <legend class="rounded float-none d-sm-none verde text-white fs-6 p-1">Tratamiento del reclamo</legend>
-        <div class="text-center mt-4 m-2">
-       <table width="100%" class="mb-3" > 
-            <tr>
-                <td align="left" class="border-bottom border-dark">
-                    <label  style="font-size:12px;">
-                <strong>
-                    Correción:
-                </strong>
-                    </label>
-                </td>
-                <td colspan="5" class="text-center border-bottom border-dark">
-                  <label class="" style="font-size:12px;">
-                     {{$Solicitudes->investigacion->correccion}}
-                    </label>
-                </td>         
-            </tr>  
-                <tr>
-                <td align="left" class="border-bottom border-dark">
-                    <label style="font-size:12px;">
-                        <strong>
-                       Causa raíz:
-                        </strong>
-                    </label>
-                </td>
-                <td colspan="5" class="border-bottom border-dark text-center">
-                <label style="font-size:12px;">
-                {{$Solicitudes->investigacion->causa_raiz}}
-                </label>
-                </td>
-             </tr>
-             <tr>
-                <td align="left" class="border-bottom border-dark">
-                    <label style="font-size:12px;">
-                    <strong>
-                    Coordinador Responsable:
-                    </strong>
-                </label>
-                </td>
-                <td colspan="5" class="border-bottom border-dark text-center">
-                 <label style="font-size:12px;">
-                 {{$Solicitudes->investigacion->Empleados->name.' '.$Solicitudes->investigacion->Empleados->lastname}}
-                 </label>
-                </td>
-            </tr>
-       </table>
-       <legend class="rounded w-50 d-none d-sm-block float-none gris text-white ps-5 ms-4">Análisis causa - Metodologia Ishikawa</legend>
-        <legend class="rounded float-none d-sm-none gris text-white fs-6 p-1">Análisis causa - Metodologia Ishikawa</legend>
-       <table width="100%">
-             <tr>
-                <td align="center" class="grisclaro rounded">
-                    <label style="font-size:12px;">
-                    <strong>
-                    Categoria:
-                    </strong>
-                    </label>
-                </td>
 
-                <td align="center" class="grisclaro rounded">
-                    <label class="" style="font-size:12px;">
-                    <strong>
-                     Causa:
-                    </strong>
-                   </label>
-                </td>
-            </tr>
-            <tr>
-            <td>
-               <label style="font-size:12px;">
-                @foreach ( $Solicitudes->ishikawa as  $Solicitude)
-                <ul class="border-bottom border-dark">
-                <li>{{$Solicitude->categoria}}</li>
-            </ul>
-                @endforeach
-                </label> 
-            </td>
-            <td>
-                <label style="font-size:12px;">
-                    @foreach ( $Solicitudes->ishikawa as  $Solicitude)
-                    <ul class="border-bottom border-dark">
-                    <li class="list-group">{{$Solicitude->causa}}</li>
-                </ul>
-                    @endforeach
-                    </label> 
-            </td>
-            </tr>
-       </table>
-       <legend class="rounded w-50 d-none d-sm-block float-none gris text-white ps-5 ms-4">Análisis causa - efecto: 5 porqués</legend>
-        <legend class="rounded float-none d-sm-none gris text-white fs-6 p-1">Análisis causa - efecto: 5 porqués</legend>
-       <table width="100%" class="mb-3">
+<table class="table-responsive col-sm-12 col-md-12 mt-5" width="100%">
+   
+        <tr align="left">
+            <td colspan="2" class="border-botton border-dark" style="font-size:14px;"><strong>Verificación General</strong></td>
+        </tr>
         <tr>
-                <td align="center" class="grisclaro">
-                    <label class="" style="font-size:12px;">
-                    <strong>
-                    Por que 1:
-                   </strong>
-                </label>
-                </td>
+      <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+        <strong>
+       1. El transporte tiene protección (carpa, furgón). 
+       </strong>  
+    </td> 
+      <td  class="border border-dark text-center" style="font-size:12px;">
+        {{$pdf->Checklist->vr1}}
+      </td>
+       </tr>
+       <tr>
+        <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+          <strong>
+         2. No se presentan olores fuera de lo normal.
+         </strong>  
+      </td> 
+        <td  class="border border-dark text-center" style="font-size:12px;">
+            {{$pdf->Checklist->vr2}}
+        </td>
+         </tr>
+         <tr>
+            <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+              <strong>
+             3. Piso del contedor, furgón, en buenas condiciones y seco.  
+             </strong>  
+    </td> 
+      <td  class="border border-dark text-center" style="font-size:12px;">
+          {{$pdf->Checklist->vr3}}
+      </td>
+       </tr>
+       <tr>
+          <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+            <strong>
+           4. Ausencia de orificios en el cajón. 
+           </strong>  
+        </td> 
+          <td  class="border border-dark text-center" style="font-size:12px;">
+              {{$pdf->Checklist->vr4}}
+          </td>
+           </tr>
+           <tr>
+        <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+          <strong>
+         5. Limpieza del contenedor, furgón (piso, paredes, techo). 
+         </strong>  
+      </td> 
+        <td  class="border border-dark text-center" style="font-size:12px;">
+            {{$pdf->Checklist->vr5}}
+        </td>
+         </tr>
+         <tr>
+            <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+              <strong>
+             6. Ausencia de plagas.
+             </strong>  
+          </td> 
+            <td  class="border border-dark text-center" style="font-size:12px;">
+            {{$pdf->Checklist->vr6}}
+         </td>
+          </tr>
+          <tr>
+             <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+               <strong>
+              7. Ausencia de quimicos y/o sustancias contaminantes (Combustible, solventes, aceites, entre otros). 
+              </strong>  
+           </td> 
+             <td  class="border border-dark text-center" style="font-size:12px;">
+                 {{$pdf->Checklist->vr7}}
+             </td>
+              </tr>
+    
+    </table>
 
-                <td align="center" class="grisclaro">
-                    <label class="" style="font-size:12px;">
-                    <strong>
-                    Por que 2:
-                   </strong>
-                </label>
-                </td>
- 
-                <td align="center" class="grisclaro">
-                <label class="" style="font-size:12px;">
-                    <strong>
-                    Por que 3:
-                    </strong>
-                </label>
-                </td>
+    <table class="table-responsive col-sm-12 col-md-12 mt-3" width="100%">
             
+     <tr align="left">
+         <td colspan="1" class="border-botton border-dark" style="font-size:14px;"><strong>Verificación en el descargue</strong></td>
+     </tr>
+     <tr>
+         <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+         <strong>
+         1. Puerta tiene el sello de seguidad. 
+         </strong>  
+     </td> 
+         <td  class="border border-dark text-center" style="font-size:12px;">
+         {{$pdf->checklist->vd1}}
+         </td>
+         </tr>
 
-                <td align="center" class="grisclaro">
-                    <label class="" style="font-size:12px;">
-                    <strong>
-                    Por que 4:
-                    </strong>
-                </label>
-                </td>
-              
-                <td align="center" class="grisclaro">
-                    <label style="font-size:12px;">
-                    <strong>
-                    Por que 5:
-                    </strong>
-                </label>
-                </td>
-        </tr>
-            @foreach ($Solicitudes->Analisis as  $Solicitude)
-            <tr>
-            <td class="border-bottom border-dark">
-                    <label  style="font-size:12px;">
-                    <ul >
-                    <li >{{$Solicitude->porque1}}</li>
-                    </ul>
-                     </label> 
-            </td>
-            <td class="border-bottom border-dark">
-                    <label  style="font-size:12px;">
-                    <ul>
-                    <li class="list-group">{{$Solicitude->porque2}}</li>
-                    </ul>
-                    </label> 
-            </td>
-            <td class="border-bottom border-dark">
-                    <label style="font-size:12px;">
-                    <ul>
-                    <li class="list-group">{{$Solicitude->porque3}}</li>
-                    </ul>
-                    </label> 
-            </td>
-            <td class="border-bottom border-dark">
-                    <label style="font-size:12px;">
-                    <ul>
-                    <li class="list-group">{{$Solicitude->porque4}}</li>
-                    </ul>
-                    </label> 
-            </td>
-            <td class="border-bottom border-dark">
-                    <label style="font-size:12px;">
-                    <ul>
-                    <li class="list-group">{{$Solicitude->porque5}}</li>
-                    </ul>
-                    </label> 
-            </td>
-        </tr>
-            @endforeach
-       </table>
-       <legend class="rounded w-50 d-none d-sm-block float-none gris text-white ps-5 ms-4">Planes de acciones</legend>
-       <legend class="rounded float-none d-sm-none gris text-white fs-6 p-1">Planes de acciones</legend>
-        <table width="100%" class="mb-5">
-            <tr>
-                <td align="center" class="grisclaro">
-                    <label style="font-size:12px;">
-                    <strong>
-                    Acciones:
-                    </strong>
-                   </label>
-                </td>
+     <tr>
+         <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+         <strong>
+         2. Carga en buen estado (no rota, abierta, en mal estado, húmeda). 
+         </strong>  
+     </td> 
+         <td  class="border border-dark text-center" style="font-size:12px;">
+             {{$pdf->checklist->vd2}}
+         </td>
+         </tr>
 
-                <td align="center" class="grisclaro">
-                    <label style="font-size: 12px">
-                    <strong>
-                    Responsable:
-                </strong>
-                 </label>
-                </td>
-                <td align="center" class="grisclaro">
-                    <label style="font-size: 12px">
-                    <strong>
-                    Fecha programada:
-                </strong>
-                 </label>
-                </td>
-            </tr>
-            @foreach ( $Solicitudes->acciones as $solicitude )
-            <tr>
-                <td class="border-bottom border-dark">
-                    <label style="font-size:12px;">
-                    <ul>
-                    <li class="">{{$solicitude->name}}</li>
-                    </ul>
-                    </label> 
-            </td>
-            <td class="border-bottom border-dark">
-                <label style="font-size:12px;">
-                <ul>
-                <li class="list-group">{{$solicitude->Empleado->name.' '.$solicitude->Empleado->lastname}}</li>
-                </ul>
-                </label> 
-            </td>
-            <td class="border-bottom border-dark">
-                <label style="font-size:12px;">
-                <ul>
-                <li class="list-group">{{$solicitude->fecha_programacion->format('d/m/y')}}</li>
-                </ul>
-                </label> 
-           </td>
-            </tr>
-            @endforeach
-       </table>
-       <legend class="rounded w-50 d-none d-sm-block float-none gris text-white ps-5 ms-4">Eficacia</legend>
-       <legend class="rounded float-none d-sm-none gris text-white fs-6 p-1">Eficacia</legend>
-       <table width="100%" class="mb-3">
-       <tr>
-        <td align="center" class="grisclaro">
-            <label style="font-size:12px;">
-            <strong>
-             Evaluación:
-            </strong>
-           </label>
-        </td>
-        <td align="center" class="grisclaro">
-            <label style="font-size:12px;">
-            <strong>
-             Responsable:
-            </strong>
-           </label>
-        </td>
-        <td align="center" class="grisclaro">
-            <label style="font-size:12px;">
-            <strong>
-             Fecha estimada:
-            </strong>
-           </label>
-        </td>
-       </tr>
-       <tr>
-        <td class="border-bottom border-dark text-center">
-            <label style="font-size:12px;">
-            {{$Solicitudes->investigacion->evaluacion_eficacia}}
-            </label>
-            </td>
+     <tr>
+         <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+         <strong>
+         3. Cumple correcto estibaje de PT (se cumple el apile PT). 
+         </strong>  
+     </td> 
+         <td  class="border border-dark text-center" style="font-size:12px;">
+             {{$pdf->checklist->vd3}}
+         </td>
+         </tr>
 
-            <td class="border-bottom border-dark text-center">
-                <label style="font-size:12px;">
-            {{$Solicitudes->investigacion->Empleados->name.' '.$Solicitudes->investigacion->Empleados->lastname}}
-                </label>
-                </td>
+     <tr>
+         <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+         <strong>
+         4. Mantiene condiciones de embalaje (pallets en buen estado, strech film cubre el PT). 
+         </strong>  
+     </td> 
+         <td  class="border border-dark text-center" style="font-size:12px;">
+             {{$pdf->checklist->vd4}}
+         </td>
+         </tr>
 
-            <td class="border-bottom border-dark text-center">
-                <label style="font-size:12px;">
-                {{$Solicitudes->investigacion->fecha_programada->format('d/m/y')}}
-                </label>
-                </td>
-       </tr>
-       </table>
-       <legend class="rounded w-50 d-none d-sm-block float-none gris text-white ps-5 ms-4">Resultado de Eficacia</legend>
-       <legend class="rounded float-none d-sm-none gris text-white fs-6 p-1">Resultado de Eficacia</legend>
-       <table width="100%" >
-        <tr>
-            <td align="center" class="grisclaro">
-                <label style="font-size:12px;">
-                <strong>
-                 Resultado obtenido:
-                </strong>
-               </label>
-            </td>
-            <td align="center" class="grisclaro">
-                <label style="font-size:12px;">
-                <strong>
-                 Fecha Cierre:
-                </strong>
-               </label>
-            </td>
-            <td align="center" class="grisclaro">
-                <label style="font-size:12px;">
-                <strong>
-                 Cumplimiento:
-                </strong>
-               </label>
-            </td>
-        </tr>
-        <tr>
-            <td class="border-bottom border-dark text-center">
-            <label style="font-size:12px;">
-            {{$Solicitudes->investigacion->observacion}}
-            </label>
-            </td>
-            <td class="border-bottom border-dark text-center">
-            <label style="font-size:12px;">
-            {{$Solicitudes->investigacion->date_check}}
-            </label>
-            </td>
-            <td class="border-bottom border-dark text-center">
-            <label style="font-size:12px;">
-            {{$Solicitudes->investigacion->cumplimiento}}
-            </label>
-            </td>
-        </tr>
-       </table>
-    </div>
-</fieldset>
-@isset($Solicitudes->encuesta->p1)
-<fieldset class="border border-2 border-dark mt-5">
-    <legend class="rounded w-50 d-none d-sm-block float-none verde text-white ps-5 ms-4">Calificación Cliente</legend>
-    <legend class="rounded float-none d-sm-none verde text-white fs-6 p-1">Calificación Cliente</legend>
-    <div class="text-center pt-4 m-2">
-<table width="100%">
-<tr>
-    <td colspan="4" align="center" class="grisclaro">
-        <label style="font-size:12px;">
-            <strong>
-                1. ¿En términos generales qué tan satisfecho te encuentras con el proceso de tu reclamo?
-            </strong>
-        </label>
-    </td>
-</tr>
-<tr>
-    <td align="left" >
-        <label style="font-size:12px;">
-            <strong>
-     Calificación:
-          </strong>
-    </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-     <label style="font-size:12px;">
-    {{$Solicitudes->encuesta->p1}} 
-    @switch($Solicitudes->encuesta->p1)
-        @case(1)
-        <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-            @break
-        @case(2)
-        <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-        @break
-        @case(3)
-        <span class="naranja p-1 rounded text-white">Muy insastifecho</span>      
-        @break
-        @case(4)
-        <span class="naranja p-1 rounded text-white">Muy insastifecho</span>   
-        @break
-        @case(5)
-        <span class="naranja p-1 rounded text-white">Insastifecho</span>   
-        @break
-        @case(6)
-        <span class="naranja p-1 rounded text-white">Insastifecho</span>
-        @break
-        @case(7)
-        <span class="verde p-1 rounded text-white">Sastifecho</span>
-        @break
-        @case(8)
-        <span class="verde p-1 rounded text-white">Sastifecho</span>  
-        @break
-        @case(9)
-        <span class="verde p-1 rounded text-white">Muy sastifecho</span>    
-        @break
-        @case(10)
-        <span class="verde p-1 rounded text-white">Muy sastifecho</span>   
-        @break
-        @default
-    @endswitch
-    </label>
-    </td>
-    <td align="left">
-        <label style="font-size:12px;">
-            <strong>
-       Observacion:
-            </strong>
-        </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-        <label style="font-size:12px;">
-       {{$Solicitudes->encuesta->ob1}}
-       </label>
-       </td>
-</tr>
-<tr>
-    <td colspan="4" align="center" class="grisclaro">
-        <label style="font-size:12px;">
-            <strong>
-                2. En términos generales, califique del 1 al 10 la gestión de su reclamo en cuanto a:
-            </strong>
-        </label>
-    </td>
-</tr>
-<tr>
-    <td align="left">
-        <label style="font-size:12px;">
-            <strong>
-                2.1. Atención:
-            </strong>
-        </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-        <label style="font-size:12px;">
-       {{$Solicitudes->encuesta->p2}}
+     <tr>
+         <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+         <strong>
+         5. Cumple orden en la carga. 
+         </strong>  
+     </td> 
+         <td  class="border border-dark text-center" style="font-size:12px;">
+             {{$pdf->checklist->vd5}}
+         </td>
+         </tr>
 
-       @switch($Solicitudes->encuesta->p2)
-       @case(1)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-           @break
-       @case(2)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-       @break
-       @case(3)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>      
-       @break
-       @case(4)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>   
-       @break
-       @case(5)
-       <span class="naranja p-1 rounded text-white">Insastifecho</span>   
-       @break
-       @case(6)
-       <span class="naranja p-1 rounded text-white">Insastifecho</span>
-       @break
-       @case(7)
-       <span class="verde p-1 rounded text-white">Sastifecho</span>
-       @break
-       @case(8)
-       <span class="verde p-1 rounded text-white">Sastifecho</span>  
-       @break
-       @case(9)
-       <span class="verde p-1 rounded text-white">Muy sastifecho</span>    
-       @break
-       @case(10)
-       <span class="verde p-1 rounded text-white">Muy sastifecho</span>   
-       @break
-       @default
-   @endswitch
-        </label>
-    </td>
-    <td align="left">
-        <label style="font-size:12px;">
-            <strong>
-       Observacion:
-            </strong>
-        </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-        <label style="font-size:12px;">
-       {{$Solicitudes->encuesta->ob2}}
-       </label>
-       </td>
-</tr>
-<tr>
-    <td align="left">
-        <label style="font-size:12px;">
-            <strong>
-                2.2. Rapidez:
-            </strong>
-        </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-        <label style="font-size:12px;">
-       {{$Solicitudes->encuesta->p3}}
+     <tr>
+         <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+         <strong>
+         6. No existe derrame de producto terminado. 
+         </strong>  
+     </td> 
+         <td  class="border border-dark text-center" style="font-size:12px;">
+             {{$pdf->checklist->vd6}}
+         </td>
+         </tr>
 
-       @switch($Solicitudes->encuesta->p3)
-       @case(1)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-           @break
-       @case(2)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-       @break
-       @case(3)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>      
-       @break
-       @case(4)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>   
-       @break
-       @case(5)
-       <span class="naranja p-1 rounded text-white">Insastifecho</span>   
-       @break
-       @case(6)
-       <span class="naranja p-1 rounded text-white">Insastifecho</span>
-       @break
-       @case(7)
-       <span class="verde p-1 rounded text-white">Sastifecho</span>
-       @break
-       @case(8)
-       <span class="verde p-1 rounded text-white">Sastifecho</span>  
-       @break
-       @case(9)
-       <span class="verde p-1 rounded text-white">Muy sastifecho</span>    
-       @break
-       @case(10)
-       <span class="verde p-1 rounded text-white">Muy sastifecho</span>   
-       @break
-       @default
-   @endswitch
-        </label>
-    </td>
-    <td align="left">
-        <label style="font-size:12px;">
-            <strong>
-       Observacion:
-            </strong>
-        </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-        <label style="font-size:12px;">
-       {{$Solicitudes->encuesta->ob3}}
-       </label>
-       </td>
-</tr>
-<tr>
-    <td align="left">
-        <label style="font-size:12px;">
-            <strong>
-                2.3. Solución final:
-            </strong>
-        </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-        <label style="font-size:12px;">
-       {{$Solicitudes->encuesta->p4}}
+  <tr>
+      <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+      <strong>
+      7. Libre  de contaminación cruzada fisica, quimica y/o biológica. 
+      </strong>  
+  </td> 
+      <td  class="border border-dark text-center" style="font-size:12px;">
+          {{$pdf->checklist->vd7}}
+      </td>
+      </tr> 
 
-       @switch($Solicitudes->encuesta->p4)
-       @case(1)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-           @break
-       @case(2)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>
-       @break
-       @case(3)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>      
-       @break
-       @case(4)
-       <span class="naranja p-1 rounded text-white">Muy insastifecho</span>   
-       @break
-       @case(5)
-       <span class="naranja p-1 rounded text-white">Insastifecho</span>   
-       @break
-       @case(6)
-       <span class="naranja p-1 rounded text-white">Insastifecho</span>
-       @break
-       @case(7)
-       <span class="verde p-1 rounded text-white">Sastifecho</span>
-       @break
-       @case(8)
-       <span class="verde p-1 rounded text-white">Sastifecho</span>  
-       @break
-       @case(9)
-       <span class="verde p-1 rounded text-white">Muy sastifecho</span>    
-       @break
-       @case(10)
-       <span class="verde p-1 rounded text-white">Muy sastifecho</span>   
-       @break
-       @default
-   @endswitch
-        </label>
-    </td>
-    <td align="left">
-        <label style="font-size:12px;">
-            <strong>
-       Observacion:
-            </strong>
-        </label>
-    </td>
-    <td align="left" class="border-bottom border-dark">
-        <label style="font-size:12px;">
-       {{$Solicitudes->encuesta->ob4}}
-       </label>
-       </td>
-</tr>
+ <tr>
+     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
+     <strong>
+     8. El material tiene minimo 70% de vida útil. 
+     </strong>  
+ </td> 
+     <td  class="border border-dark text-center" style="font-size:12px;">
+         {{$pdf->checklist->vd9}}
+     </td>
+     </tr>        
 </table>
-    </div>
-</fieldset>
-@endisset 
+
+    <div class="page-break"></div>
+
+    <table width="100%" class="border border-dark" cellspacing="0" cellpadding="3" style="font-size:12px;">
+        <thead>
+        <tr>
+            <td class="border border-dark text-center">
+                <strong>
+                    Sku Quala
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Descripción
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Cantidad
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Lote
+                </strong>
+            </td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($pdf->evidencia as $Evidencias)
+        <tr>
+           <td class="border border-dark text-center">
+            {{$Evidencias->Data_logistica->sku_quala}}
+           </td>
+
+           <td class="border border-dark text-center">
+            {{$Evidencias->Data_logistica->descripcion}}
+           </td>
+
+           <td class="border border-dark text-center">
+            {{$Evidencias->cantidad}}
+           </td>
+
+           <td class="border border-dark text-center">
+            {{$Evidencias->lote}}
+           </td>
+        </tr>
+        @endforeach 
+        
+    </tbody>
+    </table>
+
+    <p class="text-center pt-3" style="font-size:25px;"><strong> Producto / Defectuoso</strong></p>
+    <p class="text-center" style="font-size: 12px;">Se detalla producto defectuoso detectado durante la descarga.</p>
+       <hr class="grosor"/>
+     
+    <table width="100%" class="border border-dark" cellspacing="0" cellpadding="3" style="font-size:12px;">
+        <thead>
+        <tr>
+            <td class="border border-dark text-center">
+                <strong>
+                    Sku Quala
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Descripción
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Cantidad
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Lote
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Defectos
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Observación
+                </strong>
+            </td>
+            <td class="border border-dark text-center">
+                <strong>
+                    Evidencia fotografica
+                </strong>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse ($pdf->Defecto as $defectos)
+        <tr >
+           <td class="border border-dark">
+            {{$defectos->sku->sku_quala}}
+           </td>
+
+           <td class="border border-dark">
+            {{$defectos->sku->descripcion}}
+           </td>
+
+           <td class="border border-dark">
+            {{$defectos->cantidades}} {{$defectos->caja_uni}}
+           </td>
+
+           <td class="border border-dark">
+            {{$defectos->lotes}}
+           </td>
+
+           <td class="border border-dark">
+            {{$defectos->estado}}
+           </td>
+
+           <td class="border border-dark">
+            {{$defectos->observacion}}
+           </td>
+
+           <td class="border border-dark text-center" style="width: 350px;">
+            <div class="row">
+            <div class="col-md-3 mb-4 mt-3">
+            @foreach ($defectos->Imagen_check as $imagenes)
+                <img src="{{public_path('storage/evidencia_defectos/').trim($imagenes->name)}}" alt="Imagen del defectos transporte" width="100" height="100" class="img-thumbnail">
+            @endforeach
+            </div>
+            </div>
+           </td>
+        </tr>
+        @empty
+        <tr>
+       <td colspan="7" class="border border-dark text-center">
+        No Aplica 
+       </td>  
+       </tr> 
+     @endforelse
+        
+    </tbody>
+    </table>
+       
     {{-- <div class="page-break"></div>
     <h1 class="text-center pt-3">3. Registro Fotográfico</h1>
        <hr class="grosor"/>
