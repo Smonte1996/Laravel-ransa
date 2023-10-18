@@ -1183,9 +1183,9 @@
             </x-slot>
           </x-jet-dialog-modal>
            
-          {{-- @php
-              echo today()->diffInDays($fecha_elaboracion) + today()->diffInDays($fecha_vencimiento);
-          @endphp --}}
+           @php
+              echo (strtotime($this->fecha_elaboracion)/(60*60*24)) - (strtotime($this->fecha_vencimiento)/(60*60*24));
+          @endphp 
 
           <div class="border table-responsive col-sm-12 col-md-12 justify-content-center mb-3 mt-5" >
             <table class="table-striped table-bordered border">

@@ -359,19 +359,33 @@ class Muestreos extends Component
           //   $this->datas = Data_logistica::where('id', 'like', '%'.$this->sku.'%')->get();  
        };
 
-       if(empty($this->sku)) {
+       if (empty($this->sku)) {
         $this->logis = Data_logistica::find($this->sku);
-       }if($this->sku){ 
-         $this->logis = Data_logistica::find($this->sku);
-       if(today()->diffInDays($this->fecha_elaboracion) + today()->diffInDays($this->fecha_vencimiento) == $this->logis->vida_util) {
-          $this->vida_logistica = "Si";
-
-       }if(today()->diffInDays($this->fecha_elaboracion) + today()->diffInDays($this->fecha_vencimiento) <> $this->logis->vida_util) {
+     } if ($this->sku) {
+        $this->logis = Data_logistica::find($this->sku);
+    
+        $diasElaboracion = (strtotime($this->fecha_elaboracion)/(60*60*24));
+        $diasVencimiento = (strtotime($this->fecha_vencimiento)/(60*60*24));
+        $vidaUtilAjustada = $this->logis->vida_util;
+        // dd($diasVencimiento + );
+        if ($diasElaboracion <= 19782 && $diasVencimiento >=19782){
+        $vidaUtilAjustada = $vidaUtilAjustada + (1);
+        }if ($diasElaboracion <= 21243 && $diasVencimiento >=21243){
+          $vidaUtilAjustada = $vidaUtilAjustada + (1);
+        }if ($diasElaboracion <= 22704 && $diasVencimiento >=22704){
+          $vidaUtilAjustada = $vidaUtilAjustada + (1);
+        }if ($diasElaboracion <= 25626 && $diasVencimiento >=25626){
+          $vidaUtilAjustada = $vidaUtilAjustada + (1);
+        }if ($diasElaboracion <= 24165 && $diasVencimiento >=24165){
+          $vidaUtilAjustada = $vidaUtilAjustada + (1);
+        // Compara la suma de los días con la vida útil ajustada
+      }if (($diasVencimiento - $diasElaboracion) == $vidaUtilAjustada) {
+            $this->vida_logistica = "Si";
+        } else {
+          dd($vidaUtilAjustada);
             $this->vida_logistica = "No";
-          } else {
-            // $this->vida_logistica = "No aplica";
+        }
     }
-  }
   if (empty($this->Muestreos->id)) {
     # code...
   }else{

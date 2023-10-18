@@ -3,7 +3,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Practicas sde Higienes</h3>
+                    <h3>Practicas de Higienes</h3>
                 </div>
 
                 <div class="title_right">
@@ -61,7 +61,6 @@
                                    <option value="">Seleccionar una opción </option>
                                    <option value="Bodega Gye">Bodega Gye</option>
                                    <option value="Bodega Uio">Bodega Uio</option>
-                                   <option value="">Provvedor</option>
                                 </select>
                                     @error('almacen')
                                         <small id="almacenhelpId"
@@ -70,7 +69,296 @@
                                 </div>
                             </div>
 
-                      </div>        
+                            <div class="col-sm-12 col-md-4">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label fs-6 text-lead-500">Supervisor:</label>
+                                <select class="form-control rounded @error('almacen') is-invalid @enderror" wire:model.defer="almacen" name="almacen" id="almacen">                               
+                                   <option value="">Seleccionar una opción </option>
+                                   @foreach ($supervisores as $supervisor )
+                                       <option value="{{$supervisor->id}}">{{$supervisor->name}} {{$supervisor->lastname}}</option>
+                                   @endforeach
+                                </select>
+                                    @error('almacen')
+                                        <small id="almacenhelpId"
+                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label fs-6 text-lead-500">Personal Operativo:</label>
+                                <select class="form-control rounded @error('almacen') is-invalid @enderror" wire:model.defer="almacen" name="almacen" id="almacen">                               
+                                   <option value="">Seleccionar una opción </option>
+                                   @foreach ($personal as $persona )
+                                       <option value="{{$persona->id}}">{{$persona->name}} {{$persona->lastname}}</option>
+                                   @endforeach
+                                </select>
+                                    @error('almacen')
+                                        <small id="almacenhelpId"
+                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label fs-6 text-lead-500">Provedores:</label>
+                                <select class="form-control rounded @error('almacen') is-invalid @enderror" wire:model.defer="almacen" name="almacen" id="almacen">                               
+                                   <option value="">Seleccionar una opción </option>
+                                   <option value="Bodega Gye">Bodega Gye</option>
+                                   <option value="Bodega Uio">Bodega Uio</option>
+                                   <option value="">Provedor</option>
+                                </select>
+                                    @error('almacen')
+                                        <small id="almacenhelpId"
+                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row pt-4">
+
+                            <div x-data="{
+                                textselect: ''
+                                }">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label text-dark">Uniforme completo y limpio (ambiente seco, refrigerado o congelado).</label>
+                            </div>
+                               </div>
+                               
+                               <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <select class="form-control" name="" id="" x-model="textselect">
+                                        <option value="">Seleccionar una opción</option>
+                                        <option value="2">Cumple</option>
+                                        <option value="1">Cumple Parcialmente</option>
+                                        <option value="0">No cumple</option>
+                                    </select>
+                            </div>
+                               </div>
+
+                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control rounded">
+                               </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control rounded">
+                                   </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                        <div class="mb-3">
+                                            <input type="date" class="form-control rounded">
+                                       </div>
+                                        </div>
+                               </div>
+
+                               <div x-data="{
+                                textselect: ''
+                                }">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label text-dark">Botas limpias, en buen estado y cordones atados.</label>
+                            </div>
+                               </div>
+                               
+                               <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <select class="form-control" name="" id="" x-model="textselect">
+                                        <option value="">Seleccionar una opción</option>
+                                        <option value="2">Cumple</option>
+                                        <option value="1">Cumple Parcialmente</option>
+                                        <option value="0">No cumple</option>
+                                    </select>
+                            </div>
+                               </div>
+
+                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control rounded">
+                               </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control rounded">
+                                   </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                        <div class="mb-3">
+                                            <input type="date" class="form-control rounded">
+                                       </div>
+                                        </div>
+                               </div>
+
+                               <div x-data="{
+                                textselect: ''
+                                }">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label text-dark">Casco limpio, en buen estado y con nombre y apellido.</label>
+                            </div>
+                               </div>
+                               
+                               <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <select class="form-control" name="" id="" x-model="textselect">
+                                        <option value="">Seleccionar una opción</option>
+                                        <option value="2">Cumple</option>
+                                        <option value="1">Cumple Parcialmente</option>
+                                        <option value="0">No cumple</option>
+                                    </select>
+                            </div>
+                               </div>
+
+                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control rounded">
+                               </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control rounded">
+                                   </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                        <div class="mb-3">
+                                            <input type="date" class="form-control rounded">
+                                       </div>
+                                        </div>
+                               </div>
+
+                               <div x-data="{
+                                textselect: ''
+                                }">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label text-dark">No usa accesorios (reloj, cadena, anillo, pulsera, etc.).</label>
+                            </div>
+                               </div>
+                               
+                               <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <select class="form-control" name="" id="" x-model="textselect">
+                                        <option value="">Seleccionar una opción</option>
+                                        <option value="2">Cumple</option>
+                                        <option value="1">Cumple Parcialmente</option>
+                                        <option value="0">No cumple</option>
+                                    </select>
+                            </div>
+                               </div>
+
+                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control rounded">
+                               </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control rounded">
+                                   </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                        <div class="mb-3">
+                                            <input type="date" class="form-control rounded">
+                                       </div>
+                                        </div>
+                               </div>
+
+                               <div x-data="{
+                                textselect: ''
+                                }">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label text-dark">Cabello Correctamente peinado (mantiene buen aspecto).</label>
+                            </div>
+                               </div>
+                               
+                               <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <select class="form-control" name="" id="" x-model="textselect">
+                                        <option value="">Seleccionar una opción</option>
+                                        <option value="2">Cumple</option>
+                                        <option value="1">Cumple Parcialmente</option>
+                                        <option value="0">No cumple</option>
+                                    </select>
+                            </div>
+                               </div>
+
+                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control rounded">
+                               </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control rounded">
+                                   </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                        <div class="mb-3">
+                                            <input type="date" class="form-control rounded">
+                                       </div>
+                                        </div>
+                               </div>
+
+                               <div x-data="{
+                                textselect: ''
+                                }">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="almacen" class="form-label text-dark">Uñas cortas y limpias (aplica para personal operativo).</label>
+                            </div>
+                               </div>
+                               
+                               <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <select class="form-control" name="" id="" x-model="textselect">
+                                        <option value="">Seleccionar una opción</option>
+                                        <option value="2">Cumple</option>
+                                        <option value="1">Cumple Parcialmente</option>
+                                        <option value="0">No cumple</option>
+                                    </select>
+                            </div>
+                               </div>
+
+                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control rounded">
+                               </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control rounded">
+                                   </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                        <div class="mb-3">
+                                            <input type="date" class="form-control rounded">
+                                       </div>
+                                        </div>
+                               </div>
+                            <div class="pt-4 text-center">
+                                 <button class="btn btn-primary">Guardar</button>
+
+                                 <button class="btn btn-danger">Enviar</button>
+                            </div>
+                        </div>
                    </div>        
                 </div>
             </div>
@@ -95,7 +383,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #4d6a88; color: white;">
-                    <h5 class="modal-title" id="exampleModalLabel">Tabla de Valorización Check List</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tabla de Valorización</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -116,7 +404,7 @@
                             </tr>
                             </tr>
                             
-                            <tr>
+                            {{-- <tr>
                                 <td class="text-center border border-dark">
                                 El items evaluado se cumple en su totalidad. No se evidencia incumplimiento alguno (0 hallazgos).
                                 </td>
@@ -126,23 +414,23 @@
                                 <td class="text-center border border-dark">
                                     El items evaluado se cumple de forma parcial y se evidencia un número significativo de incumplimientos (más de 4 hallazgos).
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </table>
                         <table class="table">
                             <tr>
                                 <p align="center" class="text-center bg-lead-500 border border-dark text-white"><b><span> CALIFICACIÓN</span></b></p>
                                 <tr>
                                     <td class="text-center border border-dark">
-                                        Requiere mejora ≤ 74
+                                        Deficiente ≤ 70
                                     </td>
                                     <td class="text-center border border-dark">
-                                        Regular 75 - 84 %
+                                        Aceptable 70 - 85 %
                                     </td>
                                     <td class="text-center border border-dark">
-                                        Bueno 85 - 90 %
+                                        Bueno 85 - 95 %
                                     </td>
                                     <td class="text-center border border-dark">
-                                        Excelente ≥ 91 %
+                                        Muy bueno ≥ 95 - 100 %
                                     </td>
                                 </tr>
                             </tr>
