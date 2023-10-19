@@ -30,7 +30,7 @@
                                     <div class="col-sm-12 col-md-4">
                                     <div class="mb-3">
                                     <label for="fecha" class="form-label fs-6 text-lead-500">Fecha:</label>
-                                    <input type="date" class="form-control rounded @error('fecha') is-invalid @enderror" wire:model.defer="Fecha" name="fecha" id="fecha">                               
+                                    <input type="date" class="form-control rounded @error('fecha') is-invalid @enderror" wire:model.defer="fecha" name="fecha" id="fecha">                               
                                         @error('fecha')
                                             <small id="fechahelpId"
                                                 class="form-text text-muted invalid-feedback">{{ $message }}</small>
@@ -72,14 +72,14 @@
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="almacen" class="form-label fs-6 text-lead-500">Supervisor:</label>
-                                <select class="form-control rounded @error('almacen') is-invalid @enderror" wire:model.defer="almacen" name="almacen" id="almacen">                               
+                                <select class="form-control rounded @error('Supervisor') is-invalid @enderror" wire:model.defer="Supervisor" name="Supervisor" id="Supervisor">                               
                                    <option value="">Seleccionar una opción </option>
                                    @foreach ($supervisores as $supervisor )
                                        <option value="{{$supervisor->id}}">{{$supervisor->name}} {{$supervisor->lastname}}</option>
                                    @endforeach
                                 </select>
-                                    @error('almacen')
-                                        <small id="almacenhelpId"
+                                    @error('Supervisor')
+                                        <small id="SupervisorhelpId"
                                             class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -88,23 +88,23 @@
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="almacen" class="form-label fs-6 text-lead-500">Personal Operativo:</label>
-                                <select class="form-control rounded @error('almacen') is-invalid @enderror" wire:model.defer="almacen" name="almacen" id="almacen">                               
+                                <select class="form-control rounded @error('Personal') is-invalid @enderror" wire:model.defer="Personal" name="Personal" id="Personal">                               
                                    <option value="">Seleccionar una opción </option>
                                    @foreach ($personal as $persona )
                                        <option value="{{$persona->id}}">{{$persona->name}} {{$persona->lastname}}</option>
                                    @endforeach
                                 </select>
-                                    @error('almacen')
-                                        <small id="almacenhelpId"
+                                    @error('Personal')
+                                        <small id="PersonalhelpId"
                                             class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="col-sm-12 col-md-4">
-                                <div class="mb-3">
-                                <label for="almacen" class="form-label fs-6 text-lead-500">Provedores:</label>
-                                <select class="form-control rounded @error('almacen') is-invalid @enderror" wire:model.defer="almacen" name="almacen" id="almacen">                               
+                                <div class="pt-4">
+                                <label for="almacen" class="form-label"></label>
+                                {{-- <select class="form-control rounded @error('almacen') is-invalid @enderror" wire:model.defer="almacen" name="almacen" id="almacen">                               
                                    <option value="">Seleccionar una opción </option>
                                    <option value="Bodega Gye">Bodega Gye</option>
                                    <option value="Bodega Uio">Bodega Uio</option>
@@ -113,26 +113,55 @@
                                     @error('almacen')
                                         <small id="almacenhelpId"
                                             class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                    @enderror
+                                    @enderror --}}
+                                    <button class="btn btn-success" wire:click='Guardar'> Empezar </button>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="row pt-4">
+                            {{-- <div style="background-color: #4d6a88;  height:50px" class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="" style=" font-size:11px" class="form-label text-dark border border-dark text-center"><strong> Puntos a Evaluar. </strong></label>
+                            </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <label for="" style="" class="form-label border border-dark text-dark text-center">Calificación.</label>
+                            </div>
+                            </div>
+                            <div class="col-sm-12 col-md-2">
+                                <div class="mb-3">
+                                <label for="" style="" class="form-label border border-dark text-dark text-center">Detalle de incumplimientos.</label>
+                            </div>
+                            </div>
+                            <div class="col-sm-12 col-md-2">
+                                <div class="mb-3">
+                                <label for="" style="" class="form-label border border-dark text-dark text-center">Detalle de acciones tomadas.</label>
+                            </div>
+                            </div>
+                            <div class="col-sm-12 col-md-2">
+                                <div class="mb-3">
+                                <label for="" style=" font-size:11px" class="form-label border border-dark text-dark text-center">Fecha de cierre de incumplimientos (según aplique).</label>
+                            </div>
+                            </div>
+                        </div> --}}
 
                             <div x-data="{
-                                textselect: ''
+                                textselect:'null'
                                 }">
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                <label for="almacen" class="form-label text-dark">Uniforme completo y limpio (ambiente seco, refrigerado o congelado).</label>
+    
+                                <label for="" class="form-label text-dark">Uniforme completo y limpio (ambiente seco, refrigerado o congelado).</label>
                             </div>
                                </div>
                                
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control" name="" id="" x-model="textselect">
-                                        <option value="">Seleccionar una opción</option>
+                                    <select class="form-control" wire:model.defer="uc" name="" id="" x-model="textselect">
+                                        <option value="null">Seleccionar una opción</option>
                                         <option value="2">Cumple</option>
                                         <option value="1">Cumple Parcialmente</option>
                                         <option value="0">No cumple</option>
@@ -140,19 +169,19 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                               <div class="col-sm-12 col-md-2"  x-show="textselect== 1 || textselect == 0">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control rounded">
+                                    <input type="text" class="form-control rounded" wire:model.defer="uc1" placeholder='Detalle de incumplimientos'>
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="col-sm-12 col-md-2" x-show="textselect== 1 || textselect == 0">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control rounded">
+                                        <input type="text" class="form-control rounded" wire:model.defer="uc2" placeholder="Detalle de acciones tomadas">
                                    </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="col-sm-12 col-md-2" wire:model.defer="uc3" x-show="textselect== 1 || textselect == 0">
                                         <div class="mb-3">
                                             <input type="date" class="form-control rounded">
                                        </div>
@@ -160,7 +189,7 @@
                                </div>
 
                                <div x-data="{
-                                textselect: ''
+                                textselect: 'null'
                                 }">
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
@@ -170,8 +199,8 @@
                                
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control" name="" id="" x-model="textselect">
-                                        <option value="">Seleccionar una opción</option>
+                                    <select class="form-control" wire:model.defer="bl" name="" id="" x-model="textselect">
+                                        <option value="null">Seleccionar una opción</option>
                                         <option value="2">Cumple</option>
                                         <option value="1">Cumple Parcialmente</option>
                                         <option value="0">No cumple</option>
@@ -179,19 +208,19 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                               <div class="col-sm-12 col-md-2" wire:model.defer="bl1" x-show="textselect== 1 || textselect == 0" placeholder='Detalle de incumplimientos'>
                                 <div class="mb-3">
                                     <input type="text" class="form-control rounded">
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="col-sm-12 col-md-2" wire:model.defer="bl2" x-show="textselect== 1 || textselect == 0" placeholder="Detalle de acciones tomadas">
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded">
                                    </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="col-sm-12 col-md-2" wire:model.defer="bl3" x-show="textselect== 1 || textselect == 0">
                                         <div class="mb-3">
                                             <input type="date" class="form-control rounded">
                                        </div>
@@ -199,7 +228,7 @@
                                </div>
 
                                <div x-data="{
-                                textselect: ''
+                                textselect: 'null'
                                 }">
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
@@ -209,8 +238,8 @@
                                
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control" name="" id="" x-model="textselect">
-                                        <option value="">Seleccionar una opción</option>
+                                    <select class="form-control" wire:model.defer="cl" name="" id="" x-model="textselect">
+                                        <option value="null">Seleccionar una opción</option>
                                         <option value="2">Cumple</option>
                                         <option value="1">Cumple Parcialmente</option>
                                         <option value="0">No cumple</option>
@@ -218,19 +247,19 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                               <div class="col-sm-12 col-md-2" wire:model.defer="cl1" x-show="textselect == 1 || textselect == 0" placeholder='Detalle de incumplimientos'>
                                 <div class="mb-3">
                                     <input type="text" class="form-control rounded">
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="col-sm-12 col-md-2" wire:model.defer="cl2" x-show="textselect == 1 || textselect == 0" placeholder="Detalle de acciones tomadas">
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded">
                                    </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="col-sm-12 col-md-2" wire:model.defer="cl3" x-show="textselect == 1 || textselect == 0">
                                         <div class="mb-3">
                                             <input type="date" class="form-control rounded">
                                        </div>
@@ -238,7 +267,7 @@
                                </div>
 
                                <div x-data="{
-                                textselect: ''
+                                textselect: 'null'
                                 }">
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
@@ -248,8 +277,8 @@
                                
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control" name="" id="" x-model="textselect">
-                                        <option value="">Seleccionar una opción</option>
+                                    <select class="form-control" wire:model.defer="na" name="" id="" x-model="textselect">
+                                        <option value="null">Seleccionar una opción</option>
                                         <option value="2">Cumple</option>
                                         <option value="1">Cumple Parcialmente</option>
                                         <option value="0">No cumple</option>
@@ -257,19 +286,19 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                               <div class="col-sm-12 col-md-2" wire:model.defer="na1" x-show="textselect == 1 || textselect == 0" placeholder='Detalle de incumplimientos'>
                                 <div class="mb-3">
                                     <input type="text" class="form-control rounded">
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="col-sm-12 col-md-2" wire:model.defer="na2" x-show="textselect == 1 || textselect == 0" placeholder="Detalle de acciones tomadas">
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded">
                                    </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="col-sm-12 col-md-2" wire:model.defer="na3" x-show="textselect == 1 || textselect == 0">
                                         <div class="mb-3">
                                             <input type="date" class="form-control rounded">
                                        </div>
@@ -277,7 +306,7 @@
                                </div>
 
                                <div x-data="{
-                                textselect: ''
+                                textselect: 'null'
                                 }">
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
@@ -287,8 +316,8 @@
                                
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control" name="" id="" x-model="textselect">
-                                        <option value="">Seleccionar una opción</option>
+                                    <select class="form-control" wire:model.defer="cp" name="" id="" x-model="textselect">
+                                        <option value="null">Seleccionar una opción</option>
                                         <option value="2">Cumple</option>
                                         <option value="1">Cumple Parcialmente</option>
                                         <option value="0">No cumple</option>
@@ -296,19 +325,19 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                               <div class="col-sm-12 col-md-2" wire:model.defer="cp1" x-show="textselect == 1 || textselect == 0" placeholder='Detalle de incumplimientos'>
                                 <div class="mb-3">
                                     <input type="text" class="form-control rounded">
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="col-sm-12 col-md-2" wire:model.defer="c2" x-show="textselect == 1 || textselect == 0" placeholder="Detalle de acciones tomadas">
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded">
                                    </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="col-sm-12 col-md-2" wire:model.defer="cp3" x-show="textselect == 1 || textselect == 0">
                                         <div class="mb-3">
                                             <input type="date" class="form-control rounded">
                                        </div>
@@ -316,7 +345,7 @@
                                </div>
 
                                <div x-data="{
-                                textselect: ''
+                                textselect: 'null'
                                 }">
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
@@ -326,8 +355,8 @@
                                
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control" name="" id="" x-model="textselect">
-                                        <option value="">Seleccionar una opción</option>
+                                    <select class="form-control" wire:model.defer="uc" name="" id="" x-model="textselect">
+                                        <option value="null">Seleccionar una opción</option>
                                         <option value="2">Cumple</option>
                                         <option value="1">Cumple Parcialmente</option>
                                         <option value="0">No cumple</option>
@@ -335,26 +364,26 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                               <div class="col-sm-12 col-md-2" wire:model.defer="uc1" x-show="textselect == 1 || textselect == 0" placeholder='Detalle de incumplimientos'>
                                 <div class="mb-3">
                                     <input type="text" class="form-control rounded">
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                <div class="col-sm-12 col-md-2" wire:model.defer="uc2" x-show="textselect == 1 || textselect == 0" placeholder="Detalle de acciones tomadas">
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded">
                                    </div>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-2" x-show="textselect == 1" x-show="textselect == 0">
+                                    <div class="col-sm-12 col-md-2" wire:model.defer="uc3" x-show="textselect == 1 || textselect == 0">
                                         <div class="mb-3">
                                             <input type="date" class="form-control rounded">
                                        </div>
                                         </div>
                                </div>
                             <div class="pt-4 text-center">
-                                 <button class="btn btn-primary">Guardar</button>
+                                 <button class="btn btn-primary" >Guardar</button>
 
                                  <button class="btn btn-danger">Enviar</button>
                             </div>
@@ -365,18 +394,23 @@
         </div>
     </div>
    </div>
-{{-- @push('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    Livewire.on('show-sweetalert', function(data){
-        Swal.fire({
-            icon: data.type,
-            title: data.title,
-            text: data.message
-        });
-    });
-</script>    
-@endpush --}}
+   {{-- @push('scripts') --}}
+   {{--<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+       Livewire.on('show-sweetalert', function(data){
+           Swal.fire({
+               icon: data.type,
+               title: data.title,
+               text: data.message
+           });
+       });
+   </script>--}}    
+   {{-- <script type="text/javascript">
+   (function () {
+    history.forward();
+   })();
+   </script>
+   @endpush  --}}
 </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -445,4 +479,4 @@
             </div>
         </div>
 
-
+      
