@@ -65,8 +65,18 @@
          <div class="row">
             <div class="col-sm-12 col-md-12">
             <div class="x_panel">
-                <div class="x_title"> 
+                <div class="x_title">
                     <div class="clearfix"></div>
+                </div>
+                 <div class="mb-2 col-md-3" style="width: 200px">
+                    <select name="" wire:model="estado" class="form-control">
+                       <option value="">Seleccionar opción</option>
+                      <option value="1">Clasificación</option>
+                      <option value="2">Investigación</option>
+                      <option value="3">En proceso</option>
+                      <option value="4">Cerrado</option>
+                      <option value="5">No procede</option>
+                    </select>
                 </div>
             <table id="reclamos" class="text-green-500 table table-striped dt-responsive" style="width:100%">
                 <thead>
@@ -107,7 +117,7 @@
                             @switch($solicitud->estado)
 
                             @case(2)
-                            {{-- @if (today()->diffInDays($solicitud->clasificacion->created_at) > 5)         
+                            {{-- @if (today()->diffInDays($solicitud->clasificacion->created_at) > 5)
                             <label class="bg-orange-500 p-1 btn-group btn-group-sm  rounded text-white text-center" style="font-size:11px;">Investigacion con {{today()->diffInDays($solicitud->clasificacion->created_at)}} dias de atrazo</label>
                             @else --}}
                             <span class="bg-green-500 p-1 rounded text-white">Investigacion</span>
@@ -127,11 +137,11 @@
                             <span class="bg-orange-500 p-1 rounded text-white">Cerrado</span>
                             @break
                             @default
-                             @if (today()->diffInDays($solicitud->created_at) > 2) 
+                             @if (today()->diffInDays($solicitud->created_at) > 2)
                             <label class="bg-orange-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Clasificacion con {{today()->diffInDays($solicitud->created_at)}} dias de atrazo</label>
                             @else
                             <span class="bg-green-500 p-1 rounded text-white">Clasificacion</span>
-                            @endif 
+                            @endif
                             @endswitch
                         </td>
                         <td>
@@ -144,7 +154,7 @@
 
                             @case(3)
                             <div class="btn-group btn-group-sm " role="group" aria-label="">
-                               
+
                                 <a href="{{route('adm.pdf.Reclamo', $solicitud->id)}}" rel="noreferrer noopener" target="_blank"  class="border btn btn-orange-500 text-white"
                                     >
                                     <i class="fa-solid fa-file-pdf"></i>
@@ -157,7 +167,7 @@
 
                             @case(4)
                             <div class="btn-group btn-group-sm " role="group" aria-label="">
-                              
+
                                 <a href="{{route('adm.pdf.Reclamo', $solicitud->id)}}" rel="noreferrer noopener" target="_blank"  class="border btn btn-orange-500 text-white"
                                     >
                                     <i class="fa-solid fa-file-pdf"></i>
@@ -165,9 +175,9 @@
                                 <a href="{{ route('adm.Infor.reclamo', $solicitud->id) }}" class="btn btn-orange-500 text-white border" >
                                     <i class="fa fa-info"></i>
                                 </a>
-                            </div> 
+                            </div>
                             @break
-                             
+
                             @case(5)
                             <div class="btn-group btn-group-sm " role="group" aria-label="">
                                {{-- @isset($solicitud->investigacion->argumento)
@@ -179,12 +189,12 @@
                                 <a href="{{route('adm.inf.no-procede', $solicitud->id)}}" class="btn btn-orange-500 text-white border" >
                                     <i class="fa fa-info"></i>
                                 </a>
-                            </div>  
+                            </div>
                             @break
 
                             @default
                             <div class="btn-group btn-group-sm " role="group" aria-label="">
-                                
+
                                 <button type="button" class="border btn btn-orange-500 text-white images"
                                     data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i class="fa fa-image"></i>
@@ -216,14 +226,14 @@
                 <div class="modal-body">
                     <div class="overflow-scroll d-block">
                     @isset($solicitud->imagen)
-                    <img src="{{asset('storage/Reclamos/'.trim($solicitud->imagen))}}" class="card-img-top"> 
+                    <img src="{{asset('storage/Reclamos/'.trim($solicitud->imagen))}}" class="card-img-top">
                     <dd>{{$solicitud->id}}</dd>
-                    @endisset 
+                    @endisset
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
- 
+
 

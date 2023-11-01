@@ -34,7 +34,7 @@ class PasilloVistaController extends Controller
     {
         //
          $pdf = Info_checklist::find($id);
-        
+
         //   $SupervisoreP[];
          foreach ($pdf->check_seco as $pdfs) {
              $SupervisoreP[] = ['name' => $pdfs->Pasillos->supervisor->name];
@@ -43,7 +43,7 @@ class PasilloVistaController extends Controller
         //  dd($consulta);
         $resultado = [($consulta->firstWhere('name','MIGUEL ANGEL RONQUILLO FRANCO'))['name'], ($consulta->firstWhere('name','JORGE ANTONIO PIVAQUE RODRIGUEZ'))['name'], ($consulta->firstWhere('name','MARTHA CECILIA BORBOR ALDAZ'))['name'], ($consulta->firstWhere('name','JAIRO JAVIER ESPINOZA MOLINA'))['name'], ($consulta->firstWhere('name','Melissa Lisbeth Baño Vera'))['name'], ($consulta->firstWhere('name','Giancarlo David Barreiro Piloso'))['name']];
         $superisores = $resultado;
-        
+
         foreach ($pdf->check_frio as $frios) {
              $superisoreF[] = ['name' => $frios->Pasillos->supervisor->name];
         }
@@ -68,7 +68,7 @@ class PasilloVistaController extends Controller
     //   $steven = BodegaSeca($id, 'STEVEN RONALDO MONTENEGRO TORRES ');
     //   $jorge = BodegaSeca($id, 'JORGE MIGUEL MONSERRATTE CONTRERAS');
     //   $cecilia = BodegaSeca($id, 'MARTHA CECILIA BORBOR ALDAZ');
-    
+
         // $jorge = DB::table('pasillos as p')
         // ->join('chcklt_secos as cs', 'p.id', '=' , 'cs.pasillo_id')
         // ->join('users as u','p.user_id', '=', 'u.id')
@@ -84,7 +84,7 @@ class PasilloVistaController extends Controller
         // ->where('cf.info_checklist_id', $id)
         // ->whereIn('u.name', ['STEVEN RONALDO MONTENEGRO TORRES '])->get();
 
-        
+
 
        // Funcion de para calcular todo los valores de bodega seca
         function BodegaSeca($id, $nombre):float{
@@ -100,7 +100,7 @@ class PasilloVistaController extends Controller
          $porcentaje = $total->bs1 + $total->bs2 + $total->bs3 + $total->bs4 + $total->bs5 + $total->bs6 + $total->bs7;
          $Porcentaje_total += ($porcentaje*100/14);
         }
-        if (count($filtro)>0) {          
+        if (count($filtro)>0) {
         $Porcentaje_total/= count($filtro);
         }
         return $Porcentaje_total;
@@ -124,8 +124,8 @@ class PasilloVistaController extends Controller
             foreach ($filtros as $total) {
              $porcentaje = $total->bf1 + $total->bf2 + $total->bf3 + $total->bf4 + $total->bf5 + $total->bf6 + $total->bf7;
              $Porcentaje_total += ($porcentaje*100/14);
-            } 
-            if (count($filtros)>0) {      
+            }
+            if (count($filtros)>0) {
             $Porcentaje_total/= count($filtros);
             }
             return $Porcentaje_total;
@@ -134,7 +134,7 @@ class PasilloVistaController extends Controller
             foreach ($supervioresF as $superisore) {
                 $bodegafria[] = Bodega_fria($id, $superisore);
             }
-            // dd($bodegafria);
+             dd($bodegafria);
      // Funcion de para calcular todo los valores de bodega reefer
         function Bodegareefer($id, $nombre):float{
             $Porcentaje_total = 0;
@@ -148,17 +148,18 @@ class PasilloVistaController extends Controller
             foreach ($filtros as $total) {
              $porcentaje = $total->br1 + $total->br2 + $total->br3 + $total->br4 + $total->br5 + $total->br6;
              $Porcentaje_total += ($porcentaje*100/12);
-            }  
-            if (count($filtros)>0) {     
+            }
+            if (count($filtros)>0) {
             $Porcentaje_total/= count($filtros);
             }
             return $Porcentaje_total;
             }
+
             foreach ($supervioresR as $superisoress ) {
                 $bodega_reefer[] = Bodegareefer($id, $superisoress);
             }
-           
-            
+
+
      // Funcion de para calcular todo los valores de bodega reefer
         function Bodegaliris($id, $nombre):float{
             $Porcentaje_total = 0;
@@ -172,8 +173,8 @@ class PasilloVistaController extends Controller
             foreach ($filtros as $total) {
              $porcentaje = $total->bam1 + $total->bam2 + $total->bam3 + $total->bam4 + $total->bam5 + $total->bam6 + $total->bam7;
              $Porcentaje_total += ($porcentaje*100/14);
-            }  
-            if (count($filtros)>0) {     
+            }
+            if (count($filtros)>0) {
             $Porcentaje_total/= count($filtros);
             }
             return $Porcentaje_total;
@@ -184,21 +185,21 @@ class PasilloVistaController extends Controller
 
          // $Valor_porcentaje = ($bodega_seca + $bodegafria + $bodega_reefer);
 
-          for ($i=0; $i < count($bodega_seca) ; $i++) { 
+          for ($i=0; $i < count($bodega_seca) ; $i++) {
             $total[]=[$bodega_seca[$i], $superisores[$i]];
             // $total[]=$bodega_seca[$i];
             // $total1[]=$superisores[$i];
           }
-          for ($i=0; $i < count($bodegafria) ; $i++) { 
+          for ($i=0; $i < count($bodegafria) ; $i++) {
             $total1[]=[$bodegafria[$i], $supervioresF[$i]];
           }
 
-          for ($i=0; $i < count($bodega_reefer) ; $i++) { 
-            $total2[]=[$bodega_reefer[$i], $supervioresR[$i]]; 
+          for ($i=0; $i < count($bodega_reefer) ; $i++) {
+            $total2[]=[$bodega_reefer[$i], $supervioresR[$i]];
           }
 
-          for ($i=0; $i < count($bodega_amplicion) ; $i++) { 
-            $total3[]=[$bodega_amplicion[$i], $supervioresR[$i]]; 
+          for ($i=0; $i < count($bodega_amplicion) ; $i++) {
+            $total3[]=[$bodega_amplicion[$i], $supervioresR[$i]];
           }
 
            //dd($total2);
@@ -210,7 +211,7 @@ class PasilloVistaController extends Controller
         //  $Porcentaje = $filtro->id;
         // $Pasillos = collect($Bodega_seca);
         // $filtered = $Pasillos->filter(function ($value, $key) {
-        //     return $value == 1; 
+        //     return $value == 1;
         // });
         // $Porcentajes = $filtered->all();
 
@@ -229,7 +230,7 @@ class PasilloVistaController extends Controller
          //dd($Bodega_fria);
 
         $pdfs = PDF::loadView('pdf.Informe_checklist', compact('pdf', 'total', 'total1', 'total2', 'total3'));
-        
+
         return $pdfs->stream(strtoupper("Checklist Pasillo.pdf"));
     }
 

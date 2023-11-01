@@ -89,8 +89,10 @@
                                 href="{{route('adm.Check.list')}}">Check de Pasillo</a>
                             </li>
                             <li class="sub_menu"><a
-                                href="{{route('adm.practica.higiene')}}">Practicas de higiene</a>
+                                href="{{route('adm.practica.higiene')}}">Practicas de higiene Ransa</a>
                             </li>
+                            <li class="sub_menu"><a href="{{route('adm.Practica.Maquila')}}">Prácticas de higiene maquila (pendiente compartir parámetros)</a></li>
+                            <li class="sub_menu"><a href="{{route('adm.practica.Proveedor')}}">Prácticas de higiene proveedores (estiba y limpieza)</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-whmcs"></i> Administración Calidad <span class="fa fa-chevron-down"></span></a>
@@ -151,13 +153,15 @@
                             {{-- @endcan --}}
                             <li><a href="{{route('adm.Muestreos.container.index')}}">Muestreos - Contenedor </a></li>
                             <li><a href="{{route('adm.pasillos.vista.index')}}">Resultado - Checklist </a></li>
+                            <li><a href="{{route('adm.p.h&g.index')}}">Practicas de higiene</a></li>
+
                             {{-- <li><a href="form_validation.html">Form Validation</a></li>
                             <li><a href="form_wizards.html">Form Wizard</a></li>
                             <li><a href="form_upload.html">Form Upload</a></li>
                             <li><a href="form_buttons.html">Form Buttons</a></li> --}}
                         </ul>
                     </li>
-                    
+
                         <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                              {{-- @can() --}}
@@ -168,13 +172,13 @@
                                      {{-- @can() --}}
                                      <li class="sub_menu"><a
                                          href="{{route('adm.Asignar-estibas.index')}}">Asignar Estibas</a>
-                                     </li> 
+                                     </li>
                                      {{-- @endcan --}}
                                      {{-- @can() --}}
                                      @if (now()->toTimeString()<= "17:25")
-                                     <li class="sub_menu"><a href="{{route('adm.Confirmar-estibas.index')}}"> Por Confirmar</a></li> 
+                                     <li class="sub_menu"><a href="{{route('adm.Confirmar-estibas.index')}}"> Por Confirmar</a></li>
                                      @else
-                                         
+
                                      @endif
                                      {{-- @endcan --}}
                                  </ul>
@@ -191,20 +195,20 @@
                                 </ul>
                             </li>
                             @break
-                    
+
                         @default
-                            
+
                     @endswitch
-                    
+
                     {{-- @switch()
                         @case() --}}
-                        
+
                             {{-- @break
-                    
+
                         @default
-                            
+
                     @endswitch --}}
-                    
+
                     {{-- <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="general_elements.html">General Elements</a></li>

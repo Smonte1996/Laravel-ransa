@@ -36,6 +36,7 @@ use App\Http\Controllers\MuestreoContenedorController;
 use App\Http\Controllers\Niveles_estandarController;
 use App\Http\Controllers\PasilloController;
 use App\Http\Controllers\PasilloVistaController;
+use App\Http\Controllers\PracticahgController;
 use App\Http\Controllers\ProvedoresEstibas;
 use App\Http\Controllers\Tamano_muestraController;
 use App\Http\Controllers\User_clientController;
@@ -44,6 +45,8 @@ use App\Http\Livewire\Guest\Consultas;
 use App\Http\Livewire\Guest\EncuestaCliente;
 use App\Http\Livewire\Guest\Muestreos;
 use App\Http\Livewire\Higiene\FormularioHigiene;
+use App\Http\Livewire\Higiene\FormularioHigieneMaquila;
+use App\Http\Livewire\Higiene\FormularioHigieneProveedor;
 use App\Http\Livewire\Reclamo\Clasificaciones as ReclamoClasificaciones;
 use App\Http\Livewire\Reclamo\Confirmaracciones;
 use App\Http\Livewire\Reclamo\Correciones;
@@ -102,7 +105,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('proveedores', SupplierController::class)->except(['show'])->parameters(['proveedores' => 'supplier'])->names('suppliers');
         Route::post('datapermissions', [PermissionController::class, 'getData'])->name('data');
         Route::post('import', [PermissionController::class, 'import'])->name('permissions.import');
-        Route::resource('permisos', PermissionController::class)->except(['show'])->parameters(['permisos' => 'permission'])->names('permissions');        
+        Route::resource('permisos', PermissionController::class)->except(['show'])->parameters(['permisos' => 'permission'])->names('permissions');
         Route::post('dataroles', [RoleController::class, 'getData'])->name('data');
         Route::resource('roles', RoleController::class)->except(['show'])->parameters(['roles' => 'role'])->names('roles');
         Route::post('dataclients', [ClientController::class, 'getData'])->name('data');
@@ -117,7 +120,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('ciudades', CityController::class)->except(['show'])->parameters(['ciudades' => 'city'])->names('cities');
         Route::post('datacountries', [CountryController::class, 'getData'])->name('data');
         Route::resource('paises', CountryController::class)->except(['show'])->parameters(['paises' => 'country'])->names('countries');
-        
+
         //Rutas de gestion de reclamos.
           Route::resource('General/causal', Causal_generalController::class)->except(['show'])->parameters(['Causal_general' => 'Causal_general'])->names('General');
           Route::resource('Detalles', Detalle_causalController::class)->except(['show'])->parameters(['Detalle_casual' => 'Detalle_causal'])->names('Detalle');
@@ -148,12 +151,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
           // url para las practivas de higiene.
           Route::get('Practicas-higiene', FormularioHigiene::class)->name('practica.higiene');
+          Route::resource('Practicas/higienes', PracticahgController::class)->except(['show'])->parameters(['Practicashg'=>'Practicashg'])->names('p.h&g');
+          Route::get('Higiene/Pdf/{id}',[PracticahgController::class, 'Generarpdfs'])->name('pdf.hgs');
+          Route::get('Practicas-higiene-Proveedor', FormularioHigieneProveedor::class)->name('practica.Proveedor');
+          Route::get('Higienes/Pdf-Proveedors/{id}',[PracticahgController::class, 'PdfProveedor'])->name('pdf.Proveedor');
+          Route::get('Practicas-higiene-Maquila', FormularioHigieneMaquila::class)->name('Practica.Maquila');
 
           //urles para administrar la parte de los estibas.
           Route::resource('Proveedores-estibas', ProvedoresEstibas::class)->except(['show'])->parameters(['Provedor' => 'Proveedores'])->names('Estibas');
           Route::resource('Asgnacion-estibas', AsignarCuadrillaController::class)->except(['show'])->parameters(['Asignar-estibas'=>'Asignacion-estibas'])->names('Asignar-estibas');
           Route::resource('Confirmacion-estibas', ConfirmarActividades::class)->except(['show'])->parameters(['Confirmar-estibas'=>'Confirmacion-estibas'])->names('Confirmar-estibas');
-          
+
         Route::get('/Solicitudes', ReclamoReclamoController::class)->name('reclamo');
         Route::get('download/{id}',[ReclamoReclamoController::class, 'download'])->name('download.Archivo');
         Route::get('Reclamo-pdf/{id}',[ReclamoReclamoController::class, 'ReclamoPdf'])->name('pdf.Reclamo');
@@ -168,7 +176,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::post('/solicitudes/{solicitude}/edit',[confirmaraccionesController::class, 'update'])->name('solicitud.update');
 
         });
-        
+
 
     // Rutas para Usuarios que no son administradores
         Route::middleware(['auth:sanctum',config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -177,5 +185,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('downloadfile/{notification_service}', [NotificationserviceController::class,'download'])->name('notifications.download');
     Route::post('downloadnotificacion', [NotificationserviceController::class,'download_notificacion'])->name('notifications.downloadnotificacion');
     Route::resource('servicio-no-conforme', NotificationserviceController::class)->except(['create',])->parameters(['servicio-no-conforme' => 'notification_service'])->names('notifications');
-    
-});    
+
+});
