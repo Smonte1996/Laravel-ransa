@@ -115,90 +115,862 @@
     {{--<hr class="grosor"/> --}}
 
     <div class="text-center pt-1 m-2">
-    <table width="100%" class="pt-3" cellspacing="0" cellpadding="3" >
-        <tr class="cabecera " align="center">
-            <td colspan="6" class="border border-dark" style="font-size:13px;"><strong>Datos Generales</strong></td>
-        </tr>
-            <tr>
-                <td align="left" class="border border-dark" style="font-size:12px;">
-                    <strong>
-                    Fecha:
-                    </strong>
-                </td>
-                <td colspan="" class="border border-dark text-center" style="font-size:12px;">
-                    {{$pdfi->fecha}}
-                </td>
-
-                <td align="left" class="border border-dark" style="font-size:12px;">
-                    <strong>
-                   Almacén:
-                </strong>
-                </td>
-                <td colspan="" class="border border-dark text-center" style="font-size:12px;">
-                    {{$pdfi->almacen}}
-                </td>
-
-                <td align="left" class="border border-dark" style="font-size:12px;">
-                    <strong>
-                   Evaluador:
-                    </strong>
-                </td>
-                <td colspan="" class="border border-dark text-center" style="font-size:12px;">
-                    {{$pdfi->evaluador}}
-                </td>
+        <table width="100%" class="pt-3" cellspacing="0" cellpadding="3" >
+            <tr class="cabecera " align="center">
+                <td colspan="6" class="border border-dark" style="font-size:13px;"><strong>Datos Generales</strong></td>
             </tr>
-    </table>
-  </div>
+                <tr>
+                    <td align="left" class="border border-dark" style="font-size:12px;">
+                        <strong>
+                        Fecha:
+                        </strong>
+                    </td>
+                    <td colspan="" class="border border-dark text-center" style="font-size:12px;">
+                        {{$pdfi->fecha}}
+                    </td>
 
-  <table width="100%" class="pt-1" cellspacing="0" cellpadding="3">
-    <tr class="cabecera " align="center">
-        <td colspan="4" class="border border-dark" style="font-size:13px;"><strong>Criterio de calificación</strong></td>
-    </tr>
-    <tr>
-        <td class="border border-dark" align="center" style="font-size:12px;">
-            Cumple(2)
-        </td>
-        <td colspan="2" align="center" class="border border-dark" style="font-size:12px;">
-            Cumple parcialmente(1)
-        </td>
-        <td align="center" class="border border-dark" style="font-size:12px;">
-            No cumple(0)
-        </td>
+                    <td align="left" class="border border-dark" style="font-size:12px;">
+                        <strong>
+                       Almacén:
+                    </strong>
+                    </td>
+                    <td colspan="" class="border border-dark text-center" style="font-size:12px;">
+                        {{$pdfi->almacen}}
+                    </td>
 
-    </tr>
-    <tr>
-        <td class="border border-dark" style="font-size:12px;" align="center">
-            El items evaluado se cumple en su totalidad. No se evidencia incumplimiento alguno (0 hallazgos).
-        </td>
-        <td colspan="2" class="border border-dark" style="font-size:12px;" align="center">
-            El items evaluado se cumple de forma parcial y se evidencia un bajo número de incumplimientos (1-2 hallazgos).
-        </td>
-        <td class="border border-dark" style="font-size:12px;" align="center">
-            El items evaluado se cumple de forma parcial y se evidencia un número significativo de incumplimientos (3 hallazgos o más).
-        </td>
-    </tr>
-    <tr class="cabecera " align="center">
-        <td colspan="4" class="border border-dark" style="font-size:14px;"><strong>Calificación</strong></td>
-    </tr>
-    <tr>
-        <td class="border border-dark" style="font-size:12px;" align="center">
-           0-70% Deficinte
-        </td>
-        <td class="border border-dark" style="font-size:12px;" align="center">
-            70-85%  Aceptable
-        </td>
-        <td class="border border-dark" style="font-size:12px;" align="center">
-            85 - 95% Bueno
-        </td>
-        <td class="border border-dark" style="font-size:12px;" align="center">
-            Muy Bueno 95 - 100%
-        </td>
-    </tr>
-  </table>
+                    <td align="left" class="border border-dark" style="font-size:12px;">
+                        <strong>
+                       Evaluador:
+                        </strong>
+                    </td>
+                    <td colspan="" class="border border-dark text-center" style="font-size:12px;">
+                        {{$pdfi->evaluador}}
+                    </td>
+                </tr>
+        </table>
+      </div>
+
+      <table width="100%" class="pt-1" cellspacing="0" cellpadding="3">
+        <tr class="cabecera " align="center">
+            <td colspan="4" class="border border-dark" style="font-size:13px;"><strong>Criterio de calificación</strong></td>
+        </tr>
+        <tr>
+            <td class="border border-dark" align="center" style="font-size:12px;">
+                Cumple(2)
+            </td>
+            <td colspan="2" align="center" class="border border-dark" style="font-size:12px;">
+                Cumple parcialmente(1)
+            </td>
+            <td align="center" class="border border-dark" style="font-size:12px;">
+                No cumple(0)
+            </td>
+
+        </tr>
+        <tr>
+            <td class="border border-dark" style="font-size:12px;" align="center">
+                El items evaluado se cumple en su totalidad. No se evidencia incumplimiento alguno (0 hallazgos).
+            </td>
+            <td colspan="2" class="border border-dark" style="font-size:12px;" align="center">
+                El items evaluado se cumple de forma parcial y se evidencia un bajo número de incumplimientos (1-2 hallazgos).
+            </td>
+            <td class="border border-dark" style="font-size:12px;" align="center">
+                El items evaluado se cumple de forma parcial y se evidencia un número significativo de incumplimientos (3 hallazgos o más).
+            </td>
+        </tr>
+        <tr class="cabecera " align="center">
+            <td colspan="4" class="border border-dark" style="font-size:14px;"><strong>Calificación</strong></td>
+        </tr>
+        <tr>
+            <td class="border border-dark" style="font-size:12px;" align="center">
+               0-70% Deficinte
+            </td>
+            <td class="border border-dark" style="font-size:12px;" align="center">
+                70-85%  Aceptable
+            </td>
+            <td class="border border-dark" style="font-size:12px;" align="center">
+                85 - 95% Bueno
+            </td>
+            <td class="border border-dark" style="font-size:12px;" align="center">
+                Muy Bueno 95 - 100%
+            </td>
+        </tr>
+      </table>
+   @if ($pdfi->almacen == "Bodega Uio")
+
+
+            <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
+                <tr align="center">
+                    <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor3))
+
+                    @else
+                    {{$supervisor3}}
+                    @endif </strong></td>
+                </tr>
+                <tr>
+                    <td class="border border-start-0" style="font-size:12px;">
+                        1. Uniforme completo y limpio (ambiente seco, refrigerado o congelado).
+                    </td>
+                    <td class="border border-start-0" style="font-size:12px;">
+                        4. No usa accesorios (reloj, cadena, anillo, pulsera, etc.).
+                    </td>
+                    <td class="border border-end-0" style="font-size:12px;">
+                        6. Uñas cortas y limpias (aplica para personal operativo).
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border border-start-0" style="font-size:12px;">
+                        2. Botas limpias, en buen estado y cordones atados.
+                    </td>
+                    <td class="border border-start-0" style="font-size:12px;">
+                        3. Casco limpio, en buen estado y con nombre y apellido.
+                    </td>
+                    <td class="border border-end-0" style="font-size:12px;">
+                        5. Cabello Correctamente peinado (mantiene buen aspecto).
+                    </td>
+                </tr>
+
+              </table>
+              <table width="100%" class="border border-dark" cellspacing="0" cellpadding="3">
+                <thead>
+                <tr class="cabecera" align="center">
+                    <td></td>
+                    <td colspan="7" class="border border-dark" style="font-size:13px;"><strong>Parámetros de evaluación</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> Personal </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 1 </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 2 </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 3 </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 4 </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 5 </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 6 </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> % de cumplimiento</strong> </td>
+                    <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de incumplimientos </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de acciones tomadas </strong></td>
+                    <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Verificación de cierre de acciones</strong></td>
+                </tr>
+             </thead>
+             <tbody>
+                @foreach ($pdfl as $Hgs)
+                    <tr>
+                        <td class="border border-dark" style="font-size:12px;">
+                          {{$Hgs->Personal->name}} {{$Hgs->Personal->lastname}}
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            @switch($Hgs->uc)
+                                @case(2)
+                                   Cumple
+                                    @break
+                                  @case(1)
+                                      Cumple Parcialmente
+                                  @break
+                                  @case(0)
+                                      No cumple
+                                  @break
+                                @default
+
+                            @endswitch
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            @switch($Hgs->bl)
+                                @case(2)
+                                   Cumple
+                                    @break
+                                  @case(1)
+                                      Cumple Parcialmente
+                                  @break
+                                  @case(0)
+                                      No cumple
+                                  @break
+                                @default
+
+                            @endswitch
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            @switch($Hgs->cl)
+                                @case(2)
+                                   Cumple
+                                    @break
+                                  @case(1)
+                                      Cumple Parcialmente
+                                  @break
+                                  @case(0)
+                                      No cumple
+                                  @break
+                                @default
+
+                            @endswitch
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            @switch($Hgs->cp)
+                                @case(2)
+                                   Cumple
+                                    @break
+                                  @case(1)
+                                      Cumple Parcialmente
+                                  @break
+                                  @case(0)
+                                      No cumple
+                                  @break
+                                @default
+
+                            @endswitch
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            @switch($Hgs->na)
+                                @case(2)
+                                   Cumple
+                                    @break
+                                  @case(1)
+                                      Cumple Parcialmente
+                                  @break
+                                  @case(0)
+                                      No cumple
+                                  @break
+                                @default
+
+                            @endswitch
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            @switch($Hgs->ul)
+                                @case(2)
+                                   Cumple
+                                    @break
+                                  @case(1)
+                                      Cumple Parcialmente
+                                  @break
+                                  @case(0)
+                                      No cumple
+                                  @break
+                                @default
+
+                            @endswitch
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: <?php $Porcentaje = $Hgs->uc + $Hgs->bl + $Hgs->cl + $Hgs->cp + $Hgs->na + $Hgs->ul;
+                                    echo (round($Porcentaje*100/12))?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@php
+                                    $Porcentaje = $Hgs->uc + $Hgs->bl + $Hgs->cl + $Hgs->cp + $Hgs->na + $Hgs->ul;
+                                     echo (round($Porcentaje*100/12))
+                                    @endphp %</div>
+                              </div>
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:10px;">
+                            {{$Hgs->uc1}} {{$Hgs->bl1}} {{$Hgs->cl1}}  {{$Hgs->cp1}} {{$Hgs->na1}} {{$Hgs->ul1}}
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
+                        </td>
+                        <td align="center" class="border border-dark" style="font-size:12px;">
+                            {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+                            @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
+
+                           @else
+                               @if (empty($Hgs->uc3) && empty($Hgs->bl3) && empty($Hgs->cl3) && empty($Hgs->cp3) && empty($Hgs->na3) && empty($Hgs->ul3))
+                                   Abierto
+                               @else
+                                   Cerrado
+                               @endif
+                           @endif
+                         </td>
+                    </tr>
+                @endforeach
+             </tbody>
+              </table>
+
+
+              <div class="page-break"></div>
+
+              <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
+                  <tr  align="center">
+                      <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor4))
+
+                      @else
+                      {{$supervisor4}}
+                      @endif </strong></td>
+                  </tr>
+                  <tr>
+                      <td class="border border-start-0" style="font-size:12px;">
+                          1. Uniforme completo y limpio (ambiente seco, refrigerado o congelado).
+                      </td>
+                      <td class="border border-start-0" style="font-size:12px;">
+                          4. No usa accesorios (reloj, cadena, anillo, pulsera, etc.).
+                      </td>
+                      <td class="border border-end-0" style="font-size:12px;">
+                          6. Uñas cortas y limpias (aplica para personal operativo).
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="border border-start-0" style="font-size:12px;">
+                          2. Botas limpias, en buen estado y cordones atados.
+                      </td>
+                      <td class="border border-start-0" style="font-size:12px;">
+                          3. Casco limpio, en buen estado y con nombre y apellido.
+                      </td>
+                      <td class="border border-end-0" style="font-size:12px;">
+                          5. Cabello Correctamente peinado (mantiene buen aspecto).
+                      </td>
+                  </tr>
+
+                </table>
+                <table width="100%" class="border border-dark" cellspacing="0" cellpadding="3">
+                  <thead>
+                  <tr class="cabecera" align="center">
+                      <td></td>
+                      <td colspan="7" class="border border-dark" style="font-size:13px;"><strong>Parámetros de evaluación</strong></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+
+                  <tr>
+                      <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> Personal </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 1 </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 2 </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 3 </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 4 </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 5 </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 6 </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> % de cumplimiento</strong> </td>
+                      <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de incumplimientos </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de acciones tomadas </strong></td>
+                      <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Verificación de cierre de acciones</strong></td>
+                  </tr>
+               </thead>
+               <tbody>
+                  @foreach ($pdfj as $Hgs)
+                      <tr>
+                          <td class="border border-dark" style="font-size:12px;">
+                            {{$Hgs->Personal->name}} {{$Hgs->Personal->lastname}}
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              @switch($Hgs->uc)
+                                  @case(2)
+                                     Cumple
+                                      @break
+                                    @case(1)
+                                        Cumple Parcialmente
+                                    @break
+                                    @case(0)
+                                        No cumple
+                                    @break
+                                  @default
+
+                              @endswitch
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              @switch($Hgs->bl)
+                                  @case(2)
+                                     Cumple
+                                      @break
+                                    @case(1)
+                                        Cumple Parcialmente
+                                    @break
+                                    @case(0)
+                                        No cumple
+                                    @break
+                                  @default
+
+                              @endswitch
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              @switch($Hgs->cl)
+                                  @case(2)
+                                     Cumple
+                                      @break
+                                    @case(1)
+                                        Cumple Parcialmente
+                                    @break
+                                    @case(0)
+                                        No cumple
+                                    @break
+                                  @default
+
+                              @endswitch
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              @switch($Hgs->cp)
+                                  @case(2)
+                                     Cumple
+                                      @break
+                                    @case(1)
+                                        Cumple Parcialmente
+                                    @break
+                                    @case(0)
+                                        No cumple
+                                    @break
+                                  @default
+
+                              @endswitch
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              @switch($Hgs->na)
+                                  @case(2)
+                                     Cumple
+                                      @break
+                                    @case(1)
+                                        Cumple Parcialmente
+                                    @break
+                                    @case(0)
+                                        No cumple
+                                    @break
+                                  @default
+
+                              @endswitch
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              @switch($Hgs->ul)
+                                  @case(2)
+                                     Cumple
+                                      @break
+                                    @case(1)
+                                        Cumple Parcialmente
+                                    @break
+                                    @case(0)
+                                        No cumple
+                                    @break
+                                  @default
+
+                              @endswitch
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              <div class="progress">
+                                  <div class="progress-bar bg-success" role="progressbar" style="width: <?php $Porcentaje = $Hgs->uc + $Hgs->bl + $Hgs->cl + $Hgs->cp + $Hgs->na + $Hgs->ul;
+                                      echo (round($Porcentaje*100/12))?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@php
+                                      $Porcentaje = $Hgs->uc + $Hgs->bl + $Hgs->cl + $Hgs->cp + $Hgs->na + $Hgs->ul;
+                                       echo (round($Porcentaje*100/12))
+                                      @endphp %</div>
+                                </div>
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:10px;">
+                              {{$Hgs->uc1}} {{$Hgs->bl1}} {{$Hgs->cl1}}  {{$Hgs->cp1}} {{$Hgs->na1}} {{$Hgs->ul1}}
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
+                          </td>
+                          <td align="center" class="border border-dark" style="font-size:12px;">
+                              {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+                              @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
+
+                             @else
+                                 @if (empty($Hgs->uc3) && empty($Hgs->bl3) && empty($Hgs->cl3) && empty($Hgs->cp3) && empty($Hgs->na3) && empty($Hgs->ul3))
+                                     Abierto
+                                 @else
+                                     Cerrado
+                                 @endif
+                             @endif
+                           </td>
+                      </tr>
+                  @endforeach
+               </tbody>
+                </table>
+
+
+                <div class="page-break"></div>
+
+                <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
+                    <tr align="center">
+                        <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: {{$supervisor5}}
+                         </strong></td>
+                    </tr>
+                    <tr>
+                        <td class="border border-start-0" style="font-size:12px;">
+                            1. Uniforme completo y limpio (ambiente seco, refrigerado o congelado).
+                        </td>
+                        <td class="border border-start-0" style="font-size:12px;">
+                            4. No usa accesorios (reloj, cadena, anillo, pulsera, etc.).
+                        </td>
+                        <td class="border border-end-0" style="font-size:12px;">
+                            6. Uñas cortas y limpias (aplica para personal operativo).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-start-0" style="font-size:12px;">
+                            2. Botas limpias, en buen estado y cordones atados.
+                        </td>
+                        <td class="border border-start-0" style="font-size:12px;">
+                            3. Casco limpio, en buen estado y con nombre y apellido.
+                        </td>
+                        <td class="border border-end-0" style="font-size:12px;">
+                            5. Cabello Correctamente peinado (mantiene buen aspecto).
+                        </td>
+                    </tr>
+
+                  </table>
+                  <table width="100%" class="border border-dark" cellspacing="0" cellpadding="3">
+                    <thead>
+                    <tr class="cabecera" align="center">
+                        <td></td>
+                        <td colspan="7" class="border border-dark" style="font-size:13px;"><strong>Parámetros de evaluación</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> Personal </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 1 </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 2 </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 3 </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 4 </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 5 </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 6 </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> % de cumplimiento</strong> </td>
+                        <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de incumplimientos </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de acciones tomadas </strong></td>
+                        <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Verificación de cierre de acciones</strong></td>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    @foreach ($pdff as $Hgs6)
+                        <tr>
+                            <td class="border border-dark" style="font-size:12px;">
+                             {{$Hgs6->Personal->name}} {{$Hgs6->Personal->lastname}}
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                @switch($Hgs6->uc)
+                                    @case(2)
+                                       Cumple
+                                        @break
+                                      @case(1)
+                                          Cumple Parcialmente
+                                      @break
+                                      @case(0)
+                                          No cumple
+                                      @break
+                                    @default
+
+                                @endswitch
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                @switch($Hgs6->bl)
+                                    @case(2)
+                                       Cumple
+                                        @break
+                                      @case(1)
+                                          Cumple Parcialmente
+                                      @break
+                                      @case(0)
+                                          No cumple
+                                      @break
+                                    @default
+
+                                @endswitch
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                @switch($Hgs6->cl)
+                                    @case(2)
+                                       Cumple
+                                        @break
+                                      @case(1)
+                                          Cumple Parcialmente
+                                      @break
+                                      @case(0)
+                                          No cumple
+                                      @break
+                                    @default
+
+                                @endswitch
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                @switch($Hgs6->cp)
+                                    @case(2)
+                                       Cumple
+                                        @break
+                                      @case(1)
+                                          Cumple Parcialmente
+                                      @break
+                                      @case(0)
+                                          No cumple
+                                      @break
+                                    @default
+
+                                @endswitch
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                @switch($Hgs6->na)
+                                    @case(2)
+                                       Cumple
+                                        @break
+                                      @case(1)
+                                          Cumple Parcialmente
+                                      @break
+                                      @case(0)
+                                          No cumple
+                                      @break
+                                    @default
+
+                                @endswitch
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                @switch($Hgs6->ul)
+                                    @case(2)
+                                       Cumple
+                                        @break
+                                      @case(1)
+                                          Cumple Parcialmente
+                                      @break
+                                      @case(0)
+                                          No cumple
+                                      @break
+                                    @default
+
+                                @endswitch
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: <?php $Porcentaje = $Hgs6->uc + $Hgs6->bl + $Hgs6->cl + $Hgs6->cp + $Hgs6->na + $Hgs6->ul;
+                                        echo (round($Porcentaje*100/12))?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@php
+                                        $Porcentaje = $Hgs6->uc + $Hgs6->bl + $Hgs6->cl + $Hgs6->cp + $Hgs6->na + $Hgs6->ul;
+                                         echo (round($Porcentaje*100/12))
+                                        @endphp %</div>
+                                  </div>
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:10px;">
+                                {{$Hgs6->uc1}} {{$Hgs6->bl1}} {{$Hgs6->cl1}}  {{$Hgs6->cp1}} {{$Hgs6->na1}} {{$Hgs6->ul1}}
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+                                {{$Hgs6->uc2}} {{$Hgs6->bl2}} {{$Hgs6->cl2}}  {{$Hgs6->cp2}} {{$Hgs6->na2}} {{$Hgs6->ul2}}
+                            </td>
+                            <td align="center" class="border border-dark" style="font-size:12px;">
+
+                                @if (empty($Hgs6->uc2) && empty($Hgs6->bl2) && empty($Hgs6->cl2) && empty($Hgs6->cp2) && empty($Hgs6->na2) && empty($Hgs6->ul2))
+
+                               @else
+                                   @if (empty($Hgs6->uc3) && empty($Hgs6->bl3) && empty($Hgs6->cl3) && empty($Hgs6->cp3) && empty($Hgs6->na3) && empty($Hgs6->ul3))
+                                       Abierto
+                                   @else
+                                       Cerrado
+                                   @endif
+                               @endif
+                             </td>
+                        </tr>
+                    @endforeach
+                 </tbody>
+                  </table>
+
+                  <div class="page-break"></div>
+
+                  <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
+                      <tr align="center">
+                          <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor6))
+
+                          @else
+                          {{$supervisor6}}
+                          @endif </strong></td>
+                      </tr>
+                      <tr>
+                          <td class="border border-start-0" style="font-size:12px;">
+                              1. Uniforme completo y limpio (ambiente seco, refrigerado o congelado).
+                          </td>
+                          <td class="border border-start-0" style="font-size:12px;">
+                              4. No usa accesorios (reloj, cadena, anillo, pulsera, etc.).
+                          </td>
+                          <td class="border border-end-0" style="font-size:12px;">
+                              6. Uñas cortas y limpias (aplica para personal operativo).
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="border border-start-0" style="font-size:12px;">
+                              2. Botas limpias, en buen estado y cordones atados.
+                          </td>
+                          <td class="border border-start-0" style="font-size:12px;">
+                              3. Casco limpio, en buen estado y con nombre y apellido.
+                          </td>
+                          <td class="border border-end-0" style="font-size:12px;">
+                              5. Cabello Correctamente peinado (mantiene buen aspecto).
+                          </td>
+                      </tr>
+
+                    </table>
+                    <table width="100%" class="border border-dark" cellspacing="0" cellpadding="3">
+                      <thead>
+                      <tr class="cabecera" align="center">
+                          <td></td>
+                          <td colspan="7" class="border border-dark" style="font-size:13px;"><strong>Parámetros de evaluación</strong></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+
+                      <tr>
+                          <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> Personal </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 1 </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 2 </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 3 </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 4 </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 5 </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 6 </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> % de cumplimiento</strong> </td>
+                          <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de incumplimientos </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de acciones tomadas </strong></td>
+                          <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Verificación de cierre de acciones</strong></td>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      @foreach ($pdfe as $Hgs)
+                          <tr>
+                              <td class="border border-dark" style="font-size:12px;">
+                                {{$Hgs->Personal->name}} {{$Hgs->Personal->lastname}}
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  @switch($Hgs->uc)
+                                      @case(2)
+                                         Cumple
+                                          @break
+                                        @case(1)
+                                            Cumple Parcialmente
+                                        @break
+                                        @case(0)
+                                            No cumple
+                                        @break
+                                      @default
+
+                                  @endswitch
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  @switch($Hgs->bl)
+                                      @case(2)
+                                         Cumple
+                                          @break
+                                        @case(1)
+                                            Cumple Parcialmente
+                                        @break
+                                        @case(0)
+                                            No cumple
+                                        @break
+                                      @default
+
+                                  @endswitch
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  @switch($Hgs->cl)
+                                      @case(2)
+                                         Cumple
+                                          @break
+                                        @case(1)
+                                            Cumple Parcialmente
+                                        @break
+                                        @case(0)
+                                            No cumple
+                                        @break
+                                      @default
+
+                                  @endswitch
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  @switch($Hgs->cp)
+                                      @case(2)
+                                         Cumple
+                                          @break
+                                        @case(1)
+                                            Cumple Parcialmente
+                                        @break
+                                        @case(0)
+                                            No cumple
+                                        @break
+                                      @default
+
+                                  @endswitch
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  @switch($Hgs->na)
+                                      @case(2)
+                                         Cumple
+                                          @break
+                                        @case(1)
+                                            Cumple Parcialmente
+                                        @break
+                                        @case(0)
+                                            No cumple
+                                        @break
+                                      @default
+
+                                  @endswitch
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  @switch($Hgs->ul)
+                                      @case(2)
+                                         Cumple
+                                          @break
+                                        @case(1)
+                                            Cumple Parcialmente
+                                        @break
+                                        @case(0)
+                                            No cumple
+                                        @break
+                                      @default
+
+                                  @endswitch
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  <div class="progress">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: <?php $Porcentaje = $Hgs->uc + $Hgs->bl + $Hgs->cl + $Hgs->cp + $Hgs->na + $Hgs->ul;
+                                          echo (round($Porcentaje*100/12))?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@php
+                                          $Porcentaje = $Hgs->uc + $Hgs->bl + $Hgs->cl + $Hgs->cp + $Hgs->na + $Hgs->ul;
+                                           echo (round($Porcentaje*100/12))
+                                          @endphp %</div>
+                                    </div>
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:10px;">
+                                  {{$Hgs->uc1}} {{$Hgs->bl1}} {{$Hgs->cl1}}  {{$Hgs->cp1}} {{$Hgs->na1}} {{$Hgs->ul1}}
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
+                              </td>
+                              <td align="center" class="border border-dark" style="font-size:12px;">
+                                  {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+                                  @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
+
+                                 @else
+                                     @if (empty($Hgs->uc3) && empty($Hgs->bl3) && empty($Hgs->cl3) && empty($Hgs->cp3) && empty($Hgs->na3) && empty($Hgs->ul3))
+                                         Abierto
+                                     @else
+                                         Cerrado
+                                     @endif
+                                 @endif
+                               </td>
+                          </tr>
+                      @endforeach
+                   </tbody>
+                    </table>
+
+                      <div class="page-break"></div>
+
+                      <p class="text-center" style="font-size:20px;"><strong>Resultado de la Verificación de practicas de higienes por supervisor </strong></p>
+
+                      <table align="center" class="text-center border border-dark">
+                        @foreach ($final as $Finales)
+                       <tr>
+                       <td class="border border-dark" style="font-size:11px; width: 250px">
+                              {{$Finales[1]}}
+                       </td>
+                         <td class="border border-dark" style="width: 250px">
+                            <div class="progress">
+                               <div class="progress-bar" role="progressbar" style="width: {{round($Finales[0])}}%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
+                                 {{round($Finales[0])}} %</div>
+                             </div>
+                       </td>
+                   </tr>
+                   @endforeach
+                </table>
+
+
+                @else
+
+                 {{-- Parte de almacen Guayaquil --}}
 
   <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-    <tr class="cabecera " align="center">
-        <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: {{$supervisor}}</strong></td>
+    <tr align="center">
+        <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor))
+
+            @else
+            {{$supervisor}}
+            @endif </strong></td></strong></td>
     </tr>
     <tr>
         <td class="border border-start-0" style="font-size:12px;">
@@ -370,26 +1142,6 @@
                        Cerrado
                    @endif
                @endif
-
-                {{-- @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
-
-              @else
-                  @if (empty($Hgs->uc3) && empty($Hgs->bl3) && empty($Hgs->cl3) && empty($Hgs->cp3) && empty($Hgs->na3) && empty($Hgs->ul3))
-
-                  @else
-                      Cerrado
-                  @endif
-              @endif
-
-              @if (!empty($Hgs->uc2) || !empty($Hgs->bl2) || !empty($Hgs->cl2) || !empty($Hgs->cp2) || !empty($Hgs->na2) || !empty($Hgs->ul2))
-
-              @else
-                  @if (empty($Hgs->uc3) && empty($Hgs->bl3) && empty($Hgs->cl3) && empty($Hgs->cp3) && empty($Hgs->na3) && empty($Hgs->ul3))
-                     Abierto
-                  @else
-
-                  @endif
-              @endif --}}
              </td>
         </tr>
     @endforeach
@@ -399,8 +1151,8 @@
   <div class="page-break"></div>
 
 <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-    <tr class="cabecera " align="center">
-        <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: @if (empty($supervisor1))
+    <tr align="center">
+        <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor1))
 
         @else
         {{$supervisor1}}
@@ -576,25 +1328,6 @@
                        Cerrado
                    @endif
                @endif
-                {{-- @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
-
-              @else
-                  @if (empty($Hgs->uc3) && empty($Hgs->bl3) && empty($Hgs->cl3) && empty($Hgs->cp3) && empty($Hgs->na3) && empty($Hgs->ul3))
-
-                  @else
-                      Lleno
-                  @endif
-              @endif
-
-              @if (!empty($Hgs->uc2) || !empty($Hgs->bl2) || !empty($Hgs->cl2) || !empty($Hgs->cp2) || !empty($Hgs->na2) || !empty($Hgs->ul2))
-
-              @else
-                  @if (empty($Hgs->uc3) && empty($Hgs->bl3) && empty($Hgs->cl3) && empty($Hgs->cp3) && empty($Hgs->na3) && empty($Hgs->ul3))
-
-                  @else
-                      Abierto
-                  @endif
-              @endif --}}
 
              </td>
         </tr>
@@ -606,8 +1339,8 @@
   <div class="page-break"></div>
 
   <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-      <tr class="cabecera " align="center">
-          <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: @if (empty($supervisor2))
+      <tr  align="center">
+          <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor2))
 
           @else
           {{$supervisor2}}
@@ -793,8 +1526,8 @@
     <div class="page-break"></div>
 
     <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-        <tr class="cabecera " align="center">
-            <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: @if (empty($supervisor3))
+        <tr align="center">
+            <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor3))
 
             @else
             {{$supervisor3}}
@@ -980,8 +1713,8 @@
       <div class="page-break"></div>
 
       <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-          <tr class="cabecera " align="center">
-              <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: @if (empty($supervisor4))
+          <tr  align="center">
+              <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor4))
 
               @else
               {{$supervisor4}}
@@ -1167,8 +1900,8 @@
         <div class="page-break"></div>
 
         <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-            <tr class="cabecera " align="center">
-                <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: {{$supervisor5}}
+            <tr align="center">
+                <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: {{$supervisor5}}
                  </strong></td>
             </tr>
             <tr>
@@ -1350,8 +2083,8 @@
           <div class="page-break"></div>
 
           <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-              <tr class="cabecera " align="center">
-                  <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: @if (empty($supervisor6))
+              <tr align="center">
+                  <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor6))
 
                   @else
                   {{$supervisor6}}
@@ -1537,8 +2270,8 @@
             <div class="page-break"></div>
 
             <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
-                <tr class="cabecera " align="center">
-                    <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Responsable: @if (empty($supervisor7))
+                <tr align="center">
+                    <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor7))
 
                     @else
                     {{$supervisor7}}
@@ -1740,20 +2473,9 @@
            </tr>
            @endforeach
         </table>
+        @endif
 
 
-    {{-- <div class="page-break"></div>
-    <h1 class="text-center pt-3">3. Registro Fotográfico</h1>
-       <hr class="grosor"/>
-       <div class="container pt-5">
-        <div class="row">
-            <div class="col-md-12 mb-2"> --}}
-       {{-- @foreach ($pdf->imagenes as $imagen )
-            <img src="{{public_path('storage/evidencia_muestreo/').trim($imagen->name)}}" width="200" height="200" class="img-thumbnail ">
-       @endforeach --}}
-    {{-- </div>
-    </div>
-   </div> --}}
 
 
 

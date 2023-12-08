@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('practica_proveedores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('infor_practicahg_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained();
+            $table->string('supervisor');
             $table->string('proveedor');
             $table->string('personal');
             $table->integer('puc');

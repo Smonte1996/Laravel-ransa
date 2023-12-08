@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('almacen');
             $table->date('fecha');
             $table->integer('estado');
+            $table->string('solicitud');
+            $table->string('Proveedor');
             $table->timestamps();
         });
     }

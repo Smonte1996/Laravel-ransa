@@ -156,6 +156,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
           Route::get('Practicas-higiene-Proveedor', FormularioHigieneProveedor::class)->name('practica.Proveedor');
           Route::get('Higienes/Pdf-Proveedors/{id}',[PracticahgController::class, 'PdfProveedor'])->name('pdf.Proveedor');
           Route::get('Practicas-higiene-Maquila', FormularioHigieneMaquila::class)->name('Practica.Maquila');
+          Route::get('Praticas/pdf-Maquila/{id}', [PracticahgController::class, 'PdfMaquila'])->name('Pdf.maquila');
+
+          // rutas para el update de las tareas tanto como maquila y proveedor y personal ransa.
+          Route::get('Practicas/tarea/{id}', [PracticahgController::class, 'PersonalRansa'])->name('Tarea.ransa');
+          Route::get('Practicas/Tarea-Maquila/{id}', [PracticahgController::class, 'VistaMaquila'])->name('Tarea.Maquila');
+          Route::put('Confirmar/{id}',[PracticahgController::class, 'ConfirmartaskMaquila'])->name('Tasks.Maquila');
+          Route::put('PersonalRansa/{id}',[PracticahgController::class, 'ConfirmarTarea'])->name('Tareas.Ransas');
 
           //urles para administrar la parte de los estibas.
           Route::resource('Proveedores-estibas', ProvedoresEstibas::class)->except(['show'])->parameters(['Provedor' => 'Proveedores'])->names('Estibas');

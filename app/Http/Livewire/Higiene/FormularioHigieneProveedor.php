@@ -2,11 +2,16 @@
 
 namespace App\Http\Livewire\Higiene;
 
+use App\Mail\notificarProveedor;
 use App\Models\Infor_practicahg;
 use App\Models\Practica_proveedore;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\RequiredIf;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class FormularioHigieneProveedor extends Component
 {
@@ -64,6 +69,16 @@ class FormularioHigieneProveedor extends Component
     ]);
     }
 
+    function CumpleTodo()
+    {
+        $this->puc = 2;
+        $this->pbl = 2;
+        $this->pcl = 2;
+        $this->pcp = 2;
+        $this->pna = 2;
+        $this->pul = 2;
+    }
+
     public function render()
     {
         return view('livewire.higiene.formulario-higiene-proveedor');
@@ -76,28 +91,28 @@ class FormularioHigieneProveedor extends Component
             'Personal' => 'required',
             'Proveedor' => 'required',
             'puc' => 'required',
-            'puc1'=>  'required_if:uc,0,1|nullable',
-            'puc2'=>  'required_if:uc,0,1|nullable',
+            'puc1'=>  'required_if:puc,0,1|nullable',
+            'puc2'=>  'required_if:puc,0,1|nullable',
             'pbl'=> 'required',
-            'pbl1'=>  'required_if:bl,0,1|nullable',
-            'pbl2'=>  'required_if:bl,0,1|nullable',
+            'pbl1'=>  'required_if:pbl,0,1|nullable',
+            'pbl2'=>  'required_if:pbl,0,1|nullable',
             'pcl'=> 'required',
-            'pcl1'=>  'required_if:cl,0,1|nullable',
-            'pcl2'=>  'required_if:cl,0,1|nullable',
+            'pcl1'=>  'required_if:pcl,0,1|nullable',
+            'pcl2'=>  'required_if:pcl,0,1|nullable',
             'pna'=> 'required',
-            'pna1'=> 'required_if:na,0,1|nullable',
-            'pna2'=> 'required_if:na,0,1|nullable',
+            'pna1'=> 'required_if:pna,0,1|nullable',
+            'pna2'=> 'required_if:pna,0,1|nullable',
             'pcp'=> 'required',
-            'pcp1'=> 'required_if:cp,0,1|nullable',
-            'pcp2'=> 'required_if:cp,0,1|nullable',
+            'pcp1'=> 'required_if:pcp,0,1|nullable',
+            'pcp2'=> 'required_if:pcp,0,1|nullable',
             'pul' => 'required',
-            'pul1'=> 'required_if:ul,0,1|nullable',
-            'pul2'=> 'required_if:ul,0,1|nullable',
+            'pul1'=> 'required_if:pul,0,1|nullable',
+            'pul2'=> 'required_if:pul,0,1|nullable',
            ]);
 
         $this->Practica_Provvedor = Practica_proveedore::create([
             'infor_practicahg_id' => $this->Infor_ph->id,
-            'user_id'=> $dato2['Supervisores'],
+            'supervisor'=> $dato2['Supervisores'],
             'personal' => $dato2['Personal'],
             'proveedor' => $dato2['Proveedor'],
             'puc' => $dato2['puc' ],
@@ -120,13 +135,13 @@ class FormularioHigieneProveedor extends Component
             'pul2'=> $dato2['pul2'],
         ]);
 
-        $this->reset('Proveedor','Personal','puc','puc1','puc2','pbl','pbl1','pbl2','pcl','pcl1','pcl2','pna','pna1','pna2','pcp','pcp1','pcp2','pul','pul1','pul2');
+        $this->reset('Personal','puc','puc1','puc2','pbl','pbl1','pbl2','pcl','pcl1','pcl2','pna','pna1','pna2','pcp','pcp1','pcp2','pul','pul1','pul2');
     }
 
     function mount()
     {
         $this->supervisores = User::with('Employee')->whereHas('Employee', function($query){
-            $query->WhereIn('position_id', [5,6])->where('warehouse_id', 1);
+            $query->WhereIn('position_id', [5])->where('warehouse_id', 1);
          })->get();
     }
 
@@ -136,8 +151,32 @@ class FormularioHigieneProveedor extends Component
        ->where('id', $this->Infor_ph->id)
        ->update(['estado' => 2]);
 
-       return redirect()->route('adm.practica.Proveedor');
 
-       $this->emit('alert','Muchas gracias, nuestro equipo ya recibió tu solicitud. Pronto te enviaremos una respuesta');
+       $this->emit('alert','Muchas gracias, el correo te llegara en cual quiere momento.');
+
+       if ($this->Infor_ph->almacen == "Bodega Gye") {
+        switch ($this->Practica_Provvedor->Supervisores) {
+            case 'Magaly Marlene Guzman':
+                Mail::to('stevemontenegro_9@hotmail.com')->send(new notificarProveedor($this->Infor_ph));
+                break;
+
+            default:
+               Mail::to('stevenmontorres96@gmail.com')->send(new notificarProveedor($this->Infor_ph));
+                break;
+          }
+       } else {
+        switch ($this->Practica_Provvedor->Supervisores) {
+            case 'Lenin Jeison Itaz Chango':
+                Mail::to('smontenegrot@ransa.net')->send(new notificarProveedor($this->Infor_ph));
+                break;
+
+            default:
+                Mail::to(['smontenegrot@ransa.net', 'stevenmontorres96@gmail.com'])->send(new notificarProveedor($this->Infor_ph));
+                break;
+          }
+       }
+
+        return redirect()->route('adm.practica.Proveedor');
+
     }
 }

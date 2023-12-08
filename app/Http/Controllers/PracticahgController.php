@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Infor_practicahg;
+use App\Models\Practica_maquila;
 use App\Models\Practica_proveedore;
 use App\Models\Practicahg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class PracticahgController extends Controller
@@ -19,6 +21,19 @@ class PracticahgController extends Controller
     {
         //
         $Higienes = Infor_practicahg::all()->where('estado', 2);
+        // $tarea1 = "";
+        // foreach ($Higienes as $prueba) {
+        //          if (empty($prueba->Proveedor->puc1) && empty($prueba->Proveedor->pbl1) && empty($prueba->Proveedor->pcl1) && empty($prueba->Proveedor->pcp1) && empty($prueba->Proveedor->pna1) && empty($prueba->Proveedor->pul1)) {
+        //             # code...
+        //          }else{
+        //             if (empty($prueba->Proveedor->puc3) && empty($prueba->Proveedor->pbl3) && empty($prueba->Proveedor->pcl3) && empty($prueba->Proveedor->pcp3) && empty($prueba->Proveedor->pna3) && empty($prueba->Proveedor->pul3)) {
+        //                 $tarea1 = "Tarea Abierta";
+        //             } else {
+        //                 $tarea1 = "Tarea cerrada";
+        //             }
+        //          }
+        // }
+        //dd($Higienes->Proveedor);
         return view('modulos.Practicas_hg.index', compact('Higienes'));
     }
 
@@ -33,57 +48,58 @@ class PracticahgController extends Controller
         // se hace la consulta a la la tabla base para seguir con el id del registro con la relaciones enloque.
         $pdfi = Infor_practicahg::find($id);
 
-        // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
+        if ($pdfi->almacen == "Bodega Gye") {
+            // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdfm = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 9)->get();
         foreach ($pdfm as $pdfa) {
-             $supervisor2 = $pdfa->Supervisores->name;
+             $supervisor2 = $pdfa->Supervisor->name;
         }
         // dd($pdfm->Personal->name);
         // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdfl = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 11)->get();
         foreach ($pdfl as $pdfa) {
-             $supervisor3 = $pdfa->Supervisores->name;
+             $supervisor3 = $pdfa->Supervisor->name;
         }
         // dd($pdfl);
 
         // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdfj = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 14)->get();
         foreach ($pdfj as $pdfa) {
-             $supervisor4 = $pdfa->Supervisores->name;
+             $supervisor4 = $pdfa->Supervisor->name;
         }
         //dd($pdfj);
         // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdff = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 13)->get();
         foreach ($pdff as $pdfsam) {
-             $supervisor5 = $pdfsam->Supervisores->name;
+             $supervisor5 = $pdfsam->Supervisor->name;
         }
         // dd($pdfa);
 
         // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdfe = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 15)->get();
         foreach ($pdfe as $pdfa) {
-             $supervisor6 = $pdfa->Supervisores->name;
+             $supervisor6 = $pdfa->Supervisor->name;
         }
         // dd($pdfe);
 
         // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdfg = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 16)->get();
         foreach ($pdfg as $pdfa) {
-             $supervisor7 = $pdfa->Supervisores->name;
+             $supervisor7 = $pdfa->Supervisor->name;
         }
         // dd($pdfg);
 
         // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdf = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 10)->get();
         foreach ($pdf as $pdfa) {
-             $supervisor = $pdfa->Supervisores->name;
+             $supervisor = $pdfa->Supervisor->name;
         }
         // dd($pdf);
 
         // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
         $pdf2 = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 12)->get();
         foreach ($pdf2 as $pdfa) {
-             $supervisor1 = $pdfa->Supervisores->name;
+             $supervisor1 = $pdfa->Supervisor->name;
         }
 
         function Total_supervisores($id)
@@ -142,6 +158,91 @@ class PracticahgController extends Controller
         $pdfs = PDF::loadView('pdf.Practicashg', compact('pdf', 'pdf2','pdfm', 'pdfl', 'pdfj','pdff', 'pdfe','pdfg', 'supervisor', 'supervisor7', 'supervisor5', 'supervisor6', 'supervisor4', 'supervisor3', 'supervisor2', 'supervisor1' ,'pdfi', 'final'));
 
         return $pdfs->setPaper('a4','landscape')->stream(strtoupper("Practicas Higiene $pdfi->fecha.pdf"));
+
+        } else {
+
+              // esta parte del codigo pasa los datos para Quito.
+             // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
+        // $pdfm = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 18)->get();
+        // foreach ($pdfm as $pdfa) {
+        //      $supervisor2Uio = $pdfa->Supervisores->name;
+        // }
+        //  dd($supervisor2Uio);
+        // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
+        $pdfl = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 19)->get();
+        foreach ($pdfl as $pdfa) {
+             $supervisor3 = $pdfa->Supervisores->name;
+        }
+        // dd($pdfl);
+
+        // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
+        $pdfj = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 20)->get();
+        foreach ($pdfj as $pdfa) {
+             $supervisor4 = $pdfa->Supervisor->name;
+        }
+        //dd($pdfj);
+        // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
+        $pdff = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 21)->get();
+        foreach ($pdff as $pdfsam) {
+             $supervisor5 = $pdfsam->Supervisor->name;
+        }
+        // dd($pdfa);
+
+        // se esat haciendo a la consulta para filtrar con el id del supervisor y a la ves se consulta el nombre del supervisor.
+        $pdfe = Practicahg::where('infor_practicahg_id', $id)->Where('user_id', 22)->get();
+        foreach ($pdfe as $pdfa) {
+             $supervisor6 = $pdfa->Supervisor->name;
+        }
+        // dd($pdfe);
+
+
+        function Total_supervisores($id)
+        {
+          $Porcentajes = [0,0,0,0];
+          $Porcentajes2 = [0,0,0,0];
+          $Puntacion = Practicahg::where('infor_practicahg_id', $id)->WhereIn('user_id', [19, 20, 21, 22])->get();
+
+          foreach ($Puntacion as $total) {
+            $totales = $total->uc + $total->bl + $total->cl + $total->cp + $total->na + $total->ul;
+            // $Porcentajes += ($totales*100/12);
+            if ($total->user_id == 19) {
+                $Porcentajes2[0] += 1;
+                $Porcentajes[0] += ($totales*100/12);
+            }if ($total->user_id == 20) {
+                $Porcentajes2[1] += 1;
+                $Porcentajes[1] += ($totales*100/12);
+            }if ($total->user_id == 21) {
+                $Porcentajes2[2] += 1;
+                $Porcentajes[2] += ($totales*100/12);
+            }if ($total->user_id == 22) {
+                $Porcentajes2[3] += 1;
+                $Porcentajes[3] += ($totales*100/12);
+            }
+          }
+
+          for ($i=0; $i <4 ; $i++) {
+            if ($Porcentajes2[$i]>0) {
+             $Porcentajes[$i]/= $Porcentajes2[$i];
+            }
+          }
+
+          return $Porcentajes;
+        }
+
+         $Todos = Total_supervisores($id);
+         $Supervisores = [$supervisor3, $supervisor5, $supervisor4, $supervisor6];
+
+          for ($i=0; $i < count($Todos) ; $i++) {
+            $final[] = [$Todos[$i], $Supervisores[$i]];
+          }
+        //  dd($final);
+
+        $pdfs = PDF::loadView('pdf.Practicashg', compact('pdfl', 'pdfj','pdff', 'pdfe', 'supervisor5', 'supervisor6', 'supervisor4', 'supervisor3','pdfi', 'final'));
+
+        return $pdfs->setPaper('a4','landscape')->stream(strtoupper("Practicas Higiene $pdfi->fecha.pdf"));
+        }
+
+
     }
 
 
@@ -156,56 +257,89 @@ class PracticahgController extends Controller
       // se hace la consulta a la la tabla base para seguir con el id del registro con la relaciones enloque.
       $PDFPROVEEDOR = Infor_practicahg::find($id);
 
-      $PDFRESPONSABLE = Practica_proveedore::where('infor_practicahg_id', $id)->where('user_id', 17)->get();
-      foreach ($PDFRESPONSABLE as $PDFRESPONSABLES) {
-       $nombre  = $PDFRESPONSABLES->Responsable->name;
+      $PDFsupervisor = Practica_proveedore::where('infor_practicahg_id', $id)->get();
+      foreach ($PDFsupervisor as $PDFRESPONSABLES) {
+       $nombre  = $PDFRESPONSABLES->supervisor;
       }
-
-      $PDFRESPONSABLE_ESTIBAS = Practica_proveedore::where('infor_practicahg_id', $id)->where('user_id', 18)->get();
-       foreach ($PDFRESPONSABLE_ESTIBAS as $PDFRESPONSABLE_ESTIBA) {
-        $nombres = $PDFRESPONSABLE_ESTIBA->Responsable->name;
-       }
-
+    //    dd($PDFRESPONSABLE);
        function EvaluacionSupervisores($id)
        {
-        $PORCENTAJE = [0,0];
-        $PORCENTAJE1 = [0,0];
-        $punto = Practica_proveedore::where('infor_practicahg_id', $id)->whereIn('user_id', [17,18])->get();
+        $PORCENTAJE = 0;
+        $punto = Practica_proveedore::where('infor_practicahg_id', $id)->get();
 
         foreach ($punto as $Puntos) {
             $total = $Puntos->puc + $Puntos->pbl + $Puntos->pcl + $Puntos->pcp + $Puntos->pna + $Puntos->pul;
 
-            if ($Puntos->user_id == 17) {
-                $PORCENTAJE1[0] += 1;
-                 $PORCENTAJE[0] += ($total*100/12);
-             }if ($Puntos->user_id == 18) {
-                 $PORCENTAJE1[1] += 1;
-                  $PORCENTAJE[1] += ($total*100/12);
-             }
-        }
-        for ($i=0; $i <2 ; $i++) {
-            if ($PORCENTAJE1[$i]>0) {
-             $PORCENTAJE[$i]/= $PORCENTAJE1[$i];
-            }
-          }
+                  $PORCENTAJE += ($total*100/12);
+                }
+                  if (count($punto)>0) {
+                    $PORCENTAJE/= count($punto);
+                    }
 
           return $PORCENTAJE;
        }
+
        $Procentaje_Total = EvaluacionSupervisores($id);
-       $nombre_Supervisores = [$nombre, $nombres];
 
-       for ($i=0; $i <count($Procentaje_Total) ; $i++) {
-        $ValoresJunto[] = [$Procentaje_Total[$i], $nombre_Supervisores[$i]];
-       }
-        // dd($ValoresJunto);
-
-      $pdfs = PDF::loadView('pdf.PracticasProveedor', compact('PDFPROVEEDOR', 'PDFRESPONSABLE', 'PDFRESPONSABLE_ESTIBAS', 'nombre', 'nombres', 'ValoresJunto'));
+      $pdfs = PDF::loadView('pdf.PracticasProveedor', compact('PDFPROVEEDOR', 'PDFsupervisor', 'nombre', 'Procentaje_Total'));
 
       return $pdfs->setPaper('a4','landscape')->stream(strtoupper("Practicas Higiene $PDFPROVEEDOR->fecha.pdf"));
     }
 
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function PdfMaquila($id)
+    {
+      // se hace la consulta a la la tabla base para seguir con el id del registro con la relaciones enloque.
+      $PDFPROVEEDOR = Infor_practicahg::find($id);
+
+      $PDFresponsable = Practica_maquila::where('infor_practicahg_id', $id)->get();
+
+      foreach ($PDFresponsable as $PDFRESPONSABLES) {
+       $nombre  = $PDFRESPONSABLES->Supervisor;
+      }
+
+
+       function EvaluacionMaquila($id)
+       {
+        $PORCENTAJE = 0;
+        $puntuacion = Practica_maquila::where('infor_practicahg_id', $id)->get();
+
+        foreach ($puntuacion as $Puntos) {
+
+            $total = $Puntos->muc + $Puntos->mbl + $Puntos->mcl + $Puntos->mcp + $Puntos->mna + $Puntos->mul + $Puntos->mnp + $Puntos->mml + $Puntos->mnaa + $Puntos->mub + $Puntos->mcb + $Puntos->mbe + $Puntos->mhg;
+            //varaible concatenada de la consulta de la base.
+            $total1 = $Puntos->muc . $Puntos->mbl . $Puntos->mcl . $Puntos->mcp . $Puntos->mna . $Puntos->mul . $Puntos->mnp . $Puntos->mml . $Puntos->mnaa . $Puntos->mub . $Puntos->mcb . $Puntos->mbe . $Puntos->mhg;
+            //hace un conteo de las cantidades de cero que tengo.
+            // dd($total1);
+            $total2 = substr_count($total1, "0");
+            //  dd($total2);
+            //hago la resta de la cantidad de cero valor de campos.
+            $cantidadFinal = 26-($total2*2);
+            //se saca el porcentaje final.
+                $PORCENTAJE += ($total*100/$cantidadFinal);
+               }
+
+               if (count($puntuacion)>0) {
+                $PORCENTAJE/= count($puntuacion);
+                }
+
+          return $PORCENTAJE;
+       }
+
+       $Valor_total = EvaluacionMaquila($id);
+
+      $pdfs = PDF::loadView('pdf.PracticasMaquila', compact('PDFPROVEEDOR', 'PDFresponsable', 'nombre', 'Valor_total'));
+
+      return $pdfs->setPaper('a4','landscape')->stream(strtoupper("Practicas Higiene Maquila $PDFPROVEEDOR->fecha.pdf"));
+    }
+
+
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -232,10 +366,176 @@ class PracticahgController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Practica_proveedore $practica_proveedore)
     {
-        //
+
     }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function PersonalRansa($id)
+    {
+        $validacion = Infor_practicahg::find($id);
+        // dd();
+         if ($validacion->almacen == "Bodega Gye") {
+            $consulta = Practicahg::where('infor_practicahg_id', $id)->whereIn('user_id', [9,10,11,12,13,14,15,16])->where(function ($query){
+                $query->whereIn('uc', [1,0])
+                ->orWhereIn('bl', [1,0])
+                ->orWhereIn('cl', [1,0])
+                ->orWhereIn('cp', [1,0])
+                ->orWhereIn('na', [1,0])
+                ->orWhereIn('ul', [1,0]);
+                })->get();
+
+            foreach ($consulta as $pdfa) {
+                $super = $pdfa->Supervisor->name;
+           }
+
+           $resultado1 ='';
+
+           foreach ($consulta as $supervisor1) {
+                       //    dd(array($trabajo->id));
+             $resultado1 =$resultado1. ','. $supervisor1->id;
+             $resultado1=ltrim($resultado1,",");
+           }
+         } else {
+            $consulta = Practicahg::where('infor_practicahg_id', $id)->whereIn('user_id', [19, 20, 21, 22])->where(function ($query){
+                $query->whereIn('uc', [1,0])
+                ->orWhereIn('bl', [1,0])
+                ->orWhereIn('cl', [1,0])
+                ->orWhereIn('cp', [1,0])
+                ->orWhereIn('na', [1,0])
+                ->orWhereIn('ul', [1,0]);
+                })->get();
+
+            foreach ($consulta as $pdfa) {
+                $super = $pdfa->Supervisor->name;
+           }
+
+           $resultado1 ='';
+
+           foreach ($consulta as $supervisor1) {
+                       //    dd(array($trabajo->id));
+             $resultado1 =$resultado1. ','. $supervisor1->id;
+             $resultado1=ltrim($resultado1,",");
+           }
+         }
+
+
+       //dd($resultado1);
+
+
+        return view('modulos.Practicas_hg.task1', compact('consulta', 'resultado1'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function ConfirmarTarea(Request $request, $id)
+    {
+        $validar = $request->validate([
+            'checklistRansa' => 'required'
+        ]);
+
+        $vx = explode(",", $id);
+        for ($i=0; $i <count($vx) ; $i++) {
+        $varx=$vx[$i] ;
+        $valores = DB::table('practicahgs')->where('id', $varx)->update(['uc3' => $request->checklistRansa ? now():null,
+                                                                         'bl3' => $request->checklistRansa ? now():null,
+                                                                         'cl3' => $request->checklistRansa ? now():null,
+                                                                         'cp3' => $request->checklistRansa ? now():null,
+                                                                         'na3' => $request->checklistRansa ? now():null,
+                                                                         'ul3' => $request->checklistRansa ? now():null,
+        ]);
+    }
+
+    return redirect()->route('adm.p.h&g.index');
+
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function VistaMaquila($id)
+    {
+          $workin = DB::table('practica_maquilas')->where('infor_practicahg_id', $id)
+          ->where(function ($query){
+          $query->whereIn('muc', [1])
+          ->orWhereIn('mbl', [1])
+          ->orWhereIn('mcl', [1])
+          ->orWhereIn('mcp', [1])
+          ->orWhereIn('mna', [1])
+          ->orWhereIn('mul', [1])
+          ->orWhereIn('mnp', [1])
+          ->orWhereIn('mml', [1])
+          ->orWhereIn('mnaa',[1])
+          ->orWhereIn('mub', [1])
+          ->orWhereIn('mcb', [1])
+          ->orWhereIn('mbe', [1])
+          ->orWhereIn('mhg', [1]);
+          })->get();
+
+         $resultado ='';
+         //dd($workin);
+        foreach ($workin as $trabajo) {
+                    //    dd(array($trabajo->id));
+          $resultado =$resultado. ','. $trabajo->id;
+          $resultado=ltrim($resultado,",");
+        }
+
+
+        return view('modulos.Practicas_hg.task2', compact('workin', 'resultado'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function ConfirmartaskMaquila(Request $request, $id)
+    {
+        $validar = $request->validate([
+            'checklistMaquila' => 'required'
+        ]);
+
+        $vx = explode(",", $id);
+        for ($i=0; $i <count($vx) ; $i++) {
+        $varx=$vx[$i] ;
+
+        $valores = DB::table('practica_maquilas')->where('id', $varx)->update(['muc3' => $request->checklistMaquila ? now():null,
+                                                                                'mbl3' => $request->checklistMaquila ? now():null,
+                                                                                'mcl3' => $request->checklistMaquila ? now():null,
+                                                                                'mcp3' => $request->checklistMaquila ? now():null,
+                                                                                'mna3' => $request->checklistMaquila ? now():null,
+                                                                                'mul3' => $request->checklistMaquila ? now():null,
+                                                                                'mnp3' => $request->checklistMaquila ? now():null,
+                                                                                'mml3' => $request->checklistMaquila ? now():null,
+                                                                                'mnaa3' => $request->checklistMaquila ? now():null,
+                                                                                'mub3' => $request->checklistMaquila ? now():null,
+                                                                                'mcb3' => $request->checklistMaquila ? now():null,
+                                                                                'mbe3' => $request->checklistMaquila ? now():null,
+                                                                                'mhg3' => $request->checklistMaquila ? now():null,
+        ]);
+      }
+
+// dd($valores);
+         return redirect()->route('adm.p.h&g.index');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -245,7 +545,23 @@ class PracticahgController extends Controller
      */
     public function edit($id)
     {
-        //
+         $workin = DB::table('practica_proveedores')->where('infor_practicahg_id', $id)
+         ->where(function ($query){
+         $query->whereIn('puc', [1,0])
+         ->orWhereIn('pbl', [1,0])
+         ->orWhereIn('pcl', [1,0])
+         ->orWhereIn('pcp', [1,0])
+         ->orWhereIn('pna', [1,0])
+         ->orWhereIn('pul', [1,0]);
+         })->get();
+         $resultado ='';
+        // dd($workin);
+        foreach ($workin as $trabajo) {
+                    //    dd(array($trabajo->id));
+          $resultado =$resultado. ','. $trabajo->id;
+          $resultado=ltrim($resultado,",");
+        }
+        return view('modulos.Practicas_hg.task', compact('workin', 'resultado'));
     }
 
     /**
@@ -257,7 +573,25 @@ class PracticahgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validar = $request->validate([
+            'checklist' => 'required'
+        ]);
+
+        $vx = explode(",", $id);
+        for ($i=0; $i <count($vx) ; $i++) {
+        $varx=$vx[$i] ;
+
+        $valores = DB::table('practica_proveedores')->where('id', $varx)->update(['puc3' => $request->checklist ? now():null,
+                                                                                'pbl3' => $request->checklist ? now():null,
+                                                                                'pcl3' => $request->checklist ? now():null,
+                                                                                'pcp3' => $request->checklist ? now():null,
+                                                                                'pna3' => $request->checklist ? now():null,
+                                                                                'pul3' => $request->checklist ? now():null,
+        ]);
+      }
+
+// dd($valores);
+         return redirect()->route('adm.p.h&g.index');
     }
 
     /**

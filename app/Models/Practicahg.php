@@ -39,13 +39,23 @@ class Practicahg extends Model
         'ul3',
     ];
 
-   public function Supervisores()
+   public function Supervisor()
     {
-        return $this->hasOne(User::class, 'id','user_id');
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function Responsable()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 
    public function Personal()
     {
        return $this->hasOne(Employee::class,'id','employee_id');
+    }
+
+    public function Personales()
+    {
+        return $this->hasMany(Employee::class, 'employee_id');
     }
 }

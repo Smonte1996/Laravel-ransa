@@ -27,6 +27,8 @@
                         </div>
                         <div class="x_content">
                             <div class="row">
+                                <div x-data="{textselect:'null'}">
+
                                     <div class="col-sm-12 col-md-4">
                                     <div class="mb-3">
                                     <label for="fecha" class="form-label fs-6 text-lead-500">Fecha:</label>
@@ -54,10 +56,11 @@
                                     </div>
                                 </div>
 
+
                                 <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="Almacen" class="form-label fs-6 text-lead-500">Almacén:</label>
-                                <select class="form-control rounded @error('Almacen') is-invalid @enderror" wire:model.defer="Almacen" name="Almacen" id="Almacen" required>
+                                <select class="form-control rounded @error('Almacen') is-invalid @enderror" wire:model.defer="Almacen" name="Almacen" id="Almacen" required x-model="textselect">
                                    <option value="">Seleccionar una opción </option>
                                    <option value="Bodega Gye">Bodega Gye</option>
                                    <option value="Bodega Uio">Bodega Uio</option>
@@ -69,27 +72,66 @@
                                 </div>
                             </div>
 
-                            @if (!is_null($this->Infor_ph))
-                            <div class="col-sm-12 col-md-4">
-                                <div class="mb-3">
-                                <label for="Supervisores" class="form-label fs-6 text-lead-500">Supervisor:</label>
-                                <select class="form-control rounded @error('Supervisores') is-invalid @enderror" wire:model.defer="Supervisores" name="Supervisores" id="Supervisores" required>
-                                    <option value="">Seleccionar una opción</option>
-                                    @foreach ($supervisores as $supervisor )
-                                       <option value="{{$supervisor->id}}">{{$supervisor->name}} {{$supervisor->lastname}}</option>
-                                   @endforeach
-                                </select>
-                                    @error('Supervisores')
-                                        <small id="SupervisoreshelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                    @enderror
+                              @if (!is_null($this->Infor_ph))
+                              <div x-data="{provedoruio:'null'}">
+                                <div class="col-sm-12 col-md-4" x-show="textselect == 'Bodega Uio'">
+                                    <div class="mb-3">
+                                    <label for="Proveedor" class="form-label fs-6 text-lead-500">Proveedor:</label>
+                                    <select class="form-control rounded Selector @error('Proveedor') is-invalid @enderror" wire:model.defer="Proveedor" name="Proveedor" id="Personal" required x-model="provedoruio">
+                                        <option value="">Seleccionar una opción</option>
+                                        <option value="Estibadores A.B">Estibadores A.B</option>
+                                        <option value="Logiktel">Logiktel</option>
+                                        <option value="Rubasa">Rubasa</option>
+                                    </select>
+                                        @error('Proveedor')
+                                            <small id="ProveedorhelpId"
+                                                class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-sm-12 col-md-4" x-show="textselect == 'Bodega Uio'&& provedoruio == 'Estibas Torres'">
+                                    <div class="mb-3">
+                                    <label for="Supervisores" class="form-label fs-6 text-lead-500">Supervisor:</label>
+                                    <select class="form-control rounded @error('Supervisores') is-invalid @enderror" wire:model.defer="Supervisores" name="Supervisores" id="Supervisores" required>
+                                        <option value="">Seleccionar una opción</option>
+                                        {{-- @foreach ($supervisores as $supervisor )
+                                           <option value="{{$supervisor->id}}">{{$supervisor->name}} {{$supervisor->lastname}}</option>
+                                       @endforeach --}}
+                                       <option value="Lenin Jeison Itaz Chango">Lenin Jeison Itaz Chango</option>
+                                    </select>
+                                        @error('Supervisores')
+                                            <small id="SupervisoreshelpId"
+                                                class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
 
-                            <div class="col-sm-12 col-md-4">
+                                <div class="col-sm-12 col-md-4" x-show="textselect == 'Bodega Uio' && provedoruio == 'Rubasa'">
+                                    <div class="mb-3">
+                                    <label for="Supervisores" class="form-label fs-6 text-lead-500">Supervisor:</label>
+                                    <select class="form-control rounded @error('Supervisores') is-invalid @enderror" wire:model.defer="Supervisores" name="Supervisores" id="Supervisores" required>
+                                        <option value="">Seleccionar una opción</option>
+                                        {{-- @foreach ($supervisores as $supervisor )
+                                           <option value="{{$supervisor->id}}">{{$supervisor->name}} {{$supervisor->lastname}}</option>
+                                       @endforeach --}}
+                                       <option value="Byron Villacreces">Byron Villacreces</option>
+                                       {{-- <option value="Abel Montes">Abel Montes</option> --}}
+                                    </select>
+                                        @error('Supervisores')
+                                            <small id="SupervisoreshelpId"
+                                                class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                              </div>
+
+                            {{-- </div>--}}
+                            <div x-data="{proveedor:'null'}">
+
+                            <div class="col-sm-12 col-md-4" x-show="textselect== 'Bodega Gye'">
                                 <div class="mb-3">
                                 <label for="Proveedor" class="form-label fs-6 text-lead-500">Proveedor:</label>
-                                <select class="form-control rounded Selector @error('Proveedor') is-invalid @enderror" wire:model.defer="Proveedor" name="Proveedor" id="Personal" required>
+                                <select class="form-control rounded Selector @error('Proveedor') is-invalid @enderror" wire:model.defer="Proveedor" name="Proveedor" id="Personal" required x-model="proveedor">
                                     <option value="">Seleccionar una opción</option>
                                     <option value="Estibas Torres">Estibas Torres</option>
                                     <option value="Rubasa">Rubasa</option>
@@ -100,6 +142,40 @@
                                 </select>
                                     @error('Proveedor')
                                         <small id="ProveedorhelpId"
+                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4" x-show="proveedor == 'Estibas Torres'  || proveedor == 'Estibas JQ' || proveedor == 'Estibas Padilla' || proveedor == 'Estibas Choez' || proveedor == 'Estibas Estigua'">
+                                <div class="mb-3">
+                                <label for="Supervisores" class="form-label fs-6 text-lead-500">Supervisor:</label>
+                                <select class="form-control rounded @error('Supervisores') is-invalid @enderror" wire:model.defer="Supervisores" name="Supervisores" id="Supervisores" required>
+                                    <option value="">Seleccionar una opción</option>
+                                    {{-- @foreach ($supervisores as $supervisor )
+                                       <option value="{{$supervisor->id}}">{{$supervisor->name}} {{$supervisor->lastname}}</option>
+                                   @endforeach --}}
+                                   <option value="Magaly Marlene Guzman">Magaly Marlene Guzman</option>
+                                </select>
+                                    @error('Supervisores')
+                                        <small id="SupervisoreshelpId"
+                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4" x-show="proveedor== 'Rubasa'">
+                                <div class="mb-3">
+                                <label for="Supervisores" class="form-label fs-6 text-lead-500">Supervisor:</label>
+                                <select class="form-control rounded @error('Supervisores') is-invalid @enderror" wire:model.defer="Supervisores" name="Supervisores" id="Supervisores" required>
+                                    <option value="">Seleccionar una opción</option>
+                                    {{-- @foreach ($supervisores as $supervisor )
+                                       <option value="{{$supervisor->id}}">{{$supervisor->name}} {{$supervisor->lastname}}</option>
+                                   @endforeach --}}
+                                   {{-- <option value="Byron Villacreces">Byron Villacreces</option> --}}
+                                   <option value="Abel Montes">Abel Montes</option>
+                                </select>
+                                    @error('Supervisores')
+                                        <small id="SupervisoreshelpId"
                                             class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -117,6 +193,8 @@
                                 </div>
                             </div>
 
+                            </div>
+                        </div>
                              @else
 
                             <div class="col-sm-12 col-md-4 pb-3">
@@ -125,7 +203,14 @@
                                     <button class="btn btn-success" wire:click='GuardarInfor'> Empezar </button>
                                 </div>
                             </div>
-                            @endif
+                         @endif
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 pb-0 d-flex justify-content-end">
+                            <div class="pt-0">
+                            <label for="almacen" class="form-label"></label>
+                                <button class="btn btn-success" wire:click.prevent='CumpleTodo'> Cumple Todo</button>
+                            </div>
                         </div>
 
                         <fieldset class="border border-2 rounded-2">
@@ -133,9 +218,9 @@
                                 <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Puntos a Evaluar</legend>
                         <div class="row pt-4">
 
-                            <div x-data="{
+                            {{-- <div x-data="{
                                 textselect:'null'
-                                }">
+                                }"> --}}
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
 
@@ -145,7 +230,7 @@
 
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control @error('puc') is-invalid @enderror" wire:model.defer="puc" name="" id="uc" x-model="textselect" required>
+                                    <select class="form-control @error('puc') is-invalid @enderror" wire:model.defer="puc" name="" id="uc" required>
                                         <option value="null">Seleccionar una opción</option>
                                          @if (!is_null($this->Infor_ph))
                                         <option value="2">Cumple</option>
@@ -158,14 +243,14 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-3"  x-show="textselect== 1 || textselect == 0">
+                               <div class="col-sm-12 col-md-3" >
                                 <div class="mb-3">
-                                    <input type="text" class="form-control rounded @error('puc1') is-invalid @enderror" wire:model.defer="puc1" placeholder='Detalle de incumplimientos'>
+                                    <input type="text" class="form-control rounded @error('puc1') is-invalid @enderror" wire:model.defer="puc1" placeholder='Detalle del incumplimientos'>
 
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2" x-show="textselect== 1 || textselect == 0">
+                                <div class="col-sm-12 col-md-2">
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded @error('puc2') is-invalid @enderror" wire:model.defer="puc2" placeholder="Detalle de acciones tomadas">
 
@@ -181,11 +266,11 @@
                                             @enderror
                                        </div>
                                         </div> --}}
-                               </div>
+                               {{-- </div>
 
                                <div x-data="{
                                 textselect: 'null'
-                                }">
+                                }"> --}}
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="almacen" class="form-label text-dark">Botas limpias, en buen estado y cordones atados.</label>
@@ -194,7 +279,7 @@
 
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control @error('pbl') is-invalid @enderror" wire:model.defer="pbl" name="" id="" x-model="textselect" required>
+                                    <select class="form-control @error('pbl') is-invalid @enderror" wire:model.defer="pbl" name="" id="" required>
                                         <option value="null">Seleccionar una opción</option>
                                          @if (!is_null($this->Infor_ph))
                                         <option value="2">Cumple</option>
@@ -208,14 +293,14 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-3"  x-show="textselect== 1 || textselect == 0" >
+                               <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control rounded @error('pbl1') is-invalid @enderror" wire:model.defer="pbl1" placeholder='Detalle de incumplimientos'>
+                                    <input type="text" class="form-control rounded @error('pbl1') is-invalid @enderror" wire:model.defer="pbl1" placeholder='Detalle del incumplimientos'>
 
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2"  x-show="textselect== 1 || textselect == 0">
+                                <div class="col-sm-12 col-md-2" >
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded @error('pbl2') is-invalid @enderror" wire:model.defer="pbl2" placeholder="Detalle de acciones tomadas">
                                    </div>
@@ -230,11 +315,11 @@
                                            @enderror
                                        </div>
                                         </div> --}}
-                               </div>
+                               {{-- </div>
 
                                <div x-data="{
                                 textselect: 'null'
-                                }">
+                                }"> --}}
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="almacen" class="form-label text-dark">Casco limpio, en buen estado y con nombre y apellido.</label>
@@ -243,7 +328,7 @@
 
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control @error('pbl') is-invalid @enderror" wire:model.defer="pcl" name="" id="" x-model="textselect" required>
+                                    <select class="form-control @error('pbl') is-invalid @enderror" wire:model.defer="pcl" name="" id="" required>
                                         <option value="null">Seleccionar una opción</option>
                                         @if (!is_null($this->Infor_ph))
                                         <option value="2">Cumple</option>
@@ -256,13 +341,13 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-3"  x-show="textselect == 1 || textselect == 0" >
+                               <div class="col-sm-12 col-md-3" >
                                 <div class="mb-3">
-                                    <input type="text" class="form-control rounded @error('pcl1') is-invalid @enderror" wire:model.defer="pcl1" placeholder='Detalle de incumplimientos'>
+                                    <input type="text" class="form-control rounded @error('pcl1') is-invalid @enderror" wire:model.defer="pcl1" placeholder='Detalle del incumplimientos'>
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2"  x-show="textselect == 1 || textselect == 0">
+                                <div class="col-sm-12 col-md-2">
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded @error('pcl2') is-invalid @enderror" wire:model.defer="pcl2" placeholder="Detalle de acciones tomadas">
                                    </div>
@@ -273,11 +358,11 @@
                                             <input type="date" class="form-control rounded" wire:model.defer="cl3">
                                        </div>
                                         </div> --}}
-                               </div>
+                               {{-- </div>
 
                                <div x-data="{
                                 textselect: 'null'
-                                }">
+                                }"> --}}
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="almacen" class="form-label text-dark">No usa accesorios (reloj, cadena, anillo, pulsera, etc.).</label>
@@ -286,7 +371,7 @@
 
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control @error('pna') is-invalid @enderror" wire:model.defer="pna" name="" id="pna" x-model="textselect" required>
+                                    <select class="form-control @error('pna') is-invalid @enderror" wire:model.defer="pna" name="" id="pna" required>
                                         <option value="null">Seleccionar una opción</option>
                                          @if (!is_null($this->Infor_ph))
                                         <option value="2">Cumple</option>
@@ -300,13 +385,13 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-3"  x-show="textselect == 1 || textselect == 0">
+                               <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control rounded @error('pna1') is-invalid @enderror" wire:model.defer="pna1" placeholder='Detalle de incumplimientos'>
+                                    <input type="text" class="form-control rounded @error('pna1') is-invalid @enderror" wire:model.defer="pna1" placeholder='Detalle del incumplimientos'>
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2"  x-show="textselect == 1 || textselect == 0" >
+                                <div class="col-sm-12 col-md-2" >
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded @error('pna2') is-invalid @enderror" id="pna2" wire:model.defer="pna2" placeholder="Detalle de acciones tomadas">
                                    </div>
@@ -317,11 +402,11 @@
                                             <input type="date" class="form-control rounded" wire:model.defer="na3">
                                        </div>
                                         </div> --}}
-                               </div>
+                               {{-- </div>
 
                                <div x-data="{
                                 textselect: 'null'
-                                }">
+                                }"> --}}
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="almacen" class="form-label text-dark">Cabello Correctamente peinado (mantiene buen aspecto).</label>
@@ -330,7 +415,7 @@
 
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control @error('pcp') is-invalid @enderror" wire:model.defer="pcp" name="pcp" id="pcp" x-model="textselect" required>
+                                    <select class="form-control @error('pcp') is-invalid @enderror" wire:model.defer="pcp" name="pcp" id="pcp"  required>
                                         <option value="null">Seleccionar una opción</option>
                                          @if (!is_null($this->Infor_ph))
                                         <option value="2">Cumple</option>
@@ -343,13 +428,13 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-3" x-show="textselect == 1 || textselect == 0">
+                               <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control rounded @error('pcp1') is-invalid @enderror"  wire:model.defer="pcp1" placeholder='Detalle de incumplimientos'>
+                                    <input type="text" class="form-control rounded @error('pcp1') is-invalid @enderror"  wire:model.defer="pcp1" placeholder='Detalle del incumplimientos'>
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2"  x-show="textselect == 1 || textselect == 0">
+                                <div class="col-sm-12 col-md-2" >
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded @error('pcp2') is-invalid @enderror" wire:model.defer="pcp2" placeholder="Detalle de acciones tomadas">
                                    </div>
@@ -360,11 +445,11 @@
                                             <input type="date" class="form-control rounded" wire:model.defer="cp3">
                                        </div>
                                         </div> --}}
-                               </div>
+                               {{-- </div>
 
                                <div x-data="{
                                 textselect: 'null'
-                                }">
+                                }"> --}}
                             <div class="col-sm-12 col-md-4">
                                 <div class="mb-3">
                                 <label for="almacen" class="form-label text-dark">Uñas cortas y limpias (aplica para personal operativo).</label>
@@ -373,7 +458,7 @@
 
                                <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <select class="form-control @error('pul') is-invalid @enderror" wire:model.defer="pul" name="pul" id="pul" x-model="textselect" required>
+                                    <select class="form-control @error('pul') is-invalid @enderror" wire:model.defer="pul" name="pul" id="pul" required>
                                         <option value="null">Seleccionar una opción</option>
                                          @if (!is_null($this->Infor_ph))
                                         <option value="2">Cumple</option>
@@ -386,30 +471,24 @@
                             </div>
                                </div>
 
-                               <div class="col-sm-12 col-md-3"  x-show="textselect == 1 || textselect == 0">
+                               <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control rounded @error('pul1') is-invalid @enderror" wire:model.defer="pul1" placeholder='Detalle de incumplimientos'>
+                                    <input type="text" class="form-control rounded @error('pul1') is-invalid @enderror" wire:model.defer="pul1" placeholder='Detalle del incumplimientos'>
                                </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-2"  x-show="textselect == 1 || textselect == 0" >
+                                <div class="col-sm-12 col-md-2" >
                                     <div class="mb-3">
                                         <input type="text" class="form-control rounded @error('pul2') is-invalid @enderror" wire:model.defer="pul2" placeholder="Detalle de acciones tomadas">
                                    </div>
                                     </div>
-
-                                    {{-- <div class="col-sm-12 col-md-2"  x-show="textselect == 1 || textselect == 0">
-                                        <div class="mb-3">
-                                            <input type="date" class="form-control rounded" wire:model.defer="ul3">
-                                       </div>
-                                        </div> --}}
 
                                </div>
                             </fieldset>
                             <div class="pt-4 text-center">
                                  <button class="btn btn-primary" wire:click='GuardarProveedor()'>Guardar</button>
                                 @if (!is_null($this->Practica_Provvedor))
-                                <button class="btn btn-danger" wire:click='Enviar'>Enviar</button>
+                                <button class="btn btn-danger" wire:loading.attr='disabled' wire:click='Enviar' wire:target='Enviar' class="disabled:opacity-60">Enviar</button>
                                 @else
 
                                 @endif
@@ -423,23 +502,18 @@
     </div>
    </div>
   @push('scripts')
-    {{--<script>
-        Livewire.on('select2', function() {
-            $('.Selector').on('change', function(e){
-                @this.set('Personal', e.target.value);
-            });
-            $(".Selector").select2();
-           });
-    </script> --}}
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   Livewire.on('alert', function(message){
-    Swal.fire(
-      'Gracias',
-       message,
-      'success'
-    )
-  })
+    Swal.fire({
+     position: "center",
+     title:'¡Gracias!',
+     icon:'success',
+     text: message,
+     showConfirmButton: false,
+     timer: 1500
+    })
+  });
 </script>
    @endpush
 </div>

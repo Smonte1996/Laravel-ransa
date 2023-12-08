@@ -45,6 +45,8 @@ class FormularioHigiene extends Component
     public  $ul3;
     public $Infor_ph;
     public $Practicashg;
+    public $personalUIO;
+    public $supervisoresUio;
 
     protected $rules =[
         'fecha'=> 'required',
@@ -71,9 +73,19 @@ class FormularioHigiene extends Component
        ->where('id', $this->Infor_ph->id)
        ->update(['estado' => 2]);
 
-        $this->emit('alert','Muchas gracias, nuestro equipo ya recibió tu solicitud. Pronto te enviaremos una respuesta');
+       $this->emit('alert','Muchas gracias, el correo te llegara en cual quiere momento.');
 
-       return redirect()->back();
+    //  switch ($this->Infor_ph->almacen) {
+    //     case 'Bodega Uio':
+    //         # code...
+    //         break;
+
+    //     default:
+    //         # code...
+    //         break;
+    //  }
+
+       return redirect()->route('adm.practica.higiene');
     }
 
      function ValidacionPH()
@@ -134,26 +146,45 @@ class FormularioHigiene extends Component
 
     function mount()
     {
-        $this->personal = Employee::where('warehouse_id', 1)->whereIn('position_id', [3,4])->get();
-        $this->supervisores = User::with('Employee')->whereHas('Employee', function($query){
-            $query->WhereIn('position_id', [3])->where('warehouse_id', 1);
-         })->get();
+            $this->supervisoresUio = User::with('Employee')->whereHas('Employee', function($query){
+                $query->WhereIn('position_id', [3])->where('warehouse_id', 2);
+                 })->get();
+            $this->personalUIO = Employee::where('warehouse_id', 2)->whereIn('position_id', [4])->get();
+
+            $this->supervisores = User::with('Employee')->whereHas('Employee', function($query){
+                $query->WhereIn('position_id', [3])->where('warehouse_id', 1);
+                })->get();
+            $this->personal = Employee::where('warehouse_id', 1)->whereIn('position_id', [3,4])->get();
+
     }
 
     public function render()
     {
 
         if (isset($this->Practicashg->id)){
-            $excepto = Practicahg::where('infor_practicahg_id', $this->Infor_ph->id)->get();
+            if ($this->Infor_ph->almacen == "Bodega Gye") {
+                $excepto = Practicahg::where('infor_practicahg_id', $this->Infor_ph->id)->get();
            foreach ($excepto as $exceptos) {
              $consultas[] = $exceptos->employee_id;
             }
 
            $consulta = $consultas;
 
-           $this->personal = DB::table('employees')->whereNotIn('id', $consulta)->get();
-         }
+           $this->personal = DB::table('employees')->where('warehouse_id', 1)->whereIn('position_id', [3,4])->whereNotIn('id', $consulta)->get();
 
+            }if($this->Infor_ph->almacen == "Bodega Uio"){
+
+            $exceptoUio = Practicahg::where('infor_practicahg_id', $this->Infor_ph->id)->get();
+            foreach ($exceptoUio as $exceptos) {
+              $consultas[] = $exceptos->employee_id;
+             }
+
+            $consultar = $consultas;
+
+            $this->personalUIO = DB::table('employees')->where('warehouse_id', 2)->whereNotIn('id', $consultar)->get();
+
+         }
+        }
          $this->emit('select2');
 
         return view('livewire.higiene.formulario-higiene');

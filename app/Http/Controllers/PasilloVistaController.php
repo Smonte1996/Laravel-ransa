@@ -134,7 +134,7 @@ class PasilloVistaController extends Controller
             foreach ($supervioresF as $superisore) {
                 $bodegafria[] = Bodega_fria($id, $superisore);
             }
-             dd($bodegafria);
+            //  dd($bodegafria);
      // Funcion de para calcular todo los valores de bodega reefer
         function Bodegareefer($id, $nombre):float{
             $Porcentaje_total = 0;

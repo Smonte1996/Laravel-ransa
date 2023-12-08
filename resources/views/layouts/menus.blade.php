@@ -68,9 +68,9 @@
                             @can('adm.clients.index')
                                 <li><a href="{{ route('adm.clients.index') }}">Clientes</a></li>
                             @endcan
-                            @can('adm.suppliers.index')
+                            {{-- @can('adm.suppliers.index') --}}
                                 <li><a href="{{ route('adm.suppliers.index') }}">Proveedores</a></li>
-                            @endcan
+                            {{-- @endcan --}}
 
                             @can('adm.employees.index')
                                 <li><a href="{{ route('adm.employees.index') }}">Empleados</a></li>

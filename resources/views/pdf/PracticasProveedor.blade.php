@@ -237,7 +237,7 @@
     <thead>
     <tr class="cabecera" align="center">
         <td></td>
-        <td colspan="7" class="border border-dark" style="font-size:13px;"><strong>Parámetros de evaluación</strong></td>
+        <td colspan="8" class="border border-dark" style="font-size:13px;"><strong>Parámetros de evaluación</strong></td>
         <td></td>
         <td></td>
         <td></td>
@@ -245,6 +245,7 @@
 
     <tr>
         <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> Personal </strong></td>
+        <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> Proveedor </strong></td>
         <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 1 </strong></td>
         <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 2 </strong></td>
         <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 3 </strong></td>
@@ -258,11 +259,15 @@
     </tr>
  </thead>
  <tbody>
-     @foreach ($PDFRESPONSABLE as $PDFRESPONSABLES)
+
+     @foreach ($PDFsupervisor as $PDFRESPONSABLES)
         <tr>
             <td class="border border-dark" style="font-size:12px;">
               {{$PDFRESPONSABLES->personal}}
             </td>
+            <td class="border border-dark" style="font-size:12px;">
+                {{$PDFRESPONSABLES->proveedor}}
+              </td>
             <td align="center" class="border border-dark" style="font-size:12px;">
                 @switch($PDFRESPONSABLES->puc)
                     @case(2)
@@ -383,9 +388,44 @@
         </tr>
     @endforeach
  </tbody>
+ <tr class="cabecera">
+    <td colspan="12" class="border border-dark text-center" style="font-size:13px;"><strong>Resulatdo de la evaluación</strong></td>
+ </tr>
+ <tr>
+    <td colspan="5" class="border border-dark cabecera text-center" style="font-size:12px;">
+        Número de personas evaluadas
+    </td>
+    <td colspan="2" class="border border-dark text-center" style="font-size:13px;">
+      <strong>{{$PDFsupervisor->count()}}</strong>
+    </td>
+    <td rowspan="2" colspan="3" class="border border-dark cabecera text-center" style="font-size:12px;">
+        Porcentaje de cumplimiento
+     </td>
+     <td rowspan="2" colspan="2" class="border border-dark text-center" style="font-size:12px;">
+      <strong>{{round($Procentaje_Total)}}%</strong>
+     </td>
+ </tr>
+ <tr>
+    <td colspan="5" class="border border-dark cabecera text-center" style="font-size:12px;">
+        Calificación por Porcentaje de Cumplimiento
+    </td>
+    <td colspan="2" class="border border-dark cabecera text-center" style="font-size:13px;">
+    <strong>
+        @if (round($Procentaje_Total) > 95)
+        Muy Bueno
+    @elseif (round($Procentaje_Total) > 85)
+        Bueno
+    @elseif (round($Procentaje_Total) > 70)
+        Aceptable
+    @elseif (round($Procentaje_Total) > 0)
+        Deficiente
+    @endif
+    </strong>
+    </td>
+ </tr>
   </table>
 
-  <div class="page-break"></div>
+  {{-- <div class="page-break"></div>
 
 <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
     <tr class="cabecera " align="center">
@@ -565,9 +605,9 @@
         </tr>
     @endforeach
  </tbody>
-  </table>
+  </table> --}}
 
-              <div class="page-break"></div>
+              {{-- <div class="page-break"></div>
 
               <p class="text-center" style="font-size:20px;"><strong>Resultado de la Verificación de practicas de higienes por supervisor </strong></p>
 
@@ -585,7 +625,7 @@
                </td>
            </tr>
            @endforeach
-        </table>
+        </table> --}}
 
 
     {{-- <div class="page-break"></div>

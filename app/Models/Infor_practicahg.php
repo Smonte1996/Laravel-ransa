@@ -14,16 +14,22 @@ class Infor_practicahg extends Model
         'almacen',
         'evaluador',
         'solicitud',
+        'Proveedor',
         'estado',
     ];
 
      public function Practicashgs()
     {
-        return $this->hasMany(Practicahg::class, 'id' ,'infor_practicahg_id');
+        return $this->hasMany(Practicahg::class,'infor_practicahg_id');
     }
 
     public function Proveedor()
     {
-        return $this->hasMany(Practica_proveedore::class, 'id' ,'infor_practicahg_id');
+        return $this->hasMany(Practica_proveedore::class,'infor_practicahg_id');
+    }
+
+    function Maquila()
+    {
+        return $this->hasMany(Practica_maquila::class, 'infor_practicahg_id');
     }
 }

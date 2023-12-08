@@ -11,7 +11,7 @@ class Practica_proveedore extends Model
 
     protected $fillable = [
         'infor_practicahg_id',
-        'user_id',
+        'supervisor',
         'personal',
         'proveedor',
         'puc',
