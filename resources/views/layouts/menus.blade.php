@@ -162,6 +162,12 @@
                         </ul>
                     </li>
 
+                    <li><a><i class="fa fa-people-carry"></i> Trabajos Maquila <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('adm.Maquila.trabajo')}}">Producción</a></li>
+                        </ul>
+                    </li>
+
                         <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                              {{-- @can() --}}

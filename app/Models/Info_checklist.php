@@ -14,6 +14,7 @@ class Info_checklist extends Model
         'almacen',
         'evaluador',
         'estado',
+        'codigo',
     ];
 
     function check_seco()
@@ -41,8 +42,18 @@ class Info_checklist extends Model
         return $this->hasMany(Chcklt_liri::class, 'info_checklist_id');
     }
 
-    function check_andenes() 
+    function check_andenes()
     {
-       return $this->hasMany(Chcklt_andene::class, 'info_checklist_id');    
+       return $this->hasMany(Chcklt_andene::class, 'info_checklist_id');
+    }
+
+    function Check_Contenedorytuberia()
+     {
+       return $this->hasMany(Chcklt_contenedorytuberia::class, 'info_checklist_id');
+    }
+
+    function Check_Bodegayperimetros()
+    {
+        return $this->hasMany(Chcklt_bodegayperimetro::class, 'info_checklist_id');
     }
 }

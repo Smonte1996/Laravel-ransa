@@ -17,8 +17,8 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 class Investigaciones extends Component
-{    
-    
+{
+
     use WithFileUploads;
 
     public $inputs =[
@@ -29,7 +29,7 @@ class Investigaciones extends Component
          ]
     ];
 
-    public $campos =[ 
+    public $campos =[
         [
             'porqueone' => '',
             'porquetwo' => '',
@@ -56,41 +56,57 @@ class Investigaciones extends Component
     public $solicitude;
     public $empleado;
     public $Empleados;
-    
-    
+
+
     protected $rules = [
      'correccion'=> 'required',
      'causa_raiz' => 'required',
      'evaluacion' => 'required',
      'Responsable' => 'required',
-     'fechaprog' => 'required', 
+     'fechaprog' => 'required',
     //  'acciones' => 'required',
     //  'responsable' => 'required',
     //  'fecha_programada' => 'required',
 
-    ];    
+    ];
 
-    
-  
+
+
     public function mount($solicitud)
-    {   
-        //     $Investigacion = solicitude::find($solicitud);
-        // if (!empty($Investigacion->investigacion->solicitude_id)) {
-        //     abort(401);
-        // } else {
+    {
+
+        $isEncrypted = preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $solicitud);
+        // dd(decrypt($solicitud));
+        if (!is_numeric($solicitud)) {
+            // dd(decrypt($solicitud));
+            $Investigacion = solicitude::find(decrypt($solicitud));
+            // dd($Investigacion);
+        } else {
+            $Investigacion = solicitude::find($solicitud);
+        }
+         if (!empty($Investigacion->investigacion->solicitude_id)) {
+             abort(401);
+         } else {
          $this->empleado = Employee::where('position_id', 3)->get();
-        // $this->empleado = User::with('Employee')->whereHas('Employee', function($query){
-        //    $query->Where('position_id', 3);  
-        // })->get();
+         $this->empleado = User::with('Employee')->whereHas('Employee', function($query){
+            $query->Where('position_id', 3);
+         })->get();
         $this->Empleados = Employee::with('users')->whereIn('position_id', [1,2])->get();
-        $this->clasificacion = $solicitud;
-        $this->solicitude = solicitude::find($solicitud);
-        // }
+        if (!is_numeric($solicitud)) {
+            $this->clasificacion = decrypt($solicitud);
+            $this->solicitude = solicitude::find(decrypt($solicitud));
+            // dd($this->solicitude);
+        } else {
+            $this->clasificacion = $solicitud;
+            $this->solicitude = solicitude::find($solicitud);
+        }
+
+        }
     }
     public function addField()
     {
-        
-        $this->inputs[] = 
+
+        $this->inputs[] =
         [
             'acciones' => '',
              'responsable' => '',
@@ -99,7 +115,7 @@ class Investigaciones extends Component
     }
     public function agregarcampos()
     {
-        $this->campos[] = 
+        $this->campos[] =
         [
             'porqueone' => '',
             'porquetwo' => '',
@@ -125,13 +141,13 @@ class Investigaciones extends Component
     public function QuitarCampos($indexs)
     {
         unset($this->campos[$indexs]);
-        
+
     }
 
     public function removeField($index)
     {
         unset($this->inputs[$index]);
-        
+
     }
 
     public function ResgistroAnalisis()
@@ -142,17 +158,17 @@ class Investigaciones extends Component
         //  $datos['archivo'] = str_replace('public/Reclamos/Analisis/', ' ', $archivo);
 
          $notificacionInvestigacion = Investigacion::create([
-         'solicitude_id' => $this->clasificacion, 
+         'solicitude_id' => $this->clasificacion,
          'employee_id'=> $datos['Responsable'],
          'correccion'=> $datos['correccion'],
          'causa_raiz' =>$datos['causa_raiz'],
          'evaluacion_eficacia' => $datos['evaluacion'],
          'fecha_programada' => $datos['fechaprog'],
         //  'archivo' => $datos['archivo'],
-         
+
         //  'codigo_generado' => $this->clasificacion->codigo_generado,
         ]);
-          foreach ($this->inputs as $input) { 
+          foreach ($this->inputs as $input) {
          $notificacionAcciones = Accion::create([
           'solicitude_id' => $this->clasificacion,
           'name' => $input['acciones'],
@@ -183,16 +199,16 @@ class Investigaciones extends Component
          $affected = DB::table('solicitudes')
          ->where('id', $this->clasificacion)
          ->update(['estado' => 3]);
-
-         
+        //  $this->solicitude->investigacion->Empleados->users[0]->email ,
+        // $accion->Empleado->users[0]->email ,
          Mail::to([$this->solicitude->correo,"stevemontenegro_9@hotmail.com"])->send(New notificacioninvestigacion($this->solicitude));
-         Mail::to([$this->solicitude->investigacion->Empleados->users[0]->email ,"stevemontenegro_9@hotmail.com"])->send(new notificacionresponsableacciones($this->solicitude));
-         foreach ($this->solicitude->acciones as  $accion ) {
-         Mail::to([$accion->Empleado->users[0]->email ,"stevemontenegro_9@hotmail.com"])->send(new notificacionactividades($this->solicitude));
-         }
-        
+         Mail::to(["stevemontenegro_9@hotmail.com"])->send(new notificacionresponsableacciones($this->solicitude));
+        //  foreach ($this->solicitude->acciones as  $accion ) {
+         Mail::to(["stevemontenegro_9@hotmail.com"])->send(new notificacionactividades($this->solicitude));
+        //  }
+
          redirect()->route('adm.dashboard');
-    
+
     }
 
     public function render()

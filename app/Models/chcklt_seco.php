@@ -31,15 +31,22 @@ class chcklt_seco extends Model
         'bso8',
         'bs9',
         'bso9',
+        'bs10',
+        'bso10',
     ];
 
     function Pasillos()
     {
         return $this->belongsTo(Pasillo::class, 'pasillo_id');
     }
-    
+
     function Pasillo(){
        return $this->hasMany(Pasillo::class, 'pasillo_id');
+     }
+
+     function supervisores()
+      {
+        return $this->hasOne(User::class, 'id', 'user_id');
      }
 
     function zona()

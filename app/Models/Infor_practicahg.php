@@ -23,13 +23,24 @@ class Infor_practicahg extends Model
         return $this->hasMany(Practicahg::class,'infor_practicahg_id');
     }
 
+    public function PersonalRansa()
+    {
+        return $this->hasMany(Practicahg::class,'infor_practicahg_id')->orderBy('infor_practicahg_id', 'desc')->limit(1);
+    }
+
     public function Proveedor()
     {
         return $this->hasMany(Practica_proveedore::class,'infor_practicahg_id');
+    }
+
+    public function NombreProveedor()
+    {
+        return $this->hasMany(Practica_proveedore::class,'infor_practicahg_id')->orderBy('infor_practicahg_id', 'desc')->limit(1);
     }
 
     function Maquila()
     {
         return $this->hasMany(Practica_maquila::class, 'infor_practicahg_id');
     }
+
 }

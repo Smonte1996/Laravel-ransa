@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasillo;
+use App\Models\Seco_frio;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PasilloController extends Controller
@@ -16,7 +20,7 @@ class PasilloController extends Controller
     public function index()
     {
         //
-        $Pasillos_R = Pasillo::all();
+        $Pasillos_R = Pasillo::where('warehouse_id', Auth::user()->Employee->warehouse->id)->where('estado', 1)->get();
         return view('adm.Pasillos_checklist.index', compact('Pasillos_R'));
     }
 
@@ -27,9 +31,21 @@ class PasilloController extends Controller
      */
     public function create()
     {
-        //
+      if (Auth::user()->Employee->warehouse->id == 1) {
+        $Zona = Seco_frio::all();
+        $supervisores =  User::with('Employee')->whereHas('Employee', function($query){
+        $query->WhereIn('position_id', [3,1])->where('warehouse_id', 1)->where('departament_id', 1);
+        })->get();
+      } else {
+        $Zona = Seco_frio::whereIn('id', [1,4,7])->get();
+        $supervisores =  User::with('Employee')->whereHas('Employee', function($query){
+            $query->WhereIn('position_id', [3])->where('warehouse_id', 2)->where('departament_id', 1);
+             })->get();
+      }
 
-        
+
+      return view('adm.Pasillos_checklist.create', compact('Zona', 'supervisores'));
+
     }
 
     /**
@@ -40,7 +56,29 @@ class PasilloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+        $validacion = $request->validate([
+         'zona' => 'required',
+         'Pasillos' => 'required',
+         'coordinador' => 'required',
+         'supervisor' => 'required',
+         'responsable' => 'required'
+        ]);
+     $pasillo = Pasillo::create([
+       'seco_frio_id' => $validacion['zona'],
+       'user_id' => $validacion['supervisor'],
+       'warehouse_id' => Auth::user()->Employee->warehouse->id,
+       'coordinador' => $validacion['coordinador'],
+       'name' => $validacion['Pasillos'],
+       'responsables' => $validacion['responsable'],
+       'estado' => 1
+     ]);
+
+    return redirect()->route('adm.check.pasillos.index');
+} catch (Exception $e) {
+    return $Mensaje = $e->getMessage();
+}
+
     }
 
     /**
@@ -63,7 +101,7 @@ class PasilloController extends Controller
     public function edit($pasillos)
     {
         //
-        $pasillo = Pasillo::find($pasillos);
+        $pasillo = Pasillo::find(decrypt($pasillos));
         $supervisor = Pasillo::all();
         return view('adm.Pasillos_checklist.edit', compact('pasillo', 'supervisor'));
     }
@@ -85,13 +123,31 @@ class PasilloController extends Controller
         ]);
 
         $Pasillos = DB::table('pasillos')
-        ->where('id', $pasillo)
+        ->where('id', decrypt($pasillo))
         ->update(['coordinador' => $validated['coordinador'],
                   'user_id' => $validated['supervisor'],
                   'responsables' => $validated['responsable']]);
 
         return redirect()->route('adm.check.pasillos.index');
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     function Eliminar($id) {
+        $Pasillos = DB::table('pasillos')
+        ->where('id', decrypt($id))
+        ->update(['estado' => 0,
+                ]);
+
+        return redirect()->route('adm.check.pasillos.index');
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -101,6 +157,6 @@ class PasilloController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

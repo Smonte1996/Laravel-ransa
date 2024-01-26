@@ -55,10 +55,10 @@ class DissatisfiedServices extends Component
                 $this->responsable  = $this->responsables['responsables'][0]->nombres;
                 $this->responsableEmail  = $this->responsables['responsables'][0]->email;
                 $this->lider = $this->responsables['lider']['nombre'];
-                
+
             }else{
                 $this->reset([ 'responsable','responsableEmail','lider' ]);
-               
+
             }
         }
     }
@@ -96,7 +96,7 @@ class DissatisfiedServices extends Component
     public function save()
     {
         $this->validate();
-        
+
         $notification_service = Notification_service::create([
             'dissatisfaction_service_id' => $this->dissatisfaction_service_id,
             'employee_id' => $this->employee->id,

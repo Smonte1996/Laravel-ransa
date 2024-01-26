@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Higiene;
 
+use App\Mail\notificarRansa;
 use App\Models\Employee;
 use App\Models\Infor_practicahg;
 use App\Models\Practicahg;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class FormularioHigiene extends Component
@@ -47,6 +49,7 @@ class FormularioHigiene extends Component
     public $Practicashg;
     public $personalUIO;
     public $supervisoresUio;
+    public $correos;
 
     protected $rules =[
         'fecha'=> 'required',
@@ -69,21 +72,39 @@ class FormularioHigiene extends Component
 
     function Enviar()
     {
-        $hgs = DB::table('infor_practicahgs')
-       ->where('id', $this->Infor_ph->id)
-       ->update(['estado' => 2]);
+          $hgs = DB::table('infor_practicahgs')
+         ->where('id', $this->Infor_ph->id)
+         ->update(['estado' => 2]);
+
+    //    $correosuper = Practicahg::where('infor_practicahg_id', $this->Infor_ph->id)->get();
+    //      foreach ($correosuper as $supervis) {
+    //         $this->correos[] = $supervis->Supervisor->email;
+    //          }
+        //dd(array_unique($this->correos));
+
+        // Mail::to(array_unique($this->correos))->send(New notificarRansa);
 
        $this->emit('alert','Muchas gracias, el correo te llegara en cual quiere momento.');
 
-    //  switch ($this->Infor_ph->almacen) {
-    //     case 'Bodega Uio':
-    //         # code...
-    //         break;
 
-    //     default:
-    //         # code...
-    //         break;
-    //  }
+       switch ($this->Infor_ph->almacen) {
+          case 'Bodega Uio':
+             $correosuper = Practicahg::where('infor_practicahg_id', $this->Infor_ph->id)->get();
+             foreach ($correosuper as $supervis) {
+                 $this->correos[] = $supervis->Supervisor->email;
+             }
+             Mail::to(array_unique($this->correos))->cc(['smontenegrot@ransa.net'])->send(new notificarRansa($this->Infor_ph));
+              break;
+          default:
+         $correosuper = Practicahg::where('infor_practicahg_id', $this->Infor_ph->id)->get();
+         foreach ($correosuper as $supervis) {
+            $this->correos[] = $supervis->Supervisor->email;
+             }
+         // dd(array_unique($this->correos));
+
+        Mail::to(array_unique($this->correos))->cc(['smontenegrot@ransa.net'])->send(new notificarRansa($this->Infor_ph));
+              break;
+       }
 
        return redirect()->route('adm.practica.higiene');
     }
@@ -138,6 +159,12 @@ class FormularioHigiene extends Component
         'ul2'=> $dato1['ul2'],
         ]);
 
+        if ($dato1['uc'] + $dato1['bl'] + $dato1['cl'] + $dato1['na'] + $dato1['cp'] + $dato1['ul'] < 12) {
+            $hgsr = DB::table('infor_practicahgs')
+            ->where('id', $this->Infor_ph->id)
+            ->update(['Estatus_tarea' => 1]);
+        }
+
         $this->reset('Personal','uc','uc1','uc2','bl','bl1','bl2','cl','cl1','cl2','na','na1','na2','cp','cp1','cp2','ul','ul1','ul2');
 
     }
@@ -146,13 +173,14 @@ class FormularioHigiene extends Component
 
     function mount()
     {
+
             $this->supervisoresUio = User::with('Employee')->whereHas('Employee', function($query){
-                $query->WhereIn('position_id', [3])->where('warehouse_id', 2);
+                $query->WhereIn('position_id', [3])->where('warehouse_id', 2)->where('departament_id', 1);
                  })->get();
             $this->personalUIO = Employee::where('warehouse_id', 2)->whereIn('position_id', [4])->get();
 
             $this->supervisores = User::with('Employee')->whereHas('Employee', function($query){
-                $query->WhereIn('position_id', [3])->where('warehouse_id', 1);
+                $query->WhereIn('position_id', [3,1])->where('warehouse_id', 1)->where('departament_id', 1);
                 })->get();
             $this->personal = Employee::where('warehouse_id', 1)->whereIn('position_id', [3,4])->get();
 
@@ -170,7 +198,7 @@ class FormularioHigiene extends Component
 
            $consulta = $consultas;
 
-           $this->personal = DB::table('employees')->where('warehouse_id', 1)->whereIn('position_id', [3,4])->whereNotIn('id', $consulta)->get();
+           $this->personal = DB::table('employees')->where('warehouse_id', 1)->whereNotIn('id', $consulta)->where(function ($query){$query->whereIn('position_id', [3,4]);})->get();
 
             }if($this->Infor_ph->almacen == "Bodega Uio"){
 
@@ -181,7 +209,7 @@ class FormularioHigiene extends Component
 
             $consultar = $consultas;
 
-            $this->personalUIO = DB::table('employees')->where('warehouse_id', 2)->whereNotIn('id', $consultar)->get();
+            $this->personalUIO = DB::table('employees')->where('warehouse_id', 2)->whereIn('position_id', [4])->whereNotIn('id', $consultar)->get();
 
          }
         }

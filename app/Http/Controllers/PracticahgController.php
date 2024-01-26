@@ -20,19 +20,7 @@ class PracticahgController extends Controller
     public function index()
     {
         //
-        $Higienes = Infor_practicahg::all()->where('estado', 2);
-        // $tarea1 = "";
-        // foreach ($Higienes as $prueba) {
-        //          if (empty($prueba->Proveedor->puc1) && empty($prueba->Proveedor->pbl1) && empty($prueba->Proveedor->pcl1) && empty($prueba->Proveedor->pcp1) && empty($prueba->Proveedor->pna1) && empty($prueba->Proveedor->pul1)) {
-        //             # code...
-        //          }else{
-        //             if (empty($prueba->Proveedor->puc3) && empty($prueba->Proveedor->pbl3) && empty($prueba->Proveedor->pcl3) && empty($prueba->Proveedor->pcp3) && empty($prueba->Proveedor->pna3) && empty($prueba->Proveedor->pul3)) {
-        //                 $tarea1 = "Tarea Abierta";
-        //             } else {
-        //                 $tarea1 = "Tarea cerrada";
-        //             }
-        //          }
-        // }
+        $Higienes = Infor_practicahg::where('estado', 2)->get();
         //dd($Higienes->Proveedor);
         return view('modulos.Practicas_hg.index', compact('Higienes'));
     }
@@ -490,13 +478,14 @@ class PracticahgController extends Controller
          $resultado ='';
          //dd($workin);
         foreach ($workin as $trabajo) {
-                    //    dd(array($trabajo->id));
+          $ids = $trabajo->infor_practicahg_id;
           $resultado =$resultado. ','. $trabajo->id;
           $resultado=ltrim($resultado,",");
+          $resultado = 12;
         }
 
-
-        return view('modulos.Practicas_hg.task2', compact('workin', 'resultado'));
+        //  dd($resultado);
+        return view('modulos.Practicas_hg.task2', compact('workin', 'resultado', 'ids'));
     }
 
     /**
@@ -506,16 +495,18 @@ class PracticahgController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function ConfirmartaskMaquila(Request $request, $id)
+    public function ConfirmartaskMaquila($resultado,$ids, Request $request)
     {
-        $validar = $request->validate([
-            'checklistMaquila' => 'required'
-        ]);
 
-        $vx = explode(",", $id);
+         $validar = $request->validate([
+             'checklistMaquila' => 'required'
+         ]);
+        // dd($resultado);
+        // dd($id);
+        $vx = explode(",", $resultado);
         for ($i=0; $i <count($vx) ; $i++) {
         $varx=$vx[$i] ;
-
+//    dd($varx);
         $valores = DB::table('practica_maquilas')->where('id', $varx)->update(['muc3' => $request->checklistMaquila ? now():null,
                                                                                 'mbl3' => $request->checklistMaquila ? now():null,
                                                                                 'mcl3' => $request->checklistMaquila ? now():null,
@@ -531,6 +522,10 @@ class PracticahgController extends Controller
                                                                                 'mhg3' => $request->checklistMaquila ? now():null,
         ]);
       }
+      $actualizar = DB::table('infor_practicahgs')
+      ->where('id', $ids)
+      ->update(['Estatus_tarea' => 2]);
+
 
 // dd($valores);
          return redirect()->route('adm.p.h&g.index');
@@ -557,11 +552,11 @@ class PracticahgController extends Controller
          $resultado ='';
         // dd($workin);
         foreach ($workin as $trabajo) {
-                    //    dd(array($trabajo->id));
+          $ids = $trabajo->infor_practicahg_id;
           $resultado =$resultado. ','. $trabajo->id;
           $resultado=ltrim($resultado,",");
         }
-        return view('modulos.Practicas_hg.task', compact('workin', 'resultado'));
+        return view('modulos.Practicas_hg.task', compact('workin', 'resultado','ids'));
     }
 
     /**
@@ -571,7 +566,7 @@ class PracticahgController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$ids)
     {
         $validar = $request->validate([
             'checklist' => 'required'
@@ -590,7 +585,10 @@ class PracticahgController extends Controller
         ]);
       }
 
-// dd($valores);
+      $actualizar = DB::table('infor_practicahgs')
+      ->where('id', $ids)
+      ->update(['Estatus_tarea' => 2]);
+
          return redirect()->route('adm.p.h&g.index');
     }
 

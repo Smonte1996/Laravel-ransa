@@ -8,12 +8,15 @@
                     <h3>Listado de Reclamos</h3>
                 </div>
                 <div class="title_right">
-                    <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                    <div class="col-md-4 col-sm-5 form-group pull-right top_search">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
+                            {{-- <input type="text" class="form-control" placeholder="Search for...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">Go!</button>
-                            </span>
+                            </span> --}}
+                            <button class="btn bg-green-500 text-white" wire:click.prevent='DescargarReclamo'>
+                                Descargar Excel
+                             </button>
                         </div>
                     </div>
                 </div>
@@ -62,13 +65,13 @@
 
                 </div>
             </div> --}}
-         <div class="row">
+         <div class="row" wire:ignore>
             <div class="col-sm-12 col-md-12">
             <div class="x_panel">
                 <div class="x_title">
                     <div class="clearfix"></div>
                 </div>
-                 <div class="mb-2 col-md-3" style="width: 200px">
+                 {{-- <div class="mb-2 col-md-3" style="width: 200px">
                     <select name="" wire:model="estado" class="form-control">
                        <option value="">Seleccionar opción</option>
                       <option value="1">Clasificación</option>
@@ -77,7 +80,7 @@
                       <option value="4">Cerrado</option>
                       <option value="5">No procede</option>
                     </select>
-                </div>
+                </div> --}}
             <table id="reclamos" class="text-green-500 table table-striped dt-responsive" style="width:100%">
                 <thead>
                     <tr>
@@ -155,11 +158,11 @@
                             @case(3)
                             <div class="btn-group btn-group-sm " role="group" aria-label="">
 
-                                <a href="{{route('adm.pdf.Reclamo', $solicitud->id)}}" rel="noreferrer noopener" target="_blank"  class="border btn btn-orange-500 text-white"
+                                <a href="{{route('adm.pdf.Reclamo', encrypt($solicitud->id))}}" rel="noreferrer noopener" target="_blank"  class="border btn btn-orange-500 text-white"
                                     >
                                     <i class="fa-solid fa-file-pdf"></i>
                                 </a>
-                                <a href="{{ route('adm.Infor.reclamo', $solicitud->id) }}" class="btn btn-orange-500 text-white border" >
+                                <a href="{{ route('adm.Infor.reclamo', encrypt($solicitud->id)) }}" class="btn btn-orange-500 text-white border" >
                                     <i class="fa fa-info"></i>
                                 </a>
                             </div>
@@ -168,11 +171,11 @@
                             @case(4)
                             <div class="btn-group btn-group-sm " role="group" aria-label="">
 
-                                <a href="{{route('adm.pdf.Reclamo', $solicitud->id)}}" rel="noreferrer noopener" target="_blank"  class="border btn btn-orange-500 text-white"
+                                <a href="{{route('adm.pdf.Reclamo', encrypt($solicitud->id))}}" rel="noreferrer noopener" target="_blank"  class="border btn btn-orange-500 text-white"
                                     >
                                     <i class="fa-solid fa-file-pdf"></i>
                                 </a>
-                                <a href="{{ route('adm.Infor.reclamo', $solicitud->id) }}" class="btn btn-orange-500 text-white border" >
+                                <a href="{{ route('adm.Infor.reclamo', encrypt($solicitud->id)) }}" class="btn btn-orange-500 text-white border" >
                                     <i class="fa fa-info"></i>
                                 </a>
                             </div>
@@ -186,7 +189,7 @@
                                     <i class="fa fa-download"></i>
                                 </a>
                                 @endisset  --}}
-                                <a href="{{route('adm.inf.no-procede', $solicitud->id)}}" class="btn btn-orange-500 text-white border" >
+                                <a href="{{route('adm.inf.no-procede', encrypt($solicitud->id))}}" class="btn btn-orange-500 text-white border" >
                                     <i class="fa fa-info"></i>
                                 </a>
                             </div>
@@ -200,7 +203,7 @@
                                     <i class="fa fa-image"></i>
                                 </button>
 
-                                <a href="{{ route('adm.Clasificacion', $solicitud->id) }}" class="btn btn-orange-500 text-white border">
+                                <a href="{{ route('adm.Clasificacion', encrypt($solicitud->id)) }}" class="btn btn-orange-500 text-white border">
                                     <i class="fa fa-user"></i>
                                 </a>
                             </div>
@@ -214,7 +217,58 @@
          </div>
     </div>
 </div>
+<x-jet-dialog-modal wire:model.prevent="open">
+    <x-slot name='title'>
+    <div class="col-md-12 col-sm-12 text-center">
+        <div class="input-group ">
+        <img src="{{asset('img/logo.png')}}" alt="logo" width="180">
+        <label class="form-label mt-2">
+          <strong>  Reclamo Ransa </strong>
+        </label>
+        </div>
     </div>
+    </x-slot>
+    <x-slot name='content'>
+        <div class="col-sm-12 col-md-12">
+        <div class="mt-2 mb-3">
+        <label for="form-label fs-6" style="color: #7c7c7c">Estatus</label>
+        <select name="" id="" class="form-select rounded" wire:model="valores">
+            <option value="">seleccionar</option>
+            <option value="2">Investigación</option>
+            <option value="3">Proceso</option>
+        </select>
+        </div>
+        </div>
+        {{-- <div class="col-sm-12 col-md-6">
+            <div class="mt-2 mb-3">
+            <label for="form-label fs-6" style="color: #7c7c7c">Fecha</label>
+            <input type="date" class="form-control rounded">
+            </div>
+            </div> --}}
+    </x-slot>
+    <x-slot name='footer'>
+        <x-jet-secondary-button wire:click.prevent="$set('open', false)">
+            Cancelar
+        </x-jet-secondary-button>
+        <x-jet-danger-button wire:click.prevent='DescargarReclamo'>
+            Descargar
+        </x-jet-danger-button>
+    </x-slot>
+  </x-jet-dialog-modal>
+    </div>
+    {{-- @push('scripts')
+    <script>
+    Livewire.on('select2', function() {
+    $("#selectgrup").select2({
+    // tags: true,
+    theme: "bootstrap-5",
+    width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+    placeholder: $( this ).data( 'placeholder' ),
+    closeOnSelect: false,
+     });
+    });
+        </script>
+    @endpush --}}
      {{-- Modal para Imagenes --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

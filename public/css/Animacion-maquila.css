@@ -1,0 +1,101 @@
+/* .input {
+    border: 2px solid transparent;
+    width: 18em;
+    height: 3em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+  }
+*/
+  .input:hover,
+  .input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 5px rgb(74, 157, 236, 20%);
+    background-color: white;
+  }
+
+   /*button {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #725AC1;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #725AC1;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #725AC1;
+  }
+
+  button:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #725AC1;
+  }
+
+  button:active {
+    transform: scale(0.9);
+  } */
+
+  .btm {
+    --color: #00A97F;
+    --color2: rgb(255, 255, 255);
+    padding: 0.8em 1em;
+    background-color: transparent;
+    border-radius: 6px;
+    border: .3px solid var(--color);
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 15px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+   }
+
+   .btm::after, .btm::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: var(--color);
+   }
+
+   .btm::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+   }
+
+   .btm:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+   }
+
+   .btm:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+   }
+
+   .btm:hover {
+    color: var(--color2);
+   }
+
+   .btm:active {
+    filter: brightness(.7);
+    transform: scale(.98);
+   }

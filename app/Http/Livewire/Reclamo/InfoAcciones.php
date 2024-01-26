@@ -30,12 +30,12 @@ class InfoAcciones extends Component
     public function mount($solicitude)
     {
     // $this->clasificacion = Clasificacion::find($solicitude);
-    $this->solicitude = solicitude::find($solicitude);
+    $this->solicitude = solicitude::find(decrypt($solicitude));
     }
 
     public function Reapertura($solicitude)
     {
-         $Investigacion = solicitude::find($solicitude);
+         $Investigacion = solicitude::find(decrypt($solicitude));
          if ($Investigacion) {
              $Investigacion->investigacion->delete();
          }
@@ -43,14 +43,14 @@ class InfoAcciones extends Component
              $Investigacion->encuesta->delete();
          }
         $Investigacion = Accion::where('solicitude_id', $solicitude)->delete();
-        
+
         $affected = DB::table('solicitudes')
        ->where('id', $this->solicitude->id)
        ->update(['estado' => 2]);
 
        Mail::to([$this->solicitude->clasificacion->users->email,'stevemontenegro_9@hotmail.com'])->send(New notificacionReaperturaResponsable($this->solicitude));
        Mail::to([$this->solicitude->correo ,"stevemontenegro_9@hotmail.com"])->send(new notificacionReapertura($this->solicitude));
-     
+
        redirect()->route('adm.reclamo');
 
     }

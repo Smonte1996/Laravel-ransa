@@ -468,11 +468,11 @@
                             </fieldset>
                             <div class="pt-4 text-center">
                                  <button class="btn btn-primary" wire:click='ValidacionPH'>Guardar</button>
-                                 @if (!is_null($this->Practicashg))
+                                 {{-- @if (!is_null($this->Practicashg)) --}}
                                  <button class="btn btn-danger" wire:click='Enviar'>Enviar</button>
-                                 @else
+                                 {{-- @else
 
-                                 @endif
+                                 @endif --}}
 
                             </div>
                         </div>
@@ -494,11 +494,14 @@
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   Livewire.on('alert', function(message){
-    Swal.fire(
-      'Gracias',
-       message,
-      'success'
-    )
+    Swal.fire({
+     position: "center",
+     title:'¡Gracias!',
+     icon:'success',
+     text: message,
+     showConfirmButton: false,
+     timer: 1500
+    })
   })
 </script>
    @endpush

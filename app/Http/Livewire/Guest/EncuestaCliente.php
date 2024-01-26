@@ -20,28 +20,28 @@ class EncuestaCliente extends Component
      public $ob3;
      public $ob4;
      public $solicitude;
-    
+
      protected $rules = [
       'General' => 'required',
       'Atencion' => 'required',
       'Rapidez' => 'required',
       'solucion' => 'required',
      ];
-     
+
     public function render()
     {
-       
+
         return view('livewire.guest.encuesta-cliente')->layout('layouts.guest2');
-          
+
     }
-   
+
     public function mount($solicitude)
     {
-        $calificacion = solicitude::find($solicitude);
+        $calificacion = solicitude::find(decrypt($solicitude));
         if (!empty($calificacion->encuesta->p1)) {
             abort(401);
         } else {
-         $this->solicitude = $solicitude;
+         $this->solicitude = decrypt($solicitude);
          }
     }
 
@@ -67,7 +67,7 @@ class EncuestaCliente extends Component
         ]);
 
         Mail::to(['stevemontenegro_9@hotmail.com','smontenegrot@ransa.net'])->send(new notificacionRespuestacliente($notificacionEncuesta));
-        
+
         return redirect()->route('reclamo.visita');
     }
 

@@ -32,6 +32,18 @@ return new class extends Migration
             $table->char('bamo6','255')->nullable();
             $table->string('bam7');
             $table->char('bamo7','255')->nullable();
+            $table->string('bam8');
+            $table->char('bamo8','255')->nullable();
+            $table->string('bam9');
+            $table->char('bamo9','255')->nullable();
+            $table->string('bam10');
+            $table->char('bamo10','255')->nullable();
+            $table->string('bam11');
+            $table->char('bamo11','255')->nullable();
+            $table->string('bam12');
+            $table->char('bamo12','255')->nullable();
+            $table->string('bam13');
+            $table->char('bamo13','255')->nullable();
             $table->timestamps();
         });
     }

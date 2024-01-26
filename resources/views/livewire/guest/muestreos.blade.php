@@ -9,13 +9,13 @@
               <div class="row">
               <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="bodega" class="text-center" style="font-size:14px;">Almacen:
                     </label>
                         <select class="form-control @error('bodega') is-invalid @enderror" wire:model.defer="bodega" id="bodega" :value="old('bodega')">
                            <option value="">Seleccionar una opción</option>
                            <option value="BODEGA GYE">BODEGA GYE</option>
-                           <option value="BODEGA UIO">BODEGA UIO</option> 
+                           <option value="BODEGA UIO">BODEGA UIO</option>
                         </select>
                         @error('bodega')
                         <small id="bodegahelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="clientes" style="font-size:14px;">Cliente:
                     </label>
                         <select class="form-control @error('clientes') is-invalid @enderror" wire:model.defer="clientes" id="clientes" :value="old('clientes')">
@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="contenedor" style="font-size:14px;">Contenedor/placa:
                     </label>
                        <input type="text" class="form-control uppercase @error('contenedor') is-invalid @enderror" id="contenedor" wire:model.defer='contenedor' :value="old('contenedor')">
@@ -51,13 +51,13 @@
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="Guia" style="font-size:14px;">Guia de remisión:
                     </label>
                        <input type="text" class="form-control @error('Guia') is-invalid @enderror" wire:model.defer='Guia' id="Guia" :value="old('Guia')">
                          @error('Guia')
-                         <small id="GuiarhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
-                         @enderror                  
+                         <small id="GuiarhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                         @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
@@ -67,19 +67,19 @@
                     </label>
                        <input type="date" class="form-control @error('fecha_recepcion') is-invalid @enderror" wire:model.defer="fecha_recepcion" id="fecha_recepcion" :value="old('fecha_recepcion')">
                        @error('fecha_recepcion')
-                       <small id="fecha_recepcionrhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
-                       @enderror 
+                       <small id="fecha_recepcionrhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                       @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="hora_recepcion" style="font-size:14px;">Hora de recepción:
                     </label>
                        <input type="time" class="form-control @error('hora_recepcion') is-invalid @enderror" wire:model.defer='hora_recepcion' id="hora_recepcion" :value="old('hora_recepcion')">
                        @error('hora_recepcion')
-                       <small id="hora_recepcionrhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
-                       @enderror 
+                       <small id="hora_recepcionrhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                       @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
@@ -89,51 +89,51 @@
                     </label>
                        <input type="text" class="form-control @error('pedido') is-invalid @enderror" wire:model.defer="pedido" id="pedido" :value="old('pedido')">
                        @error('pedido')
-                       <small id="pedidorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       <small id="pedidorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
                        @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="responsable" style="font-size:14px;">Responsable de validación:
                     </label>
                        <input type="text" class="form-control @error('responsable') is-invalid @enderror" placeholder="TU NOMBRE" wire:model.defer="responsable" id="responsable" :value="old('responsable')">
                        @error('responsable')
-                       <small id="responsablerhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       <small id="responsablerhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
                        @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="transportista" style="font-size:14px;">Nombre del transportista:
                     </label>
                        <input type="text" class="form-control @error('transportista') is-invalid @enderror"  wire:model.defer="transportista" id="transportista" :value="old('transportista')">
                        @error('transportista')
-                       <small id="transportistarhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       <small id="transportistarhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
                        @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="sello" style="font-size:14px;">Sello de seguridad:
                     </label>
                        <input type="text" class="form-control @error('sello') is-invalid @enderror"  wire:model.defer="sello" id="sello" :value="old('sello')">
                        @error('sello')
-                       <small id="sellorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       <small id="sellorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
                        @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-8">
                 <div class="mb-2">
-                    <label 
+                    <label
                         class="form-label text-lead-500 fw-bold" for="comentario" style="font-size:14px;">Observacion:
                     </label>
                        <input type="text" class="form-control @error('comentario') is-invalid @enderror"  wire:model.defer="comentario" id="comentario" :value="old('comentario')">
                        @error('comentario')
-                       <small id="comentariorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small> 
+                       <small id="comentariorhelpId" class="form-text text-muted invalid-feedback">{{ $message }}</small>
                        @enderror
                 </div>
             </div>
@@ -152,8 +152,8 @@
   <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
     <strong>
    1. El transporte tiene protección (carpa, furgón).
-   </strong>  
-</td> 
+   </strong>
+</td>
   <td  class="border border-dark">
     <select name="" id="vr1" wire:model.defer="vr1" class="form-control">
         <option value="">Selecionar una opción</option>
@@ -167,8 +167,8 @@
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
 <strong>
    2. No se presentan olores fuera de lo normal.
-   </strong>  
-</td> 
+   </strong>
+</td>
   <td  class="border border-dark">
     <select name="" id="vr2" wire:model.defer="vr2" class="form-control">
         <option value="">Selecionar una opción</option>
@@ -181,9 +181,9 @@
  <tr>
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
       <strong>
-     3. Piso del contedor, furgón, en buenas condiciones y seco.  
-     </strong>  
-  </td> 
+     3. Piso del contedor, furgón, en buenas condiciones y seco.
+     </strong>
+  </td>
     <td  class="border border-dark">
       <select name="" id="vr3" wire:model.defer="vr3" class="form-control">
   <option value="">Selecionar una opción</option>
@@ -196,9 +196,9 @@
  <tr>
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
       <strong>
-   4. Ausencia de orificios en el cajón. 
-   </strong>  
-</td> 
+   4. Ausencia de orificios en el cajón.
+   </strong>
+</td>
   <td  class="border border-dark">
     <select name="" id="vr4" wire:model.defer="vr4" class="form-control">
         <option value="">Selecionar una opción</option>
@@ -211,9 +211,9 @@
    <tr>
       <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
                 <strong>
-   5. Limpieza del contenedor, furgón (piso, paredes, techo). 
-   </strong>  
-</td> 
+   5. Limpieza del contenedor, furgón (piso, paredes, techo).
+   </strong>
+</td>
         <td  class="border border-dark">
  <select name="" id="vr5" wire:model.defer="vr5" class="form-control">
      <option value="">Selecionar una opción</option>
@@ -227,8 +227,8 @@
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
       <strong>
      6. Ausencia de plagas.
-     </strong>  
-</td> 
+     </strong>
+</td>
 <td  class="border border-dark">
 <select name="" id="vr6" wire:model.defer="vr6" class="form-control">
  <option value="">Selecionar una opción</option>
@@ -241,9 +241,9 @@
  <tr>
 <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
   <strong>
- 7. Ausencia de quimicos y/o sustancias contaminantes (Combustible, solventes, aceites, entre otros). 
- </strong>  
- </td> 
+ 7. Ausencia de quimicos y/o sustancias contaminantes (Combustible, solventes, aceites, entre otros).
+ </strong>
+ </td>
    <td  class="border border-dark">
      <select name="" id="vr7" wire:model.defer="vr7" class="form-control">
      <option value="">Selecionar una opción</option>
@@ -264,9 +264,9 @@
  <tr>
      <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
        <strong>
-      1. Puerta tiene el sello de seguidad. 
-      </strong>  
-   </td> 
+      1. Puerta tiene el sello de seguidad.
+      </strong>
+   </td>
      <td  class="border border-dark">
        <select name="" id="vd1" wire:model.defer="vd1" class="form-control">
            <option value="">Selecionar una opción</option>
@@ -280,9 +280,9 @@
  <tr>
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
       <strong>
-     2. Carga en buen estado (no rota, abierta, en mal estado, húmeda). 
-     </strong>  
-  </td> 
+     2. Carga en buen estado (no rota, abierta, en mal estado, húmeda).
+     </strong>
+  </td>
     <td  class="border border-dark">
       <select name="" id="vd2" wire:model.defer="vd2" class="form-control">
           <option value="">Selecionar una opción</option>
@@ -296,9 +296,9 @@
  <tr>
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
       <strong>
-     3. Cumple correcto estibaje de PT (se cumple el apile PT). 
-     </strong>  
-  </td> 
+     3. Cumple correcto estibaje de PT (se cumple el apile PT).
+     </strong>
+  </td>
     <td  class="border border-dark">
       <select name="" id="vd3" wire:model.defer="vd3" class="form-control">
           <option value="">Selecionar una opción</option>
@@ -312,9 +312,9 @@
 <tr>
    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
      <strong>
-    4. Mantiene condiciones de embalaje (pallets en buen estado, strech film cubre el MP/ME/PT). 
-    </strong>  
- </td> 
+    4. Mantiene condiciones de embalaje (pallets en buen estado, strech film cubre el MP/ME/PT).
+    </strong>
+ </td>
    <td  class="border border-dark">
      <select name="" id="vd4" wire:model.defer="vd4" class="form-control">
          <option value="">Selecionar una opción</option>
@@ -328,9 +328,9 @@
 <tr>
    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
      <strong>
-    5. Cumple orden en la carga. 
-    </strong>  
- </td> 
+    5. Cumple orden en la carga.
+    </strong>
+ </td>
    <td  class="border border-dark">
      <select name="" id="vd5" wire:model.defer="vd5" class="form-control">
          <option value="">Selecionar una opción</option>
@@ -344,9 +344,9 @@
  <tr>
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
       <strong>
-     6. No existe derrame de producto terminado, materias primas o material de empaque. 
-     </strong>  
-  </td> 
+     6. No existe derrame de producto terminado, materias primas o material de empaque.
+     </strong>
+  </td>
     <td  class="border border-dark">
       <select name="" id="vd6" wire:model.defer="vd6" class="form-control">
           <option value="">Selecionar una opción</option>
@@ -360,9 +360,9 @@
 <tr>
    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
      <strong>
-    7. Libre  de contaminación cruzada fisica, quimica y/o biológica. 
-    </strong>  
- </td> 
+    7. Libre  de contaminación cruzada fisica, quimica y/o biológica.
+    </strong>
+ </td>
    <td  class="border border-dark">
      <select name="" id="vd7" wire:model.defer="vd7" class="form-control">
          <option value="">Selecionar una opción</option>
@@ -376,9 +376,9 @@
 {{-- <tr>
    <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
      <strong>
-    8. ME/MP ingreso con certificados de calidad. 
-    </strong>  
- </td> 
+    8. ME/MP ingreso con certificados de calidad.
+    </strong>
+ </td>
    <td  class="border border-dark">
      <select name="" id="vd8" wire:model.defer="vd8" class="form-control">
          <option value="">Selecionar una opción</option>
@@ -392,9 +392,9 @@
  <tr>
     <td align="left" class="border border-dark" style="font-size:12px; width: 480px">
       <strong>
-     8. El material tiene minimo 70% de vida útil. 
-     </strong>  
-  </td> 
+     8. El material tiene minimo 70% de vida útil.
+     </strong>
+  </td>
     <td  class="border border-dark">
       <select name="" id="vd9" wire:model.defer="vd9" class="form-control">
           <option value="">Selecionar una opción</option>
@@ -417,13 +417,13 @@
             <button type="button" class="btn bg-green-600 text-white" wire:click.prevent="RegistrarInfor"> Muestrear</button>
             @endif
         </div>
-        
+
           <div class="text-end mb-4">
             <button class="btn bg-orange-600 text-white" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Tabla Militar Estandar</button>
         </div>
     </div>
-        
+
      <div class="row">
         <div class="border table-responsive col-sm-12 col-md-10 justify-content-center mb-3" >
             {{-- <table class="table-striped table-bordered border">
@@ -463,18 +463,18 @@
                 </thead>
                 <tbody>
                     <tr>
-    
+
                       <td>
                         <div wire:ignore>
-                        <select class="form-control Selector @error('sku') is-invalid @enderror" wire:model='sku' id="sku" style="width: 200px"> 
+                        <select class="form-control Selector @error('sku') is-invalid @enderror" wire:model='sku' id="sku" style="width: 200px">
                         <option>Seleccione una opción</option>
                         @foreach ( $data_logis as $data_logi )
                             <option value="{{$data_logi->id}}">{{$data_logi->sku_quala}}</option>
                         @endforeach
                       </select>
-                    </div> 
+                    </div>
                     </td>
-                
+
                     <td>
                         <input type="number" class="form-control @error('cantidad') is-invalid @enderror" wire:model.lazy="cantidad" id="cantidad" style="width: 150px" >
                     </td>
@@ -484,21 +484,21 @@
                         <option selected>Seleccionar un opcion</option>
                         @foreach ($Niveles as $Nivele)
                             <option value="{{$Nivele->id}}">{{$Nivele->name}}</option>
-                        @endforeach      
+                        @endforeach
                         </select>
-                       </div>    
+                       </div>
                     </td>
                     <td>
                         <div>
                         <select class="form-control @error('letratamano') is-invalid @enderror" wire:model="letratamano" id="letratamano" style="width: 200px">
                             <option selected>Seleccionar un opcion</option>
-                             @if (!is_null($Letras))  
+                             @if (!is_null($Letras))
                             @foreach ($Letras as $Letra)
                                 <option value="{{$Letra->id}}">{{$Letra->nivel}}</option>
-                            @endforeach 
+                            @endforeach
                              @endif
                             </select>
-                        </div> 
+                        </div>
                     </td>
                     <td>
                         <div>
@@ -507,11 +507,11 @@
                              @forelse ($Muestras as $Muestra )
                              {{$Muestra->muestra}}
                              @empty
-                             <p>No hay datos</p> 
+                             <p>No hay datos</p>
                              @endforelse
-                          @endif 
+                          @endif
                          </label>
-                            </div> 
+                            </div>
                     </td>
                     <td>
                         <select name="" class="form-control @error('etiqueta') is-invalid @enderror" id="etiqueta" wire:model="etiqueta" style="width: 200px">
@@ -521,7 +521,7 @@
                         </select>
                     </td> --}}
 
-                    
+
                     {{-- <td>
                         <select name="" class="form-control" id="" wire:model="defecto" style="width: 200px">
                             <option value="">Seleccionar una opcion</option>
@@ -537,18 +537,18 @@
                             <option value="Aprobado">Aprobado</option>
                             <option value="Cuarentena">Cuarentena</option>
                             <option value="Rechazado">Rechazado</option>
-                        </select> 
+                        </select>
                     </td>
                     <td>
                         <textarea name="" id="" class="form-control"  rows="2" wire:model="obsrva" style="width: 250px">
-    
+
                         </textarea>
                     </td> --}}
                     {{-- <td>
                         <div class="text-center"> --}}
-                            
+
                             {{-- <button type="button" class="btn bg-orange-600 text-white"  style="font-size: 22px;" wire:click.prevent="validarCampos"><i class="fa-solid fa-square-plus"></i></button> --}}
-                            
+
                             {{-- <a class="btn bg-green-600 text-white" style="font-size: 22px;" wire:click="$set('open', true)"><i class="fa-solid fa-square-plus"></i></a>
                         </div>
                     </td>
@@ -574,7 +574,7 @@
                      <th class="bg-secondary text-white text-center" style="font-size:12px;">
                          Lote, fecha de elaboración y/o<br> expiración ilegible o borrable
                      </th>
-                     
+
                     </tr>
                  </thead>
                  <tbody>
@@ -584,14 +584,14 @@
                                  <select class="form-control"  wire:model.defer="registro_sanitario" id="registro_sanitario" style="width: 180px">
                                      <option value="">Seleccionar una opcion</option>
                                      <option value="Si">Si</option>
-                                     <option value="No">No</option>  
+                                     <option value="No">No</option>
                                  </select>
-                                    </div> 
+                                    </div>
                          </td>
-     
+
                          <td>
                              <div wire:ignore>
-                             <input type="text" class="form-control" wire:model="vida_logistica" id="vida_logistica" disabled style="width: 200px" 
+                             <input type="text" class="form-control" wire:model="vida_logistica" id="vida_logistica" disabled style="width: 200px"
                              :value="{{$vida_logistica}}">
                               </div>
                          </td>
@@ -606,17 +606,17 @@
                                  <option value="">Seleccionar una opcion</option>
                                  <option value="Si">Si</option>
                                  <option value="No">No</option>
-                                 <option value="No Aplica">No Aplica</option>  
+                                 <option value="No Aplica">No Aplica</option>
                              </select>
                          </td>
                          <td>
                               <select name="" class="form-control @error('lote') is-invalid @enderror" id="lote" wire:model="lote" style="width: 200px">
                                  <option value="">Seleccionar una opcion</option>
-                                 <option value="Si">Si</option>  
-                                 <option value="No">No</option>  
+                                 <option value="Si">Si</option>
+                                 <option value="No">No</option>
                              </select>
                          </td>
-                         
+
                      </tr>
                  </tbody>
                 @if (!is_null($sku))
@@ -642,7 +642,7 @@
                         </th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                     <tr>
                         <td>
@@ -652,7 +652,7 @@
                                         {{$data->sku_unilever}}
                                     @endforeach
                                 @endif
-                              </label> 
+                              </label>
                         </td>
                         <td>
                             <label class="form-label text-center" style="width: 200px">
@@ -670,7 +670,7 @@
                                         {{$data->ean13}}
                                     @endforeach
                                 @endif
-                              </label> 
+                              </label>
                         </td>
                         <td>
                             <label class="form-label text-center" style="width: 200px">
@@ -745,7 +745,7 @@
                     </th>
                     <td>
                         <div wire:ignore>
-                            <select class="form-control Selector @error('sku') is-invalid @enderror" wire:model='sku' id="sku" style="width: 190px"> 
+                            <select class="form-control Selector @error('sku') is-invalid @enderror" wire:model='sku' id="sku" style="width: 190px">
                             <option>Seleccione una opción</option>
                             @foreach ( $data_logis as $data_logi )
                                 <option value="{{$data_logi->id}}">{{$data_logi->sku_quala}}</option>
@@ -763,7 +763,7 @@
                                     {{$data->sku_unilever}}
                                 @endforeach
                             @endif
-                          </label> 
+                          </label>
                     </td>
                 </tr>
                 <tr>
@@ -797,9 +797,9 @@
                         <option selected>Seleccionar un opcion</option>
                         @foreach ($Niveles as $Nivele)
                             <option value="{{$Nivele->id}}">{{$Nivele->name}}</option>
-                        @endforeach      
+                        @endforeach
                         </select>
-                       </div>    
+                       </div>
                     </td>
                     <th class="text-center" style="font-size:12px;">
                         Ean 13
@@ -811,7 +811,7 @@
                                     {{$data->ean13}}
                                 @endforeach
                             @endif
-                          </label> 
+                          </label>
                     </td>
                 </tr>
                 <tr>
@@ -822,13 +822,13 @@
                         <div>
                         <select class="form-control @error('letratamano') is-invalid @enderror" wire:model="letratamano" id="letratamano" style="width: 190px">
                             <option selected>Seleccionar un opcion</option>
-                             @if (!is_null($Letras))  
+                             @if (!is_null($Letras))
                             @foreach ($Letras as $Letra)
                                 <option value="{{$Letra->id}}">{{$Letra->nivel}}</option>
-                            @endforeach 
+                            @endforeach
                              @endif
                             </select>
-                        </div> 
+                        </div>
                     </td>
                     <th class="text-center" style="font-size:12px;">
                         Ean 14
@@ -854,11 +854,11 @@
                              @forelse ($Muestras as $Muestra )
                              {{$Muestra->muestra}}
                              @empty
-                             <p>No hay datos</p> 
+                             <p>No hay datos</p>
                              @endforelse
-                          @endif 
+                          @endif
                          </label>
-                            </div> 
+                            </div>
                     </td>
                     <th class="text-center" style="font-size:12px;">
                         Marca
@@ -882,9 +882,9 @@
                             <select class="form-control"  wire:model.defer="registro_sanitario" id="registro_sanitario" style="width: 190px">
                                 <option value="">Seleccionar una opcion</option>
                                 <option value="Si">Si</option>
-                                <option value="No">No</option>  
+                                <option value="No">No</option>
                             </select>
-                               </div> 
+                               </div>
                     </td>
                     <th class="text-center" style="font-size:12px;">
                         Registro Sanitario
@@ -908,7 +908,7 @@
                             <option value="">Seleccionar una opcion</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
-                            <option value="No Aplica">No Aplica</option>  
+                            <option value="No Aplica">No Aplica</option>
                         </select>
                     </td>
                     <th class="text-center" style="font-size:12px;">
@@ -935,7 +935,7 @@
                             <option value="No">No</option>
                         </select>
                     </td>
-                </tr>  
+                </tr>
                 <tr>
                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
                         Lote, fecha de elaboración y/o<br> expiración ilegible o borrable
@@ -943,11 +943,11 @@
                     <td>
                         <select name="" class="form-control @error('lote') is-invalid @enderror" id="lote" wire:model="lote" style="width: 190px">
                            <option value="">Seleccionar una opcion</option>
-                           <option value="Si">Si</option>  
-                           <option value="No">No</option>  
+                           <option value="Si">Si</option>
+                           <option value="No">No</option>
                        </select>
                    </td>
-                </tr> 
+                </tr>
                 <tr>
                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
                         Fecha de Elaboración
@@ -967,7 +967,7 @@
                         @endif
                         </label>
                     </td>
-                </tr>   
+                </tr>
                 <tr>
                     <th class="bg-secondary text-white text-center" style="font-size:12px;">
                         Fecha de Vencimiento
@@ -977,21 +977,21 @@
                     </td>
                     <td>
                         <div wire:ignore>
-                        <input type="text" class="form-control" wire:model="vida_logistica" id="vida_logistica" disabled style="width: 130px" 
+                        <input type="text" class="form-control" wire:model="vida_logistica" id="vida_logistica" disabled style="width: 130px"
                         :value="{{$vida_logistica}}">
                          </div>
                     </td>
                         <td>
                             <div class="text-center">
-                                 @if (!is_null($Evidencias)) 
+                                 @if (!is_null($Evidencias))
                                 <button type="button" class="btn bg-orange-600 text-white"  style="font-size: 23px;" wire:click.prevent="$set('Abrir', true)"><i class="fa-solid fa-truck-fast"></i></button>
-                                 @else 
+                                 @else
 
-                                 @endif 
+                                 @endif
                                 <a class="btn bg-green-600 text-white" style="font-size: 23px;" wire:click.prevent="$set('open', true)"><i class="fa-solid fa-square-plus"></i></a>
                             </div>
                         </td>
-                </tr>              
+                </tr>
             </table>
           </div>
         </div>
@@ -1010,7 +1010,7 @@
                 @switch($data->marca)
                     @case('QUIPITOS')
                     <a  class="btn btn-orange-500 text-white border" href="{{asset('Pdf/C284 Matriz defectos QUIPITOS.pdf')}}" target="_blank" >
-                        <i class="fa-solid fa-file-pdf"></i>     
+                        <i class="fa-solid fa-file-pdf"></i>
                             PDF QUIPITOS
                         </a>
                         @break
@@ -1020,7 +1020,7 @@
                                     PDF SAVILOE
                         </a>
                         @break
-                         
+
                     @default
                     <a  class="btn btn-orange-500 text-white border" href="{{asset('Pdf/C284 Matriz defectos UNILEVER.pdf')}}" target="_blank" >
                         <i class="fa-solid fa-file-pdf"></i>
@@ -1038,28 +1038,28 @@
                          @case('QUIPITOS')
                          @foreach ($Quipitos_defectos as $Quipitos_defecto)
                          <option value="{{$Quipitos_defecto->id}}">{{$Quipitos_defecto->name}} - {{$Quipitos_defecto->marca}}</option>
-                          @endforeach 
+                          @endforeach
                              @break
                              @case('SAVILOE')
                              @foreach ($Matrices_defectos as $Matrices_defecto)
                              <option value="{{$Matrices_defecto->id}}">{{$Matrices_defecto->name}} - {{$Matrices_defecto->marca}}</option>
-                            @endforeach 
+                            @endforeach
                              @break
                              @case('NUTRIBELA')
                              @foreach ($Nutribela_defectos as $Nutribela_defecto)
                              <option value="{{$Nutribela_defecto->id}}">{{$Nutribela_defecto->name}} - {{$Nutribela_defecto->marca}}</option>
-                              @endforeach  
+                              @endforeach
                              @break
-                     
+
                          @default
                          @foreach ($Unilever_defectos as $Unilever_defecto)
                          <option value="{{$Unilever_defecto->id}}">{{$Unilever_defecto->name}} - {{$Unilever_defecto->marca}}</option>
-                          @endforeach  
+                          @endforeach
                      @endswitch
-                  
-                  @endif 
+
+                  @endif
                 </select>
-              </div> 
+              </div>
               <div class=" mt-2 mb-2">
                   <select class="form-control @error('matriz_defecto') is-invalid @enderror" id="matrizdefecto" wire:model='matrizdefecto'>
                     <option value="">Seleccionar un opción</option>
@@ -1100,7 +1100,7 @@
                   @if (!is_null($Aqls))
                       @foreach ($Aqls as $Aql)
                       <option value="{{$Aql->id}}">{{$Aql->Aql}}</option>
-                      @endforeach 
+                      @endforeach
                       @endif
                 </select>
                </div>
@@ -1111,11 +1111,11 @@
                     <label class="form-label" id="aceptaci" style="width: 90px">
                         @if (!is_null($Aceptaciones))
                         @foreach ($Aceptaciones as $Aceptacione )
-                        {{$Aceptacione->Ac}}  
+                        {{$Aceptacione->Ac}}
                         @endforeach
                         @endif
                     </label>
-                </div> 
+                </div>
                 </div>
                 <div class="col-sm-4 col-md-4 mt-2 text-center">
                     <div class="mb-3">
@@ -1123,18 +1123,18 @@
                       <label class="form-label" id="recha" style="width: 90px">
                         @if (!is_null($Aceptaciones))
                         @foreach ($Aceptaciones as $Aceptacione )
-                        {{$Aceptacione->rec}}  
+                        {{$Aceptacione->rec}}
                         @endforeach
                         @endif
                     </label>
-                  </div> 
                   </div>
-                
-                  
+                  </div>
+
+
                 <div class="col-sm-4 col-md-4 mt-2 mb-2">
                  <input type="number" class="form-control" style="width: 100px" placeholder="Cantidad" wire:model.defer="caja_un" id="caja_un">
                 </div>
-                
+
                 <div class="col-sm-4 col-md-6 mb-2 mt-2">
                     <select class="form-control" wire:model.defer="cantidad_caja" id="cantidad_caja">
                         <option value="">Selecciona una opción</option>
@@ -1156,13 +1156,13 @@
                 <div class=" mt-2 mb-2">
                   <textarea class="form-control" wire:model.defer="obsrva" cols="" rows=""></textarea>
                 </div>
-                
+
                 <div class="mt-2 mb-2">
                  {{-- <input type="file" wire:model="imagen" class="form-control" multiple>
                  @if ($imagen)
                  Preview Imagen:
                  @foreach ($imagen as $images )
-                 <img src="{{ $images->temporaryUrl() }}" width="80px" height="80px">    
+                 <img src="{{ $images->temporaryUrl() }}" width="80px" height="80px">
                  @endforeach
                 @endif --}}
                 <div class="col-md-12 mt-2 mb-2">
@@ -1182,10 +1182,10 @@
                 </x-jet-danger-button>
             </x-slot>
           </x-jet-dialog-modal>
-           
-           @php
+
+           {{-- @php
               echo (strtotime($this->fecha_elaboracion)/(60*60*24)) - (strtotime($this->fecha_vencimiento)/(60*60*24));
-          @endphp 
+          @endphp --}}
 
           <div class="border table-responsive col-sm-12 col-md-12 justify-content-center mb-3 mt-5" >
             <table class="table-striped table-bordered border">
@@ -1225,7 +1225,7 @@
                 </thead>
                 <tbody>
                     @if (!is_null($Muestreos))
- 
+
                     @switch($Muestreos->bodega)
                         @case('BODEGA GYE')
                         @foreach ($Evidencia_muestreos as $Evidencia_muestreo)
@@ -1269,12 +1269,12 @@
                                 <label class="bg-lead-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Cuarentena</label>
                                 @break
                                 @default
-                                    
+
                             @endswitch
                           </td>
                         </tr>
                         @endforeach
-                         
+
                             @break
                             @case('BODEGA UIO')
                             @foreach ($Evidencia_muestreos as $Evidencia_muestreo)
@@ -1318,24 +1318,24 @@
                                 <label class="bg-lead-500 p-1 btn-group btn-group-sm rounded text-white text-center" style="font-size:11px;">Cuarentena</label>
                                 @break
                                 @default
-                                    
+
                             @endswitch
                           </td>
                         </tr>
                         @endforeach
                             @break
-                    
+
                         @default
-                            
+
                     @endswitch
-                    @endif 
+                    @endif
                 </tbody>
             </table>
           </div>
-          
+
           <x-jet-dialog-modal wire:model.prevent="Abrir">
             <x-slot name='title'>
-                <label class="form label">
+                <label class="form-label">
                     <span>Reporte de defectos</span>
                 </label>
             </x-slot>
@@ -1350,7 +1350,7 @@
                   @endif
                 </select>
               </div>
-              
+
               <div class="row">
                 <div class="col-sm-4 col-md-6 mt-2 mb-2 text-center">
                  <label class="form-label" id="descripcion">
@@ -1375,11 +1375,11 @@
               <div class=" mt-2 mb-2">
                   <input type="text" class="form-control" id="defecto" wire:model.defer="estado" placeholder="Defecto del producto">
               </div>
-                  
+
                 <div class="col-sm-4 col-md-4 mt-2 mb-2">
                  <input type="number" class="form-control"  placeholder="Cantidad" wire:model.defer="cantidades">
                 </div>
-                
+
                 <div class="col-sm-4 col-md-4 mb-2 mt-2">
                     <select class="form-control" wire:model.defer="caja_uni" id="cantidad_caja">
                         <option value="">Selecciona una opción</option>
@@ -1395,13 +1395,13 @@
                 <div class=" mt-2 mb-2">
                   <textarea class="form-control" wire:model.defer="observacion" cols="" rows=""></textarea>
                 </div>
-                
+
                 <div class="mt-2 mb-2">
                  <input type="file" wire:model="imagen_defectos" class="form-control" accept="image/*" multiple>
                  @if ($imagen_defectos)
                  Preview Imagen:
                  @foreach ($imagen_defectos as $imagen )
-                 <img src="{{ $imagen->temporaryUrl() }}" width="80px" height="80px">    
+                 <img src="{{ $imagen->temporaryUrl() }}" width="80px" height="80px">
                  @endforeach
                 @endif
                 {{-- <div class="col-md-12 mt-2 mb-2">
@@ -1421,7 +1421,7 @@
                 </x-jet-danger-button>
             </x-slot>
           </x-jet-dialog-modal>
-          
+
           @if (!is_null($Evidencias))
           <div class="row">
             <div class="col-md-12 mt-3 text-center">
@@ -1429,12 +1429,12 @@
           </div>
          </div>
            @else
-           
+
           @endif
-          
+
           </div>
         </div>
-   
+
 
 <!--Imgen de la tabla -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1456,8 +1456,8 @@
         </div>
     </div>
  </div>
-</div> 
- @push('scripts') 
+</div>
+ @push('scripts')
  {{-- <script>
     document.addEventListener('livewire:load', function() {
     $('.Select2').on('change', function(e){
@@ -1492,7 +1492,7 @@
                 this.on("addedfile", function(file) {
 
                     arrayFiles.push(file);
-                    
+
                     @this.uploadMultiple('imagen_muestreo', arrayFiles)
 
                 })
@@ -1508,9 +1508,9 @@
 
             }
         })
-      
+
     });
-      
+
 </script>
- @endpush 
+ @endpush
 

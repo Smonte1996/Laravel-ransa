@@ -31,6 +31,8 @@ class chcklt_fria extends Model
         'bfo8',
         'bf9',
         'bfo9',
+        'bf10',
+        'bfo10',
     ];
 
     function Pasillos()

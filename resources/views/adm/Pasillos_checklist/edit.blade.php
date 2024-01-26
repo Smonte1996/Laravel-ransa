@@ -25,7 +25,7 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Actualización Responsable de Pasillos</h2>
-                           
+
                             <div class="clearfix"></div>
                         </div>
                         <div class="mb-3">
@@ -34,13 +34,13 @@
                                 Regresar</a>
                         </div>
                         <div class="x_content">
-                            <form action="{{route('adm.check.pasillos.update', $pasillo)}}" method="post">
+                            <form action="{{route('adm.check.pasillos.update', encrypt($pasillo->id))}}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
                                     <div class="mb-3 col-sm-12 col-md-4">
                                         <label for="" class="form-label fs-6 text-lead-500">Zona Bodega</label>
-                                        <input type="text" class="form-control" name="" value="{{$pasillo->Bodega->name}}" disabled> 
+                                        <input type="text" class="form-control" name="" value="{{$pasillo->Bodega->name}}" disabled>
                                     </div>
 
                                         <div class="mb-3 col-sm-12 col-md-4">
@@ -85,7 +85,7 @@
                                                 <small id="responsablehelpId"
                                                     class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                             @enderror
-                                        </div>                                       
+                                        </div>
                                 </div>
                                 <x-jet-button type="submit">Modificar</x-jet-button>
                             </form>

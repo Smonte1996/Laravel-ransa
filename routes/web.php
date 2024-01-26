@@ -47,6 +47,7 @@ use App\Http\Livewire\Guest\Muestreos;
 use App\Http\Livewire\Higiene\FormularioHigiene;
 use App\Http\Livewire\Higiene\FormularioHigieneMaquila;
 use App\Http\Livewire\Higiene\FormularioHigieneProveedor;
+use App\Http\Livewire\Maquila\OrdenesMaquila;
 use App\Http\Livewire\Reclamo\Clasificaciones as ReclamoClasificaciones;
 use App\Http\Livewire\Reclamo\Confirmaracciones;
 use App\Http\Livewire\Reclamo\Correciones;
@@ -145,9 +146,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
           // url para el check de pasillo calidad
           Route::resource('ChecksPasillos', PasilloController::class)->except(['show'])->parameters(['checkPasillos', 'checkPasillo'])->names('check.pasillos');
+          Route::get('Eliminar/{id}',[PasilloController::class, 'Eliminar'])->name('ChecksPasillos.Eliminar');
           Route::get('Check Pasillo/ Crear', FormularioChecklit::class)->name('Check.list');
           Route::resource('Resulta Checklist', PasilloVistaController::class)->except(['show'])->parameters(['Pasillos'=>'Pasillovista'])->names('pasillos.vista');
           Route::get('Informe /pdf /{id}',[PasilloVistaController::class, 'Informepdf'])->name('Checklist.pdf');
+
 
           // url para las practivas de higiene.
           Route::get('Practicas-higiene', FormularioHigiene::class)->name('practica.higiene');
@@ -161,13 +164,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
           // rutas para el update de las tareas tanto como maquila y proveedor y personal ransa.
           Route::get('Practicas/tarea/{id}', [PracticahgController::class, 'PersonalRansa'])->name('Tarea.ransa');
           Route::get('Practicas/Tarea-Maquila/{id}', [PracticahgController::class, 'VistaMaquila'])->name('Tarea.Maquila');
-          Route::put('Confirmar/{id}',[PracticahgController::class, 'ConfirmartaskMaquila'])->name('Tasks.Maquila');
+          Route::put('Confirmar/{resultado}/{ids}',[PracticahgController::class, 'ConfirmartaskMaquila'])->name('Tasks.Maquila');
+          Route::put('Praticas/pdf-Maquila/{id}/{ids}',[PracticahgController::class, 'update'])->name('Tasks.Proveedor');
           Route::put('PersonalRansa/{id}',[PracticahgController::class, 'ConfirmarTarea'])->name('Tareas.Ransas');
 
           //urles para administrar la parte de los estibas.
           Route::resource('Proveedores-estibas', ProvedoresEstibas::class)->except(['show'])->parameters(['Provedor' => 'Proveedores'])->names('Estibas');
           Route::resource('Asgnacion-estibas', AsignarCuadrillaController::class)->except(['show'])->parameters(['Asignar-estibas'=>'Asignacion-estibas'])->names('Asignar-estibas');
           Route::resource('Confirmacion-estibas', ConfirmarActividades::class)->except(['show'])->parameters(['Confirmar-estibas'=>'Confirmacion-estibas'])->names('Confirmar-estibas');
+
+          //url para el apartado de maquila.
+          Route::get('Trabajo Maquila', OrdenesMaquila::class)->name('Maquila.trabajo');
 
         Route::get('/Solicitudes', ReclamoReclamoController::class)->name('reclamo');
         Route::get('download/{id}',[ReclamoReclamoController::class, 'download'])->name('download.Archivo');

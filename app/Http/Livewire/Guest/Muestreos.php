@@ -26,9 +26,9 @@ class Muestreos extends Component
 {
    use WithFileUploads;
 
-   
+
     public $datas;
-    public $tamaño_muestreo; 
+    public $tamaño_muestreo;
     public $data_logis;
     public $logis;
     public $bodega;
@@ -106,7 +106,7 @@ class Muestreos extends Component
     public $comentario;
     public $imagen_defectos;
     public $dato_transporte;
- 
+
 
 
     protected $rules = [
@@ -138,8 +138,8 @@ class Muestreos extends Component
         'sello' => 'required'
     ];
 
-    
-      public function RegistrarInfor() 
+
+      public function RegistrarInfor()
     {
        $dataInfor = $this->validate();
 
@@ -175,9 +175,9 @@ class Muestreos extends Component
           'vd6'=> $dataInfor['vd6'],
           'vd7'=> $dataInfor['vd7'],
           // 'vd8'=> $dataInfor['vd8'],
-          'vd9'=> $dataInfor['vd9'], 
+          'vd9'=> $dataInfor['vd9'],
         ]);
-      
+
     }
 
     public function Defectos()
@@ -190,7 +190,7 @@ class Muestreos extends Component
        'lotes' => 'required',
        'observacion' => 'required',
       ]);
-       
+
       $this->Transporte_defecto = Defecto_transporte::create([
         'muestreo_id' => $this->Muestreos->id,
         'data_logistica_id' => $defectos['skuchecklits'],
@@ -200,7 +200,7 @@ class Muestreos extends Component
         'lotes' => $defectos['lotes'],
         'observacion' => $defectos['observacion'],
       ]);
-      
+
       if (!is_null($this->imagen_defectos)) {
         foreach ($this->imagen_defectos as $imagen) {
             $url =  $imagen->store('public/evidencia_defectos');
@@ -211,7 +211,7 @@ class Muestreos extends Component
             ]);
         }
     }
-     
+
 
       $this->reset('skuchecklits', 'estado', 'cantidades', 'caja_uni', 'lotes', 'observacion', 'Abrir', 'imagen_defectos');
     }
@@ -229,7 +229,7 @@ class Muestreos extends Component
         'etiqueta' => 'required',
         'registro_sanitario' =>'required',
         'estatus'=>'required', ]);
-        
+
         $this->Evidencias = Evidencia_muestreo::create([
             'muestreo_id' => $this->Muestreos->id,
             'data_logistica_id' => $dato['sku'],
@@ -284,7 +284,7 @@ class Muestreos extends Component
              case '1':
                  Mail::to(['smontenegrot@ransa.net'])->cc(['stevenmontorres96@gmail.com', 'stevemontenegro_9@hotmail.com'])->send(new NotificacionInforme($this->Muestreos));
                  break;
-      
+
              default:
              Mail::to(['stevenmontorres96@gmail.com'])->cc(['smontenegrot@ransa.net', 'stevemontenegro_9@hotmail.com'])->send(new NotificacionInforme($this->Muestreos));
                  break;
@@ -344,7 +344,7 @@ class Muestreos extends Component
 
     public function render()
     {
-          
+
        if (empty($this->Muestreos->id)) {
       //  $this->dato_transporte = Evidencia_muestreo::where('muestreo_id', $this->Muestreos->id)->get();
        }else {
@@ -356,20 +356,23 @@ class Muestreos extends Component
             $this->datas = Data_logistica::where('id', $this->sku)->get();
        }else{
           $this->datas = Data_logistica::where('id', $this->sku)->get();
-          //   $this->datas = Data_logistica::where('id', 'like', '%'.$this->sku.'%')->get();  
+          //   $this->datas = Data_logistica::where('id', 'like', '%'.$this->sku.'%')->get();
        };
 
        if (empty($this->sku)) {
         $this->logis = Data_logistica::find($this->sku);
      } if ($this->sku) {
         $this->logis = Data_logistica::find($this->sku);
-    
+
         $diasElaboracion = (strtotime($this->fecha_elaboracion)/(60*60*24));
         $diasVencimiento = (strtotime($this->fecha_vencimiento)/(60*60*24));
         $vidaUtilAjustada = $this->logis->vida_util;
-        // dd($diasVencimiento + );
-        if ($diasElaboracion <= 19782 && $diasVencimiento >=19782){
-        $vidaUtilAjustada = $vidaUtilAjustada + (1);
+        $articulo = $this->logis->sku_quala;
+         //dd($articulo);
+        $skuar = ['19780305','19780107','5762300','21340000','13750000'];
+         if (!in_array($articulo, $skuar, true)) {
+         if ($diasElaboracion <= 19782 && $diasVencimiento >=19782){
+           $vidaUtilAjustada = $vidaUtilAjustada + (1);
         }if ($diasElaboracion <= 21243 && $diasVencimiento >=21243){
           $vidaUtilAjustada = $vidaUtilAjustada + (1);
         }if ($diasElaboracion <= 22704 && $diasVencimiento >=22704){
@@ -379,10 +382,11 @@ class Muestreos extends Component
         }if ($diasElaboracion <= 24165 && $diasVencimiento >=24165){
           $vidaUtilAjustada = $vidaUtilAjustada + (1);
         // Compara la suma de los días con la vida útil ajustada
-      }if (($diasVencimiento - $diasElaboracion) == $vidaUtilAjustada) {
+      }
+       }if (($diasVencimiento - $diasElaboracion) == $vidaUtilAjustada) {
             $this->vida_logistica = "Si";
         } else {
-          dd($vidaUtilAjustada);
+          //dd($vidaUtilAjustada);
             $this->vida_logistica = "No";
         }
     }

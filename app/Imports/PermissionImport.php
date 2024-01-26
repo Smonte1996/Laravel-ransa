@@ -17,7 +17,7 @@ class PermissionImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        
+
         return new Permission([
             'name' => $row["permiso"],
             'description' => $row["descripcion"],

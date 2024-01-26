@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('seco_frio_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('warehouse_id')->constrained()->onDelete('cascade');
             $table->char('coordinador', 255);
             $table->char('responsables', 255);
             $table->string('name');
+            $table->string('estado');
             $table->timestamps();
         });
     }

@@ -175,7 +175,7 @@
         </td>
 
     </tr>
-    <tr>
+    {{-- <tr>
         <td class="border border-dark" style="font-size:12px;" align="center">
             El items evaluado se cumple en su totalidad. No se evidencia incumplimiento alguno (0 hallazgos).
         </td>
@@ -185,7 +185,7 @@
         <td class="border border-dark" style="font-size:12px;" align="center">
             El items evaluado se cumple de forma parcial y se evidencia un número significativo de incumplimientos (3 hallazgos o más).
         </td>
-    </tr>
+    </tr> --}}
     <tr class="cabecera " align="center">
         <td colspan="4" class="border border-dark" style="font-size:14px;"><strong>Calificación</strong></td>
     </tr>
@@ -238,7 +238,7 @@
         <td class="border border-start-0" style="font-size:12px;">
             6. Rostro sin maquillaje.
         </td>
-        <td class="border border-start-0" style="font-size:12px;">
+        <td class="border border-end-0" style="font-size:12px;">
             9. No usa accesorios (aretes, cadenas, anillo, etc).
         </td>
     </tr>
@@ -251,12 +251,12 @@
             11. Casco/ cofia en buen estado.
         </td>
 
-        <td class="border border-start-0" style="font-size:12px;">
+        <td class="border border-end-0" style="font-size:12px;">
             12. Botas en buen estado.
         </td>
      </tr>
      <tr>
-        <td colspan="3" class="border border-start-0 text-center" style="font-size:12px;">
+        <td colspan="3" class="border border-end-0 text-center" style="font-size:12px;">
             13. Hace uso de guantes cuando corresponda.
         </td>
      </tr>
@@ -264,12 +264,14 @@
   <table width="100%" class="border border-dark" cellspacing="0" cellpadding="3">
     <thead>
     <tr class="cabecera" align="center">
-        <td></td>
+        <td rowspan="2" class="border border-dark"></td>
         <td colspan="14" class="border border-dark" style="font-size:13px;"><strong>Parámetros de evaluación</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td rowspan="2" colspan="4" class="border border-dark"></td>
+    </tr>
+    <tr class="cabecera" align="center">
+    <td colspan="9" class="border border-dark" style="font-size:13px;"><strong>Higiene personal</strong></td>
+    <td colspan="3" class="border border-dark" style="font-size:13px;"><strong>Uniforme</strong></td>
+    <td colspan="2" class="border border-dark" style="font-size:13px;"><strong>Durante el trabajo</strong></td>
     </tr>
 
     <tr>
@@ -287,8 +289,8 @@
         <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 11 </strong></td>
         <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 12 </strong></td>
         <td class="border border-dark cabecera" style="font-size:12px;" align="center"><strong> 13 </strong></td>
-        <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> % de cumplimiento</strong> </td>
         <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Actividad que se está realizando</strong> </td>
+        <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> % de cumplimiento</strong> </td>
         <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de incumplimientos </strong></td>
         <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Detalle de acciones tomadas </strong></td>
         <td class="border border-dark cabecera" style="font-size:11px;" align="center"><strong> Verificación de cierre de acciones</strong></td>
@@ -499,6 +501,10 @@
                 @endswitch
             </td>
 
+            <td align="center" class="border border-dark" style="font-size:10px;">
+                {{$PDFRESPONSABLES->observacion}}
+            </td>
+
               @if ($PDFRESPONSABLES->muc != 1 && $PDFRESPONSABLES->mbl != 1 && $PDFRESPONSABLES->mcl != 1 &&  $PDFRESPONSABLES->mcp != 1 && $PDFRESPONSABLES->mna != 1 && $PDFRESPONSABLES->mul != 1 && $PDFRESPONSABLES->mnp != 1 && $PDFRESPONSABLES->mml != 1 && $PDFRESPONSABLES->mnaa != 1 && $PDFRESPONSABLES->mub != 1 && $PDFRESPONSABLES->mcb != 1 && $PDFRESPONSABLES->mbe != 1 && $PDFRESPONSABLES->mhg != 1)
               <td align="center" class="border border-dark" style="font-size:12px; background-color: #73d884">
                 Cumple
@@ -520,15 +526,12 @@
               @endif
 
             <td align="center" class="border border-dark" style="font-size:10px;">
-                {{$PDFRESPONSABLES->observacion}}
+                 {{$PDFRESPONSABLES->muc1}} @isset($PDFRESPONSABLES->mbl1) - @endisset {{$PDFRESPONSABLES->mbl1}}@isset($PDFRESPONSABLES->mcl1) - @endisset {{$PDFRESPONSABLES->mcl1}}@isset($PDFRESPONSABLES->mcp1) - @endisset  {{$PDFRESPONSABLES->mcp1}}@isset($PDFRESPONSABLES->mna1) - @endisset {{$PDFRESPONSABLES->mna1}}@isset($PDFRESPONSABLES->mul1) - @endisset {{$PDFRESPONSABLES->mul1}}
+                 @isset($PDFRESPONSABLES->mnp1) - @endisset{{$PDFRESPONSABLES->mnp1}}@isset($PDFRESPONSABLES->mml1) - @endisset {{$PDFRESPONSABLES->mml1}}@isset($PDFRESPONSABLES->mnaa1) - @endisset {{$PDFRESPONSABLES->mnaa1}} @isset($PDFRESPONSABLES->mub1) - @endisset {{$PDFRESPONSABLES->mub1}}@isset($PDFRESPONSABLES->mcb1) - @endisset {{$PDFRESPONSABLES->mcb1}}@isset($PDFRESPONSABLES->mbe1) - @endisset {{$PDFRESPONSABLES->mbe1}}@isset($PDFRESPONSABLES->mhg1) - @endisset {{$PDFRESPONSABLES->mhg1}}
             </td>
             <td align="center" class="border border-dark" style="font-size:10px;">
-                {{$PDFRESPONSABLES->muc1}} {{$PDFRESPONSABLES->mbl1}} {{$PDFRESPONSABLES->mcl1}}  {{$PDFRESPONSABLES->mcp1}} {{$PDFRESPONSABLES->mna1}} {{$PDFRESPONSABLES->mul1}}
-                {{$PDFRESPONSABLES->mnp1}} {{$PDFRESPONSABLES->mml1}} {{$PDFRESPONSABLES->mnaa1}} {{$PDFRESPONSABLES->mub1}} {{$PDFRESPONSABLES->mcb1}} {{$PDFRESPONSABLES->mbe1}} {{$PDFRESPONSABLES->mhg1}}
-            </td>
-            <td align="center" class="border border-dark" style="font-size:10px;">
-                {{$PDFRESPONSABLES->muc2}} {{$PDFRESPONSABLES->mbl2}} {{$PDFRESPONSABLES->mcl2}}  {{$PDFRESPONSABLES->mcp2}} {{$PDFRESPONSABLES->mna2}} {{$PDFRESPONSABLES->mul2}}
-                {{$PDFRESPONSABLES->mnp2}} {{$PDFRESPONSABLES->mml2}} {{$PDFRESPONSABLES->mnaa2}} {{$PDFRESPONSABLES->mub2}} {{$PDFRESPONSABLES->mcb2}} {{$PDFRESPONSABLES->mbe2}} {{$PDFRESPONSABLES->mhg2}}
+                {{$PDFRESPONSABLES->muc2}} @isset($PDFRESPONSABLES->mbl2) - @endisset {{$PDFRESPONSABLES->mbl2}}@isset($PDFRESPONSABLES->mcl2) - @endisset {{$PDFRESPONSABLES->mcl2}}@isset($PDFRESPONSABLES->mcp2) - @endisset  {{$PDFRESPONSABLES->mcp2}}@isset($PDFRESPONSABLES->mna2) - @endisset {{$PDFRESPONSABLES->mna2}}@isset($PDFRESPONSABLES->mul2) - @endisset {{$PDFRESPONSABLES->mul2}}
+                 @isset($PDFRESPONSABLES->mnp2) - @endisset{{$PDFRESPONSABLES->mnp2}}@isset($PDFRESPONSABLES->mml2) - @endisset {{$PDFRESPONSABLES->mml2}}@isset($PDFRESPONSABLES->mnaa2) - @endisset {{$PDFRESPONSABLES->mnaa2}} @isset($PDFRESPONSABLES->mub2) - @endisset {{$PDFRESPONSABLES->mub2}}@isset($PDFRESPONSABLES->mcb2) - @endisset {{$PDFRESPONSABLES->mcb2}}@isset($PDFRESPONSABLES->mbe2) - @endisset {{$PDFRESPONSABLES->mbe2}}@isset($PDFRESPONSABLES->mhg2) - @endisset {{$PDFRESPONSABLES->mhg2}}
             </td>
             <td align="center" class="border border-dark" style="font-size:10px;">
                 {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}}--}}

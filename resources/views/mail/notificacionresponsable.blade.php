@@ -1,4 +1,4 @@
-<style> 
+<style>
 /*.sticky + .contenidoCuadro {
   padding-top: 102px;
 }*/
@@ -115,7 +115,7 @@ Hola,
 </tr>
 <tr>
 <td class="color-lead">
-El reclamo ya a sido asignado responsable para su respectiva investigacion y analisis con los planes de acciones  definido. 
+El reclamo ya a sido asignado responsable para su respectiva investigacion y analisis con los planes de acciones  definido.
 </td>
 </tr>
 <tr>
@@ -141,21 +141,21 @@ El reclamo ya a sido asignado responsable para su respectiva investigacion y ana
 </tr>
 <tr>
 <br>
-@switch($solicitud->clasificacion->causal_general_id) 
+@switch($solicitud->clasificacion->causal_general_id)
     @case(1)
-    @component('mail::button', ['url' => route('adm.Investigacion.correccion', ['solicitud' =>$notificacionCR->solicitude_id]), 'color' => 'green'])
+    @component('mail::button', ['url' => route('adm.Investigacion.correccion', ['solicitud' => encrypt($notificacionCR->solicitude_id)]), 'color' => 'green'])
     Cumplimiento de acciones
-    @endcomponent   
+    @endcomponent
         @break
     @case(5)
-    @component('mail::button', ['url' => route('adm.Investigacion.correccion', ['solicitud' =>$notificacionCR->solicitude_id]), 'color' => 'green'])
+    @component('mail::button', ['url' => route('adm.Investigacion.correccion', ['solicitud' => encrypt($notificacionCR->solicitude_id)]), 'color' => 'green'])
     Cumplimiento de acciones
-    @endcomponent    
+    @endcomponent
         @break
     @default
-@component('mail::button', ['url' => route('adm.Investigador', ['solicitud'=>$notificacionCR->solicitude_id]), 'color' => 'green'])
+@component('mail::button', ['url' => route('adm.Investigador', ['solicitud'=> encrypt($notificacionCR->solicitude_id)]), 'color' => 'green'])
 Cumplimiento de acciones
-@endcomponent      
+@endcomponent
 @endswitch
 
 </tr>

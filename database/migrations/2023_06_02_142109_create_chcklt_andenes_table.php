@@ -28,6 +28,10 @@ return new class extends Migration
             $table->string('bao4')->nullable();
             $table->string('ba5');
             $table->string('bao5')->nullable();
+            $table->string('ba6');
+            $table->string('bao6')->nullable();
+            $table->string('ba7');
+            $table->string('bao7')->nullable();
             $table->timestamps();
         });
     }

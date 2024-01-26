@@ -72,7 +72,7 @@
                                 </div>
                             </div>
 
-                              @if (!is_null($this->Infor_ph))
+                               @if (!is_null($this->Infor_ph))
                               <div x-data="{provedoruio:'null'}">
                                 <div class="col-sm-12 col-md-4" x-show="textselect == 'Bodega Uio'">
                                     <div class="mb-3">
@@ -89,7 +89,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-4" x-show="textselect == 'Bodega Uio'&& provedoruio == 'Estibas Torres'">
+                                <div class="col-sm-12 col-md-4" x-show="textselect == 'Bodega Uio' && provedoruio == 'Estibadores A.B' || provedoruio == 'Logiktel'">
                                     <div class="mb-3">
                                     <label for="Supervisores" class="form-label fs-6 text-lead-500">Supervisor:</label>
                                     <select class="form-control rounded @error('Supervisores') is-invalid @enderror" wire:model.defer="Supervisores" name="Supervisores" id="Supervisores" required>
@@ -195,7 +195,7 @@
 
                             </div>
                         </div>
-                             @else
+                            @else
 
                             <div class="col-sm-12 col-md-4 pb-3">
                                 <div class="pt-4">

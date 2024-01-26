@@ -12,10 +12,11 @@ class Pasillo extends Model
     protected $fillable = [
     'seco_frio_id',
     'user_id',
+    'warehouse_id',
     'name',
     'coordinador',
     'responsables',
-
+    'estado'
     ];
 
 
@@ -24,7 +25,7 @@ class Pasillo extends Model
         return $this->belongsTo(Seco_frio::class, 'seco_frio_id');
     }
 
-    function supervisor() 
+    function supervisor()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

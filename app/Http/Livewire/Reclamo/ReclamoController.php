@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Reclamo;
 
+use App\Exports\keyuserReclamoExport;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\solicitude;
@@ -19,6 +20,8 @@ class ReclamoController extends Component
      public $solicitudes;
      public $date;
      public $estado;
+     public $valores;
+     public $open = false;
 
       public function mount()
       {
@@ -38,6 +41,7 @@ class ReclamoController extends Component
             $solicitudes = Solicitude::where('estado', $this->estado)->get();
          //    dd($this->estado);
             }
+            $this->emit('select2');
         return view('livewire.reclamo.index');
     }
 
@@ -53,9 +57,15 @@ class ReclamoController extends Component
             return response()->download(storage_path('app/public/Reclamos/Analisis/'.trim($archivo)));
     }
 
+    function DescargarReclamo()
+    {
+       $valores = [2,3];
+      return (new keyuserReclamoExport($valores))->download('Reclamo Cliente.xlsx');
+    }
+
     public function ReclamoPdf($id)
     {
-        $Solicitudes = solicitude::find($id);
+        $Solicitudes = solicitude::find(decrypt($id));
 
         $pdfs = PDF::loadView('pdf.informe_pdf', compact('Solicitudes'));
 

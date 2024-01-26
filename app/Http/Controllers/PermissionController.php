@@ -111,7 +111,7 @@ class PermissionController extends Controller
         // var_dump();
         // Excel::import(new PermissionImport, request()->file('filexlsx'));
 
-        (new PermissionImport)->import(request()->file('filexlsx'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+        (new PermissionImport)->import(request()->file('filexlsx'), 'local', Excel::XLSX);
 
         // return redirect('/')->with('success', 'All good!');
 

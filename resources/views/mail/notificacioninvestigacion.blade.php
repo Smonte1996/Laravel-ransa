@@ -60,7 +60,7 @@
       }
 .valoritem:hover .popover{
     width: 250px;
-    } 
+    }
 /*.sticky + .contenidoCuadro {
   padding-top: 102px;
 }*/
@@ -185,7 +185,7 @@
 <table>
 <tr align="center">
 <td>
- <img width="400" src="{{asset('img/Proceso.png')}}">   
+ <img width="400" src="{{asset('img/Proceso.png')}}">
 </td>
 </tr>
 </table>
@@ -198,30 +198,37 @@ Hola, {{$solicitud->nombre}}
 <td class="color-lead">
 Queremos informarte que tu caso se encuentra en investigación. La fecha estimada de respuesta es: {{$solicitud->investigacion->fecha_programada}}
 </td>
-<tr> 
+<tr>
 <td class="color-lead me">
-Plan de acciones 
+Plan de acciones
 </td>
-</tr>   
+</tr>
 <tr>
 <td>
 <ul class="color-lead me">
  @foreach ($solicitud->acciones as $action)
 <li>{{ $action->name }}</li>
-@endforeach 
+@endforeach
 </ul>
 </td>
 </tr>
 <tr>
 <td class="colir-lead">
-Queremos saber tu opinión es muy importante para nosotros hasta la siguiente encuesta <a href="{{url('Encuesta/cliente', [ 'solicitude' => $solicitud->id])}}">Aquí.</a>   
-</td>   
+Queremos saber tu opinión es muy importante para nosotros hasta la siguiente encuesta.
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="{{url('Encuesta/cliente', [ 'solicitude' => encrypt($solicitud->id)])}}">
+<img width="250" src="{{asset('img/Encuesta.png')}}" alt="Foto de la encuesta">
+</a>
+</td>
 </tr>
 <tr>
 <td>
 <hr size="2px" color="black" />
 </td>
-</tr> 
+</tr>
 </table>
 <table class="cuerpo mt" width="100%">
 <tr>
@@ -237,11 +244,11 @@ Queremos informarte que tu caso ha sido registrado.
 </tr>
 <tr>
 <td class="color-lead me">Cliente:</td>
- <td class="color-lead me">{{ $solicitud->cliente }}</td> 
+ <td class="color-lead me">{{ $solicitud->cliente }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Servicio Brindado por Ransa:</td>
-<td class="color-lead me">{{ $solicitud->servicio_ransa->name }}</td> 
+<td class="color-lead me">{{ $solicitud->servicio_ransa->name }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Sub servicio:</td>
@@ -249,11 +256,11 @@ Queremos informarte que tu caso ha sido registrado.
 </tr>
 <tr>
 <td class="color-lead me">Sede:</td>
-<td class="color-lead me">{{ $solicitud->sede->name}}</td> 
+<td class="color-lead me">{{ $solicitud->sede->name}}</td>
 </tr>
 <tr>
 <td class="color-lead me">Tipo de Novedad:</td>
-<td class="color-lead me">{{ $solicitud->tipo_reclamo->name}}</td> 
+<td class="color-lead me">{{ $solicitud->tipo_reclamo->name}}</td>
 </tr>
 <tr>
 <td class="color-lead me">Titulo del caso:</td>
@@ -261,13 +268,13 @@ Queremos informarte que tu caso ha sido registrado.
 </tr>
 <tr>
 <td class="color-lead me">Descripcion:</td>
-<td class="color-lead me">{{ $solicitud->Descripcion }}</td> 
+<td class="color-lead me">{{ $solicitud->Descripcion }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Reportado por:</td>
 <td class="color-lead me">
     {{ $solicitud->nombre }}
-</td> 
+</td>
 </tr>
 </table>
 

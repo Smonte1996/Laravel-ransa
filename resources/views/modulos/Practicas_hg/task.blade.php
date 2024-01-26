@@ -57,7 +57,7 @@
                                         </tr>
                                     </table>
 
-                                    <form action="{{ route('adm.p.h&g.update', $resultado) }}" method="post" id="confirmaction">
+                                    <form action="{{ route('adm.Tasks.Proveedor', [$resultado,$ids]) }}" method="post" id="confirmaction">
                                         {{-- @php
                                             echo $resultado;
                                         @endphp --}}

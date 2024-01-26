@@ -44,7 +44,7 @@ class Practicahg extends Model
         return $this->hasOne(User::class,'id','user_id');
     }
 
-    public function Responsable()
+    public function Supervisores()
     {
         return $this->belongsTo(User::class,'user_id');
     }

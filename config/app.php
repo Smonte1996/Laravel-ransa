@@ -189,7 +189,8 @@ return [
          */
          Yajra\DataTables\DataTablesServiceProvider::class,
          Maatwebsite\Excel\ExcelServiceProvider::class,
-         
+        //  Laravel\Charts\ChartsServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -200,6 +201,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+
 
     ],
 

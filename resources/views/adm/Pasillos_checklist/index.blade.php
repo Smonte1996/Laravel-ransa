@@ -3,7 +3,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>checklist pasillo</h3>
+                    <h3>Checklist pasillo</h3>
                 </div>
 
                 <div class="title_right">
@@ -28,10 +28,9 @@
 
                             <div class="clearfix"></div>
                         </div>
-                        {{-- <div class="">
-                            <a class="btn-green-500 btn text-white btn-sm" href="#">Registrar</a>
-
-                        </div> --}}
+                         <div class="pt-2">
+                            <a class="btn-green-500 btn text-white btn-sm" href="{{route('adm.check.pasillos.create')}}">Registrar</a>
+                        </div>
                         <div class="x_content">
                             <table id="reclamos" class="table text-green-500 align-middle table-hover" style="width:100%">
                                 <thead>
@@ -48,17 +47,17 @@
                                 <tbody>
                                     @foreach ( $Pasillos_R as $Pasillos_Rs )
                                     <tr>
-                                        
+
                                          <td>
-                                            {{$Pasillos_Rs->id}} 
+                                            {{$Pasillos_Rs->id}}
                                         </td>
 
                                         <td>
-                                            {{$Pasillos_Rs->Bodega->name}} 
+                                            {{$Pasillos_Rs->Bodega->name}}
                                         </td>
-                                            
+
                                         <td>
-                                             {{$Pasillos_Rs->name}} 
+                                             {{$Pasillos_Rs->name}}
                                         </td>
 
                                         <td>
@@ -74,13 +73,17 @@
                                         </td>
 
                                          <td>
-                                            <a href="{{route('adm.check.pasillos.edit', $Pasillos_Rs->id)}}" class="btn btn-orange-500 text-white border" >
+                                            <div class="btn-group btn-group-sm " role="group" aria-label="">
+                                            <a href="{{route('adm.check.pasillos.edit', encrypt($Pasillos_Rs->id))}}" class="btn btn-orange-500 text-white border" >
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
-                                        </td> 
-       
+
+                                            <a href="{{route('adm.ChecksPasillos.Eliminar', encrypt($Pasillos_Rs->id))}}" class="btn btn-sm btn-danger ms-n5" ><i class="fas fa-trash-alt"></i></a>
+                                            </div>
+                                        </td>
+
                                     </tr>
-                                      @endforeach 
+                                      @endforeach
                                 </tbody>
                             </table>
                         </div>

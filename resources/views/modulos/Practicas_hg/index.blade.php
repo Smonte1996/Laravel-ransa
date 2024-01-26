@@ -36,6 +36,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Solicitud</th>
+                                        <th>Responsable</th>
                                         <th data-priority="1">Evaluador</th>
                                         <th >Almacen</th>
                                         <th>Fecha</th>
@@ -49,10 +50,25 @@
                                          {{$Higiene->id}}
                                      </td>
                                      <td>
-                                        {{$Higiene->solicitud}}@isset($Higiene->proveedores)
-                                        -{{$Higiene->proveedores}}
+                                        {{$Higiene->solicitud}}
+                                     </td>
+
+                                     <td>
+                                    @foreach ($Higiene->PersonalRansa as $ransa )
+                                    @isset($ransa->infor_practicahg_id)
+                                    {{$ransa->Supervisor->name}}
+                                    @endisset
+                                    @endforeach
+                                    @foreach ($Higiene->NombreProveedor as $Proveedores)
+                                    @isset($Proveedores->infor_practicahg_id)
+                                        {{$Proveedores->proveedor}}
+                                    @endisset
+                                    @endforeach
+                                    @isset($Higiene->proveedores)
+                                        {{$Higiene->proveedores}}
                                         @endisset
                                      </td>
+
                                      <td>
                                          {{$Higiene->evaluador}}
                                      </td>
@@ -89,7 +105,7 @@
                                                       @if (empty($prueba->puc3) && empty($prueba->pbl3) && empty($prueba->pcl3) && empty($prueba->pcp3) && empty($prueba->pna3) && empty($prueba->pul3))
                                                       {{-- if {{$idpro1[0]}} != {{$prueba->infor_practicahg_id}} --}}
                                                       @if ($hola <= 1)
-                                                     <a href="{{route('adm.p.h&g.edit', $Higiene->id)}}" class="btn btn-orange-500 text-white border" target="_blank" >
+                                                     <a href="{{route('adm.p.h&g.edit', $Higiene->id)}}" class="btn btn-orange-500 text-white border" style="font-size: 11px;" target="_blank" >
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                     Tarea
                                                      </a>
@@ -99,7 +115,7 @@
                                                       @else
 
                                                       @if ($hola <= 1)
-                                                      <span class="btn bg-green-500 p-1 text-white border">Tarea cerrada</span>
+                                                      <span class="btn bg-green-500 p-1 text-white border" style="font-size: 11px;">Tarea cerrada</span>
                                                      @else
 
                                                     @endif
@@ -129,17 +145,18 @@
                                                 @endphp
                                                 @foreach ( $Higiene->Maquila as $prueba)
                                                 @php
-                                                    $idpro3 = $prueba->infor_practicahg_id;
+                                                    // $idpro3 = $prueba->infor_practicahg_id;
                                                     $hola = 0;
                                                      foreach ($idpro2 as $elemento) {
-                                                       if ($elemento === $idpro3) {
+                                                    //    if ($elemento === $idpro3) {
                                                          $hola++;
-                                                       } }
+                                                       }
                                                 @endphp
                                                     @if (empty($prueba->muc1) && empty($prueba->mbl1) && empty($prueba->mcl1) && empty($prueba->mcp1) && empty($prueba->mna1) && empty($prueba->mul1) && empty($prueba->mml1) && empty($prueba->mnaa1) && empty($prueba->mub1) && empty($prueba->mcb1) && empty($prueba->mbe1) && empty($prueba->mhg1))
 
                                                     @else
                                                        @if (empty($prueba->muc3) && empty($prueba->mbl3) && empty($prueba->mcl3) && empty($prueba->mcp3) && empty($prueba->mna3) && empty($prueba->mul3) && empty($prueba->mml3) && empty($prueba->mnaa3) && empty($prueba->mub3) && empty($prueba->mcb3) && empty($prueba->mbe3) && empty($prueba->mhg3))
+                                                      {{-- {{$hola}} --}}
                                                        @if ($hola <= 1)
                                                      <a href="{{route('adm.Tarea.Maquila', $Higiene->id)}}" class="btn btn-orange-500 text-white border" target="_blank" >
                                                     <i class="fa-regular fa-pen-to-square"></i>
@@ -157,9 +174,9 @@
                                                   @endif
                                                     @endif
                                                  @endif
-                                                 @php
+                                                 {{-- @php
                                                   array_push($idpro2, $prueba->infor_practicahg_id);
-                                                  @endphp
+                                                  @endphp --}}
                                                  @endforeach
                                                 </div>
                                                 @break

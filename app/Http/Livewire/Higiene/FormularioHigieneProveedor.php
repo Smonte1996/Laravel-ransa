@@ -154,27 +154,27 @@ class FormularioHigieneProveedor extends Component
 
        $this->emit('alert','Muchas gracias, el correo te llegara en cual quiere momento.');
 
-       if ($this->Infor_ph->almacen == "Bodega Gye") {
-        switch ($this->Practica_Provvedor->Supervisores) {
-            case 'Magaly Marlene Guzman':
-                Mail::to('stevemontenegro_9@hotmail.com')->send(new notificarProveedor($this->Infor_ph));
-                break;
+         if ($this->Infor_ph->almacen == "Bodega Gye") {
+          switch ($this->Practica_Provvedor->supervisor) {
+              case 'Magaly Marlene Guzman':
+                  Mail::to('stevemontenegro_9@hotmail.com')->send(new notificarProveedor($this->Infor_ph));
+                  break;
 
-            default:
-               Mail::to('stevenmontorres96@gmail.com')->send(new notificarProveedor($this->Infor_ph));
-                break;
-          }
-       } else {
-        switch ($this->Practica_Provvedor->Supervisores) {
-            case 'Lenin Jeison Itaz Chango':
-                Mail::to('smontenegrot@ransa.net')->send(new notificarProveedor($this->Infor_ph));
-                break;
+               default:
+                  Mail::to('stevenmontorres96@gmail.com')->send(new notificarProveedor($this->Infor_ph));
+                   break;
+             }
+          } else {
+           switch ($this->Practica_Provvedor->supervisor) {
+               case 'Lenin Jeison Itaz Chango':
+                   Mail::to('smontenegrot@ransa.net')->send(new notificarProveedor($this->Infor_ph));
+                   break;
 
-            default:
-                Mail::to(['smontenegrot@ransa.net', 'stevenmontorres96@gmail.com'])->send(new notificarProveedor($this->Infor_ph));
-                break;
+               default:
+                   Mail::to(['smontenegrot@ransa.net', 'stevenmontorres96@gmail.com'])->send(new notificarProveedor($this->Infor_ph));
+                   break;
+             }
           }
-       }
 
         return redirect()->route('adm.practica.Proveedor');
 

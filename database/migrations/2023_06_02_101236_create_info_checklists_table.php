@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('evaluador');
             $table->string('almacen');
             $table->date('fecha');
+            $table->string('estado');
             $table->timestamps();
         });
     }

@@ -23,6 +23,10 @@ class Chcklt_andene extends Model
         'bao4',
         'ba5',
         'bao5',
+        'ba6',
+        'bao6',
+        'ba7',
+        'bao7',
     ];
 
     function Pasillos()

@@ -112,7 +112,6 @@
           </div>  --}}
     </header>
      <p class="naranja" style="font-size: 14px">Verificación del cumplimiento de prácticas higiénicas en el personal</p>
-    {{--<hr class="grosor"/> --}}
 
     <div class="text-center pt-1 m-2">
         <table width="100%" class="pt-3" cellspacing="0" cellpadding="3" >
@@ -195,15 +194,15 @@
             </td>
         </tr>
       </table>
-   @if ($pdfi->almacen == "Bodega Uio")
+   {{-- @if ($pdfi->almacen == "Bodega Uio") --}}
 
 
             <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
                 <tr align="center">
-                    <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor3))
+                    <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor))
 
                     @else
-                    {{$supervisor3}}
+                    {{$supervisor}}
                     @endif </strong></td>
                 </tr>
                 <tr>
@@ -255,7 +254,7 @@
                 </tr>
              </thead>
              <tbody>
-                @foreach ($pdfl as $Hgs)
+                @foreach ($pdfm as $Hgs)
                     <tr>
                         <td class="border border-dark" style="font-size:12px;">
                           {{$Hgs->Personal->name}} {{$Hgs->Personal->lastname}}
@@ -380,10 +379,45 @@
                     </tr>
                 @endforeach
              </tbody>
+             <tr class="cabecera">
+                <td colspan="11" class="border border-dark text-center" style="font-size:13px;"><strong>Resulatdo de la evaluación</strong></td>
+             </tr>
+             <tr>
+                <td colspan="5" class="border border-dark cabecera text-center" style="font-size:12px;">
+                    Número de personas evaluadas
+                </td>
+                <td colspan="2" class="border border-dark text-center" style="font-size:13px;">
+                    <strong>{{$pdfm->count()}}</strong>
+                  </td>
+                  <td rowspan="2" colspan="2" class="border border-dark cabecera text-center" style="font-size:12px;">
+                    Porcentaje de cumplimiento
+                 </td>
+                 <td rowspan="2" colspan="2" class="border border-dark text-center" style="font-size:12px;">
+                  <strong>{{round($Todos)}}%</strong>
+                 </td>
+             </tr>
+             <tr>
+                <td colspan="5" class="border border-dark cabecera text-center" style="font-size:12px;">
+                    Calificación por Porcentaje de Cumplimiento
+                </td>
+                <td colspan="2" class="border border-dark cabecera text-center" style="font-size:13px;">
+                <strong>
+                    @if (round($Todos) > 95)
+                    Muy Bueno
+                @elseif (round($Todos) > 85)
+                    Bueno
+                @elseif (round($Todos) > 70)
+                    Aceptable
+                @elseif (round($Todos) > 0)
+                    Deficiente
+                @endif
+                </strong>
+                </td>
+             </tr>
               </table>
 
 
-              <div class="page-break"></div>
+              {{-- <div class="page-break"></div>
 
               <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
                   <tr  align="center">
@@ -553,7 +587,7 @@
                               {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
                           </td>
                           <td align="center" class="border border-dark" style="font-size:12px;">
-                              {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                               @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
 
                              @else
@@ -923,7 +957,7 @@
                                   {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
                               </td>
                               <td align="center" class="border border-dark" style="font-size:12px;">
-                                  {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                                   @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
 
                                  @else
@@ -937,9 +971,9 @@
                           </tr>
                       @endforeach
                    </tbody>
-                    </table>
+                    </table> --}}
 
-                      <div class="page-break"></div>
+                      {{-- <div class="page-break"></div>
 
                       <p class="text-center" style="font-size:20px;"><strong>Resultado de la Verificación de practicas de higienes por supervisor </strong></p>
 
@@ -957,14 +991,14 @@
                        </td>
                    </tr>
                    @endforeach
-                </table>
+                </table> --}}
 
 
-                @else
+                {{-- @else --}}
 
                  {{-- Parte de almacen Guayaquil --}}
 
-  <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
+  {{-- <table width="100%" class="pt-3 border border-dark" cellspacing="0" cellpadding="3">
     <tr align="center">
         <td colspan="3" class="border border-dark" style="font-size:13px; background-color:#05941d; color:white"><strong>Responsable: @if (empty($supervisor))
 
@@ -1132,7 +1166,7 @@
                 {{$Hgs1->uc2}} {{$Hgs1->bl2}} {{$Hgs1->cl2}}  {{$Hgs1->cp2}} {{$Hgs1->na2}} {{$Hgs1->ul2}}
             </td>
             <td align="center" class="border border-dark" style="font-size:12px;">
-                {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                 @if (empty($Hgs1->uc2) && empty($Hgs1->bl2) && empty($Hgs1->cl2) && empty($Hgs1->cp2) && empty($Hgs1->na2) && empty($Hgs1->ul2))
 
                @else
@@ -1318,7 +1352,7 @@
                 {{$Hgs2->uc2}} {{$Hgs2->bl2}} {{$Hgs2->cl2}}  {{$Hgs2->cp2}} {{$Hgs2->na2}} {{$Hgs2->ul2}}
             </td>
             <td align="center" class="border border-dark" style="font-size:12px;">
-                {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                 @if (empty($Hgs2->uc2) && empty($Hgs2->bl2) && empty($Hgs2->cl2) && empty($Hgs2->cp2) && empty($Hgs2->na2) && empty($Hgs2->ul2))
 
                @else
@@ -1506,7 +1540,7 @@
                   {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
               </td>
               <td align="center" class="border border-dark" style="font-size:12px;">
-                  {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                   @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
 
                  @else
@@ -1693,7 +1727,7 @@
                     {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
                 </td>
                 <td align="center" class="border border-dark" style="font-size:12px;">
-                    {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                     @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
 
                    @else
@@ -1880,7 +1914,7 @@
                       {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
                   </td>
                   <td align="center" class="border border-dark" style="font-size:12px;">
-                      {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                       @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
 
                      @else
@@ -2250,7 +2284,7 @@
                           {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
                       </td>
                       <td align="center" class="border border-dark" style="font-size:12px;">
-                          {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                           @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
 
                          @else
@@ -2437,7 +2471,7 @@
                             {{$Hgs->uc2}} {{$Hgs->bl2}} {{$Hgs->cl2}}  {{$Hgs->cp2}} {{$Hgs->na2}} {{$Hgs->ul2}}
                         </td>
                         <td align="center" class="border border-dark" style="font-size:12px;">
-                            {{-- {{$Hgs->uc3}} {{$Hgs->bl3}} {{$Hgs->cl3}}  {{$Hgs->cp3}} {{$Hgs->na3}} {{$Hgs->ul3}} --}}
+
                             @if (empty($Hgs->uc2) && empty($Hgs->bl2) && empty($Hgs->cl2) && empty($Hgs->cp2) && empty($Hgs->na2) && empty($Hgs->ul2))
 
                            @else
@@ -2473,7 +2507,7 @@
            </tr>
            @endforeach
         </table>
-        @endif
+        @endif --}}
 
 
 

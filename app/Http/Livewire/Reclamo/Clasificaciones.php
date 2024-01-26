@@ -67,7 +67,7 @@ class Clasificaciones extends Component
          $this->empleado = Employee::where('position_id', 3)->get();
           $this->Generals = Causal_general::all();
           $this->Cliente = Client::all();
-        $this->solicitude = solicitude::find($solicitude);
+        $this->solicitude = solicitude::find(decrypt($solicitude));
      }
 
       public function updatedcausalgeneral($causal_general_id)
@@ -89,8 +89,9 @@ class Clasificaciones extends Component
        $affected = DB::table('solicitudes')
        ->where('id', $this->solicitude->id)
        ->update(['estado' => 2]);
+    //    $this->solicitude->clasificacion->Empleados->users[0]->email ,
 
-      Mail::to([$this->solicitude->clasificacion->Empleados->users[0]->email ,"stevemontenegro_9@hotmail.com"])->send(new notificacionresponsable($notificacionclasificacion));
+      Mail::to(["stevemontenegro_9@hotmail.com"])->send(new notificacionresponsable($notificacionclasificacion));
       Mail::to([$this->solicitude->correo ,"stevemontenegro_9@hotmail.com"])->send(new notificacionclasificacion($notificacionclasificacion));
 
       redirect()->route('adm.reclamo');

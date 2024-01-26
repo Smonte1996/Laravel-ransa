@@ -36,6 +36,8 @@ return new class extends Migration
             $table->char('bfo8','255')->nullable();
             $table->string('bf9');
             $table->char('bfo9','255')->nullable();
+            $table->string('bf10');
+            $table->char('bfo10','255')->nullable();
             $table->timestamps();
         });
     }
