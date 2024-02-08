@@ -1,49 +1,52 @@
 <?php
 
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActionController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\ReclamoController;
-use App\Http\Livewire\Guest\ReclamoCliente;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Aql_defectoController;
 use App\Http\Controllers\AsignarCuadrillaController;
 use App\Http\Controllers\CalificacioneController;
 use App\Http\Controllers\Causal_generalController;
 use App\Http\Controllers\CheckPasilloController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CodigoFactorconversionController;
 use App\Http\Controllers\confirmaraccionesController;
 use App\Http\Controllers\ConfirmarActividades;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\Data_logisticaController;
 use App\Http\Controllers\DefectosController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\PositionController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\WarehouseController;
-use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\DepartamentController;
 use App\Http\Controllers\Detalle_causalController;
-use App\Http\Livewire\Guest\DissatisfiedServices;
-use App\Http\Controllers\NotificationserviceController;
 use App\Http\Controllers\Dissatisfaction_serviceController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Matriz_defectoController;
 use App\Http\Controllers\MuestreoClientController;
 use App\Http\Controllers\MuestreoContenedorController;
 use App\Http\Controllers\Niveles_estandarController;
+use App\Http\Controllers\NotificationserviceController;
 use App\Http\Controllers\PasilloController;
 use App\Http\Controllers\PasilloVistaController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PracticahgController;
+use App\Http\Controllers\ProduccionMaquilaController;
 use App\Http\Controllers\ProvedoresEstibas;
+use App\Http\Controllers\ReclamoController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServicioMaquilaController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Tamano_muestraController;
+use App\Http\Controllers\TarifarioMaquilaController;
 use App\Http\Controllers\User_clientController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WarehouseController;
 use App\Http\Livewire\Checklist\FormularioChecklit;
 use App\Http\Livewire\Guest\Consultas;
+use App\Http\Livewire\Guest\DissatisfiedServices;
 use App\Http\Livewire\Guest\EncuestaCliente;
 use App\Http\Livewire\Guest\Muestreos;
+use App\Http\Livewire\Guest\ReclamoCliente;
 use App\Http\Livewire\Higiene\FormularioHigiene;
 use App\Http\Livewire\Higiene\FormularioHigieneMaquila;
 use App\Http\Livewire\Higiene\FormularioHigieneProveedor;
@@ -58,6 +61,8 @@ use App\Http\Livewire\Reclamo\InvestigacionNoProcede;
 use App\Http\Livewire\Reclamo\MuestreoContenedor;
 use App\Http\Livewire\Reclamo\ReclamoController as ReclamoReclamoController;
 use App\Models\Defecto;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +180,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
           //url para el apartado de maquila.
           Route::get('Trabajo Maquila', OrdenesMaquila::class)->name('Maquila.trabajo');
+          Route::resource('Solicitudes-Maquila', ProduccionMaquilaController::class)->except(['show'])->parameters(['ProduccionMaquila' => 'Solicitud-Maquila'])->names('vista.Maquila');
+          Route::resource('Actividad-tarifa', TarifarioMaquilaController::class)->except(['show'])->parameters(['Actividades-tarifas' => 'Actividad-tarifa'])->names('Tarifa.Maquila');
+          Route::resource('Servicio-Maquila', ServicioMaquilaController::class)->except(['show'])->parameters(['ServiceMaquila' => 'ServicioMaquila'])->names('Maquila.servicio');
+          Route::resource('Codigos', CodigoFactorconversionController::class)->except(['show'])->parameters(['Codigo_conver'=>'Codigo_conversion'])->names('codigo.fc');
+          Route::get('Eliminar-actividad/{id}',[TarifarioMaquilaController::class, 'EliminarActividad'])->name('Actividad.eliminar');
 
         Route::get('/Solicitudes', ReclamoReclamoController::class)->name('reclamo');
         Route::get('download/{id}',[ReclamoReclamoController::class, 'download'])->name('download.Archivo');

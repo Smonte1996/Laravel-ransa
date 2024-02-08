@@ -198,13 +198,14 @@
                             @default
                             <div class="btn-group btn-group-sm " role="group" aria-label="">
 
-                                <button type="button" class="border btn btn-orange-500 text-white images"
+                                {{-- <button type="button" class="border btn btn-orange-500 text-white images"
                                     data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i class="fa fa-image"></i>
-                                </button>
+                                </button> --}}
 
                                 <a href="{{ route('adm.Clasificacion', encrypt($solicitud->id)) }}" class="btn btn-orange-500 text-white border">
                                     <i class="fa fa-user"></i>
+                                    Asignar
                                 </a>
                             </div>
                             @endswitch
@@ -217,7 +218,7 @@
          </div>
     </div>
 </div>
-<x-jet-dialog-modal wire:model.prevent="open">
+{{-- <x-jet-dialog-modal wire:model.prevent="open">
     <x-slot name='title'>
     <div class="col-md-12 col-sm-12 text-center">
         <div class="input-group ">
@@ -238,14 +239,14 @@
             <option value="3">Proceso</option>
         </select>
         </div>
-        </div>
+        </div> --}}
         {{-- <div class="col-sm-12 col-md-6">
             <div class="mt-2 mb-3">
             <label for="form-label fs-6" style="color: #7c7c7c">Fecha</label>
             <input type="date" class="form-control rounded">
             </div>
             </div> --}}
-    </x-slot>
+    {{-- </x-slot>
     <x-slot name='footer'>
         <x-jet-secondary-button wire:click.prevent="$set('open', false)">
             Cancelar
@@ -254,7 +255,7 @@
             Descargar
         </x-jet-danger-button>
     </x-slot>
-  </x-jet-dialog-modal>
+  </x-jet-dialog-modal> --}}
     </div>
     {{-- @push('scripts')
     <script>

@@ -12,7 +12,6 @@ class Paso_a_paso extends Model
     protected $fillable = [
         'cabecera_id',
         'descripcion',
-        'proceso',
         'imagen',
     ];
 }

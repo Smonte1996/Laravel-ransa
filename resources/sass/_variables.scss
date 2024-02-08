@@ -39,3 +39,8 @@ $modal-content-border-color: $green300;
 // $modal-header-border-color: $green500;
 $modal-header-padding:0.5rem 1rem;
 $utilities: map-merge($utilities, ( "background-color": ( property: background-color, class: bg, values: map-merge( $theme-colors, ( "body": $body-bg, "white": $white, "transparent": transparent))), "color": ( property: color, class: text, values: map-merge( $theme-colors, ( "white": $white, "body": $body-color, "muted": $text-muted, "black-50": rgba($black, .5), "white-50": rgba($white, .5), "reset": inherit, )))));
+$theme-colors-rgb: (
+  primary: #000000,
+  secondary: #ffffff,
+  accent: #ff0000,
+);

@@ -175,31 +175,42 @@
 @component('mail::message')
 <table>
 <tr>
-<td align="rigth"><img width="100" src="{{asset('img/LOGO_RANSA_2.png')}}"></td>
+<td align="left">
+<img width="300" src="{{asset('img/Reclamo.jpg')}}" alt="">
+</td>
+<td align="right"><img width="100" src="{{asset('img/logo-ransa.png')}}"></td>
 </tr>
 </table>
 <table width="100%">
-<tr class="color-green titulo mb">
-<td> Comunicado de <span class="text-titulo">RECLAMO </span></td>
-</tr>
-<table>
-<tr align="center">
-<td>
- <img width="400" src="{{asset('img/Proceso.png')}}">
-</td>
-</tr>
-</table>
-<table class="cuerpo mt" width="100%">
 <tr>
 <td class="color-green nombre">
 Hola, {{$solicitud->nombre}}
 </td>
 </tr>
+<tr>
+<td align="center">
+ <img width="100%" src="{{asset('img/en-proceso.png')}}">
+</td>
+</tr>
+</table>
+<table class="cuerpo mt" width="100%">
 <td class="color-lead">
-Queremos informarte que tu caso se encuentra en investigación. La fecha estimada de respuesta es: {{$solicitud->investigacion->fecha_programada}}
+Deseamos informarle que hemos definido las acciones necesarias para atender su reclamo, las cuales se encuentran en proceso de ejecución. La fecha estimada de cierre de dichas acciones es: {{$solicitud->investigacion->fecha_programada->format('d/m/y')}}
 </td>
 <tr>
-<td class="color-lead me">
+<td class="color-lead titulo">Correccion:</td>
+</tr>
+<tr>
+<td>
+<ul class="color-lead me">
+<li>
+{{$solicitud->investigacion->correccion}}
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="color-lead titulo">
 Plan de acciones
 </td>
 </tr>
@@ -214,7 +225,8 @@ Plan de acciones
 </tr>
 <tr>
 <td class="colir-lead">
-Queremos saber tu opinión es muy importante para nosotros hasta la siguiente encuesta.
+Reafirmamos nuestro compromiso de mejorar tu experiencia de servicio y agradecemos la confianza depositada en nosotros.
+A continuación te invitamos a participar de nuestra encuesta de satisfacción en la atención a tu reclamo.
 </td>
 </tr>
 <tr>
@@ -281,7 +293,7 @@ Queremos informarte que tu caso ha sido registrado.
 <table width="100%" class="cuerpo" cellpadding="0" cellspacing="0">
 
 <tr>
-<td class="color-green cuerpos mt">
+<td class="color-green cuerpos">
     ¡Hacemos de la logística una ventaja completitiva!
 </td>
 </tr>

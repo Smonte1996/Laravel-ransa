@@ -60,7 +60,7 @@
       }
 .valoritem:hover .popover{
     width: 250px;
-    } 
+    }
 /*.sticky + .contenidoCuadro {
   padding-top: 102px;
 }*/
@@ -143,9 +143,9 @@
     }
 
     .nombre{
-        font-size: 15px;
+        font-size: 20px;
         font-weight: bold;
-        font: verdana; 
+        font: verdana;
     }
 
     .me {
@@ -175,18 +175,22 @@
 @component('mail::message')
 <table>
 <tr>
-<td align="rigth"><img width="100" src="{{asset('img/LOGO_RANSA_2.png')}}"></td>
+<td align="left">
+<img width="300" src="{{asset('img/Reclamo.jpg')}}" alt="">
+</td>
+<td align="right"><img width="100" src="{{asset('img/logo-ransa.png')}}"></td>
 </tr>
 </table>
 <table width="100%">
-<tr class="color-green titulo mb">
-<td> Comunicado de <span class="text-titulo">{{$solicitud->tipo_reclamo->name}}</span></td>
+<tr>
+<td class="color-green nombre">
+Hola, {{ $solicitud->nombre }}
+</td>
 </tr>
-<table>
-<tr align="center">
-<td >
- <img width="400" src="{{ asset('img/clasificacion.png') }}" >    
-</td>   
+<tr>
+<td align="center">
+ <img width="100%" src="{{ asset('img/investigacion.png') }}" >
+</td>
 </tr>
 </table>
 
@@ -197,13 +201,13 @@ Hola, {{ $solicitud->nombre }}
 </td>
 </tr>
 <td class="color-lead">
-Le informamos que su reclamo ha sido asignado al responsable correspondiente para su investigación y análisis. Se han definido planes de acción para abordar su preocupación de manera efectiva.
+Le informamos que su reclamo ha sido asignado al responsable correspondiente para su investigación y análisis.
 </td>
-<tr> 
+<tr>
 <td>
 <hr size="2px" color="black" />
 </td>
-</tr> 
+</tr>
 </table>
 <table class="cuerpo mt" width="100%">
 <tr>
@@ -218,11 +222,11 @@ Le informamos que su reclamo ha sido asignado al responsable correspondiente par
 </tr>
 <tr>
 <td class="color-lead me">Cliente:</td>
- <td class="color-lead me">{{ $solicitud->cliente }}</td> 
+ <td class="color-lead me">{{ $solicitud->cliente }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Servicio Brindado por Ransa:</td>
-<td class="color-lead me">{{ $solicitud->servicio_ransa->name }}</td> 
+<td class="color-lead me">{{ $solicitud->servicio_ransa->name }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Sub servicio:</td>
@@ -230,11 +234,11 @@ Le informamos que su reclamo ha sido asignado al responsable correspondiente par
 </tr>
 <tr>
 <td class="color-lead me">Sede:</td>
-<td class="color-lead me">{{ $solicitud->sede->name}}</td> 
+<td class="color-lead me">{{ $solicitud->sede->name}}</td>
 </tr>
 <tr>
 <td class="color-lead me">Tipo de Novedad:</td>
-<td class="color-lead me">{{ $solicitud->tipo_reclamo->name}}</td> 
+<td class="color-lead me">{{ $solicitud->tipo_reclamo->name}}</td>
 </tr>
 <tr>
 <td class="color-lead me">Titulo del caso:</td>
@@ -242,19 +246,19 @@ Le informamos que su reclamo ha sido asignado al responsable correspondiente par
 </tr>
 <tr>
 <td class="color-lead me">Descripcion:</td>
-<td class="color-lead me">{{ $solicitud->Descripcion }}</td> 
+<td class="color-lead me">{{ $solicitud->Descripcion }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Reportado por:</td>
 <td class="color-lead me">
     {{ $solicitud->nombre }}
-</td> 
+</td>
 </tr>
 </table>
 
 <table width="100%" class="cuerpo" cellpadding="0" cellspacing="0">
 <tr>
-<td class="color-green cuerpos mt">
+<td class="color-green cuerpos">
     ¡Hacemos de la logística una ventaja completitiva!
 </td>
 </tr>

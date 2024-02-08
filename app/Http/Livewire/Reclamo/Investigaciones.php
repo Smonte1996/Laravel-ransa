@@ -87,11 +87,11 @@ class Investigaciones extends Component
          if (!empty($Investigacion->investigacion->solicitude_id)) {
              abort(401);
          } else {
-         $this->empleado = Employee::where('position_id', 3)->get();
-         $this->empleado = User::with('Employee')->whereHas('Employee', function($query){
-            $query->Where('position_id', 3);
-         })->get();
-        $this->Empleados = Employee::with('users')->whereIn('position_id', [1,2])->get();
+         $this->empleado = Employee::whereIn('position_id', [3,2])->get();
+        //  $this->empleado = User::with('Employee')->whereHas('Employee', function($query){
+        //     $query->Where('position_id', 3);
+        //  })->get();
+        $this->Empleados = Employee::with('users')->whereIn('position_id', [3])->get();
         if (!is_numeric($solicitud)) {
             $this->clasificacion = decrypt($solicitud);
             $this->solicitude = solicitude::find(decrypt($solicitud));
@@ -201,7 +201,8 @@ class Investigaciones extends Component
          ->update(['estado' => 3]);
         //  $this->solicitude->investigacion->Empleados->users[0]->email ,
         // $accion->Empleado->users[0]->email ,
-         Mail::to([$this->solicitude->correo,"stevemontenegro_9@hotmail.com"])->send(New notificacioninvestigacion($this->solicitude));
+        //$this->solicitude->correo,
+         Mail::to(["smontenegrot@ransa.net"])->send(New notificacioninvestigacion($this->solicitude));
          Mail::to(["stevemontenegro_9@hotmail.com"])->send(new notificacionresponsableacciones($this->solicitude));
         //  foreach ($this->solicitude->acciones as  $accion ) {
          Mail::to(["stevemontenegro_9@hotmail.com"])->send(new notificacionactividades($this->solicitude));

@@ -1,0 +1,13 @@
+#firma-electronica {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  #canvas {
+    border: 1px solid #ddd;
+  }
+
+  #limpiar,
+  #guardar {
+    margin-top: 10px;
+  }

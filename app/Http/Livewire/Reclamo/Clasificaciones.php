@@ -90,9 +90,9 @@ class Clasificaciones extends Component
        ->where('id', $this->solicitude->id)
        ->update(['estado' => 2]);
     //    $this->solicitude->clasificacion->Empleados->users[0]->email ,
-
+     //  $this->solicitude->correo ,
       Mail::to(["stevemontenegro_9@hotmail.com"])->send(new notificacionresponsable($notificacionclasificacion));
-      Mail::to([$this->solicitude->correo ,"stevemontenegro_9@hotmail.com"])->send(new notificacionclasificacion($notificacionclasificacion));
+      Mail::to(["smontenegrot@ransa.net"])->send(new notificacionclasificacion($notificacionclasificacion));
 
       redirect()->route('adm.reclamo');
      }

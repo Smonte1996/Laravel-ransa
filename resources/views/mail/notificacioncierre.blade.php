@@ -60,7 +60,7 @@
       }
 .valoritem:hover .popover{
     width: 250px;
-    } 
+    }
 /*.sticky + .contenidoCuadro {
   padding-top: 102px;
 }*/
@@ -145,7 +145,7 @@
     .nombre{
         font-size: 15px;
         font-weight: bold;
-        font: verdana; 
+        font: verdana;
     }
 
     .me {
@@ -174,30 +174,29 @@
 
 @component('mail::message')
 <table>
-    <tr>
-    <td align="rigth"><img width="100" src="{{asset('img/LOGO_RANSA_2.png')}}"></td>
-    </tr>
+<tr>
+<td align="left">
+<img width="300" src="{{asset('img/Reclamo.jpg')}}" alt="">
+</td>
+<td align="right"><img width="100" src="{{asset('img/logo-ransa.png')}}"></td>
+</tr>
 </table>
 <table width="100%">
-<tr class="color-green titulo mb">
-<td> Comunicado de <span class="text-titulo">{{$solicitud->tipo_reclamo->name}}</span></td>
-</tr>
-<table>
-<tr align="center">
-<td >
- <img width="400" src="{{asset('img/proceso-cierre.png')}}">   
-</td>
-</tr>   
-</table>
-<table class="cuerpo mt" width="100%">
 <tr>
 <td class="color-green nombre">
 Hola, {{ $solicitud->nombre }}
 </td>
 </tr>
 <tr>
+<td align="center">
+ <img width="100%" src="{{asset('img/cierre-caso.png')}}">
+</td>
+</tr>
+</table>
+<table class="cuerpo mt" width="100%">
+<tr>
 <td class="color-lead">
- Queremos informarte que tu caso ha sido resuelto. 
+ Queremos informarte que tu caso ha sido resuelto.
 </td>
 </tr>
 {{-- <tr>
@@ -209,36 +208,48 @@ Puedes consultar tu reclamo en nuestro portal <a href="#" class="color-orange">D
 <td>
 <hr size="2px" color="black" />
 </td>
-</tr>         
+</tr>
 </table>
 <table class="cuerpo mt" width="100%">
 <td class="color-lead">
- Queremos informarte que tu caso se encuentra en investigación. La fecha estimada de respuesta es: {{$solicitud->investigacion->fecha_programada}} 
+    Deseamos informarle que hemos definido las acciones necesarias para atender su reclamo, las cuales se encuentran en proceso de ejecución. La fecha estimada de cierre de dichas acciones es: {{$solicitud->investigacion->fecha_programada->format('d/m/y')}}
 </td>
-<tr> 
+<tr>
+<td class="color-lead titulo">Correccion:</td>
+</tr>
+<tr>
+<td>
+<ul class="color-lead me">
+<li>
+{{$solicitud->investigacion->correccion}}
+</li>
+</ul>
+</td>
+</tr>
+<tr>
 <td class="color-lead titulo">
-Plan de acciones 
+Plan de acciones
 </td>
-</tr>   
+</tr>
 <tr>
 <td>
 <ul class="color-lead me">
  @foreach ($solicitud->acciones as $action)
 <li>{{ $action->name }}</li>
-@endforeach 
+@endforeach
 </ul>
 </td>
 </tr>
 {{-- <tr>
 <td class="colir-lead">
-Queremos saber tu opinión es muy importante para nosotros hasta la siguiente encuesta <a href="#">Aquí.</a>   
-</td>   
+Queremos saber tu opinión es muy importante para nosotros hasta la siguiente encuesta <a href="#">Aquí.</a>
+</td>
 </tr> --}}
 <tr>
 <td>
 <hr size="2px" color="black" />
 </td>
-</tr> 
+</tr>
 </table>
 <table class="cuerpo mt" width="100%">
 <tr>
@@ -250,32 +261,32 @@ Queremos saber tu opinión es muy importante para nosotros hasta la siguiente en
 <tr>
 <td class="color-lead me">N° de caso:</td>
 <td class="color-lead me"> {{$solicitud->codigo_generado}}</td>
-</tr>    
+</tr>
 <tr>
 <td class="color-lead me">Cliente:</td>
- <td class="color-lead me">{{ $solicitud->cliente }}</td> 
+ <td class="color-lead me">{{ $solicitud->cliente }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Servicio Brindado por Ransa:</td>
-<td class="color-lead me">{{ $solicitud->servicio_ransa->name }}</td> 
+<td class="color-lead me">{{ $solicitud->servicio_ransa->name }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Sede:</td>
-<td class="color-lead me">{{ $solicitud->sede->name}}</td> 
+<td class="color-lead me">{{ $solicitud->sede->name}}</td>
 </tr>
 <tr>
 <td class="color-lead me">Tipo de Novedad:</td>
-<td class="color-lead me">{{ $solicitud->tipo_reclamo->name}}</td> 
+<td class="color-lead me">{{ $solicitud->tipo_reclamo->name}}</td>
 </tr>
 <tr>
 <td class="color-lead me">Descripcion:</td>
-<td class="color-lead me">{{ $solicitud->Descripcion }}</td> 
+<td class="color-lead me">{{ $solicitud->Descripcion }}</td>
 </tr>
 <tr>
 <td class="color-lead me">Reportado por:</td>
 <td class="color-lead me">
     {{ $solicitud->nombre }}
-</td> 
+</td>
 </tr>
 </table>
 

@@ -60,7 +60,7 @@
       }
 .valoritem:hover .popover{
     width: 250px;
-    } 
+    }
 /*.sticky + .contenidoCuadro {
   padding-top: 102px;
 }*/
@@ -175,26 +175,26 @@
 @component('mail::message')
 <table>
 <tr>
-<td align="rigth"><img width="100" src="{{asset('img/LOGO_RANSA_2.png')}}"></td>
+<td align="left">
+ <img width="300" src="{{asset('img/Reclamo.jpg')}}" alt="">
+</td>
+<td align="right"><img width="100" src="{{asset('img/logo-ransa.png')}}"></td>
 </tr>
 </table>
 <table width="100%">
-<tr class="color-green titulo mb">
-<td> Comunicado de <span class="text-titulo">{{ $notificacionR->tipo_reclamo->name}} </span></td>
-</tr>
-<table>
-<tr align="center">
-<td>
-<img width="400" src="{{asset('img/procesoregistro.png')}}" >    
-</td>   
-</tr>
-</table>
-<table class="cuerpo mt" width="100%">
 <tr>
 <td class="color-green nombre">
 Hola, {{ $notificacionR->nombre }}
 </td>
 </tr>
+<table>
+<tr>
+<td align="center">
+ <img width="100%" src="{{asset('img/registro.png')}}" >
+ </td>
+</tr>
+</table>
+<table class="cuerpo mt" width="100%">
 <tr>
 <td class="color-lead">
     Queremos informarte que tu caso ha sido registrado.
@@ -205,7 +205,7 @@ Hola, {{ $notificacionR->nombre }}
 <tr>
 <td class="color-lead me">N° de caso:</td>
 <td class="color-lead me">{{$notificacionR->codigo_generado}}</td>
-</tr>   
+</tr>
 <tr>
 <td class="color-lead me">Cliente:</td>
 <td class="color-lead me">{{ $notificacionR->cliente }}</td>
@@ -243,7 +243,7 @@ Hola, {{ $notificacionR->nombre }}
 <table width="100%" class="cuerpo" cellpadding="0" cellspacing="0">
 
 <tr>
-<td class="color-green cuerpos mt">
+<td class="color-green cuerpos">
    ¡Hacemos de la logística una ventaja completitiva!
 </td>
 </tr>

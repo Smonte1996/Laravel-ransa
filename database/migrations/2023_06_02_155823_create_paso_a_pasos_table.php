@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cabecera_id')->constrained()->onDelete('cascade');
             $table->text('descripcion');
-            $table->text('proceso');
             $table->string('imagen');
             $table->timestamps();
         });

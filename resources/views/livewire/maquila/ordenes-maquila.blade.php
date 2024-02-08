@@ -13,9 +13,12 @@
                      <div class=" form-group pull-right">
                         <div class="input-group">
                             <div class="row">
+                                @if (!is_null($GuardarCabecera))
+
+                            @else
                                 <div class="col-md-7">
                             <div class="form-floating">
-                                <select class="form-select input " wire:model.enter='GuardarCabecera' id="floatingSelect">
+                                <select class="form-select input " wire:model.enter='GuardarCabecera' id="floatingSelect" wire:ignore>
                                   <option selected>Seleccionar una opcion</option>
                                     @foreach ($foreot as $Guardar )
                                         <option value="{{ $Guardar->id }}">{{ $Guardar->codigo }}</option>
@@ -24,6 +27,7 @@
                                 <label for="floatingSelect" class="text-lead-900">Codigo unico</label>
                           </div>
                         </div>
+                        @endif
                         <div class="col-md-5">
                             <a href="{{ asset('Doc_Excel/Produccion.xlsx') }}" class="btn btn-green-500 btn-md text-white rounded" target="_blank"><i class="fa-solid fa-file-excel"></i> Descargar excel</a>
                         </div>
@@ -48,127 +52,324 @@
 
                                     <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Datos Generales</legend>
                                         <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Datos Generales</legend>
-                                    <div  x-data = "{cliente:'null'}">
-                                    <div class="row">
-                                        {{-- <div class="ms-3"> --}}
-
-                                <div class="col-sm-12 col-md-2" wire:ignore>
-                                    <div class="mb-3">
-                                    <div class="form-floating">
-                                        <input class="form-control rounded input @error('Ordent') is-invalid @enderror" placeholder="Orden de trabajo" type="text" id="floatingInput" disabled value="{{$code}}">
-                                        <label for="floatingInput" class="text-lead-500">Orden de trabajo</label>
-                                         @error('Ordent')
-                                        <small id="OrdenthelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-md-2">
-                                    <div class="mb-3">
-                                    <div class="form-floating">
-                                        <input class="form-control rounded input @error('Cantidad') is-invalid @enderror" wire:model.defer='cantidad' placeholder="Cantidad" type="number" id="floatingInput">
-                                        <label for="floatingInput" class="text-lead-500">Cantidad</label>
-                                         @error('Cantidad')
-                                        <small id="CantidadhelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-md-2">
-                                    <div class="mb-3">
-                                    <div class="form-floating">
-                                        <select class="form-select input @error('cjun') is-invalid @enderror" wire:model.defer='cjun' id="floatingSelect" aria-label="Floating label select example">
-                                            <option selected>Seleccionar</option>
-                                            <option value="Cajas">Cajas</option>
-                                            <option value="Unidades">Unidades</option>
-                                          </select>
-                                          <label for="floatingSelect" class="text-lead-900">Cajas o Unidades</label>
-                                         @error('cjun')
-                                        <small id="cjunhelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-md-3">
-                                    <div class="mb-3">
-                                        <div class="form-floating">
-                                            <select class="form-select input @error('proveedor') is-invalid @enderror" wire:model.defer='proveedor' id="floatingSelect" aria-label="Floating label select example">
-                                              <option selected>Seleccionar una opcion</option>
-                                              <option value="Dprissa">Dprissa</option>
-                                              <option value="Seryproc">Seryproc</option>
-                                            </select>
-                                            <label for="floatingSelect" class="text-lead-900">Proveedor</label>
-                                         @error('proveedor')
-                                        <small id="proveedorhelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-md-3">
-                                    <div class="mb-3">
-                                        <div class="form-floating">
-                                            <input class="form-control rounded input @error('codigo') is-invalid @enderror" wire:model.defer='codigo' placeholder="Codigo" type="text" id="floatingInput">
-                                           <label for="floatingInput" class="text-lead-500">Codigo</label>
-                                         @error('codigo')
-                                        <small id="codigohelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-md-4">
-                                    <div class="mb-3">
-                                    <div class="form-floating">
-                                        <input class="form-control rounded input @error('fecha') is-invalid @enderror" wire:model.defer='fecha' placeholder="Fecha" type="date" id="floatingInput">
-                                        <label for="floatingInput" class="text-lead-500">Fecha</label>
-                                         @error('fecha')
-                                        <small id="fechahelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
-                                </div>
+                                    {{-- <div  x-data = "{cliente:'null'}"> --}}
+                                  <div class="row">
 
 
-                                <div class="col-sm-12 col-md-4">
-                                    <div class="mb-3">
-                                    <div class="form-floating">
-                                        <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect" wire:model.defer='cliente' aria-label="Floating label select example" x-model ="cliente">
-                                            <option selected>Seleccionar una opcion</option>
-                                            <option value="Arcor">Arcor</option>
-                                            <option value="Alicorp">Alicorp</option>
-                                          </select>
-                                          <label for="floatingSelect" class="text-lead-900">Cliente</label>
-                                         @error('Cliente')
-                                        <small id="ClientehelpId"
-                                            class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-sm-12 col-md-4" x-show="cliente == 'Arcor'">
-                                    <div class="mb-3">
-                                    <div class="form-floating">
-                                        <input class="form-control rounded input @error('otcliente') is-invalid @enderror" wire:model.defer='otcliente' placeholder="Orden de trabajo" type="text" id="floatingInput" >
-                                        <label for="floatingInput" class="text-lead-500">Ot del cliente</label>
-                                      </div>
-                                    </div>
-                                </div>
-
-                            </div>
                             @if (!is_null($GuardarCabecera))
+                            <div class="col-sm-12 col-md-2">
+                                <div class="mb-3">
+                                    {{-- <input class="form-control rounded input @error('Ordent') is-invalid @enderror" placeholder="Orden de trabajo" type="text" id="floatingInput" disabled value="{{$code}}"> --}}
+                                    <label for="floatingInput" class="text-lead-500">Orden de trabajo:</label>
+                                    <p style="color: black">{{ $GuardarCabecera->codigo }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="floatingInput" class="text-lead-500">Cantidad:</label>
+                                   <p style="color: black">{{ $GuardarCabecera->cantidad }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                      <label for="floatingSelect" class="text-lead-900">Cajas o Unidades</label>
+                                      <p style="color: black">{{ $GuardarCabecera->cj_un }}</p>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="floatingInput" class="text-lead-500">Fecha</label>
+                                  <p style="color: black">{{ $GuardarCabecera->fecha }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="mb-3">
+                                    <label for="floatingInput" class="text-lead-500">Ean13</label>
+                                     <p style="color: black">{{ $GuardarCabecera->ean13 }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="mb-3">
+                                    <label for="floatingInput" class="text-lead-500">Ean14</label>
+                                    <p style="color: black">{{ $GuardarCabecera->ean14 }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3" >
+                                      <label for="floatingSelect" class="text-lead-900">Cliente</label>
+                                     <p style="color: black"> {{ $GuardarCabecera->Clientes->social_reason }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                       <label for="floatingSelect" class="text-lead-500">Codigo</label>
+                                       <p style="color: black">{{ $GuardarCabecera->CodigoF->codigo }}</p>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fs-6 text-lead-500">Descripción:</label>
+                                     <p style="color: black">{{ $GuardarCabecera->CodigoF->descripcion }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                        <label for="floatingSelect" class="text-lead-900">Actividad:</label>
+                                        <p style="color: black">{{ $GuardarCabecera->Tarifario->actividad }}</p>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fs-6 text-lead-500">Tarifa Serypro:</label>
+                                    <p style="color: black">{{ $GuardarCabecera->Tarifario->tarifa_serypro }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fs-6 text-lead-500">Tarifa Dprissa:</label>
+                                    <p style="color: black">{{ $GuardarCabecera->Tarifario->tarifa_dprissa }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+
+                                        <label for="floatingSelect" class="text-lead-900">Proveedor</label>
+                                       <p style="color: black">{{ $GuardarCabecera->Proveedores->social_reason}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="floatingInput" class="text-lead-500">Ot del cliente</label>
+                                    <p style="color: black">{{ $GuardarCabecera->otcliente }}</p>
+                                </div>
+                            </div>
 
                             @else
+
+
+                            <div class="col-sm-12 col-md-2" >
+                                <div class="mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control rounded input @error('Ordent') is-invalid @enderror" placeholder="Orden de trabajo" type="text" id="floatingInput" disabled value="{{$code}}">
+                                    <label for="floatingInput" class="text-lead-500">Orden de trabajo</label>
+                                     @error('Ordent')
+                                    <small id="OrdenthelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control rounded input @error('Cantidad') is-invalid @enderror" wire:model='cantidad' placeholder="Cantidad" type="number" id="floatingInput">
+                                    <label for="floatingInput" class="text-lead-500">Cantidad</label>
+                                     @error('Cantidad')
+                                    <small id="CantidadhelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <div class="form-floating">
+                                    <select class="form-select input @error('cjun') is-invalid @enderror" wire:model.defer='cjun' id="floatingSelect" aria-label="Floating label select example">
+                                        <option selected>Seleccionar</option>
+                                        <option value="Cajas">Cajas</option>
+                                        <option value="Unidades">Unidades</option>
+                                      </select>
+                                      <label for="floatingSelect" class="text-lead-900">Cajas o Unidades</label>
+                                     @error('cjun')
+                                    <small id="cjunhelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control rounded input @error('fecha') is-invalid @enderror" wire:model.defer='fecha' placeholder="Fecha" type="date" id="floatingInput">
+                                    <label for="floatingInput" class="text-lead-500">Fecha</label>
+                                     @error('fecha')
+                                    <small id="fechahelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control rounded input @error('ean13') is-invalid @enderror" wire:model='ean13' placeholder="Ean13" type="number" id="floatingInput">
+                                    <label for="floatingInput" class="text-lead-500">Ean13</label>
+                                     @error('ean13')
+                                    <small id="ean13helpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control rounded input @error('ean14') is-invalid @enderror" wire:model='ean14' placeholder="Ean14" type="number" id="floatingInput">
+                                    <label for="floatingInput" class="text-lead-500">Ean14</label>
+                                     @error('ean14')
+                                    <small id="ean14helpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3" >
+                                <div class="form-floating">
+                                    <select class="form-select input Selector @error('cliente') is-invalid @enderror" id="floatingSelect" wire:model='cliente' x-model ="cliente">
+                                        <option selected>Seleccionar una opcion</option>
+                                        @foreach ($Clientes as $Client )
+                                            <option value="{{ $Client->id }}">{{ $Client->social_reason }}</option>
+                                        @endforeach
+                                      </select>
+                                      <label for="floatingSelect" class="text-lead-900">Cliente</label>
+                                     @error('Cliente')
+                                    <small id="ClientehelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <select class="form-select rounded Selector input @error('codigo') is-invalid @enderror" wire:model='codigo' placeholder="Codigo" id="floatingSelect">
+                                            <option value="">Seleccionar</option>
+                                            @if (!is_null($cliente))
+                                            @foreach ( $Codigos as $Codi )
+                                            <option value="{{ $Codi->id }}">{{ $Codi->codigo }}</option>
+                                            @endforeach
+                                            @else
+
+                                            @endif
+                                        </select>
+                                       <label for="floatingSelect" class="text-lead-500">Codigo</label>
+                                     @error('codigo')
+                                    <small id="codigohelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            @if (!is_null($codigo))
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fs-6 text-lead-500">Descripción:</label>
+                                    @foreach ( $descrip_codigo as $descrip_cod )
+                                      <p style="color: black"> {{ $descrip_cod->descripcion }} </p>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @else
+
+                            @endif
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <select class="form-select input @error('Actividad') is-invalid @enderror" wire:model='Actividad' id="floatingSelect">
+                                          <option selected>Seleccionar una opcion</option>
+                                          @if (!is_null($cliente))
+                                          @foreach ($actividad as $activida )
+                                          <option value="{{ $activida->id }}">{{ $activida->actividad }}</option>
+                                         @endforeach
+                                          @else
+
+                                          @endif
+                                        </select>
+                                        <label for="floatingSelect" class="text-lead-900">Actividad</label>
+                                     @error('Actividad')
+                                    <small id="ActividadhelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            @if (!is_null($Actividad))
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fs-6 text-lead-500">Tarifa Serypro:</label>
+                                    @foreach ( $Tarifas as $Tarif )
+                                      <p style="color: black">${{ $Tarif->tarifa_serypro }} </p>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fs-6 text-lead-500">Tarifa Dprissa:</label>
+                                    @foreach ( $Tarifas as $Tarif )
+                                      <p style="color: black">${{ $Tarif->tarifa_dprissa }} </p>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @else
+
+                            @endif
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <select class="form-select input @error('proveedor') is-invalid @enderror" wire:model.defer='proveedor' id="floatingSelect">
+                                          <option selected>Seleccionar una opcion</option>
+                                          @foreach ($Proveedores as $Proveedor )
+                                            <option value="{{ $Proveedor->id }}">{{ $Proveedor->social_reason }}</option>
+                                          @endforeach
+                                        </select>
+                                        <label for="floatingSelect" class="text-lead-900">Proveedor</label>
+                                     @error('proveedor')
+                                    <small id="proveedorhelpId"
+                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control rounded input @error('otcliente') is-invalid @enderror" wire:model.defer='otcliente' placeholder="Orden de trabajo" type="text" id="floatingInput" >
+                                    <label for="floatingInput" class="text-lead-500">Ot del cliente</label>
+                                  </div>
+                                </div>
+                            </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="mb-3">
                                 <button class="btm" wire:click.prevent='Encabezado'> Empezar
@@ -176,8 +377,9 @@
                               </div>
                             </div>
                             @endif
-
                             </div>
+
+                            {{-- </div> --}}
 
                             </fieldset>
 
@@ -187,39 +389,20 @@
 
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                                     <div class="col-sm-12 col-md-6">
-                                <legend class="rounded w-auto d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Información producción</legend>
-                                <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Información producción</legend>
+                                <legend class="rounded w-auto d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Compomentes</legend>
+                                <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Compomentes</legend>
                                 </div>
 
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                                    <input type="file" class="form-control form-control-sm" id="filexlsx"
-                                         name="filexlsx" wire:model.defer="filexlsx" accept=".xlsx">
-                                    <button class="btn btn-green-500 text-white" wire:click.prevent='importExcel'>Importar</button>
-                                    </div>
-                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                                        <input type="file" class="form-control form-control-sm" id="filexlsx"
+                                            name="filexlsx" wire:model.defer="filexlsx" accept=".xlsx">
+                                        <button class="btn btn-green-500 text-white" wire:click.prevent='importExcel'>Importar</button>
+                                        </div>
+                                        </div>
                                 </div>
                                 <div class="table-responsive">
                                 <table class="table table-striped">
-                                 {{-- <thead>
-                                    <tr>
-                                    <td>
-                                      Sku
-                                    </td>
-                                    <td>
-                                        Descripción
-                                    </td>
-                                    <td>
-                                        Cantidad
-                                    </td>
-                                    <td>
-                                        Fecha de vencimiento
-                                    </td>
-                                    <td>
-                                        Precio unitario
-                                    </td>
-                                    </tr>
-                                 </thead> --}}
                                  <tbody>
                                     @foreach ($actividades as $index => $actividad )
                                    <tr>
@@ -265,14 +448,14 @@
                                     <button class="btn btn-sm" wire:click='agregarcampo()'><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end">
-                                    <button class="btn btn-sm bg-green-500 text-white" wire:click.prevent='GuardarDatos'>Guardar</button>
+                                    <button class="btn btn-sm bg-green-500 text-white" wire:click='GuardarDatos' wire:loading.attr='disabled' wire:target='GuardarDatos' class="disabled:opacity-60">Guardar</button>
                                     </div>
                                </div>
                             </fieldset>
 
                             <div class="clearfix border border-1 mt-5"></div>
 
-                            @if (!is_null($Produccion))
+                            @if (!is_null($skus))
                             <fieldset class="border border-0 mt-4">
                                 <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Tabla preview</legend>
                                 <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Tabla preview</legend>
@@ -295,7 +478,7 @@
                                       <td>{{ $Sku->precio }}</td>
                                       <td>
                                         <div class="btn-group btn-group-sm " role="group" aria-label="">
-                                            <button class="btn btn-md bg-orange-500 text-white"><i class="fa-solid fa-pen"></i></button>
+                                            <button class="btn btn-md bg-orange-500 text-white" wire:click.prevent="$set('open', true)"><i class="fa-solid fa-pen"></i></button>
                                             <button class="btn btn-md btn-danger"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                       </td>
@@ -351,16 +534,101 @@
                                 </div>
                             </fieldset>
                             <div class="mt-3">
-                                <button class="btm" wire:click.prevent='Pasos'>Guardar</button>
+                                <button class="btn btn-sm bg-green-500 text-white" wire:click.prevent='Pasos'>Guardar</button>
                              </div>
+
+                             <div class="clearfix border border-1 mt-5"></div>
+
+                             <fieldset class="border border-0 mt-3">
+                                <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Programación</legend>
+                                <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Programación</legend>
+                                <div class="table-responsive">
+                                 <table class="table table-striped">
+                                    <tbody>
+                                    @foreach ( $ProgramaDias as $index =>$Dias )
+                                   <tr>
+                                    <td>
+                                        <div class="form-floating">
+                                            <input class="form-control rounded input @error('dia') is-invalid @enderror" style="width: 180px" wire:model.defer='ProgramaDias.{{ $index }}.dia' placeholder="Dias" type="text" igd="floatingInput">
+                                            <label for="floatingInput" class="text-lead-500">Dias</label>
+                                        </div>
+                                       </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <input class="form-control rounded input @error('cantidades') is-invalid @enderror" style="width: 180px" wire:model.defer='ProgramaDias.{{ $index }}.cantidades' placeholder="Cantidades" type="text" igd="floatingInput">
+                                                <label for="floatingInput" class="text-lead-500">Cantidades</label>
+                                            </div>
+                                       </td>
+                                       <td>
+                                        <div class="form-floating">
+                                            <input class="form-control rounded input @error('fechaPs') is-invalid @enderror" style="width: 180px" wire:model.defer='ProgramaDias.{{ $index }}.fechaP' placeholder="Fechas" type="date" igd="floatingInput">
+                                            <label for="floatingInput" class="text-lead-500">Fechas</label>
+                                        </div>
+                                       </td>
+                                       <td>
+                                        <div class="form-floating">
+                                            <textarea class="form-control rounded input" wire:model.defer='ProgramaDias.{{ $index }}.observa' style="width: 320px" placeholder="Observación" id="floatingTextarea"></textarea>
+                                            <label for="floatingTextarea" class="text-lead-500">Observación</label>
+                                        </div>
+                                       </td>
+                                       <td>
+                                        <button class="btn btn-sm btn-danger" wire:click.prevent='QuitarDias({{ $index }})'>Eliminar</button>
+                                       </td>
+                                   </tr>
+                                   @endforeach
+                                </tbody>
+                                 </table>
+                                 <div class="col-md-6">
+                                    <button class="btn btn-sm" wire:click='AgregarDias()'><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-end">
+                                    <button class="btn btn-sm bg-green-500 text-white" wire:click='Programacion' wire:loading.attr='disabled' wire:target='Programacion' class="disabled:opacity-60">Guardar</button>
+                                </div>
+                                </div>
+                            </fieldset>
+                            @if (!is_null($GuardarProgramcion))
+                            <div class="mt-3">
+                                <button class="btm" wire:click='Enviar' wire:loading.attr='disabled' wire:target='Enviar' class="disabled:opacity-60"> Enviar </button>
+                            </div>
+                            @else
+
+                            @endif
+
                         </div>
                     </div>
+                  </div>
                 </div>
             </div>
+          </div>
+    <x-jet-dialog-modal wire:model.prevent="open">
+        <x-slot name='title'>
+        <h2>Editar Codigo </h2>
+        </x-slot>
+        <x-slot name='content'>
+            <div class="row">
+                <div class="col-sm-12 col-md-3">
+                <input type="text" class="form-control rounded">
+                </div>
+                 <div class="col-sm-12 col-md-3">
+                    <input type="text" class="form-control rounded">
+                </div>
             </div>
-        </div>
+        </x-slot>
+        <x-slot name='footer'>
+        </x-slot>
+    </x-jet-dialog-modal>
+
 </div>
 @push('scripts')
+{{-- <script>
+    Livewire.on('select2', function() {
+        $('.Selector').select2();
+        $('.Selector').on('change', function(e){
+            @this.set('codigo', e.target.value),
+            @this.set('cliente', e.target.value);
+        });
+       });
+</script> --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
    Livewire.on('alert', function(message){
@@ -372,5 +640,5 @@
   timer: 1200
 });
 });
-    </script>
+</script>
 @endpush

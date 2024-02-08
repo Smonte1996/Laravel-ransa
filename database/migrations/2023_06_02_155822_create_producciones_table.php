@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->date('fecha');
             $table->string('precio');
+            $table->date('datacheck')->nullable();
             $table->timestamps();
         });
     }

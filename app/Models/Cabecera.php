@@ -11,12 +11,72 @@ class Cabecera extends Model
 
     protected $fillable = [
         'codigo',
+        'tarifario_id',
+        'supplier_id',
         'cantidad',
-        'proveedor',
+        'cj_un',
+        'tarifa',
+        'ean13',
+        'ean14',
         'fecha',
-        'cliente',
+        'client_id',
+        'tarifario_id',
+        'codigo_fconversione_id',
         'estado',
         'solicitud',
         'otcliente'
     ];
+
+    public static function generate_unique_code($length)
+    {
+        $characters = '0123456789aqwertyuiopsdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+
+        $code = 'OT-';
+        for ($i = 2; $i < $length; $i++) {
+            $code .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        $Verificar = Cabecera::where('codigo', $code)->first();
+      if ($Verificar) {
+          return self::generate_unique_code(7);
+      } else {
+          return $code;
+
+      }
+
+    }
+
+    function Pasoapaso()
+    {
+        return $this->hasOne(Paso_a_paso::class, 'cabecera_id');
+    }
+
+    function Programa()
+    {
+        return $this->hasMany(Programacione::class, 'cabecera_id');
+    }
+
+    function Componentes()
+    {
+        return $this->hasMany(Produccione::class, 'cabecera_id');
+    }
+
+    function Tarifario()
+    {
+        return $this->hasOne(Tarifario::class, 'id', 'tarifario_id');
+    }
+
+    function CodigoF()
+    {
+        return $this->hasOne(Codigo_fconversione::class, 'id', 'codigo_fconversione_id');
+    }
+
+    function Proveedores()
+    {
+        return $this->hasOne(Supplier::class, 'id', 'supplier_id');
+    }
+
+    function Clientes()
+    {
+        return $this->hasOne(Client::class, 'id', 'client_id');
+    }
 }

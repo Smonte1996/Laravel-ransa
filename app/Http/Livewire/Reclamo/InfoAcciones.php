@@ -48,8 +48,11 @@ class InfoAcciones extends Component
        ->where('id', $this->solicitude->id)
        ->update(['estado' => 2]);
 
-       Mail::to([$this->solicitude->clasificacion->users->email,'stevemontenegro_9@hotmail.com'])->send(New notificacionReaperturaResponsable($this->solicitude));
-       Mail::to([$this->solicitude->correo ,"stevemontenegro_9@hotmail.com"])->send(new notificacionReapertura($this->solicitude));
+       //$this->solicitude->clasificacion->users->email,
+       //$this->solicitude->correo ,
+
+       Mail::to(['stevemontenegro_9@hotmail.com'])->send(New notificacionReaperturaResponsable($this->solicitude));
+       Mail::to(["stevemontenegro_9@hotmail.com"])->send(new notificacionReapertura($this->solicitude));
 
        redirect()->route('adm.reclamo');
 

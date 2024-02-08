@@ -162,10 +162,24 @@
                         </ul>
                     </li>
 
+                    <li><a><i class="fa fa-file-invoice-dollar"></i> Actividades Maquila <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('adm.codigo.fc.index') }}">Codigos - Nuevos</a></li>
+                            <li><a href="{{ route('adm.Maquila.servicio.index') }}">Servicio Maquila</a></li>
+                            <li><a href="{{ route('adm.Tarifa.Maquila.index') }}">Actividades - Tarifario</a></li>
+                        </ul>
+                    </li>
+
                     <li><a><i class="fa fa-people-carry"></i> Trabajos Maquila <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{route('adm.Maquila.trabajo')}}">Producción</a></li>
                         </ul>
+                    </li>
+
+                    <li><a><i class="fa fa-people-carry"></i> Lista de Actividades <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ route('adm.vista.Maquila.index') }}">Actividades</a></li>
+                    </ul>
                     </li>
 
                         <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
