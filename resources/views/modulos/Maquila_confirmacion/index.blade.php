@@ -3,7 +3,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Trabajos Maquila Abiertos</h3>
+                    <h3>Guia de remicion de Maquila a Operación</h3>
                 </div>
 
                 <div class="title_right">
@@ -24,7 +24,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Solicitudes Trabajo Maquila</h2>
+                            <h2>listado Guia de remición de Maquila a Operación</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -36,48 +36,41 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Orden de Trabajo</th>
-                                        <th>Cantidad</th>
+                                        <th>N° Guia</th>
                                         <th data-priority="1">Proveedor</th>
                                         <th>Fecha de la Solicitud</th>
-                                        <th>Actividad</th>
-                                        <th>Cliente</th>
-                                        <th data-priority="2">Codigo a crear</th>
-                                        <th>Solicitud</th>
                                         <th>Estado</th>
                                         <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach ($Cabeceras as $Cabecera )
+                                   @foreach ($Cabecera as $Cabeceras )
                                        <tr>
-                                        <td>{{ $Cabecera->id }}</td>
-                                        <td> <strong>{{ $Cabecera->codigo }}</strong></td>
-                                        <td>{{ $Cabecera->cantidad }} {{ $Cabecera->cj_un }}</td>
-                                        <td>{{ $Cabecera->Proveedores->social_reason }}</td>
-                                        <td>{{ $Cabecera->fecha }}</td>
-                                        <td style="white-space: pre-line;">@foreach ($Cabecera->Tarifarios as $activid )
-                                            {{ $activid->actividad }}
-                                        @endforeach</td>
-                                        <td>{{ $Cabecera->Clientes->social_reason }}</td>
-                                        <td>{{ $Cabecera->CodigoF->codigo }}</td>
-                                        <td>{{ $Cabecera->solicitud }}</td>
+                                        <td>{{ $Cabeceras->id }}</td>
+                                        <td> <strong>{{ $Cabeceras->Cabecera->codigo }}</strong></td>
+                                        <td> <strong>{{ $Cabeceras->n_guia }}</strong></td>
+                                        <td>{{ $Cabeceras->Cabecera->Proveedores->social_reason }}</td>
+                                        <td>{{ $Cabeceras->Cabecera->fecha }}</td>
                                         <td>
-                                            @switch($Cabecera->estado)
+                                            @switch($Cabeceras->estado)
                                                 @case(2)
-                                                <span class="bg-green-500 p-1 rounded text-white">Abierta</span>
+                                                <span class="bg-lead-500 p-1 rounded text-white">En confirmación</span>
                                                     @break
-                                                  @case(1)
-                                                  <span class="bg-orange-500 p-1 rounded text-white">En espera</span>
-                                                  @break
+                                                    @case(1)
+                                                 <span class="bg-orange-500 p-1 rounded text-white">Abierta</span>
+                                                    @break
+                                                    <!-- @case(3)
+                                                    <span class="bg-green-500 p-1 rounded text-white">Cerrado</span>
+                                                    @break -->
                                                 @default
 
                                             @endswitch
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group">
-                                                <a href="#" class="btn btn-green-500 text-white border"><i class="fa fa-info"></i></a>
+                                                <a href="{{ route('adm.pdf.guia.operacion', encrypt($Cabeceras->cabecera_id)) }}" target="_blank" class="btn btn-green-500 text-white border"><i class="fa fa-file-pdf"></i></a>
 
-                                                <a href="{{ route('adm.Maquila.Actividad', encrypt($Cabecera->id)) }}" class="btn btn-orange-500 text-white border"><i class="fa fa-info"></i></a>
+                                                <a href="{{ route('adm.Confirmar.Maquila', encrypt($Cabeceras->cabecera_id)) }}" class="btn btn-orange-500 text-white border"><i class="fa fa-info"></i></a>
                                             </div>
                                         </td>
                                        </tr>

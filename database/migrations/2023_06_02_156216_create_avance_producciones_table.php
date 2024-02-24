@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('avance_producciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('programacione_id')->constrained()->onDelete('cascade');
             $table->foreignId('cabecera_id')->constrained()->onDelete('cascade');
-            $table->string('detalle_personal');
+            $table->foreignId('programacione_id')->constrained()->onDelete('cascade');
+            $table->string('unidades_caja');
             $table->integer('Cantidad_avance');
-            $table->text('observacion')->nullable();
-            $table->text('sustento_cierre')->nullable();
-            $table->string('imagen_sustento')->nullable();
+            $table->date('fecha_vencimiento');
+            $table->string('lote');
             $table->timestamps();
         });
     }

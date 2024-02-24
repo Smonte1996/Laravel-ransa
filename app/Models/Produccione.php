@@ -14,7 +14,18 @@ class Produccione extends Model
         'sku',
         'descripcion',
         'cantidad',
+        'empa',
         'fecha',
         'precio',
     ];
+
+    function Recibido()
+    {
+        return $this->hasOne(Confirmacion_maquila::class, 'produccione_id');
+    }
+
+    function validarCampos()
+    {
+      return $this->hasMany(Confirmacion_maquila::class, 'cabecera_id');
+    }
 }

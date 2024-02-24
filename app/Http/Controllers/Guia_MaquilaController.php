@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cabecera;
+use App\Models\Guia_remicion;
 use Illuminate\Http\Request;
+use PDF;
 
-class ProduccionMaquilaController extends Controller
+class Guia_MaquilaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,26 @@ class ProduccionMaquilaController extends Controller
      */
     public function index()
     {
-        $Cabeceras = Cabecera::whereIn('estado', [1,2,3])->get();
-        return view('modulos.Produccion_Maquila.index', compact('Cabeceras'));
+        //
+       $Cabecera = Guia_remicion::whereIn('estado', [1,2])->get();
+
+       return view('modulos.Guias_Maquila.index', compact('Cabecera'));
     }
+
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function GuiaRemicion($id)
+    {
+        $pdf = Cabecera::find(decrypt($id));
+
+        $pdfs = PDF::loadView('pdf.GuiaRemicion_operacion', compact('pdf'));
+
+        return $pdfs->stream("{{$pdf->GuiaMaquilas->n_guia}}.pdf");
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +77,7 @@ class ProduccionMaquilaController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**

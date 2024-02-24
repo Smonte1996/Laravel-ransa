@@ -46,6 +46,11 @@
                 </strong>
             </th>
             <th align="center">
+            <strong>
+                Responsable de eficacia
+            </strong>
+            </th>
+            <th align="center">
                 <strong>
                 fecha del Registro
                </strong>
@@ -101,6 +106,11 @@
               @else
 
               @endif
+            </td>
+            <td>
+                @if (!empty($Reclamos->investigacion->users->name))
+
+                @endif
             </td>
             <td align="center">
             {{$Reclamos->fecha_registro}}

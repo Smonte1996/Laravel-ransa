@@ -1,54 +1,35 @@
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/Firma.css') }}">
-    @endpush
-<x-app-layout>
+<div>
     <div class="right_col" role="main">
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Orden de Trabajo</h3>
+                    <h3>Orden de Trabajo hola</h3>
                 </div>
 
                 <div class="title_right">
-                    <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                    {{-- <div class="col-md-5 col-sm-5 form-group pull-right top_search">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">Go!</button>
                             </span>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
             <div class="clearfix"></div>
-            <form action="" method="post"
-                id="imgcorrection">
-                @csrf
-                {{-- @method('PUT') --}}
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Actividad pendiente</h2>
                                 <ul class="nav navbar-right panel_toolbox">
-                                    {{-- @if ($notification_service->dissatisfaction_service->notification_type == 'NO CONFORMIDAD')
-                                        <x-jet-button type="button" id=""><i
-                                                class="fa fa-solid fa-upload"></i>
-                                            Análisis
-                                        </x-jet-button>
-                                    @endif --}}
-                                    <li>
+                                    {{-- <li>
                                         <x-jet-button type="button" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal"><i class="fa fa-solid fa-eye"></i> Evidencia
                                         </x-jet-button>
-                                    </li>
-                                    <li>
-                                        <x-jet-button type="button" id="imgcorreccion"><i
-                                                class="fa fa-solid fa-upload"></i>
-                                            Adjuntar
-                                        </x-jet-button>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -101,7 +82,7 @@
                                             <label for="exampleFormControlInput1"
                                                 class="form-label text-lead-500"> Cliente</label>
                                             <div class="text-orange-500 fw-bold fs-6">
-                                                {{ $Inf->cliente }}
+                                                {{ $Inf->Clientes->social_reason }}
                                                </div>
                                         </div>
                                     </div>
@@ -111,7 +92,9 @@
                                             <label for="exampleFormControlInput1"
                                                 class="form-label text-lead-500">Actividad</label>
                                             <div class="text-orange-500 fw-bold fs-6">
-                                                {{ $Inf->Tarifario->actividad }}
+                                                @foreach ( $Inf->Tarifarios as $activid )
+                                                    <li>{{ $activid->actividad }}</li>
+                                                @endforeach
                                                </div>
                                         </div>
                                     </div>
@@ -121,7 +104,7 @@
                                             <label for="exampleFormControlInput1"
                                                 class="form-label text-lead-500">Codigo a crear</label>
                                             <div class="text-orange-500 fw-bold fs-6">
-                                                {{ $Inf->codigo_final }}
+                                                {{ $Inf->CodigoF->codigo }}
                                                 </div>
                                         </div>
                                     </div>
@@ -137,6 +120,26 @@
                                         </div>
                                     </div>
                                     @endisset
+
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1"
+                                                class="form-label text-lead-500">Ean 13</label>
+                                            <div class="text-orange-500 fw-bold fs-6">
+                                                {{ $Inf->ean13 }}
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1"
+                                                class="form-label text-lead-500">Ean 14</label>
+                                            <div class="text-orange-500 fw-bold fs-6">
+                                                {{ $Inf->ean14 }}
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
                                 <fieldset class="border border-2 mt-3">
@@ -186,7 +189,7 @@
                                             </div>
                                             <div class="col-sm-12 col-md-6">
                                             <div class="text-center rounded">
-                                              <img src="{{ asset('storage/Pasoapaso/'.trim($Inf->Pasoapaso->imagen)) }}" class="card-img-top"  style="width: 25%; height:25%;" alt="imagen paso a paso">
+                                              <img src="{{ asset('storage/Pasoapaso/'.trim($Inf->Pasoapaso->imagen)) }}" class="card-img-top"  style="width: 60%; height:60%;" alt="imagen paso a paso">
                                             </div>
                                         </div>
                                     </div>
@@ -209,9 +212,6 @@
                                                 <th class="text-center">Cantidad programada</th>
                                                 <th class="text-center">Fecha</th>
                                                 <th class="text-center">Observación</th>
-                                                <th class="text-center">Check</th>
-                                                {{-- <th class="text-center">Avances</th>
-                                                <th class="text-center">Personal</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -229,34 +229,12 @@
                                                     <td class="text-center">
                                                         <p style="white-space: pre-line; color:black;">{{ $Programacion->observacion }}</p>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <div class="form-check">
-                                                            <input type="checkbox" name="Programacion_id[]"
-                                                                class="form-check-input text-green-500" value="{{ $Programacion->observacion }}">
-                                                        </div>
-
-                                                    </td>
-                                                    {{-- <td class="text-center">
-                                                        <div class="form-floating">
-                                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="avance" placeholder="Cantidad de avances" type="number" id="floatingInput">
-                                                           <label for="floatingInput" class="text-lead-500">Cantidad de avances</label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-floating">
-                                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="personal" placeholder="Personal utilizado" type="text" id="floatingInput">
-                                                           <label for="floatingInput" class="text-lead-500">Personal utilizado</label>
-                                                        </div>
-                                                    </td> --}}
                                                 </tr>
                                              @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                     </div>
-                                    {{-- @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach --}}
                                 </fieldset>
 
                                 <fieldset class="border border-2 mt-3">
@@ -266,41 +244,57 @@
                              <div class="table-responsive">
                             <table class="table w-100">
                              <tbody>
+                                @foreach ( $Avances as $index => $Avance )
                                 <tr>
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" style="width: 180px" name="avance" placeholder="Cantidad de avances" type="number" id="floatingInput">
+                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" style="width: 180px" wire:model='Avances.{{ $index }}.cantidades' placeholder="Cantidad de avances" type="number" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Cantidad de avances</label>
                                         </div>
                                     </td>
+
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <select class="form-select input @error('cliente') is-invalid @enderror" style="width: 230px" id="floatingSelect">
+                                            <select class="form-select input @error('Empaque') is-invalid @enderror" wire:model='Avances.{{ $index }}.cjun' style="width: 230px" id="floatingSelect">
                                                 <option selected>Seleccionar una opcion</option>
                                                 <option value="Caja">Caja</option>
                                                 <option value="Unidad">Unidad</option>
                                                 <option value="Display">Display</option>
                                               </select>
-                                              <label for="floatingSelect" class="text-lead-900">cajas o unidades</label>
+                                              <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                         </div>
                                     </td>
+
+                                    <td class="text-center">
+                                        <div class="form-floating">
+                                            <input class="form-control rounded @error('lotes') is-invalid @enderror" style="width: 180px" wire:model='Avances.{{ $index }}.lotes' placeholder="Lote" type="text" id="floatingInput">
+                                           <label for="floatingInput" class="text-lead-500">Lote</label>
+                                        </div>
+                                    </td>
+
                                     <td>
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('fecha') is-invalid @enderror" name="fecha" placeholder="Fecha de Vencimiento" type="date" id="floatingInput">
+                                            <input class="form-control rounded @error('fecha') is-invalid @enderror" wire:model='Avances.{{ $index }}.fecha' placeholder="Fecha de Vencimiento" type="date" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Fecha de Vencimiento</label>
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                                        <button class="btn btn-sm btn-danger mt-3" wire:click.prevent='QuitarCampos({{ $index }})'>Eliminar</button>
                                     </td>
                                 </tr>
+                                @endforeach
                              </tbody>
+                             <div>
+                             </div>
                             </table>
                              </div>
                              </div>
-                             <div class="col-md-6">
-                                <button class="btn btn-sm"><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
+                             <div class="col-md-6 col-sm-6">
+                                <button class="btn btn-sm" wire:click.prevent='CamposAvances'><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
                              </div>
+                             <div class="col-md-6 col-sm-6 d-flex justify-content-end">
+                                <button class="btn btn-sm bg-green-500 text-white" wire:click='GuardarAvance' wire:loading.attr='disabled' wire:target='GuardarAvance' class="disabled:opacity-60">Guardar</button>
+                                </div>
                                 </fieldset>
 
                                 <fieldset class="border border-2 mt-3">
@@ -313,79 +307,50 @@
                                 <tr>
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="" placeholder="Hora de Inicio" type="date" id="floatingInput">
+                                            <input class="form-control rounded @error('hora_Inicio') is-invalid @enderror" wire:model.defer="hora_Inicio" placeholder="Hora de Inicio" type="time" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Hora de Inicio</label>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="" placeholder="Hora Fin" type="date" id="floatingInput">
-                                              <label for="floatingSelect" class="text-lead-900">Hora Fin</label>
+                                            <input class="form-control rounded @error('hora_pausa') is-invalid @enderror" wire:model.defer="hora_pausa" placeholder="Hora Pausa" type="time" id="floatingInput">
+                                              <label for="floatingSelect" class="text-lead-900">Hora Pausa</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('fecha') is-invalid @enderror" name="" style="width: 400px" placeholder="N° de Persona" type="text" id="floatingInput">
+                                            <input class="form-control rounded @error('personas1') is-invalid @enderror" wire:model.defer="personas1" style="width: 400px" placeholder="N° de Persona" type="number" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">N° de Persona</label>
                                         </div>
                                     </td>
-                                    {{-- <td>
-                                        <button class="btn btn-sm btn-danger">Eliminar</button>
-                                    </td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="" placeholder="Hora Pausa" type="date" id="floatingInput">
-                                           <label for="floatingInput" class="text-lead-500">Hora Pausa</label>
+                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" wire:model.defer="hora_reinicio" placeholder="Hora Reinicio" type="time" id="floatingInput">
+                                           <label for="floatingInput" class="text-lead-500">Hora reinicio</label>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="" placeholder="Hora inicio" type="date" id="floatingInput">
-                                              <label for="floatingSelect" class="text-lead-900">Hora inicio</label>
+                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" wire:model.defer="Hora_fin" placeholder="Hora Fin" type="time" id="floatingInput">
+                                              <label for="floatingSelect" class="text-lead-900">Hora fin</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('fecha') is-invalid @enderror" name="" style="width: 400px" placeholder="N° de Persona" type="text" id="floatingInput">
+                                            <input class="form-control rounded @error('personal2') is-invalid @enderror" wire:model.defer="personal2" style="width: 400px" placeholder="N° de Persona" type="number" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">N° de Persona</label>
                                         </div>
                                     </td>
-                                    {{-- <td>
-                                        <button class="btn btn-sm btn-danger">Eliminar</button>
-                                    </td> --}}
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="" placeholder="Hora Pausa" type="date" id="floatingInput">
-                                           <label for="floatingInput" class="text-lead-500">Hora Pausa</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" name="" placeholder="Hora Fin" type="date" id="floatingInput">
-                                              <label for="floatingSelect" class="text-lead-900">Hora Fin</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-floating">
-                                            <input class="form-control rounded @error('fecha') is-invalid @enderror" style="width: 400px" name="" placeholder="N° de Persona" type="text" id="floatingInput">
-                                           <label for="floatingInput" class="text-lead-500">N° de Persona</label>
-                                        </div>
-                                    </td>
-                                    {{-- <td>
-                                        <button class="btn btn-sm btn-danger">Eliminar</button>
-                                    </td> --}}
                                 </tr>
                              </tbody>
                             </table>
                              </div>
                              </div>
-                             {{-- <div class="col-md-6">
-                                <button class="btn btn-sm"><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
-                             </div> --}}
+                             <div class="col-md-12 col-sm-12 d-flex justify-content-end mt-3">
+                                <button class="btn btn-sm bg-green-500 text-white" wire:click='GuardarProductividad' wire:loading.attr='disabled' wire:target='GuardarProductividad' class="disabled:opacity-60">Guardar</button>
+                              </div>
                                 </fieldset>
 
                                 <fieldset class="border border-2 mt-3">
@@ -394,19 +359,24 @@
                              <div class="ms-4">
                                 <div class="table-responsive">
                                 <table class="table w-100">
-                                 <tbody>
+                                    <div class="row">
                                     <tr>
+                                        <div class="col-sm-4 col-md-4">
                                         <td>
                                             <div class="mt-3 text-center">
                                             <label class="label-control text-center">Muestra</label>
                                            </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" name="" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" wire:model.defer="" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
                                                 <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
@@ -415,22 +385,28 @@
                                                     <option value="Unidad">Unidad</option>
                                                     <option value="Display">Display</option>
                                                   </select>
-                                                  <label for="floatingSelect" class="text-lead-900">cajas o unidades</label>
+                                                  <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                             </div>
                                         </td>
+                                    </div>
                                     </tr>
                                     <tr>
+                                        <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="mt-3 text-center">
                                             <label class="label-control text-center">Aceptados</label>
                                            </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
                                                 <input class="form-control rounded @error('cantidad') is-invalid @enderror" name="" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
+                                       </div>
+                                        <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
                                                 <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
@@ -439,22 +415,28 @@
                                                     <option value="Unidad">Unidad</option>
                                                     <option value="Display">Display</option>
                                                   </select>
-                                                  <label for="floatingSelect" class="text-lead-900">cajas o unidades</label>
+                                                  <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                             </div>
                                         </td>
+                                    </div>
                                     </tr>
                                     <tr>
+                                        <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="mt-3 text-center">
                                             <label class="label-control text-center">Rechazados</label>
                                            </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" name="" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
                                                 <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
@@ -463,22 +445,36 @@
                                                     <option value="Unidad">Unidad</option>
                                                     <option value="Display">Display</option>
                                                   </select>
-                                                  <label for="floatingSelect" class="text-lead-900">cajas o unidades</label>
+                                                  <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                             </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-12 col-md-6">
+                                        <td>
+                                            <div class="form-floating">
+                                                <textarea class="form-control rounded" style="width: 250px" placeholder="Observación" wire:model='ObserRechazo' id="floatingTextarea"></textarea>
+                                                <label for="floatingTextarea" class="text-lead-500">Observación</label>
+                                            </div>
+                                        </td>
+                                    </div>
                                     </tr>
                                     <tr>
+                                        <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="mt-3 text-center">
                                             <label class="label-control">Reprocesados</label>
                                            </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
                                                 <input class="form-control rounded @error('cantidad') is-invalid @enderror" name="" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
+                                    </div>
+                                        <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
                                                 <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
@@ -487,11 +483,13 @@
                                                     <option value="Unidad">Unidad</option>
                                                     <option value="Display">Display</option>
                                                   </select>
-                                                  <label for="floatingSelect" class="text-lead-900">cajas o unidades</label>
+                                                  <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                             </div>
+
                                         </td>
+                                        </div>
                                     </tr>
-                                 </tbody>
+                                </div>
                                 </table>
                               </div>
                              </div>
@@ -503,27 +501,39 @@
                              <div class="ms-4">
                                 <div class="table-responsive">
                                 <table class="table w-100">
+                                    @foreach ( $Novedades as $index=>$Novedad )
                                 <tr>
+                                  <td>
+                                    <div class="form-floating">
+                                        <select class="form-select input @error('Sku') is-invalid @enderror" wire:model='Novedades.{{ $index }}.Sku' style="width: 150px" id="floatingSelect">
+                                            <option selected>Seleccionar</option>
+                                            @foreach ($Inf->Componentes as $skus )
+                                                <option value="{{ $skus->id }}">{{ $skus->sku }}</option>
+                                            @endforeach
+                                          </select>
+                                          <label for="floatingSelect" class="text-lead-900">Sku</label>
+                                    </div>
+                                  </td>
                                     <td>
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('cantidad') is-invalid @enderror" style="width: 100px" name="" placeholder="Cantidad" type="number" id="floatingInput">
+                                            <input class="form-control rounded @error('cantidad') is-invalid @enderror" style="width: 120px" name="" wire:model='Novedades.{{ $index }}.canti' placeholder="Cantidad" type="number" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-floating">
-                                            <select class="form-select input @error('cliente') is-invalid @enderror" style="width: 150px" id="floatingSelect">
+                                            <select class="form-select input @error('Empaque') is-invalid @enderror" wire:model='Novedades.{{ $index }}.empaque' style="width: 150px" id="floatingSelect">
                                                 <option selected>Seleccionar</option>
                                                 <option value="Caja">Caja</option>
                                                 <option value="Unidad">Unidad</option>
                                                 <option value="Display">Display</option>
                                               </select>
-                                              <label for="floatingSelect" class="text-lead-900">cajas o unidades</label>
+                                              <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-floating">
-                                            <select class="form-select input @error('cliente') is-invalid @enderror" style="width: 150px" id="floatingSelect">
+                                            <select class="form-select input @error('estado') is-invalid @enderror" wire:model='Novedades.{{ $index }}.estado' style="width: 150px" id="floatingSelect">
                                                 <option selected>Seleccionar</option>
                                                 <option value="Mal estado">Mal estado</option>
                                                 <option value="Reprocesados">Reprocesados</option>
@@ -532,201 +542,54 @@
                                               <label for="floatingSelect" class="text-lead-900">Estado</label>
                                         </div>
                                     </td>
+
                                     <td>
                                         <div class="form-floating">
-                                            <textarea class="form-control rounded" style="width: 320px" placeholder="Observación" id="floatingTextarea"></textarea>
+                                            <textarea class="form-control rounded" style="width: 320px" placeholder="Observación" wire:model='Novedades.{{ $index }}.observacion' id="floatingTextarea"></textarea>
                                             <label for="floatingTextarea" class="text-lead-500">Observación</label>
                                         </div>
                                     </td>
+
                                     <td>
-                                        <div class="form-floating">
-                                            <input class="form-control rounded @error('cantidad') is-invalid @enderror" style="width: 300px" name="" placeholder="Cantidad" type="file" id="floatingInput">
-                                           <label for="floatingInput" class="text-lead-500">Imagen</label>
-                                        </div>
+                                        <input class="form-control rounded @error('imagen') is-invalid @enderror" style="width: 300px" name="" wire:model='Novedades.{{ $index }}.imagenes' type="file">
+                                    </td>
+
+                                    <td>
+                                        <button class="btn btn-sm btn-danger mt-3" wire:click.prevent='EliminarCampo({{ $index }})'>Eliminar</button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </table>
                                 </div>
                                </div>
                                <div class="col-md-6">
-                                <button class="btn btn-sm"><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
+                                <button class="btn btn-sm" wire:click.prevent='CamposNovedad'><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
                              </div>
                                 </fieldset>
-
-                                <div id="firma-electronica" class="col-sm-12 col-md-12 text-center mt-3">
-                                    <canvas id="canvas" onchange="handleCanvasChange()"></canvas><br>
-                                    <button class="btn btn-sm bg-orange-500 text-white" id="limpiar">Limpiar</button>
-                                    <button class="btn btn-sm bg-green-500 text-white" id="guardar">Guardar</button>
-                                </div>
-                                {{-- <div class="col-12">
-                                    <label class="form-label text-orange-500">Observaciones:</label>
-                                    <textarea name="endobservations" id="" class="form-control"></textarea>
-                                </div> --}}
                                 <div class="text-center">
                                     <x-jet-button id="confirmaction" class="mt-4">Confirmar Acciones
                                     </x-jet-button>
                                 </div>
                             </div>
-            </form>
-        </div>
+         </div>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
-    {{-- Modal para Visualizar las imagenes --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="overflow-scroll d-block">
-                      <img class="rounded img-thumbnail" width="250" src="" alt="">
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
-@section('scripts')
+   </div>
+ </div>
+</div>
+@push('scripts')
 <script>
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-
-let isDrawing = false;
-let lastX;
-let lastY;
-
-// Función para iniciar el dibujo
-function startDrawing(e) {
-  isDrawing = true;
-  lastX = e.offsetX;
-  lastY = e.offsetY;
-}
-
-// Función para dibujar
-function draw(e) {
-  if (!isDrawing) return;
-
-  const currentX = e.offsetX;
-  const currentY = e.offsetY;
-
-  ctx.beginPath();
-  ctx.moveTo(lastX, lastY);
-  ctx.lineTo(currentX, currentY);
-  ctx.strokeStyle = 'black';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  lastX = currentX;
-  lastY = currentY;
-}
-
-// Función para limpiar el lienzo
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-//   handleCanvasChange(); // Actualiza la página
-}
-
-// Función para guardar la firma
-function saveSignature() {
-  const imageData = canvas.toDataURL('image/png');
-  // Aquí deberías enviar la imagen al servidor mediante una petición AJAX
-  console.log('Imagen:', imageData);
-//   handleCanvasChange(); // Actualiza la página
-}
-
-// Función para actualizar la página
-function handleCanvasChange() {
-  // Envía la imagen al servidor mediante una petición AJAX
-  // ...
-
-  // Recarga la página después de recibir la respuesta del servidor
-  location.reload();
-}
-
-// Eventos
-canvas.addEventListener('mousedown', startDrawing);
-canvas.addEventListener('mousemove', draw);
-document.getElementById('limpiar').addEventListener('click', clearCanvas);
-document.getElementById('guardar').addEventListener('click', saveSignature);
+Livewire.on('mensaje', function(message){
+    Swal.fire({
+   position: "top-end",
+   icon: "success",
+   title: message,
+   showConfirmButton: false,
+   timer: 1200
+ });
+ });
 </script>
-
-    <script>
-        window.addEventListener("load", function(event) {
-            var myDropzone = new Dropzone('#imgcorrection', { // Make the whole body a dropzone
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                paramName: 'file',
-                uploadMultiple: true,
-                // acceptedFiles: ['image/*','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
-                parallelUploads: 100,
-                maxFiles: 4,
-                autoProcessQueue: false,
-                previewTemplate: '<div class="p-1"><table class="text-center w-100 align-middle table-striped"><tr><td><p data-dz-name></p><strong class="text-danger"data-dz-errormessage></strong></td><td><span data-dz-size></span></td><td> <button data-dz-remove class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr></table></div>',
-                previewsContainer: "#previewsimg", // Define the container to display the previews
-                clickable: "#imgcorreccion", // Define the element that should be used as click trigger to select files.
-                // The setting up of the dropzone
-                init: function() {
-                    var myDropzone = this;
-                    // First change the button to actually tell Dropzone to process the queue.
-                    this.element.querySelector("button[type=submit]").addEventListener("click",
-                        function(
-                            e) {
-                            // Make sure that the form isn't actually being sent.
-                            e.preventDefault();
-                            e.stopPropagation();
-                            var count = myDropzone.getAcceptedFiles().length;
-                            var inputcheck = $("input[type=checkbox]").length;
-                            var countcheck = $("input:checked").length;
-                            if (inputcheck != countcheck) {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Debe Completar todas las acciones para continuar..',
-                                    icon: 'error',
-                                    confirmButtonText: 'OK'
-                                })
-                            } else {
-                                if (count > 0) {
-                                    myDropzone.processQueue();
-                                } else {
-                                    $("#imgcorrection").submit();
-                                }
-                            }
-                        });
-
-                    // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
-                    // of the sending event because uploadMultiple is set to true.
-                    this.on("sendingmultiple", function() {
-
-                        // Gets triggered when the form is actually being sent.
-                        // Hide the success button or the complete form.
-                    });
-                    this.on("successmultiple", function(files, response) {
-                        // Gets triggered when the files have successfully been sent.
-                        // Redirect user or notify of success.
-                        // console.log(response);
-                        // console.log(files);
-                        window.location = response
-                    });
-                    this.on("errormultiple", function(files, response) {
-                        // Gets triggered when there was an error sending the files.
-                        // Maybe show form again, and notify user of error
-                        // console.log(files);
-                        // console.log(response);
-                    });
-                }
-            });
+@endpush
 
 
-        })
-    </script>
-@show
+

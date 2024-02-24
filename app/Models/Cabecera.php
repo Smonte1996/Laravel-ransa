@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Maquila\GuiaMaquilas;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -45,6 +46,11 @@ class Cabecera extends Model
 
     }
 
+     public function Tarifarios()
+     {
+         return $this->belongsToMany(Tarifario::class);
+     }
+
     function Pasoapaso()
     {
         return $this->hasOne(Paso_a_paso::class, 'cabecera_id');
@@ -78,5 +84,10 @@ class Cabecera extends Model
     function Clientes()
     {
         return $this->hasOne(Client::class, 'id', 'client_id');
+    }
+
+    function GuiaMaquilas()
+    {
+        return $this->belongsTo(Guia_remicion::class,'id' ,'cabecera_id');
     }
 }

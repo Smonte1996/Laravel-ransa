@@ -40,6 +40,7 @@
                             {{-- @can('adm.users.index') --}}
                                 <li><a href="{{ route('adm.users.index') }}">Usuarios</a></li>
                             {{-- @endcan --}}
+                                <li><a href="{{ route('adm.crear.firma') }}">Firma Electronica</a></li>
                                 <li><a href="{{route('adm.usuario_clientes.index')}}">Usuarios Clientes</a></li>
                             @can('adm.countries.index')
                                 <li><a href="{{ route('adm.countries.index') }}">Paises</a></li>
@@ -182,29 +183,41 @@
                     </ul>
                     </li>
 
-                        <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-file-signature"></i> vista Guias de Remisión operacion<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{ route('adm.Guias.Maquila.index') }}">Operacion a Maquila</a></li>
+                        </ul>
+                        </li>
+
+                    <li><a><i class="fa fa-file-signature"></i> vista Guias de Remisión Proveedor <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{ route('adm.Guias.confirmacion.maquila.index') }}">Maquila a Operación</a></li>
+                    </ul>
+                    </li>
+
+                        {{-- <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                             {{-- @can() --}}
+                             @can()
                              <li><a href="{{route('adm.Estibas.index')}}">Registrar Proveedor</a></li>
-                             {{-- @endcan --}}
+                             @endcan
                               <li><a>Movimientos<span class="fa fa-chevron-down"></span></a>
                                  <ul class="nav child_menu">
-                                     {{-- @can() --}}
+                                     @can()
                                      <li class="sub_menu"><a
                                          href="{{route('adm.Asignar-estibas.index')}}">Asignar Estibas</a>
                                      </li>
-                                     {{-- @endcan --}}
-                                     {{-- @can() --}}
+                                     @endcan
+                                      @can()
                                      @if (now()->toTimeString()<= "17:25")
                                      <li class="sub_menu"><a href="{{route('adm.Confirmar-estibas.index')}}"> Por Confirmar</a></li>
                                      @else
 
                                      @endif
-                                     {{-- @endcan --}}
+                                     @endcan
                                  </ul>
                               </li>
                             </ul>
-                         </li>
+                         </li> --}}
                             @break
                             @case('App\Models\Client')
                             <li><a><i class="fa-solid fa-list-ul"></i> Listado Muestreo Cliente <span class="fa fa-chevron-down"></span></a>

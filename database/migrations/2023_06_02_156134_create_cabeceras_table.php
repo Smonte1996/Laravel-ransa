@@ -29,6 +29,9 @@ return new class extends Migration
             $table->integer('estado');
             $table->string('solicitud');
             $table->string('otcliente')->nullable();
+            // $table->text('observacion')->nullable();
+            $table->text('sustento_cierre')->nullable();
+            $table->string('imagen_sustento')->nullable();
             $table->timestamps();
         });
     }

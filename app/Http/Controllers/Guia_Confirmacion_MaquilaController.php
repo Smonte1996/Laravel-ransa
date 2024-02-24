@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cabecera;
+use App\Models\Guia_remicion;
 use Illuminate\Http\Request;
 
-class ProduccionMaquilaController extends Controller
+class Guia_Confirmacion_MaquilaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProduccionMaquilaController extends Controller
      */
     public function index()
     {
-        $Cabeceras = Cabecera::whereIn('estado', [1,2,3])->get();
-        return view('modulos.Produccion_Maquila.index', compact('Cabeceras'));
+        $Cabecera = Guia_remicion::whereIn('estado', [2])->get();
+         return view('modulos.Maquila_confirmacion.index', compact('Cabecera'));
     }
 
     /**
@@ -58,7 +58,7 @@ class ProduccionMaquilaController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**

@@ -31,6 +31,16 @@ class Tarifario extends Model
         return $this->hasOne(Servicio_maquila::class, 'id', 'servicio_maquila_id');
     }
 
+    function ServiciosMaquila()
+    {
+        return $this->belongsTo(Servicio_maquila::class, 'servicio_maquila_id');
+    }
+
+     function cabercera()
+     {
+         return $this->belongsToMany(Cabecera::class);
+     }
+
     // function Servico_Maquila()
     //  {
     //     return $this->hasMany(Servicio_maquila::class,'id', 'servicio_maquila_id' );

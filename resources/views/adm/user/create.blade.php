@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <div class="right_col" role="main">
         <div class="">
@@ -111,7 +112,7 @@
                                                 name="employee_id" id="employee_id">
                                                 <option value="">Seleccionar un personal</option>
                                                 @foreach ($employees as $employee)
-                                                    <option value="{{ $employee->id }}"> 
+                                                    <option value="{{ $employee->id }}">
                                                         {{ $employee->name . ' - ' . $employee->lastname }} </option>
                                                 @endforeach
                                             </select>
@@ -155,7 +156,7 @@
                                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                                 @enderror
                                             @endif
-                                        </div>                                                                                
+                                        </div>
                                     </div>
                                     <div class="mb-4 col-sm-12 col-md-4">
                                         <label for="" class="form-label fs-6 text-lead-500">Roles</label>
@@ -192,7 +193,7 @@
                                                     class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                             @enderror
                                         @endif
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <x-jet-button type="submit">Registrar</x-jet-button>
                             </form>
@@ -203,3 +204,4 @@
         </div>
     </div>
 </x-app-layout>
+

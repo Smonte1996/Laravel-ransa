@@ -6,6 +6,7 @@ use App\Imports\ProduccionImport;
 use App\Models\Cabecera;
 use App\Models\Client;
 use App\Models\Codigo_fconversione;
+use App\Models\Guia_remicion;
 use App\Models\Paso_a_paso;
 use App\Models\Pasoapaso;
 use App\Models\Produccione;
@@ -28,8 +29,9 @@ class OrdenesMaquila extends Component
     public $actividades = [
         [
          'sku' => '',
-         'cantidades' => '',
          'descripcion' => '',
+         'cantidades' => '',
+         'empa' => '',
          'fechas' => '',
          'precio' => ''
          ]
@@ -72,6 +74,8 @@ class OrdenesMaquila extends Component
     public $Tarifas;
     public $ean13;
     public $ean14;
+    public $guardarproceso;
+    public $guia;
 
     public $open = false;
 
@@ -82,7 +86,6 @@ class OrdenesMaquila extends Component
         'cliente' => 'required',
         'cantidad' => 'required',
         'proveedor' => 'required',
-        'Actividad' => 'required',
         'ean13' => 'required',
         'ean14' => 'required',
         'cjun' => 'required',
@@ -95,8 +98,9 @@ class OrdenesMaquila extends Component
      $this->actividades[] =
      [
         'sku' => '',
-         'cantidades' => '',
          'descripcion' => '',
+         'cantidades' => '',
+         'empa' => '',
          'fechas' => '',
          'precio' => ''
      ];
@@ -149,12 +153,14 @@ class OrdenesMaquila extends Component
         'ean14' => $Validarcabeera['ean14'],
         'fecha' => $Validarcabeera['fecha'],
         'client_id' => $Validarcabeera['cliente'],
-        'tarifario_id' => $Validarcabeera['Actividad'],
         'codigo_fconversione_id' => $Validarcabeera['codigo'],
         'estado' => 1,
         'solicitud' => 'Producción',
         'otcliente' => $this->otcliente,
         ]);
+        foreach ($this->Actividad as $key => $value) {
+          $this->GuardarCabecera->Tarifarios()->attach($value);
+        }
 
         $this->emit('alert', 'Se registro exitosamente');
     }
@@ -167,8 +173,9 @@ class OrdenesMaquila extends Component
               'sku' => $actividad['sku'],
               'cantidad' => $actividad['cantidades'],
               'descripcion' => $actividad['descripcion'],
-              'fecha' => $actividad['fechas'],
-              'precio' => $actividad['precio']
+              'fecha' => $actividad['fechas'] ?? null,
+              'empaque' => $actividad['empa'],
+               'precio' => $actividad['precio'] ?? null
              ]);
         }
 
@@ -178,9 +185,10 @@ class OrdenesMaquila extends Component
 
       public function mount()
       {
-        // $this->actividad = Tarifario::where('estado', 1)->get();
+         $this->actividad = Tarifario::where('estado', 1)->get();
         $this->Proveedores = Supplier::all();
         $this->Clientes = Client::where('estado', 1)->get();
+
         // $this->Codigos = Codigo_fconversione::where('estado', 1)->get();
       }
 
@@ -197,10 +205,9 @@ class OrdenesMaquila extends Component
             $validarCampo['Imagenes'] = str_replace('public/Pasoapaso/',' ', $Imagenes);
             }
 
-        $guardarproceso = Paso_a_paso::create([
+        $this->guardarproceso = Paso_a_paso::create([
          'cabecera_id' => $this->GuardarCabecera->id,
          'descripcion' => $validarCampo['descrip'],
-        //  'proceso' => $validarCampo['proceso'],
          'imagen' => $validarCampo['Imagenes']
         ]);
 
@@ -213,7 +220,7 @@ class OrdenesMaquila extends Component
    foreach ($this->ProgramaDias as $Dias) {
     $this->GuardarProgramcion = Programacione::create([
         'cabecera_id' =>  $this->GuardarCabecera->id,
-        'dia' => 'Dias'." ".$Dias['dia'],
+        'dia' => 'Dia'." ".$Dias['dia'],
         'cantidad' => $Dias['cantidades'],
         'fecha' => $Dias['fechaP'],
         'observacion' => $Dias['observa']
@@ -224,12 +231,28 @@ class OrdenesMaquila extends Component
 
     }
 
+    function GuardarGuia()
+    {
+        $this->guia = Guia_remicion::generate_unique_guia(4);
+        $datosguias = Guia_remicion::create([
+        'cabecera_id' => $this->GuardarCabecera->id,
+        'n_guia' => $this->guia,
+        'estado' => 1,
+       ]);
+    }
 
     function Enviar()
     {
-        $hgs = DB::table('cabeceras')
-       ->where('id', $this->GuardarCabecera->id)
-       ->update(['estado' => 2]);
+        $this->guia = Guia_remicion::generate_unique_guia(5);
+        $datosguias = Guia_remicion::create([
+        'cabecera_id' => $this->GuardarCabecera->id,
+        'n_guia' => $this->guia,
+        'estado' => 1,
+       ]);
+
+    //     $hgs = DB::table('cabeceras')
+    //    ->where('id', $this->GuardarCabecera->id)
+    //    ->update(['estado' => 2]);
 
        $this->emit('alert', 'Enviado Satisfactoriamente');
 
@@ -245,17 +268,20 @@ class OrdenesMaquila extends Component
         public function updatedcliente($id)
         {
           $this->Codigos = Codigo_fconversione::where('client_id', $id)->where('estado', 1)->get();
-          $this->actividad = Tarifario::where('client_id', $id)->where('estado', 1)->get();
+        //   $this->actividad = Tarifario::where('client_id', $id)->where('estado', 1)->get();
         }
 
         public function updatedcodigo($id)
         {
            $this->descrip_codigo = Codigo_fconversione::where('id', $id)->where('estado', 1)->get();
+        //    $this->dispatchBrowserEvent('initSelect1');
         }
 
         public function updatedActividad($id)
         {
-          $this->Tarifas = Tarifario::where('id', $id)->where('estado', 1)->get();
+        //   dd($id);
+           $this->Tarifas = Tarifario::whereIn('id', $id)->where('estado', 1)->get();
+        //   $this->dispatchBrowserEvent('initSelect2');
         }
 
 
@@ -268,26 +294,9 @@ class OrdenesMaquila extends Component
           $this->GuardarCabecera = Cabecera::find($this->GuardarCabecera);
         }
 
-
-    //   function generate_unique_code($length)
-    //   {
-    //       $characters = '0123456789aqwertyuiopsdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-
-    //       $code = 'OT-';
-    //       for ($i = 2; $i < $length; $i++) {
-    //           $code .= $characters[rand(0, strlen($characters) - 1)];
-    //       }
-    //       $Verificar = Cabecera::where('codigo', $code)->first();
-    //     if ($Verificar) {
-    //         return self::generate_unique_code(7);
-    //     } else {
-    //         return $code;
-    //     }
-    //   }
-
          $this->code = Cabecera::generate_unique_code(7);
 
-        //  $this->emit('select2');
+          $this->dispatchBrowserEvent('initSelect1');
 
         return view('livewire.maquila.ordenes-maquila');
     }

@@ -1,5 +1,6 @@
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/Animacion-maquila.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
 @endpush
 <div>
     <div class="right_col" role="main">
@@ -127,24 +128,37 @@
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
                                         <label for="floatingSelect" class="text-lead-900">Actividad:</label>
-                                        <p style="color: black">{{ $GuardarCabecera->Tarifario->actividad }}</p>
+                                        @foreach ($GuardarCabecera->Tarifarios as $Activid )
+                                        <li style="color: black">{{ $Activid->actividad }}</li>
+                                        @endforeach
                                 </div>
                             </div>
 
-
-                            <div class="col-sm-12 col-md-3">
-                                <div class="mb-3">
-                                    <label for="descripcion" class="form-label fs-6 text-lead-500">Tarifa Serypro:</label>
-                                    <p style="color: black">{{ $GuardarCabecera->Tarifario->tarifa_serypro }}</p>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 col-md-3">
+                         @switch($GuardarCabecera->supplier_id)
+                             @case(1)
+                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
                                     <label for="descripcion" class="form-label fs-6 text-lead-500">Tarifa Dprissa:</label>
-                                    <p style="color: black">{{ $GuardarCabecera->Tarifario->tarifa_dprissa }}</p>
+                                    @foreach ($GuardarCabecera->Tarifarios as $Activid )
+                                    <li style="color: black">{{ $Activid->tarifa_dprissa }}</li>
+                                @endforeach
                                 </div>
                             </div>
+                                 @break
+
+                        @case(2)
+                        <div class="col-sm-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label fs-6 text-lead-500">Tarifa Serypro:</label>
+                                @foreach ($GuardarCabecera->Tarifarios as $Activid )
+                                    <li style="color: black">{{ $Activid->tarifa_serypro }}</li>
+                                @endforeach
+                            </div>
+                        </div>
+                        @break
+                             @default
+
+                         @endswitch
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
@@ -167,7 +181,7 @@
                             <div class="col-sm-12 col-md-2" >
                                 <div class="mb-3">
                                 <div class="form-floating">
-                                    <input class="form-control rounded input @error('Ordent') is-invalid @enderror" placeholder="Orden de trabajo" type="text" id="floatingInput" disabled value="{{$code}}">
+                                    <input class="form-control rounded input @error('Ordent') is-invalid @enderror" placeholder="Orden de trabajo" type="text" id="floatingInput" disabled value="{{$code}}" wire:ignore>
                                     <label for="floatingInput" class="text-lead-500">Orden de trabajo</label>
                                      @error('Ordent')
                                     <small id="OrdenthelpId"
@@ -179,96 +193,85 @@
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                <div class="form-floating">
-                                    <input class="form-control rounded input @error('Cantidad') is-invalid @enderror" wire:model='cantidad' placeholder="Cantidad" type="number" id="floatingInput">
-                                    <label for="floatingInput" class="text-lead-500">Cantidad</label>
+                                    <label for="" class="text-lead-500">Cantidad</label>
+                                    <input class="form-control rounded input @error('Cantidad') is-invalid @enderror" wire:model.defer='cantidad' placeholder="Cantidad" type="number">
                                      @error('Cantidad')
                                     <small id="CantidadhelpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                <div class="form-floating">
-                                    <select class="form-select input @error('cjun') is-invalid @enderror" wire:model.defer='cjun' id="floatingSelect" aria-label="Floating label select example">
-                                        <option selected>Seleccionar</option>
+                                    <label for="floatingSelect" class="text-lead-900">Cajas o Unidades</label>
+                                    <select class="form-select input @error('cjun') is-invalid @enderror" wire:model.defer='cjun'>
+                                        <option >Seleccionar</option>
                                         <option value="Cajas">Cajas</option>
                                         <option value="Unidades">Unidades</option>
                                       </select>
-                                      <label for="floatingSelect" class="text-lead-900">Cajas o Unidades</label>
                                      @error('cjun')
                                     <small id="cjunhelpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                <div class="form-floating">
-                                    <input class="form-control rounded input @error('fecha') is-invalid @enderror" wire:model.defer='fecha' placeholder="Fecha" type="date" id="floatingInput">
-                                    <label for="floatingInput" class="text-lead-500">Fecha</label>
+                                    <label for="" class="text-lead-500">Fecha</label>
+                                    <input class="form-control rounded input @error('fecha') is-invalid @enderror" wire:model.defer='fecha' placeholder="Fecha" type="date" >
                                      @error('fecha')
                                     <small id="fechahelpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="mb-3">
-                                <div class="form-floating">
-                                    <input class="form-control rounded input @error('ean13') is-invalid @enderror" wire:model='ean13' placeholder="Ean13" type="number" id="floatingInput">
-                                    <label for="floatingInput" class="text-lead-500">Ean13</label>
+                                    <label for="" class="text-lead-500">Ean13</label>
+                                    <input class="form-control rounded input @error('ean13') is-invalid @enderror" wire:model.defer='ean13' placeholder="Ean13" type="number">
                                      @error('ean13')
                                     <small id="ean13helpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="mb-3">
-                                <div class="form-floating">
-                                    <input class="form-control rounded input @error('ean14') is-invalid @enderror" wire:model='ean14' placeholder="Ean14" type="number" id="floatingInput">
-                                    <label for="floatingInput" class="text-lead-500">Ean14</label>
+                                    <label for="" class="text-lead-500">Ean14</label>
+                                    <input class="form-control rounded input @error('ean14') is-invalid @enderror" wire:model.defer='ean14' placeholder="Ean14" type="number">
                                      @error('ean14')
                                     <small id="ean14helpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3" >
-                                <div class="form-floating">
-                                    <select class="form-select input Selector @error('cliente') is-invalid @enderror" id="floatingSelect" wire:model='cliente' x-model ="cliente">
+                                    <label for="" class="text-lead-900">Cliente</label>
+                                    <select class="form-select input  @error('cliente') is-invalid @enderror" wire:model='cliente' x-model ="cliente">
                                         <option selected>Seleccionar una opcion</option>
                                         @foreach ($Clientes as $Client )
                                             <option value="{{ $Client->id }}">{{ $Client->social_reason }}</option>
                                         @endforeach
                                       </select>
-                                      <label for="floatingSelect" class="text-lead-900">Cliente</label>
+
                                      @error('Cliente')
                                     <small id="ClientehelpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <div class="form-floating">
-                                        <select class="form-select rounded Selector input @error('codigo') is-invalid @enderror" wire:model='codigo' placeholder="Codigo" id="floatingSelect">
+                                    <label for="" class="text-lead-500">Codigo</label>
+                                        <select class="form-select input select2 @error('codigo') is-invalid @enderror" wire:model='codigo' placeholder="Codigo">
                                             <option value="">Seleccionar</option>
                                             @if (!is_null($cliente))
                                             @foreach ( $Codigos as $Codi )
@@ -278,48 +281,38 @@
 
                                             @endif
                                         </select>
-                                       <label for="floatingSelect" class="text-lead-500">Codigo</label>
                                      @error('codigo')
                                     <small id="codigohelpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
-                            @if (!is_null($codigo))
+
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
                                     <label for="descripcion" class="form-label fs-6 text-lead-500">Descripción:</label>
+                                    @if (!is_null($codigo))
                                     @foreach ( $descrip_codigo as $descrip_cod )
                                       <p style="color: black"> {{ $descrip_cod->descripcion }} </p>
                                     @endforeach
+                                    @else
+
+                                    @endif
                                 </div>
                             </div>
-                            @else
 
-                            @endif
 
-                            <div class="col-sm-12 col-md-3">
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <select class="form-select input @error('Actividad') is-invalid @enderror" wire:model='Actividad' id="floatingSelect">
-                                          <option selected>Seleccionar una opcion</option>
-                                          @if (!is_null($cliente))
+                            <div class="col-sm-12 col-md-3" >
+                                <div class="mb-3" wire:ignore>
+                                    <label for="" class="text-lead-900">Actividad</label>
+                                        <select id="select-multiple" wire:model='Actividad' multiple>
+                                          <option >Seleccionar una opcion</option>
                                           @foreach ($actividad as $activida )
                                           <option value="{{ $activida->id }}">{{ $activida->actividad }}</option>
                                          @endforeach
-                                          @else
-
-                                          @endif
                                         </select>
-                                        <label for="floatingSelect" class="text-lead-900">Actividad</label>
-                                     @error('Actividad')
-                                    <small id="ActividadhelpId"
-                                        class="form-text text-muted invalid-feedback">{{ $message }}</small>
-                                    @enderror
                                   </div>
-                                </div>
                             </div>
 
                             @if (!is_null($Actividad))
@@ -346,32 +339,28 @@
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <div class="form-floating">
-                                        <select class="form-select input @error('proveedor') is-invalid @enderror" wire:model.defer='proveedor' id="floatingSelect">
+                                    <label for="Select" class="text-lead-900">Proveedor</label>
+                                        <select class="form-select input @error('proveedor') is-invalid @enderror" wire:model.defer='proveedor' id="Select">
                                           <option selected>Seleccionar una opcion</option>
                                           @foreach ($Proveedores as $Proveedor )
                                             <option value="{{ $Proveedor->id }}">{{ $Proveedor->social_reason }}</option>
                                           @endforeach
                                         </select>
-                                        <label for="floatingSelect" class="text-lead-900">Proveedor</label>
                                      @error('proveedor')
                                     <small id="proveedorhelpId"
                                         class="form-text text-muted invalid-feedback">{{ $message }}</small>
                                     @enderror
                                   </div>
-                                </div>
                             </div>
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                <div class="form-floating">
-                                    <input class="form-control rounded input @error('otcliente') is-invalid @enderror" wire:model.defer='otcliente' placeholder="Orden de trabajo" type="text" id="floatingInput" >
-                                    <label for="floatingInput" class="text-lead-500">Ot del cliente</label>
-                                  </div>
+                                    <label for="" class="text-lead-500">Ot del cliente</label>
+                                    <input class="form-control rounded input @error('otcliente') is-invalid @enderror" wire:model.defer='otcliente' placeholder="Orden de trabajo" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div class="mb-3">
+                                <div class="mb-3 mt-3">
                                 <button class="btm" wire:click.prevent='Encabezado'> Empezar
                                 </button>
                               </div>
@@ -422,6 +411,17 @@
                                         <div class="form-floating">
                                             <input class="form-control rounded input @error('cantidades') is-invalid @enderror" style="width: 180px" wire:model.defer='actividades.{{ $index }}.cantidades' placeholder="cantidad" type="number" igd="floatingInput">
                                             <label for="floatingInput" class="text-lead-500">Cantidad</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-floating">
+                                            <select class="form-select input @error('empa') is-invalid @enderror" wire:model.defer='actividades.{{ $index }}.empa' style="width: 150px" id="floatingSelect">
+                                                <option selected>Seleccionar</option>
+                                                <option value="Caja">Caja</option>
+                                                <option value="Unidad">Unidad</option>
+                                                <option value="Display">Display</option>
+                                              </select>
+                                              <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                         </div>
                                     </td>
                                     <td>
@@ -533,9 +533,14 @@
                                  </table>
                                 </div>
                             </fieldset>
+                            @if (!is_null($guardarproceso))
+
+                            @else
                             <div class="mt-3">
                                 <button class="btn btn-sm bg-green-500 text-white" wire:click.prevent='Pasos'>Guardar</button>
                              </div>
+                            @endif
+
 
                              <div class="clearfix border border-1 mt-5"></div>
 
@@ -620,16 +625,28 @@
 
 </div>
 @push('scripts')
-{{-- <script>
-    Livewire.on('select2', function() {
-        $('.Selector').select2();
-        $('.Selector').on('change', function(e){
-            @this.set('codigo', e.target.value),
-            @this.set('cliente', e.target.value);
-        });
-       });
-</script> --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+ <script>
+    new MultiSelectTag('select-multiple',{
+    onChange: function(values) {
+        // console.log(values.length);
+  var element = [];
+for (let index = 0; index < values.length; index++) {
+    element = element.concat(values[index].value);
+}
+// console.log(element);
+ @this.set('Actividad', element);
+
+    }
+});
+
+document.addEventListener('initSelect1',  function() {
+$('.select2').select2();
+$('.select2').on('change', function(e){
+@this.set('codigo', e.target.value);
+});
+});
+</script>
 <script>
    Livewire.on('alert', function(message){
    Swal.fire({
