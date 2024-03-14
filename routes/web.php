@@ -22,6 +22,7 @@ use App\Http\Controllers\Dissatisfaction_serviceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Guia_Confirmacion_MaquilaController;
 use App\Http\Controllers\Guia_MaquilaController;
+use App\Http\Controllers\ListadoGuiasMaquilaController;
 use App\Http\Controllers\Matriz_defectoController;
 use App\Http\Controllers\MuestreoClientController;
 use App\Http\Controllers\MuestreoContenedorController;
@@ -56,6 +57,7 @@ use App\Http\Livewire\Maquila\ConfirmarMaquila;
 use App\Http\Livewire\Maquila\FirmaUsuario;
 use App\Http\Livewire\Maquila\GuiaMaquilas;
 use App\Http\Livewire\Maquila\OrdenesMaquila;
+use App\Http\Livewire\Maquila\TrabajoPorhoraOrden;
 use App\Http\Livewire\Maquila\VistaMaquila;
 use App\Http\Livewire\Reclamo\Clasificaciones as ReclamoClasificaciones;
 use App\Http\Livewire\Reclamo\Confirmaracciones;
@@ -187,20 +189,28 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
           Route::resource('Confirmacion-estibas', ConfirmarActividades::class)->except(['show'])->parameters(['Confirmar-estibas'=>'Confirmacion-estibas'])->names('Confirmar-estibas');
 
         //url para el apartado de maquila.
-        Route::get('Trabajo Maquila', OrdenesMaquila::class)->name('Maquila.trabajo');
         Route::resource('Solicitudes-Maquila', ProduccionMaquilaController::class)->except(['show'])->parameters(['ProduccionMaquila' => 'Solicitud-Maquila'])->names('vista.Maquila');
+        Route::get('Informe-Maquila', [ProduccionMaquilaController::class, 'informeCierre'])->name('Cierre.informe');
         Route::resource('Actividad-tarifa', TarifarioMaquilaController::class)->except(['show'])->parameters(['Actividades-tarifas' => 'Actividad-tarifa'])->names('Tarifa.Maquila');
         Route::resource('Servicio-Maquila', ServicioMaquilaController::class)->except(['show'])->parameters(['ServiceMaquila' => 'ServicioMaquila'])->names('Maquila.servicio');
         Route::resource('Codigos', CodigoFactorconversionController::class)->except(['show'])->parameters(['Codigo_conver'=>'Codigo_conversion'])->names('codigo.fc');
-        Route::get('Actividad-maquila/{id}', VistaMaquila::class)->name('Maquila.Actividad');
+        Route::resource('Guia-confirmacion-Maquila', Guia_Confirmacion_MaquilaController::class)->except(['show'])->parameters(['Confirmacion-Maquila'=>'Guia_confirmacion_Maquila'])->names('Guias.confirmacion.maquila');
         Route::resource('Guias-remicion', Guia_MaquilaController::class)->except(['show'])->parameters(['Guias-remicion' => 'Guias-remiciones'])->names('Guias.Maquila');
-        Route::get('Guia-remision-Maquila/{id}', [Guia_MaquilaController::class, 'GuiaRemicion'])->name('pdf.guia.operacion');
-        Route::resource('Guia-confirmcacion-Maquila', Guia_Confirmacion_MaquilaController::class)->except(['show'])->parameters(['Confirmacion-Maquila'=>'Guia_confirmacion_Maquila'])->names('Guias.confirmacion.maquila');
+        Route::resource('listado-Guias-Maquila', ListadoGuiasMaquilaController::class)->except(['show'])->parameters(['Listado-Guias' => 'Guias-Listado'])->names('Listado.guias.maquila');
+        Route::get('Trabajo Maquila', OrdenesMaquila::class)->name('Maquila.trabajo');
+        Route::get('Trabajo-por-hora', TrabajoPorhoraOrden::class)->name('orden.trabajoPorHora');
         Route::get('Confirmacion-Maquila/{id}', ConfirmarMaquila::class)->name('Confirmar.Maquila');
         Route::get('Guia-operacion-Maquila/{id}', GuiaMaquilas::class)->name('Operacion.Maquila');
         Route::get('firma-electronica', FirmaUsuario::class)->name('crear.firma');
+        Route::get('Actividad-maquila/{id}', VistaMaquila::class)->name('Maquila.Actividad');
+        Route::get('Confirmar-Operacion/{id}', [Guia_MaquilaController::class, 'ConfirmaOperacion'])->name('Confirmar.Operacion.Maquila');
+        Route::get('Guias-confirmacion-operacion/{id}',[Guia_MaquilaController::class, 'GuiaoperacionConfirmar'])->name('Guia.confirmacion.maquila');
+        Route::get('Guia-remision-Maquila/{id}', [Guia_MaquilaController::class, 'GuiaRemicion'])->name('pdf.guia.operacion');
+        Route::get('Reporte-Muestreo-maquila/{id}', [Guia_MaquilaController::class, 'ReporteMuestreo'])->name('Reporte.muestreo.maquila');
+        Route::get('Informe-Avance-Maquila/{id}', [Guia_MaquilaController::class, 'InformeAvance'])->name('Informe.avances.maquila');
         Route::get('Eliminar-actividad/{id}',[TarifarioMaquilaController::class, 'EliminarActividad'])->name('Actividad.eliminar');
 
+        //Rutas de solicitudes de reclamo.
         Route::get('/Solicitudes', ReclamoReclamoController::class)->name('reclamo');
         Route::get('download/{id}',[ReclamoReclamoController::class, 'download'])->name('download.Archivo');
         Route::get('Reclamo-pdf/{id}',[ReclamoReclamoController::class, 'ReclamoPdf'])->name('pdf.Reclamo');

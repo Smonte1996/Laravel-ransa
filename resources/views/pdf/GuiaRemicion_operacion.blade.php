@@ -133,7 +133,8 @@
         <td class="border-2 border-dark text-center">
             {{ $pdf->Clientes->social_reason }}
         </td>
-        <td class="border-2 border-dark text-center" style="white-space: pre-line;">
+        <td class="border-2 border-dark text-center">
+            {{--  style="white-space: pre-line;"  --}}
             @foreach ( $pdf->Tarifarios as $Activid )
                 {{ $Activid->ServiciosMaquila->name }}
             @endforeach
@@ -176,13 +177,15 @@
     <td class="border-2 border-dark text-center">{{ $Codigos->sku }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->descripcion }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->cantidad }}</td>
-    <td class="border-2 border-dark text-center">CJ</td>
+    <td class="border-2 border-dark text-center">{{ $Codigos->empaque }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->fecha }}</td>
     <td class="border-2 border-dark text-center">$ {{ $Codigos->precio }}</td>
 
     </tr>
 @endforeach
 </table>
+
+@isset($pdf->GuiaMaquilas->confirmafirma->name)
 
 <h2 class="text-center mt-5"><strong>Confirmación Maquila</strong></h2></td>
 
@@ -201,15 +204,17 @@
     <th class="border-2 border-dark text-center">
         Cantidad Recibido
     </th>
+    <th class="border-2 border-dark text-center">
+        Empaque
+    </th>
 </tr>
 @foreach ($pdf->Componentes as $Codigos )
     <tr>
     <td class="border-2 border-dark text-center">{{ $Codigos->id }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->sku }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->descripcion }}</td>
-    @isset($Codigos->Recibido->cantidad_confirmada)
     <td class="border-2 border-dark text-center">{{ $Codigos->Recibido->cantidad_confirmada }}</td>
-    @endisset
+    <td class="border-2 border-dark text-center">{{ $Codigos->Recibido->empaque }}<</td>
     </tr>
 @endforeach
 @isset($pdf->GuiaMaquilas->observacion)
@@ -217,17 +222,20 @@
             <th class="border-2 border-dark text-center">
               Observación
             </th>
-            <td colspan="3" class="border-2 border-dark text-center">
+            <td colspan="4" class="border-2 border-dark text-center">
                 {{ $pdf->GuiaMaquilas->observacion }}
             </td>
         </tr>
 @endisset
 </table>
-
+@endisset
 
 <Table width="100%" class="pt-5 text-center" cellspacing="0" cellpadding="3">
 <tr>
+    @isset($pdf->GuiaMaquilas->UsuarioFirma->firma)
     <th> <img src="{{ base64_decode($pdf->GuiaMaquilas->UsuarioFirma->firma) }}" alt="Firma"> </th>
+    @endisset
+
     @isset($pdf->GuiaMaquilas->confirmafirma->firma)
     <th> <img src="{{ base64_decode($pdf->GuiaMaquilas->confirmafirma->firma) }}" alt="firma2"></th>
     @endisset
@@ -238,7 +246,10 @@
     <th>Recibí conforme</th>
 </tr>
 <tr>
+    @isset($pdf->GuiaMaquilas->UsuarioFirma->name)
     <th style="font-size: 10px">{{ $pdf->GuiaMaquilas->UsuarioFirma->name }}</th>
+    @endisset
+
     @isset($pdf->GuiaMaquilas->confirmafirma->name)
        <th style="font-size: 10px"> {{ $pdf->GuiaMaquilas->confirmafirma->name }} </th>
     @endisset

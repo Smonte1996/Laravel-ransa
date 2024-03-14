@@ -52,6 +52,7 @@
                                         <td>{{ $Cabeceras->Cabecera->Proveedores->social_reason }}</td>
                                         <td>{{ $Cabeceras->Cabecera->fecha }}</td>
                                         <td>
+
                                             @switch($Cabeceras->estado)
                                                 @case(2)
                                                 <span class="bg-lead-500 p-1 rounded text-white">En confirmación</span>
@@ -62,15 +63,34 @@
                                                     @case(3)
                                                     <span class="bg-green-500 p-1 rounded text-white">Cerrado</span>
                                                     @break
+                                                    @case(4)
+                                                    <span class="bg-green-500 p-1 rounded text-white">Recibir</span>
+                                                    @break
+                                                    @case(5)
+                                                    <span class="bg-orange-500 p-1 rounded text-white">Recibido</span>
+                                                    @break
                                                 @default
 
                                             @endswitch
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group">
-                                                <a href="{{ route('adm.pdf.guia.operacion', encrypt($Cabeceras->cabecera_id)) }}" target="_blank" class="btn btn-green-500 text-white border"><i class="fa fa-file-pdf"></i></a>
 
-                                                <a href="{{ route('adm.Operacion.Maquila', encrypt($Cabeceras->cabecera_id)) }}" class="btn btn-orange-500 text-white border"><i class="fa fa-info"></i></a>
+                                                @switch($Cabeceras->estado)
+                                                    @case(1)
+                                                    <a href="{{ route('adm.pdf.guia.operacion', encrypt($Cabeceras->cabecera_id)) }}" target="_blank" class="btn btn-green-500 text-white border"><i class="fa fa-file-pdf"></i></a>
+                                                    <a href="{{ route('adm.Operacion.Maquila', encrypt($Cabeceras->cabecera_id)) }}" class="btn btn-orange-500 text-white border"><i class="fa fa-info"></i></a>
+                                                        @break
+                                                        @case(4)
+                                                        <a href="{{ route('adm.Confirmar.Operacion.Maquila', encrypt($Cabeceras->cabecera_id)) }}" class="btn btn-orange-500 text-white border"><i class="fa fa-info"></i></a>
+                                                        @break
+                                                        @case(5)
+                                                        <a href="{{ route('adm.Guia.confirmacion.maquila', encrypt($Cabeceras->id)) }}" target="_blank" class="btn btn-orange-500 text-white border"><i class="fa fa-file-pdf"></i></a>
+                                                        @break
+
+                                                    @default
+
+                                                @endswitch
                                             </div>
                                         </td>
                                        </tr>

@@ -21,6 +21,7 @@ class Cabecera extends Model
         'ean14',
         'fecha',
         'client_id',
+        'pvp',
         'tarifario_id',
         'codigo_fconversione_id',
         'estado',
@@ -89,5 +90,40 @@ class Cabecera extends Model
     function GuiaMaquilas()
     {
         return $this->belongsTo(Guia_remicion::class,'id' ,'cabecera_id');
+    }
+
+    function Guias()
+    {
+        return $this->belongsTo(Guia_remicion::class,'id' ,'cabecera_id')->where('estado', 4);
+    }
+
+    function MuestreoMaquila()
+    {
+        return $this->hasMany(Maquila_muestreo::class, 'cabecera_id');
+    }
+
+    function NovedadMaquila()
+    {
+        return $this->hasMany(Maquila_novedades::class, 'cabecera_id');
+    }
+
+    function AvancesMaquila()
+    {
+        return $this->hasMany(Avance_produccione::class, 'cabecera_id');
+    }
+
+    // function MaquilaAvance()
+    // {
+    //     return $this->hasMany(Avance_produccione::class, 'cabecera_id')->where('created_at', );
+    // }
+
+    function MaquilaProductividad()
+    {
+       return $this->hasMany(Maquila_producctividade::class, 'cabecera_id');
+    }
+
+    function Programacion()
+    {
+        return $this->hasMany(Programacione::class, 'cabecera_id');
     }
 }

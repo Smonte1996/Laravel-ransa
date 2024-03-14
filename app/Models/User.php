@@ -81,4 +81,8 @@ class User extends Authenticatable
     {
         return Client::where('id', $this->userable_id)->first()->id;
     }
+
+    public function Supplier(){
+     return $this->belongsTo(Supplier::class,'userable_id','id');
+    }
 }

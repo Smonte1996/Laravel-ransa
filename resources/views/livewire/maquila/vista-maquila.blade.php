@@ -140,6 +140,16 @@
                                                 </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1"
+                                                class="form-label text-lead-500">Pvp</label>
+                                            <div class="text-orange-500 fw-bold fs-6">
+                                               $ {{ $Inf->pvp }}
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
                                 <fieldset class="border border-2 mt-3">
@@ -212,6 +222,7 @@
                                                 <th class="text-center">Cantidad programada</th>
                                                 <th class="text-center">Fecha</th>
                                                 <th class="text-center">Observación</th>
+                                                <th class="text-center">check</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -229,6 +240,18 @@
                                                     <td class="text-center">
                                                         <p style="white-space: pre-line; color:black;">{{ $Programacion->observacion }}</p>
                                                     </td>
+                                                    @if (now()->format('Y-m-d') ===  $Programacion->fecha )
+                                                    <td class="ps-5">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" wire:model.defer="Programacion" value="{{ $Programacion->id }}"
+                                                                class="form-check-input text-green-500">
+                                                        </div>
+
+                                                    </td>
+                                                    @else
+
+                                                    @endif
+
                                                 </tr>
                                              @endforeach
                                             </tbody>
@@ -265,12 +288,12 @@
                                         </div>
                                     </td>
 
-                                    <td class="text-center">
+                                    {{--  <td class="text-center">
                                         <div class="form-floating">
                                             <input class="form-control rounded @error('lotes') is-invalid @enderror" style="width: 180px" wire:model='Avances.{{ $index }}.lotes' placeholder="Lote" type="text" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Lote</label>
                                         </div>
-                                    </td>
+                                    </td>  --}}
 
                                     <td>
                                         <div class="form-floating">
@@ -323,6 +346,12 @@
                                            <label for="floatingInput" class="text-lead-500">N° de Persona</label>
                                         </div>
                                     </td>
+                                    <td>
+                                        <div class="form-floating">
+                                            <input class="form-control rounded @error('avancce1') is-invalid @enderror" wire:model.defer="avance1" style="width: 400px" placeholder="Cantidad avance" type="number" id="floatingInput">
+                                           <label for="floatingInput" class="text-lead-500">Cantidad avance</label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">
@@ -341,6 +370,12 @@
                                         <div class="form-floating">
                                             <input class="form-control rounded @error('personal2') is-invalid @enderror" wire:model.defer="personal2" style="width: 400px" placeholder="N° de Persona" type="number" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">N° de Persona</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-floating">
+                                            <input class="form-control rounded @error('avancce2') is-invalid @enderror" wire:model.defer="avance2" style="width: 400px" placeholder="Cantidad avance" type="number" id="floatingInput">
+                                           <label for="floatingInput" class="text-lead-500">Cantidad avance</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -371,7 +406,7 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" wire:model.defer="" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" wire:model.defer="cantidad_muestra" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -379,7 +414,7 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
+                                                <select class="form-select input @error('cliente') is-invalid @enderror" wire:model.defer="empaque1" id="floatingSelect">
                                                     <option selected>Seleccionar una opcion</option>
                                                     <option value="Caja">Caja</option>
                                                     <option value="Unidad">Unidad</option>
@@ -401,7 +436,7 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" name="" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad_aceptada') is-invalid @enderror" wire:model.defer="cantidad_aceptada" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -409,7 +444,7 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
+                                                <select class="form-select input @error('empaque2') is-invalid @enderror" wire:model.defer="empaque2" id="floatingSelect">
                                                     <option selected>Seleccionar una opcion</option>
                                                     <option value="Caja">Caja</option>
                                                     <option value="Unidad">Unidad</option>
@@ -431,7 +466,7 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad_rechazo') is-invalid @enderror" wire:model.defer="cantidad_rechazo" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -439,7 +474,7 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
+                                                <select class="form-select input @error('empaque3') is-invalid @enderror" wire:model.defer="empaque3" id="floatingSelect">
                                                     <option selected>Seleccionar</option>
                                                     <option value="Caja">Caja</option>
                                                     <option value="Unidad">Unidad</option>
@@ -469,7 +504,7 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" name="" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad_reprocesado') is-invalid @enderror" wire:model.defer="cantidad_reprocesado" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -477,10 +512,10 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('cliente') is-invalid @enderror" id="floatingSelect">
+                                                <select class="form-select input @error('empaque4') is-invalid @enderror" wire:model.defer="empaque4" id="floatingSelect">
                                                     <option selected>Seleccionar</option>
-                                                    <option value="Caja">Caja</option>
-                                                    <option value="Unidad">Unidad</option>
+                                                    <option value="CJ">Caja</option>
+                                                    <option value="UN">Unidad</option>
                                                     <option value="Display">Display</option>
                                                   </select>
                                                   <label for="floatingSelect" class="text-lead-900">Empaque</label>
@@ -492,6 +527,9 @@
                                 </div>
                                 </table>
                               </div>
+                              <div class="col-md-12 col-sm-12 d-flex justify-content-end mt-3">
+                                <button class="btn btn-sm bg-green-500 text-white" wire:click='GuardarMuestreo' wire:loading.attr='disabled' wire:target='GuardarMuestreo' class="disabled:opacity-60">Guardar</button>
+                              </div>
                              </div>
                                 </fieldset>
 
@@ -501,14 +539,14 @@
                              <div class="ms-4">
                                 <div class="table-responsive">
                                 <table class="table w-100">
-                                    @foreach ( $Novedades as $index=>$Novedad )
+                                    {{--  @foreach ( $Novedades as $index=>$Novedad )  --}}
                                 <tr>
                                   <td>
                                     <div class="form-floating">
-                                        <select class="form-select input @error('Sku') is-invalid @enderror" wire:model='Novedades.{{ $index }}.Sku' style="width: 150px" id="floatingSelect">
+                                        <select class="form-select input @error('Sku') is-invalid @enderror" wire:model='Sku' style="width: 150px" id="floatingSelect">
                                             <option selected>Seleccionar</option>
                                             @foreach ($Inf->Componentes as $skus )
-                                                <option value="{{ $skus->id }}">{{ $skus->sku }}</option>
+                                                <option value="{{ $skus->sku }}">{{ $skus->sku }}</option>
                                             @endforeach
                                           </select>
                                           <label for="floatingSelect" class="text-lead-900">Sku</label>
@@ -516,16 +554,16 @@
                                   </td>
                                     <td>
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('cantidad') is-invalid @enderror" style="width: 120px" name="" wire:model='Novedades.{{ $index }}.canti' placeholder="Cantidad" type="number" id="floatingInput">
+                                            <input class="form-control rounded @error('cantidad') is-invalid @enderror" style="width: 120px" name="" wire:model='canti' placeholder="Cantidad" type="number" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-floating">
-                                            <select class="form-select input @error('Empaque') is-invalid @enderror" wire:model='Novedades.{{ $index }}.empaque' style="width: 150px" id="floatingSelect">
+                                            <select class="form-select input @error('Empaque') is-invalid @enderror" wire:model='empaque' style="width: 150px" id="floatingSelect">
                                                 <option selected>Seleccionar</option>
-                                                <option value="Caja">Caja</option>
-                                                <option value="Unidad">Unidad</option>
+                                                <option value="CJ">Caja</option>
+                                                <option value="UN">Unidad</option>
                                                 <option value="Display">Display</option>
                                               </select>
                                               <label for="floatingSelect" class="text-lead-900">Empaque</label>
@@ -533,7 +571,7 @@
                                     </td>
                                     <td>
                                         <div class="form-floating">
-                                            <select class="form-select input @error('estado') is-invalid @enderror" wire:model='Novedades.{{ $index }}.estado' style="width: 150px" id="floatingSelect">
+                                            <select class="form-select input @error('estado') is-invalid @enderror" wire:model='estado' style="width: 150px" id="floatingSelect">
                                                 <option selected>Seleccionar</option>
                                                 <option value="Mal estado">Mal estado</option>
                                                 <option value="Reprocesados">Reprocesados</option>
@@ -545,29 +583,32 @@
 
                                     <td>
                                         <div class="form-floating">
-                                            <textarea class="form-control rounded" style="width: 320px" placeholder="Observación" wire:model='Novedades.{{ $index }}.observacion' id="floatingTextarea"></textarea>
+                                            <textarea class="form-control rounded" style="width: 320px" placeholder="Observación" wire:model='observacion' id="floatingTextarea"></textarea>
                                             <label for="floatingTextarea" class="text-lead-500">Observación</label>
                                         </div>
                                     </td>
 
                                     <td>
-                                        <input class="form-control rounded @error('imagen') is-invalid @enderror" style="width: 300px" name="" wire:model='Novedades.{{ $index }}.imagenes' type="file">
+                                        <input class="form-control rounded @error('imagen') is-invalid @enderror" style="width: 300px" name="" wire:model='imagenes' wire:key='{{ $imagenkey }}' type="file">
                                     </td>
 
-                                    <td>
+                                    {{--  <td>
                                         <button class="btn btn-sm btn-danger mt-3" wire:click.prevent='EliminarCampo({{ $index }})'>Eliminar</button>
-                                    </td>
+                                    </td>  --}}
                                 </tr>
-                                @endforeach
+                                {{--  @endforeach  --}}
                                 </table>
                                 </div>
+                                <div class="col-md-12 col-sm-12 d-flex justify-content-end mt-3">
+                                    <button class="btn btn-sm bg-green-500 text-white" wire:click='GuardarNovedad' wire:loading.attr='disabled' wire:target='GuardarNovedad' class="disabled:opacity-60">Guardar</button>
+                                  </div>
                                </div>
-                               <div class="col-md-6">
+                               {{--  <div class="col-md-6">
                                 <button class="btn btn-sm" wire:click.prevent='CamposNovedad'><i class="fa-solid fa-plus" style="color: #27b050;"></i> Agregar campos</button>
-                             </div>
+                             </div>  --}}
                                 </fieldset>
                                 <div class="text-center">
-                                    <x-jet-button id="confirmaction" class="mt-4">Confirmar Acciones
+                                    <x-jet-button id="confirmaction" wire:click.prevent='EnviarYregistarguia' class="mt-4">Enviar Reportes
                                     </x-jet-button>
                                 </div>
                             </div>

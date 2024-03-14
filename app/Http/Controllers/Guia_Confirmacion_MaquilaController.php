@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guia_remicion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Guia_Confirmacion_MaquilaController extends Controller
 {
@@ -14,7 +15,14 @@ class Guia_Confirmacion_MaquilaController extends Controller
      */
     public function index()
     {
-        $Cabecera = Guia_remicion::whereIn('estado', [2])->get();
+        if (auth()->user()->userable_type == "App\Models\Supplier") {
+         $Cabecera = Guia_remicion::whereIn('estado', [2])->wherehas('Cabecera', function($query){
+            $query->where('supplier_id', Auth::user()->Supplier->id);
+           })->get();
+        } else {
+         $Cabecera = Guia_remicion::whereIn('estado', [2])->get();
+        }
+
          return view('modulos.Maquila_confirmacion.index', compact('Cabecera'));
     }
 

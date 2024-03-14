@@ -10,6 +10,7 @@ class Avance_produccione extends Model
     use HasFactory;
 
     protected $fillable = [
+        'guia_remicion_id',
         'programacione_id',
         'cabecera_id',
         'unidades_caja',
@@ -17,4 +18,14 @@ class Avance_produccione extends Model
         'fecha_vencimiento',
         'lote'
     ];
+
+    function Guias_Maquila()
+    {
+        return $this->hasMany(Guia_remicion::class, 'guia_remicion_id');
+    }
+
+    function Avanceactividad()
+    {
+        return $this->hasOne(Programacione::class, 'id', 'programacione_id');
+    }
 }

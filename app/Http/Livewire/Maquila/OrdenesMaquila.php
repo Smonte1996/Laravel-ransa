@@ -3,6 +3,9 @@
 namespace App\Http\Livewire\Maquila;
 
 use App\Imports\ProduccionImport;
+use App\Mail\NotificacionClienteMaquila;
+use App\Mail\NotificacionMaquila;
+use App\Mail\NotificacionOperacionMaquila;
 use App\Models\Cabecera;
 use App\Models\Client;
 use App\Models\Codigo_fconversione;
@@ -16,6 +19,7 @@ use App\Models\Tarifario;
 use Exception;
 use Faker\UniqueGenerator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 use Livewire\Component;
@@ -46,6 +50,7 @@ class OrdenesMaquila extends Component
         ]
     ];
 
+    public $pvp;
     public $cliente;
     public $cantidad;
     public $proveedor;
@@ -86,9 +91,10 @@ class OrdenesMaquila extends Component
         'cliente' => 'required',
         'cantidad' => 'required',
         'proveedor' => 'required',
-        'ean13' => 'required',
-        'ean14' => 'required',
+        'ean13' => 'nullable',
+        'ean14' => 'nullable',
         'cjun' => 'required',
+        'pvp' => 'required',
         'codigo' => 'required',
         'fecha' => 'required|date',
     ];
@@ -154,6 +160,7 @@ class OrdenesMaquila extends Component
         'fecha' => $Validarcabeera['fecha'],
         'client_id' => $Validarcabeera['cliente'],
         'codigo_fconversione_id' => $Validarcabeera['codigo'],
+        'pvp'=> $Validarcabeera['pvp'],
         'estado' => 1,
         'solicitud' => 'Producción',
         'otcliente' => $this->otcliente,
@@ -231,15 +238,15 @@ class OrdenesMaquila extends Component
 
     }
 
-    function GuardarGuia()
-    {
-        $this->guia = Guia_remicion::generate_unique_guia(4);
-        $datosguias = Guia_remicion::create([
-        'cabecera_id' => $this->GuardarCabecera->id,
-        'n_guia' => $this->guia,
-        'estado' => 1,
-       ]);
-    }
+    // function GuardarGuia()
+    // {
+    //     $this->guia = Guia_remicion::generate_unique_guia(4);
+    //     $datosguias = Guia_remicion::create([
+    //     'cabecera_id' => $this->GuardarCabecera->id,
+    //     'n_guia' => $this->guia,
+    //     'estado' => 1,
+    //    ]);
+    // }
 
     function Enviar()
     {
@@ -250,9 +257,13 @@ class OrdenesMaquila extends Component
         'estado' => 1,
        ]);
 
-    //     $hgs = DB::table('cabeceras')
-    //    ->where('id', $this->GuardarCabecera->id)
-    //    ->update(['estado' => 2]);
+        $hgs = DB::table('cabeceras')
+       ->where('id', $this->GuardarCabecera->id)
+       ->update(['estado' => 2]);
+
+       Mail::to('stevemontenegro_9@hotmail.com')->cc('smontenegrot@ransa.net')->send(new NotificacionClienteMaquila($this->GuardarCabecera->id));
+       Mail::to('stevenmontorres96@gmail.com')->cc('smontenegrot@ransa.net')->send(new NotificacionOperacionMaquila($this->GuardarCabecera->id));
+       Mail::to('stevemontenegro_9@hotmail.com')->cc('smontenegrot@ransa.net')->send(new NotificacionMaquila($this->GuardarCabecera->id));
 
        $this->emit('alert', 'Enviado Satisfactoriamente');
 

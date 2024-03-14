@@ -16,4 +16,9 @@ class Programacione extends Model
       'fecha',
       'observacion',
     ];
+
+    function ProgramaAvance()
+    {
+        return $this->hasOne(Avance_produccione::class, 'programacione_id');
+    }
 }

@@ -63,11 +63,17 @@
                                         <td>{{ $Cabecera->solicitud }}</td>
                                         <td>
                                             @switch($Cabecera->estado)
-                                                @case(2)
-                                                <span class="bg-green-500 p-1 rounded text-white">Abierta</span>
+                                                @case(4)
+                                                <span class="bg-green-500 p-1 rounded btn-group btn-group-sm text-white" style="font-size: 11px">En Proceso</span>
                                                     @break
-                                                  @case(1)
-                                                  <span class="bg-orange-500 p-1 rounded text-white">En espera</span>
+                                                  @case(3)
+                                                  <span class="bg-orange-500 p-1 rounded btn-group text-white">En espera</span>
+                                                  @break
+                                                   @case(5)
+                                                  <span class="bg-orange-500 p-1 rounded text-white">Cerrado</span>
+                                                  @break
+                                                  @case(2)
+                                                  <span class="bg-green-500 p-1 rounded btn-group btn-group-sm text-white" style="font-size: 11px">Espera de confirmación</span>
                                                   @break
                                                 @default
 
@@ -75,9 +81,18 @@
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group">
-                                                <a href="#" class="btn btn-green-500 text-white border"><i class="fa fa-info"></i></a>
+                                                {{--  <a href="{{ route('adm.Reporte.muestreo.maquila', encrypt($Cabecera->id)) }}" class="btn btn-green-500 text-white border" target="_blank" style="font-size:11px"><i class="fa fa-file-pdf"></i> Reporte de Muestreo</a>  --}}
 
-                                                <a href="{{ route('adm.Maquila.Actividad', encrypt($Cabecera->id)) }}" class="btn btn-orange-500 text-white border"><i class="fa fa-info"></i></a>
+                                                @switch($Cabecera->estado)
+                                                    @case(3)
+                                                    <a href="{{ route('adm.Maquila.Actividad', encrypt($Cabecera->id)) }}" class="btn btn-orange-500 text-white border" style="font-size:11px"><i class="fa fa-info"></i> Guias Maquila </a>
+                                                    <a href="{{ route('adm.Informe.avances.maquila', encrypt($Cabecera->id)) }}" class="btn btn-lead-500 text-white border" target="_blank" style="font-size:11px"><i class="fa fa-file-pdf"></i> Informe de Avances</a>
+                                                        @break
+
+                                                    @default
+
+                                                @endswitch
+
                                             </div>
                                         </td>
                                        </tr>

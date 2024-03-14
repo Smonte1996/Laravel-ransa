@@ -13,6 +13,6 @@ class Confirmacion_maquila extends Model
         'cabecera_id',
         'produccione_id',
         'cantidad_confirmada',
-        'Observacion',
+        'empaque',
     ];
 }

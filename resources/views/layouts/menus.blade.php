@@ -29,28 +29,30 @@
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                    @switch(auth()->user()->userable_type)
+                    @case('App\Models\Employee')
                     <li><a><i class="fa fa-whmcs"></i> Administración <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             @can('adm.activities.index')
                                 <li><a href="{{ route('adm.activities.index') }}">Procesos</a></li>
                             @endcan
-                            @can('adm.positions.index')
+                            {{--  @can('adm.positions.index')  --}}
                                 <li><a href="{{ route('adm.positions.index') }}">Cargos Laborales</a></li>
-                            @endcan
+                            {{--  @endcan  --}}
                             {{-- @can('adm.users.index') --}}
                                 <li><a href="{{ route('adm.users.index') }}">Usuarios</a></li>
                             {{-- @endcan --}}
                                 <li><a href="{{ route('adm.crear.firma') }}">Firma Electronica</a></li>
                                 <li><a href="{{route('adm.usuario_clientes.index')}}">Usuarios Clientes</a></li>
-                            @can('adm.countries.index')
+                            {{--  @can('adm.countries.index')  --}}
                                 <li><a href="{{ route('adm.countries.index') }}">Paises</a></li>
-                            @endcan
-                            @can('adm.cities.index')
+                            {{--  @endcan  --}}
+                            {{--  @can('adm.cities.index')  --}}
                                 <li><a href="{{ route('adm.cities.index') }}">Ciudades</a></li>
-                            @endcan
-                            @can('adm.warehouses.index')
+                            {{--  @endcan  --}}
+                            {{--  @can('adm.warehouses.index')  --}}
                                 <li><a href="{{ route('adm.warehouses.index') }}">Almacenes</a></li>
-                            @endcan
+                            {{--  @endcan  --}}
                             {{-- @can('adm.dissatisfaction_services.index') --}}
                                 <li><a>M. Servicio No Conforme<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -73,9 +75,9 @@
                                 <li><a href="{{ route('adm.suppliers.index') }}">Proveedores</a></li>
                             {{-- @endcan --}}
 
-                            @can('adm.employees.index')
+                            {{--  @can('adm.employees.index')  --}}
                                 <li><a href="{{ route('adm.employees.index') }}">Empleados</a></li>
-                            @endcan
+                            {{--  @endcan  --}}
                             {{-- @can('adm.roles.index') --}}
                                 <li><a href="{{ route('adm.roles.index') }}">Roles</a></li>
                             {{-- @endcan --}}
@@ -117,12 +119,11 @@
                             </li>
                         {{-- @endcan
                             @can('adm.data_logisticas.index') --}}
-                            @switch(auth()->user()->userable_type)
-                        @case('App\Models\Employee')
+
                             <li><a>Adminstración Muestreo<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li class="sub_menu"><a
-                                            href="{{ route('adm.data_logisticas.index') }}">Data Logistica</a>
+                                    <li class="sub_menu">
+                                    <a href="{{ route('adm.data_logisticas.index') }}">Data Logistica</a>
                                     </li>
                                     <li class="sub_menu">
                                         <a href="{{ route('adm.Niveles.index') }}">Niveles Estandar</a>
@@ -174,14 +175,15 @@
                     <li><a><i class="fa fa-people-carry"></i> Trabajos Maquila <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{route('adm.Maquila.trabajo')}}">Producción</a></li>
+                            <li><a href="{{ route('adm.orden.trabajoPorHora') }}">Trabajo por hora</a></li>
                         </ul>
                     </li>
 
-                    <li><a><i class="fa fa-people-carry"></i> Lista de Actividades <span class="fa fa-chevron-down"></span></a>
+                    {{--  <li><a><i class="fa fa-people-carry"></i> Lista de Actividades <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('adm.vista.Maquila.index') }}">Actividades</a></li>
                     </ul>
-                    </li>
+                    </li>  --}}
 
                     <li><a><i class="fa fa-file-signature"></i> vista Guias de Remisión operacion<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
@@ -189,9 +191,20 @@
                         </ul>
                         </li>
 
-                    <li><a><i class="fa fa-file-signature"></i> vista Guias de Remisión Proveedor <span class="fa fa-chevron-down"></span></a>
+                    {{--  <li><a><i class="fa fa-file-signature"></i> vista Guias de Remisión Proveedor <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="{{ route('adm.Guias.confirmacion.maquila.index') }}">Maquila a Operación</a></li>
+                    </ul>
+                    </li>  --}}
+
+                    <li><a><i class="fa fa-table-list"></i> Listado de Guias <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{ route('adm.Listado.guias.maquila.index') }}">Guias Cerradas</a></li>
+                    </ul>
+                    </li>
+                    <li><a><i class="fa fa-table-list"></i> Listado de Informe de Actividades <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{ route('adm.Cierre.informe') }}">Informe de Actividades Cerradas</a></li>
                     </ul>
                     </li>
 
@@ -227,6 +240,26 @@
                                     </li>
                                 </ul>
                             </li>
+                            @break
+                            @case('App\Models\Supplier')
+
+                            <li><a><i class="fa fa-people-carry"></i> Lista de Actividades <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                  <li class="sub_menu"><a href="{{ route('adm.vista.Maquila.index') }}">Actividades</a></li>
+                                </ul>
+                                </li>
+
+                                <li><a><i class="fa fa-file-signature"></i> vista Guias de Remisión Proveedor <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                      <li class="sub_menu"><a href="{{ route('adm.Guias.confirmacion.maquila.index') }}">Maquila a Operación</a></li>
+                                </ul>
+                                </li>
+
+                                <li><a><i class="fa fa-table-list"></i> Listado de Guias <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                      <li><a href="{{ route('adm.Listado.guias.maquila.index') }}">Guias Cerradas</a></li>
+                                </ul>
+                                </li>
                             @break
 
                         @default

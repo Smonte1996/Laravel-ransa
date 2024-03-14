@@ -17,6 +17,13 @@ class Maquila_producctividade extends Model
         'n_persona_1',
         'hora_reinicio',
         'hora_fin',
-        'n_persona_2'
+        'n_persona_2',
+        'avance1',
+        'avance2'
     ];
+
+    public function DiasProgramacion(){
+
+        return $this->hasOne(Programacione::class, 'id', 'programacione_id');
+    }
 }

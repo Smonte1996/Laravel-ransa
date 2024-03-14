@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cabecera;
 use App\Models\Guia_remicion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class Guia_MaquilaController extends Controller
@@ -17,11 +18,22 @@ class Guia_MaquilaController extends Controller
     public function index()
     {
         //
-       $Cabecera = Guia_remicion::whereIn('estado', [1,2])->get();
+       $Cabecera = Guia_remicion::whereIn('estado', [1,2,4])->get();
 
        return view('modulos.Guias_Maquila.index', compact('Cabecera'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ConfirmaOperacion($id)
+    {
+      $Maquila = Cabecera::find(decrypt($id));
+      $Avance = Guia_remicion::where('cabecera_id', decrypt($id))->get();
+      return view('modulos.Maquila_confirmacion.confirmaOperacion', compact('Maquila'));
+    }
      /**
      * Show the form for creating a new resource.
      *
@@ -36,6 +48,51 @@ class Guia_MaquilaController extends Controller
         return $pdfs->stream("{{$pdf->GuiaMaquilas->n_guia}}.pdf");
     }
 
+
+       /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ReporteMuestreo($id)
+    {
+        $rm = Cabecera::find(decrypt($id));
+
+        $pdf = PDF::loadView('pdf.ReporteMuestreo', compact('rm'));
+
+        return $pdf->stream("$rm->codigo.pdf");
+    }
+
+
+        /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function InformeAvance($id)
+    {
+        $ia = Cabecera::find(decrypt($id));
+
+        $ipdf = PDF::loadView('pdf.InformeAvance', compact('ia'));
+
+        return $ipdf->stream("$ia->codigo.pdf");
+    }
+
+
+  /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function GuiaoperacionConfirmar($id)
+    {
+        $Go = Guia_remicion::find(decrypt($id));
+        // dd($Go);
+
+        $opdf = PDF::loadView('pdf.GuiaMaquilaOperacion', compact('Go'));
+
+        return $opdf->stream("$Go->codigo.pdf");
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -89,7 +146,13 @@ class Guia_MaquilaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $Actualizar = DB::table('guia_remicions')
+      ->where('id', $id)
+      ->update(['user_id' => auth()->user()->id,
+        'observacion' => $request->Observacion,
+        'estado' => 5]);
+
+        return redirect()->route('adm.Guias.Maquila.index');
     }
 
     /**

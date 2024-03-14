@@ -76,7 +76,7 @@
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                      <label for="floatingSelect" class="text-lead-900">Cajas o Unidades</label>
+                                      <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                       <p style="color: black">{{ $GuardarCabecera->cj_un }}</p>
                                 </div>
                             </div>
@@ -156,7 +156,8 @@
                             </div>
                         </div>
                         @break
-                             @default
+
+                        @default
 
                          @endswitch
 
@@ -204,7 +205,7 @@
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                    <label for="floatingSelect" class="text-lead-900">Cajas o Unidades</label>
+                                    <label for="floatingSelect" class="text-lead-900">Empaque</label>
                                     <select class="form-select input @error('cjun') is-invalid @enderror" wire:model.defer='cjun'>
                                         <option >Seleccionar</option>
                                         <option value="Cajas">Cajas</option>
@@ -353,6 +354,14 @@
                                   </div>
                             </div>
 
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="" class="text-lead-500">Pvp</label>
+                                    <input class="form-control rounded input @error('Pvp') is-invalid @enderror" wire:model.defer='pvp' placeholder="Pvp" type="number">
+                                </div>
+                            </div>
+
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
                                     <label for="" class="text-lead-500">Ot del cliente</label>
@@ -415,10 +424,10 @@
                                     </td>
                                     <td>
                                         <div class="form-floating">
-                                            <select class="form-select input @error('empa') is-invalid @enderror" wire:model.defer='actividades.{{ $index }}.empa' style="width: 150px" id="floatingSelect">
+                                            <select class="form-select input @error('empa') is-invalid @enderror" wire:model.defer='actividades.{{ $index }}.empa' style="width:150px" igd="floatingSelect">
                                                 <option selected>Seleccionar</option>
-                                                <option value="Caja">Caja</option>
-                                                <option value="Unidad">Unidad</option>
+                                                <option value="CJ">Caja</option>
+                                                <option value="UN">Unidad</option>
                                                 <option value="Display">Display</option>
                                               </select>
                                               <label for="floatingSelect" class="text-lead-900">Empaque</label>
@@ -591,7 +600,7 @@
                                 </div>
                                 </div>
                             </fieldset>
-                            @if (!is_null($GuardarProgramcion))
+                            @if (!is_null($GuardarProgramcion) || !is_null($GuardarCabecera))
                             <div class="mt-3">
                                 <button class="btm" wire:click='Enviar' wire:loading.attr='disabled' wire:target='Enviar' class="disabled:opacity-60"> Enviar </button>
                             </div>

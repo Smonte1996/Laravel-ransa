@@ -18,9 +18,13 @@ class Maquila_muestreo extends Model
         'cj_un_aceptado',
         'cantidad_rechazado',
         'cj_un_rechazado',
-        'obsevacion_rechazado',
+        'obervacion_rechazado',
         'cantidad_reprocesado',
         'cj_un_reprocesado'
     ];
 
+    function ProgramcionMuestreo()
+    {
+        return $this->hasOne(Programacione::class, 'id', 'programacione_id');
+    }
 }

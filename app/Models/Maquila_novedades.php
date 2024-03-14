@@ -10,7 +10,7 @@ class Maquila_novedades extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cabcera_id',
+        'cabecera_id',
         'programacione_id',
         'sku',
         'cantidad',
@@ -19,4 +19,9 @@ class Maquila_novedades extends Model
         'observacion',
         'imagen'
     ];
+
+    function ProgramacionNovedades()
+    {
+        return $this->hasOne(Programacione::class, 'id', 'programacione_id');
+    }
 }

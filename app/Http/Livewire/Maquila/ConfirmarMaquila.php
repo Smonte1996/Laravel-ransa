@@ -13,20 +13,24 @@ class ConfirmarMaquila extends Component
     public $Inf;
     public $CantidadRecibida;
     public $Observacion;
-    public $validar;
     public $ActualizarCampo;
+    public $empaque;
+    public $valor;
 
 
     protected $rules = [
-        'CantidadRecibida' => 'required'
+        'CantidadRecibida' => 'required',
+        'empaque' => 'required'
     ];
 
     public function mount($id)
     {
      $this->Inf = Cabecera::find(decrypt($id));
 
-     $this->validar = Confirmacion_maquila::where('cabecera_id', decrypt($id))->get();
-
+     $validar = Confirmacion_maquila::where('cabecera_id', decrypt($id))->get();
+     foreach ($validar as $value) {
+        $this->valor[] = $value->cabecera_id;
+     }
     }
 
     public function GuardarConfirmacion()
@@ -42,17 +46,23 @@ class ConfirmarMaquila extends Component
     //    dd($valortotal);
 
        $Valores = $validarCampo['CantidadRecibida'];
+       $valorempaque = $validarCampo['empaque'];
        $valorsolo = array_values($Valores);
+       $valor = array_keys($Valores);
+       $empa = array_values($valorempaque);
        //dd($valorobserva);
      for ($i=0; $i <count($idCompomente) ; $i++) {
          $valores1 = $idCompomente[$i];
+         $key = $valor[$i];
          $valores2 = $idCompomente1[$i];
          $valores3 = $valorsolo[$i];
-    //  dd($valores3);
+         $valores4 = $empa[$i];
+    //    dd($valores1, $valores3, $key);
       $GuardarConfirmacion = Confirmacion_maquila::create([
         'cabecera_id' => $valores2,
-        'produccione_id'=> $valores1,
+        'produccione_id'=> $key,
         'cantidad_confirmada' => $valores3,
+        'empaque' => $valores4
       ]);
     }
      $valorbase = array_sum($valorsolo);
@@ -63,11 +73,18 @@ class ConfirmarMaquila extends Component
           'user_id_confirmar' => auth()->user()->id,
           'observacion' => $this->Observacion,
         ]);
+        $hgcabecera = DB::table('cabeceras')
+        ->where('id', $this->Inf->id)
+        ->update(['estado' => 3]);
     }else {
         $hgsr = DB::table('guia_remicions')
         ->where('cabecera_id', $this->Inf->id)
         ->update(['user_id_confirmar' => auth()->user()->id,
         'observacion' => $this->Observacion]);
+
+        $hgcabecera = DB::table('cabeceras')
+        ->where('id', $this->Inf->id)
+        ->update(['estado' => 3]);
     }
 
      $this->emit('mensaje', 'Guardado exitosamente');
@@ -97,13 +114,22 @@ class ConfirmarMaquila extends Component
        $canti = array_sum($valor1);
        $canti2 = array_sum($valor2);
 
-    if ($canti === $canti2) {
+    if ($canti == $canti2) {
+
+        $hgcabecera = DB::table('cabeceras')
+        ->where('id', $this->Inf->id)
+        ->update(['estado' => 3]);
+
         $hgsr = DB::table('guia_remicions')
         ->where('cabecera_id', $this->Inf->id)
         ->update(['estado' => 3,
           'user_id_confirmar' => auth()->user()->id,
           'observacion' => $this->Observacion]);
     }else {
+        $hgcabecera = DB::table('cabeceras')
+        ->where('id', $this->Inf->id)
+        ->update(['estado' => 3]);
+
         $hgsr = DB::table('guia_remicions')
         ->where('cabecera_id', $this->Inf->id)
         ->update(['user_id_confirmar' => auth()->user()->id,

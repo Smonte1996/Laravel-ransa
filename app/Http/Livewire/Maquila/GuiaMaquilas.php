@@ -27,7 +27,12 @@ class GuiaMaquilas extends Component
        ->update(['user_id' => auth()->user()->id,
         'estado' => 2 ]);
 
+        // $cabecera = DB::table('cabeceras')
+        // ->where('id', $this->Inf->id)
+        // ->update(['estado' => 3]);
+
        $this->emit('mensaje', 'Guardado Correctamente');
+
        return redirect()->route('adm.Guias.Maquila.index');
     }
 

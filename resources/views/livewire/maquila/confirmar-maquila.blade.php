@@ -23,7 +23,7 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Guia de Remisión Confirmación de Maquila a Operación</h2>
+                                <h2>Guia de Remisión Confirmación Operación a Maquila</h2>
                                 <div class="clearfix"></div>
                             </div>
 
@@ -149,7 +149,7 @@
                                     <legend class="rounded w-50 d-none d-sm-block float-none bg-lead-500 text-white ps-5 ms-4">Detalles de compomentes</legend>
                                         <legend class="rounded float-none d-sm-none bg-lead-500 text-white fs-6 p-1">Detalles de compomentes</legend>
                                     <div class="ms-4">
-                                        @if (!is_null($validar))
+                                        @if (!is_null($this->valor))
                                         <table class="table w-100 text-green-400">
                                             <thead>
                                                 <th>Sku</th>
@@ -172,9 +172,8 @@
                                                     </td>
 
                                                     <td>
-                                                        <input type="text" class="form-control rounded" wire:model.defer="ActualizarCampo.{{ $Component->id }}"  placeholder="{{ $Component->Recibido->cantidad_confirmada }}">
+                                                        <input type="number" class="form-control rounded" wire:model.defer="ActualizarCampo.{{ $Component->id }}"  placeholder="{{ $Component->Recibido->cantidad_confirmada }}">
                                                     </td>
-                                                     @else
 
                                                      @endif
 
@@ -182,7 +181,6 @@
                                             @endforeach
                                         </tbody>
                                         </table>
-
 
                                         @else
 
@@ -192,6 +190,7 @@
                                                 <th>Descripción</th>
                                                 <th>Cantidad</th>
                                                 <th>Cantidad Recibida</th>
+                                                <th>Empaque</th>
                                             </thead>
                                             <tbody>
                                              @foreach ($Inf->Componentes as $Component)
@@ -206,7 +205,15 @@
                                                         {{ $Component->cantidad }}
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control rounded" wire:model.defer="CantidadRecibida.{{ $Component->id }}">
+                                                        <input type="number" class="form-control rounded" wire:model.defer="CantidadRecibida.{{ $Component->id }}">
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select input @error('Empaque') is-invalid @enderror" wire:model.defer="empaque.{{ $Component->id }}">
+                                                            <option selected>Seleccionar</option>
+                                                            <option value="CJ">Caja</option>
+                                                            <option value="UN">Unidad</option>
+                                                            <option value="Display">Display</option>
+                                                          </select>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -216,10 +223,12 @@
                                             <label class="form-label text-orange-500">Observaciones:</label>
                                             <textarea name="" wire:model.defer='Observacion' id="" class="form-control"></textarea>
                                         </div>
+
+
                                         @endif
                                     </div>
                                 </fieldset>
-                                @if (!is_null($validar))
+                                @if (!is_null($this->valor))
                                 <div class="text-center">
                                     <x-jet-button id="confirmaction" wire:click.prevent='ActualizacionCampos' class="mt-4">Actualizar acción
                                     </x-jet-button>

@@ -14,7 +14,7 @@ class Produccione extends Model
         'sku',
         'descripcion',
         'cantidad',
-        'empa',
+        'empaque',
         'fecha',
         'precio',
     ];

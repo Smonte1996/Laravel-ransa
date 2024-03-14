@@ -42,6 +42,11 @@ class Guia_remicion extends Model
         return $this->belongsTo(Cabecera::class);
     }
 
+    // function AvancesEntrega()
+    // {
+    //     return $this->hasOne();
+    // }
+
     function UsuarioFirma()
     {
         return $this->hasOne(User::class,'id','user_id');
@@ -52,5 +57,9 @@ class Guia_remicion extends Model
         return $this->hasOne(User::class,'id','user_id_confirmar');
     }
 
+    function Avances_Maquila()
+    {
+        return $this->hasMany(Avance_produccione::class, 'guia_remicion_id');
+    }
 
 }

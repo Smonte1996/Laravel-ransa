@@ -20,9 +20,11 @@ return new class extends Migration
             $table->dateTime('hora_inicio');
             $table->dateTime('hora_pausa');
             $table->string('n_persona_1');
+            $table->integer('avance1');
             $table->dateTime('hora_reinicio');
             $table->dateTime('hora_fin');
             $table->string('n_persona_2');
+            $table->integer('avance2');
             $table->timestamps();
         });
     }

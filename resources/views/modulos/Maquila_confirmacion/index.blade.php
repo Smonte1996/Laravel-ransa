@@ -62,6 +62,9 @@
                                                     <!-- @case(3)
                                                     <span class="bg-green-500 p-1 rounded text-white">Cerrado</span>
                                                     @break -->
+                                                    @case(4)
+                                                    <span class="bg-green-500 p-1 rounded text-white">Recibir</span>
+                                                    @break
                                                 @default
 
                                             @endswitch
