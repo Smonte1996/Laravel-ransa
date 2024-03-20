@@ -167,10 +167,10 @@
                                              @foreach ($Inf->Componentes as $Component)
                                                 <tr>
                                                     <td style="color: black">
-                                                     {{ $Component->sku }}
+                                                     {{ $Component->Codigos->codigo }}
                                                     </td>
                                                     <td style="color: black">
-                                                        {{ $Component->descripcion }}
+                                                        {{ $Component->Codigos->descripcion }}
                                                        </td>
                                                     <td style="color: black">
                                                         {{ $Component->cantidad }}
@@ -546,7 +546,7 @@
                                         <select class="form-select input @error('Sku') is-invalid @enderror" wire:model='Sku' style="width: 150px" id="floatingSelect">
                                             <option selected>Seleccionar</option>
                                             @foreach ($Inf->Componentes as $skus )
-                                                <option value="{{ $skus->sku }}">{{ $skus->sku }}</option>
+                                                <option value="{{ $skus->Codigos->codigo }}">{{ $skus->Codigos->codigo }}</option>
                                             @endforeach
                                           </select>
                                           <label for="floatingSelect" class="text-lead-900">Sku</label>

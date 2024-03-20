@@ -208,6 +208,13 @@
                     </ul>
                     </li>
 
+                    {{--  <li><a> Prueba de Catalogo de Producto <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{ route('Prueba.DI') }}">Catalogo Disensa</a></li>
+                          <li><a href="{{ route('Prueba.HOL') }}">Catalogo Holcim</a></li>
+                    </ul>
+                    </li>  --}}
+
                         {{-- <li><a><i class="fa fa-people-carry"></i> Gestión Estibas <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                              @can()

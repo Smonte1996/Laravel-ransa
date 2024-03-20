@@ -86,7 +86,11 @@
                                                 @switch($Cabecera->estado)
                                                     @case(3)
                                                     <a href="{{ route('adm.Maquila.Actividad', encrypt($Cabecera->id)) }}" class="btn btn-orange-500 text-white border" style="font-size:11px"><i class="fa fa-info"></i> Guias Maquila </a>
-                                                    <a href="{{ route('adm.Informe.avances.maquila', encrypt($Cabecera->id)) }}" class="btn btn-lead-500 text-white border" target="_blank" style="font-size:11px"><i class="fa fa-file-pdf"></i> Informe de Avances</a>
+                                                    {{--  <a href="{{ route('adm.Informe.avances.maquila', encrypt($Cabecera->id)) }}" class="btn btn-lead-500 text-white border" target="_blank" style="font-size:11px"><i class="fa fa-file-pdf"></i> Informe de Avances</a>  --}}
+                                                        @break
+                                                        @case(4)
+                                                        <a href="{{ route('adm.Maquila.Actividad', encrypt($Cabecera->id)) }}" class="btn btn-orange-500 text-white border" style="font-size:11px"><i class="fa fa-info"></i> Guias Maquila </a>
+                                                        <a href="{{ route('adm.Informe.avances.maquila', encrypt($Cabecera->id)) }}" class="btn btn-lead-500 text-white border" target="_blank" style="font-size:11px"><i class="fa fa-file-pdf"></i> Informe de Avances</a>
                                                         @break
 
                                                     @default

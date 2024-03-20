@@ -111,7 +111,7 @@
         <td class="border-2 border-dark text-center">
             {{ $pdf->codigo }}
         </td>
-        <td class="border-2 border-dark text-center"    >
+        <td class="border-2 border-dark text-center">
             {{ $pdf->GuiaMaquilas->n_guia }}
         </td>
       </tr>
@@ -174,8 +174,8 @@
 @foreach ($pdf->Componentes as $Codigos )
     <tr>
     <td class="border-2 border-dark text-center">{{ $Codigos->id }}</td>
-    <td class="border-2 border-dark text-center">{{ $Codigos->sku }}</td>
-    <td class="border-2 border-dark text-center">{{ $Codigos->descripcion }}</td>
+    <td class="border-2 border-dark text-center">{{ $Codigos->Codigos->codigo }}</td>
+    <td class="border-2 border-dark text-center">{{ $Codigos->Codigos->descripcion }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->cantidad }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->empaque }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->fecha }}</td>
@@ -211,8 +211,8 @@
 @foreach ($pdf->Componentes as $Codigos )
     <tr>
     <td class="border-2 border-dark text-center">{{ $Codigos->id }}</td>
-    <td class="border-2 border-dark text-center">{{ $Codigos->sku }}</td>
-    <td class="border-2 border-dark text-center">{{ $Codigos->descripcion }}</td>
+    <td class="border-2 border-dark text-center">{{ $Codigos->Codigos->codigo }}</td>
+    <td class="border-2 border-dark text-center">{{ $Codigos->Codigos->descripcion }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->Recibido->cantidad_confirmada }}</td>
     <td class="border-2 border-dark text-center">{{ $Codigos->Recibido->empaque }}<</td>
     </tr>

@@ -297,9 +297,6 @@
                                             Actividad
                                         </th>
                                         <th>
-                                            Proveedor
-                                        </th>
-                                        <th>
                                             Acción
                                         </th>
                                         </tr>
@@ -313,11 +310,6 @@
                                           <td><select name="" id="" class="form-select" style="width: 250px">
                                             <option value="">Seleccionar</option>
                                             </select></td>
-                                          <td><select name="" id="" class="form-select" style="width: 250px">
-                                            <option value="">Seleccionar</option>
-                                            <option value="1">Dprissa</option>
-                                            <option value="2">Serypro</option>
-                                            </select></td>
                                           <td><button class="btn btn-sm btn-green-500 text-white">Guardar
                                         </button></td>
                                        </tr>
@@ -329,11 +321,6 @@
                                         <td><select name="" id="" class="form-select" style="width: 250px">
                                             <option value="">Seleccionar</option>
                                             </select></td>
-                                          <td><select name="" id="" class="form-select" style="width: 250px">
-                                            <option value="">Seleccionar</option>
-                                            <option value="1">Dprissa</option>
-                                            <option value="2">Serypro</option>
-                                            </select></td>
                                         <td><button class="btn btn-sm btn-green-500 text-white">Guardar</button></td>
                                      </tr>
                                      <tr>
@@ -344,11 +331,6 @@
                                         <td><select name="" id="" class="form-select" style="width: 250px">
                                             <option value="">Seleccionar</option>
                                             </select></td>
-                                          <td><select name="" id="" class="form-select" style="width: 250px">
-                                            <option value="">Seleccionar</option>
-                                            <option value="1">Dprissa</option>
-                                            <option value="2">Serypro</option>
-                                            </select></td>
                                         <td><button class="btn btn-sm btn-green-500 text-white">Guardar</button></td>
                                      </tr>
                                      <tr>
@@ -358,11 +340,6 @@
                                         <td>400</td>
                                         <td><select name="" id="" class="form-select" style="width: 250px">
                                             <option value="">Seleccionar</option>
-                                            </select></td>
-                                          <td><select name="" id="" class="form-select" style="width: 250px">
-                                            <option value="">Seleccionar</option>
-                                            <option value="1">Dprissa</option>
-                                            <option value="2">Serypro</option>
                                             </select></td>
                                         <td><button class="btn btn-sm btn-green-500 text-white">Guardar</button></td>
                                      </tr>

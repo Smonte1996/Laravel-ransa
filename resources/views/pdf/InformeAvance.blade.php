@@ -304,6 +304,9 @@ echo $hola;
     <th class="border-2 border-dark text-center">
      Fecha del Avance
     </th>
+    <th class="border-2 border-dark text-center">
+        N° Guia
+     </th>
     </tr>
      @foreach ($ia->AvancesMaquila as $Avances )
     <tr>
@@ -320,6 +323,9 @@ echo $hola;
     <td class="border-2 border-dark text-center" style="background-color: #fff316">
         {{ $Avances->created_at->format('Y-m-d') }}
     </td>
+    <td class="border-2 border-dark text-center" style="background-color: #fff316">
+        {{ $Avances->Guias_Avances->n_guia }}
+    </td>
 
     @else
 
@@ -334,6 +340,9 @@ echo $hola;
     </td>
     <td class="border-2 border-dark text-center">
         {{ $Avances->created_at->format('Y-m-d') }}
+    </td>
+    <td class="border-2 border-dark text-center">
+        {{ $Avances->Guias_Avances->n_guia }}
     </td>
     @endif
     </tr>

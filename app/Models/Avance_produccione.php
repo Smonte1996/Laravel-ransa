@@ -24,6 +24,11 @@ class Avance_produccione extends Model
         return $this->hasMany(Guia_remicion::class, 'guia_remicion_id');
     }
 
+    function Guias_Avances()
+    {
+        return $this->belongsTo(Guia_remicion::class,'guia_remicion_id');
+    }
+
     function Avanceactividad()
     {
         return $this->hasOne(Programacione::class, 'id', 'programacione_id');

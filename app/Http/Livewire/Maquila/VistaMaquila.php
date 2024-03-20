@@ -218,7 +218,7 @@ class VistaMaquila extends Component
         ]);
         // }
 
-        $this->reset('sku','canti', 'empaque', 'estado', 'observacion', 'imagenes');
+        $this->reset('Sku','canti', 'empaque', 'estado', 'observacion', 'imagenes');
 
         $this->imagenkey = rand();
 
@@ -239,7 +239,7 @@ class VistaMaquila extends Component
         $valor2[] = $value->Cantidad_avance;
      }
     //  dd($valor1, array_sum($valor2));
-     if ($valor1 == array_sum($valor2) ) {
+     if ($valor1 == array_sum($valor2)) {
         $actu = DB::table('guia_remicions')
          ->where('id',$this->datosguias->id)
          ->update(['estado' => 5,

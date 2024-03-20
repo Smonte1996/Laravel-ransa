@@ -35,6 +35,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PracticahgController;
 use App\Http\Controllers\ProduccionMaquilaController;
 use App\Http\Controllers\ProvedoresEstibas;
+use App\Http\Controllers\Prueba_catalogosController;
 use App\Http\Controllers\ReclamoController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServicioMaquilaController;
@@ -68,7 +69,6 @@ use App\Http\Livewire\Reclamo\Investigaciones;
 use App\Http\Livewire\Reclamo\InvestigacionNoProcede;
 use App\Http\Livewire\Reclamo\MuestreoContenedor;
 use App\Http\Livewire\Reclamo\ReclamoController as ReclamoReclamoController;
-use App\Models\Defecto;
 use Illuminate\Support\Facades\Route;
 
 
@@ -234,4 +234,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('downloadnotificacion', [NotificationserviceController::class,'download_notificacion'])->name('notifications.downloadnotificacion');
     Route::resource('servicio-no-conforme', NotificationserviceController::class)->except(['create',])->parameters(['servicio-no-conforme' => 'notification_service'])->names('notifications');
 
+    Route::get('Categoria-Disensa', [Prueba_catalogosController::class, 'CatalogoDisensa'])->name('Prueba.DI');
+    Route::get('Categoria-Holcim', [Prueba_catalogosController::class, 'CatalogoHolcim'])->name('Prueba.HOL');
 });

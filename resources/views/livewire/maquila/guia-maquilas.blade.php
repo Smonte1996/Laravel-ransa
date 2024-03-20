@@ -146,6 +146,16 @@
                                                 </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1"
+                                                class="form-label text-lead-500">Pvp</label>
+                                            <div class="text-orange-500 fw-bold fs-6">
+                                               $ {{ $Inf->pvp }}
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
                                 <fieldset class="border border-2 mt-3">
@@ -163,10 +173,10 @@
                                              @foreach ($Inf->Componentes as $Component)
                                                 <tr>
                                                     <td style="color: black">
-                                                     {{ $Component->sku }}
+                                                     {{ $Component->Codigos->codigo }}
                                                     </td>
                                                     <td style="color: black">
-                                                        {{ $Component->descripcion }}
+                                                        {{ $Component->Codigos->descripcion }}
                                                        </td>
                                                     <td style="color: black">
                                                         {{ $Component->cantidad }}

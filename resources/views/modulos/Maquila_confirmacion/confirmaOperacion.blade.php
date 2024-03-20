@@ -143,6 +143,16 @@
                                                 </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1"
+                                                class="form-label text-lead-500">Pvp</label>
+                                            <div class="text-orange-500 fw-bold fs-6">
+                                                $ {{ $Maquila->pvp }}
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
                             <form action="{{ route('adm.Guias.Maquila.update', $Maquila->Guias->id) }}" method="POST">

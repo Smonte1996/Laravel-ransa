@@ -69,10 +69,10 @@
     @foreach ( $consultas->Componentes as $componen )
         <tr>
             <td class="border">
-                {{ $componen->sku }}
+                {{ $componen->Codigos->codigo }}
             </td>
             <td class="border">
-              {{ $componen->descripcion }}
+              {{ $componen->Codigos->descripcion }}
             </td>
             <td class="border">
               {{ $componen->cantidad }}

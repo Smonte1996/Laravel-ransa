@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire\Maquila;
 
+use App\Mail\NotificacionGuiasCompleta;
+use App\Mail\NotificacionGuiasConfirmada;
 use App\Models\Cabecera;
 use App\Models\Confirmacion_maquila;
 use App\Models\Guia_remicion;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class ConfirmarMaquila extends Component
@@ -87,6 +90,8 @@ class ConfirmarMaquila extends Component
         ->update(['estado' => 3]);
     }
 
+      Mail::to('stevemontenegro_9@hotmail.com')->cc('smontenegrot@ransa.net')->send(new NotificacionGuiasConfirmada($this->Inf->id));
+
      $this->emit('mensaje', 'Guardado exitosamente');
 
      return redirect()->route('adm.Guias.confirmacion.maquila.index');
@@ -135,6 +140,8 @@ class ConfirmarMaquila extends Component
         ->update(['user_id_confirmar' => auth()->user()->id,
         'observacion' => $this->Observacion]);
     }
+
+    Mail::to('stevemontenegro_9@hotmail.com')->cc('smontenegrot@ransa.net')->send(new NotificacionGuiasCompleta($this->Inf->id));
 
       $this->emit('mensaje', 'Guardado exitosamente');
 

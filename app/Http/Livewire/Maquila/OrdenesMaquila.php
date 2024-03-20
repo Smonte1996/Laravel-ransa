@@ -33,7 +33,6 @@ class OrdenesMaquila extends Component
     public $actividades = [
         [
          'sku' => '',
-         'descripcion' => '',
          'cantidades' => '',
          'empa' => '',
          'fechas' => '',
@@ -57,7 +56,10 @@ class OrdenesMaquila extends Component
     public $otcliente;
     public $fecha;
     public $code;
+    public $sku;
     public $Imagenes;
+    public $codigoComp;
+    public $descripciones;
     // public $proceso;
     public $descrip;
     public $GuardarCabecera;
@@ -104,7 +106,6 @@ class OrdenesMaquila extends Component
      $this->actividades[] =
      [
         'sku' => '',
-         'descripcion' => '',
          'cantidades' => '',
          'empa' => '',
          'fechas' => '',
@@ -177,9 +178,9 @@ class OrdenesMaquila extends Component
         foreach ($this->actividades as $actividad) {
            $this->Produccion = Produccione::create([
               'cabecera_id' => $this->GuardarCabecera->id,
-              'sku' => $actividad['sku'],
+              'codigo_fconversione_id' => $actividad['sku'],
               'cantidad' => $actividad['cantidades'],
-              'descripcion' => $actividad['descripcion'],
+            //   'descripcion' => $actividad['descripcion'],
               'fecha' => $actividad['fechas'] ?? null,
               'empaque' => $actividad['empa'],
                'precio' => $actividad['precio'] ?? null
@@ -295,6 +296,11 @@ class OrdenesMaquila extends Component
         //   $this->dispatchBrowserEvent('initSelect2');
         }
 
+        public function updatedsku($id)
+        {
+            $this->descripciones = Codigo_fconversione::where('id', $id)->where('estado',1)->get();
+        }
+
 
     public function render()
     {
@@ -303,6 +309,10 @@ class OrdenesMaquila extends Component
         } else {
           $this->foreot = Cabecera::where('estado', 1)->get();
           $this->GuardarCabecera = Cabecera::find($this->GuardarCabecera);
+        }
+
+        if (isset($this->GuardarCabecera->client_id)) {
+            $this->codigoComp = Codigo_fconversione::where('client_id', $this->GuardarCabecera->client_id )->where('estado', 1)->get();
         }
 
          $this->code = Cabecera::generate_unique_code(7);

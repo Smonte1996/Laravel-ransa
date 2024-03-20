@@ -45,7 +45,7 @@ class Guia_MaquilaController extends Controller
 
         $pdfs = PDF::loadView('pdf.GuiaRemicion_operacion', compact('pdf'));
 
-        return $pdfs->stream("{{$pdf->GuiaMaquilas->n_guia}}.pdf");
+        return $pdfs->stream("{$pdf->GuiaMaquilas->n_guia}.pdf");
     }
 
 

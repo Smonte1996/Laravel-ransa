@@ -11,7 +11,7 @@ class Produccione extends Model
 
     protected $fillable = [
         'cabecera_id',
-        'sku',
+        'codigo_fconversione_id',
         'descripcion',
         'cantidad',
         'empaque',
@@ -27,5 +27,10 @@ class Produccione extends Model
     function validarCampos()
     {
       return $this->hasMany(Confirmacion_maquila::class, 'cabecera_id');
+    }
+
+    function Codigos()
+    {
+        return $this->belongsTo(Codigo_fconversione::class, 'codigo_fconversione_id');
     }
 }

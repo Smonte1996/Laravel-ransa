@@ -17,7 +17,7 @@
                                 @if (!is_null($GuardarCabecera))
 
                             @else
-                                <div class="col-md-7">
+                                <div class="col-md-10">
                             <div class="form-floating">
                                 <select class="form-select input " wire:model.enter='GuardarCabecera' id="floatingSelect" wire:ignore>
                                   <option selected>Seleccionar una opcion</option>
@@ -29,9 +29,9 @@
                           </div>
                         </div>
                         @endif
-                        <div class="col-md-5">
+                        {{--  <div class="col-md-5">
                             <a href="{{ asset('Doc_Excel/Produccion.xlsx') }}" class="btn btn-green-500 btn-md text-white rounded" target="_blank"><i class="fa-solid fa-file-excel"></i> Descargar excel</a>
-                        </div>
+                        </div>  --}}
                         </div>
                        </div>
                     </div>
@@ -385,36 +385,54 @@
 
                             <fieldset class="border border-0 mt-4">
 
-                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                                    <div class="col-sm-12 col-md-6">
-                                <legend class="rounded w-auto d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Compomentes</legend>
+                                {{--  <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">  --}}
+                                    {{--  <div class="col-sm-12 col-md-6">  --}}
+                                <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Compomentes</legend>
                                 <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Compomentes</legend>
-                                </div>
+                                {{--  </div>  --}}
 
-                                    <div class="col-sm-12 col-md-6">
+                                    {{--  <div class="col-sm-12 col-md-6">
                                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                                         <input type="file" class="form-control form-control-sm" id="filexlsx"
                                             name="filexlsx" wire:model.defer="filexlsx" accept=".xlsx">
                                         <button class="btn btn-green-500 text-white" wire:click.prevent='importExcel'>Importar</button>
                                         </div>
-                                        </div>
-                                </div>
+                                        </div>  --}}
+                                {{--  </div>  --}}
                                 <div class="table-responsive">
+                                    @if (!is_null($sku))
+                                            @foreach ( $descripciones as $descrip )
+                                            <label class="form-label" style="color: black">{{ $descrip->descripcion }}</label>
+                                            @endforeach
+                                            @else
+
+                                            @endif
                                 <table class="table table-striped">
                                  <tbody>
                                     @foreach ($actividades as $index => $actividad )
                                    <tr>
                                     <td>
                                        <div class="form-floating">
-                                           <input class="form-control rounded input @error('sku') is-invalid @enderror" style="width: 180px" wire:model.defer='actividades.{{ $index }}.sku' placeholder="Sku" type="text" igd="floatingInput">
-                                           <label for="floatingInput" class="text-lead-500">sku</label>
+                                           <select class="form-select rounded input @error('sku') is-invalid @enderror" style="width: 180px" wire:model.defer='actividades.{{ $index }}.sku' wire:model='sku.{{ $index }}'  placeholder="Sku" igd="floatingSelect">
+                                            <option value="">Seleccionar</option>
+                                            @if(!is_null($GuardarCabecera))
+                                            @foreach ($codigoComp as $codi )
+                                                <option value="{{ $codi->id }}">{{ $codi->codigo }}</option>
+                                            @endforeach
+                                                @else
+                                            @endif
+                                           </select>
+                                           <label for="floatingSelect" class="text-lead-500">sku</label>
                                        </div>
                                     </td>
                                     <td>
-                                        <div class="form-floating">
-                                            <input class="form-control rounded input @error('descripcion') is-invalid @enderror" style="width: 180px" wire:model.defer='actividades.{{ $index }}.descripcion' placeholder="Descripción" type="text" igd="floatingInput">
-                                            <label for="floatingInput" class="text-lead-500">Descripción</label>
-                                        </div>
+                                        {{--  <div class="form-floating">  --}}
+                                            {{--  <label for="floatingInput" class="text-lead-500" style="width: 180px" wire:model.defer='actividades.{{ $index }}.descripcion'>Descripción</label>  --}}
+
+
+                                            {{--  <input class="form-control rounded input @error('descripcion') is-invalid @enderror" style="width: 180px" wire:model.defer='actividades.{{ $index }}.descripcion' placeholder="Descripción" type="text" igd="floatingInput">  --}}
+                                            {{--  <label for="floatingInput" class="text-lead-500">Descripción</label>  --}}
+                                        {{--  </div>  --}}
                                     </td>
                                     <td>
                                         <div class="form-floating">
@@ -480,8 +498,8 @@
                                       </tr>
                                       @foreach ($skus as $Sku )
                                       <tr>
-                                      <td>{{ $Sku->sku }}</td>
-                                      <td>{{ $Sku->descripcion }}</td>
+                                      <td>{{ $Sku->Codigos->codigo }}</td>
+                                      <td>{{ $Sku->Codigos->descripcion }}</td>
                                       <td>{{ $Sku->cantidad }}</td>
                                       <td>{{ $Sku->fecha }}</td>
                                       <td>{{ $Sku->precio }}</td>
@@ -563,13 +581,13 @@
                                    <tr>
                                     <td>
                                         <div class="form-floating">
-                                            <input class="form-control rounded input @error('dia') is-invalid @enderror" style="width: 180px" wire:model.defer='ProgramaDias.{{ $index }}.dia' placeholder="Dias" type="text" igd="floatingInput">
+                                            <input class="form-control rounded input @error('dia') is-invalid @enderror" style="width: 180px" wire:model.defer='ProgramaDias.{{ $index }}.dia' placeholder="Dias" type="number" igd="floatingInput">
                                             <label for="floatingInput" class="text-lead-500">Dias</label>
                                         </div>
                                        </td>
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded input @error('cantidades') is-invalid @enderror" style="width: 180px" wire:model.defer='ProgramaDias.{{ $index }}.cantidades' placeholder="Cantidades" type="text" igd="floatingInput">
+                                                <input class="form-control rounded input @error('cantidades') is-invalid @enderror" style="width: 180px" wire:model.defer='ProgramaDias.{{ $index }}.cantidades' placeholder="Cantidades" type="number" igd="floatingInput">
                                                 <label for="floatingInput" class="text-lead-500">Cantidades</label>
                                             </div>
                                        </td>

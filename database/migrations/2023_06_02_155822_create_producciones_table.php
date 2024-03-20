@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('producciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cabecera_id')->constrained()->onDelete('cascade');
-            $table->string('sku');
-            $table->text('descripcion');
+            $table->foreignId('codigo_fconversione_id')->constrained();
+            $table->text('descripcion')->nullable();
             $table->integer('cantidad');
-            $table->date('fecha');
-            $table->string('precio');
+            $table->string('empaque');
+            $table->string('fecha')->nullable();
+            $table->string('precio')->nullable();
             $table->date('datacheck')->nullable();
             $table->timestamps();
         });

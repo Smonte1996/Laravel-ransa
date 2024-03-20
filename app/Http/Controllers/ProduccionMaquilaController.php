@@ -16,7 +16,7 @@ class ProduccionMaquilaController extends Controller
     public function index()
     {
         if (auth()->user()->userable_type == "App\Models\Supplier") {
-            $Cabeceras = Cabecera::whereIn('estado', [1,2,3])->where('supplier_id', Auth::user()->Supplier->id)->get();
+            $Cabeceras = Cabecera::whereIn('estado', [1,2,3,4])->where('supplier_id', Auth::user()->Supplier->id)->get();
         } else {
           $Cabeceras = Cabecera::whereIn('estado', [1,2,3])->get();
         }
