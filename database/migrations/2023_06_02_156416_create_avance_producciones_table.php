@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cabecera_id')->constrained()->onDelete('cascade');
             $table->foreignId('guia_remicion_id')->constrained()->onDelete('cascade');
+            $table->foreignId('programacione_id')->constrained()->onDelete('cascade');
             $table->string('unidades_caja');
             $table->integer('Cantidad_avance');
             $table->date('fecha_vencimiento');

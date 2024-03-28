@@ -104,7 +104,7 @@
                             <li><a>Adminstración Reclamo<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li class="sub_menu"><a
-                                            href="{{ route('adm.General.index') }}">Causal General</a>
+                                     href="{{ route('adm.General.index') }}">Causal General</a>
                                     </li>
                                     <li><a href="{{ route('adm.Detalle.index') }}">Detalle Causal</a>
                                     </li>
@@ -164,13 +164,14 @@
                         </ul>
                     </li>
 
-                    <li><a><i class="fa fa-file-invoice-dollar"></i> Actividades Maquila <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{ route('adm.codigo.fc.index') }}">Codigos - Nuevos</a></li>
-                            <li><a href="{{ route('adm.Maquila.servicio.index') }}">Servicio Maquila</a></li>
-                            <li><a href="{{ route('adm.Tarifa.Maquila.index') }}">Actividades - Tarifario</a></li>
-                        </ul>
-                    </li>
+                   <li><a><i class="fa fa-file-invoice-dollar"></i> Actividades Maquila <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="{{ route('adm.codigo.fc.index') }}">Codigos - Nuevos</a></li>
+                        <li><a href="{{ route('adm.Maquila.servicio.index') }}">Servicio Maquila</a></li>
+                        <li><a href="{{ route('adm.Tarifa.Maquila.index') }}">Actividades - Tarifario</a></li>
+                    </ul>
+                </li>
+
 
                     <li><a><i class="fa fa-people-carry"></i> Trabajos Maquila <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">

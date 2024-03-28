@@ -83,6 +83,8 @@ class User extends Authenticatable
     }
 
     public function Supplier(){
+
      return $this->belongsTo(Supplier::class,'userable_id','id');
+
     }
 }

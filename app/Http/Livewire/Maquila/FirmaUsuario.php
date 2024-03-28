@@ -33,6 +33,8 @@ class FirmaUsuario extends Component
        ->update(['firma' => $firmas]);
 
        $this->emit('mensaje', 'Guardado Correctamente');
+
+       return redirect()->route('adm.crear.firma');
     }
 
     public function render()

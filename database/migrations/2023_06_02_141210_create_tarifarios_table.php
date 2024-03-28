@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('tarifarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained()->onDelete('cascade');
+            $table->foreignId('client_id')->constrained();
             $table->foreignId('servicio_maquila_id')->constrained();
-            $table->foreignId('supplier_id')->constrained();
+            // $table->foreignId('supplier_id')->constrained();
             $table->string('actividad');
             // $table->string('factor_conversion');
             $table->string('tarifa_serypro');

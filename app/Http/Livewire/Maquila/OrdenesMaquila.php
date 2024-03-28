@@ -193,7 +193,7 @@ class OrdenesMaquila extends Component
 
       public function mount()
       {
-         $this->actividad = Tarifario::where('estado', 1)->get();
+         $this->actividad = Tarifario::whereIn('servicio_maquila_id', [2])->where('estado', 1)->get();
         $this->Proveedores = Supplier::all();
         $this->Clientes = Client::where('estado', 1)->get();
 

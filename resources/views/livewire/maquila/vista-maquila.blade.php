@@ -243,7 +243,7 @@
                                                     @if (now()->format('Y-m-d') ===  $Programacion->fecha )
                                                     <td class="ps-5">
                                                         <div class="form-check">
-                                                            <input type="checkbox" wire:model.defer="Programacion" value="{{ $Programacion->id }}"
+                                                            <input type="checkbox" wire:model="Programacion" value="{{ $Programacion->id }}"
                                                                 class="form-check-input text-green-500">
                                                         </div>
 
@@ -295,12 +295,13 @@
                                         </div>
                                     </td>  --}}
 
-                                    <td>
+                                     <td>
                                         <div class="form-floating">
                                             <input class="form-control rounded @error('fecha') is-invalid @enderror" wire:model='Avances.{{ $index }}.fecha' placeholder="Fecha de Vencimiento" type="date" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Fecha de Vencimiento</label>
                                         </div>
                                     </td>
+
                                     <td>
                                         <button class="btn btn-sm btn-danger mt-3" wire:click.prevent='QuitarCampos({{ $index }})'>Eliminar</button>
                                     </td>
@@ -318,6 +319,58 @@
                              <div class="col-md-6 col-sm-6 d-flex justify-content-end">
                                 <button class="btn btn-sm bg-green-500 text-white" wire:click='GuardarAvance' wire:loading.attr='disabled' wire:target='GuardarAvance' class="disabled:opacity-60">Guardar</button>
                                 </div>
+                                </fieldset>
+
+                                <fieldset class="border border-2 mt-3">
+                                    <legend class="rounded w-50 d-none d-sm-block float-none bg-green-500 text-white ps-5 ms-4">Tabla de visualización por el dia actual</legend>
+                                        <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Tabla de visualización por el dia actual</legend>
+                                        <div class="ms-4">
+                                            <div class="table-responsive">
+                                           <table class="table w-100 text-center">
+                                            <tr>
+                                                <th>
+                                                    Dia
+                                                </th>
+                                                <th>
+                                                    Avance
+                                                </th>
+                                                <th>
+                                                    fecha de Vencimiento
+                                                </th>
+                                            </tr>
+                                                @foreach ($Inf->AvancesMaquila as $Avances )
+                                                <tr>
+                                                    @if (now()->format('Y-m-d') == $Avances->created_at->format('Y-m-d'))
+                                                    <th>
+                                                        {{ $Avances->Avanceactividad->dia }}
+                                                    </th>
+                                                     <td>
+                                                        {{ $Avances->Cantidad_avance }} {{ $Avances->unidades_caja }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $Avances->fecha_vencimiento }}
+                                                    </td>
+                                                </tr>
+                                                    @else
+
+                                                    @endif
+                                                </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <th colspan="2">Saldo</th>
+                                                    <td>
+                                                        @if (!is_null($total))
+                                                         {{ $total }}
+                                                        @else
+
+                                                        @endif
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                          </div>
+                                        </div>
+
                                 </fieldset>
 
                                 <fieldset class="border border-2 mt-3">
@@ -356,13 +409,13 @@
                                 <tr>
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" wire:model.defer="hora_reinicio" placeholder="Hora Reinicio" type="time" id="floatingInput">
+                                            <input class="form-control rounded @error('hora_reinicio') is-invalid @enderror" wire:model.defer="hora_reinicio"  placeholder="Hora Reinicio" type="time" id="floatingInput">
                                            <label for="floatingInput" class="text-lead-500">Hora reinicio</label>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-floating">
-                                            <input class="form-control rounded @error('codigo') is-invalid @enderror" wire:model.defer="Hora_fin" placeholder="Hora Fin" type="time" id="floatingInput">
+                                            <input class="form-control rounded @error('Hora_fin') is-invalid @enderror" wire:model.defer="Hora_fin" placeholder="Hora Fin" type="time" id="floatingInput">
                                               <label for="floatingSelect" class="text-lead-900">Hora fin</label>
                                         </div>
                                     </td>
@@ -393,7 +446,7 @@
                                         <legend class="rounded float-none d-sm-none bg-green-500 text-white fs-6 p-1">Reporte de Muestreo</legend>
                              <div class="ms-4">
                                 <div class="table-responsive">
-                                <table class="table w-100">
+                                <table class="table w-100 text-center">
                                     <div class="row">
                                     <tr>
                                         <div class="col-sm-4 col-md-4">
@@ -406,7 +459,7 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" wire:model.defer="cantidad_muestra" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad') is-invalid @enderror" wire:model.defer="cantidad_muestra" style="width: 200px" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -414,8 +467,8 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('cliente') is-invalid @enderror" wire:model.defer="empaque1" id="floatingSelect">
-                                                    <option selected>Seleccionar una opcion</option>
+                                                <select class="form-select input @error('cliente') is-invalid @enderror" wire:model.defer="empaque1" style="width: 200px" id="floatingSelect">
+                                                    <option selected>Seleccionar</option>
                                                     <option value="Caja">Caja</option>
                                                     <option value="Unidad">Unidad</option>
                                                     <option value="Display">Display</option>
@@ -436,7 +489,7 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad_aceptada') is-invalid @enderror" wire:model.defer="cantidad_aceptada" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad_aceptada') is-invalid @enderror" style="width: 200px" wire:model.defer="cantidad_aceptada" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -444,8 +497,8 @@
                                         <div class="col-sm-6 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('empaque2') is-invalid @enderror" wire:model.defer="empaque2" id="floatingSelect">
-                                                    <option selected>Seleccionar una opcion</option>
+                                                <select class="form-select input @error('empaque2') is-invalid @enderror" style="width: 200px" wire:model.defer="empaque2" id="floatingSelect">
+                                                    <option selected>Seleccionar</option>
                                                     <option value="Caja">Caja</option>
                                                     <option value="Unidad">Unidad</option>
                                                     <option value="Display">Display</option>
@@ -466,7 +519,7 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad_rechazo') is-invalid @enderror" wire:model.defer="cantidad_rechazo" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad_rechazo') is-invalid @enderror" style="width: 200px" wire:model.defer="cantidad_rechazo" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -474,7 +527,7 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('empaque3') is-invalid @enderror" wire:model.defer="empaque3" id="floatingSelect">
+                                                <select class="form-select input @error('empaque3') is-invalid @enderror" style="width: 200px" wire:model.defer="empaque3" id="floatingSelect">
                                                     <option selected>Seleccionar</option>
                                                     <option value="Caja">Caja</option>
                                                     <option value="Unidad">Unidad</option>
@@ -504,7 +557,7 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <input class="form-control rounded @error('cantidad_reprocesado') is-invalid @enderror" wire:model.defer="cantidad_reprocesado" placeholder="Cantidad" type="number" id="floatingInput">
+                                                <input class="form-control rounded @error('cantidad_reprocesado') is-invalid @enderror" style="width: 200px" wire:model.defer="cantidad_reprocesado" placeholder="Cantidad" type="number" id="floatingInput">
                                                <label for="floatingInput" class="text-lead-500">Cantidad</label>
                                             </div>
                                         </td>
@@ -512,7 +565,7 @@
                                         <div class="col-sm-12 col-md-6">
                                         <td>
                                             <div class="form-floating">
-                                                <select class="form-select input @error('empaque4') is-invalid @enderror" wire:model.defer="empaque4" id="floatingSelect">
+                                                <select class="form-select input @error('empaque4') is-invalid @enderror" style="width: 200px" wire:model.defer="empaque4" id="floatingSelect">
                                                     <option selected>Seleccionar</option>
                                                     <option value="CJ">Caja</option>
                                                     <option value="UN">Unidad</option>

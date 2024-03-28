@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('codigo');
             $table->string('cantidad');
             $table->foreignId('codigo_fconversione_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tarifario_id')->constrained();
+            // $table->foreignId('tarifario_id')->constrained();
             $table->foreignId('client_id')->constrained();
             $table->foreignId('supplier_id')->constrained();
-            $table->string('tarifa')->nullable();
+            $table->string('pvp')->nullable();
             $table->integer('ean13')->nullable();
             $table->integer('ean14')->nullable();
             $table->string('cj_un');
@@ -29,7 +29,6 @@ return new class extends Migration
             $table->integer('estado');
             $table->string('solicitud');
             $table->string('otcliente')->nullable();
-            // $table->text('observacion')->nullable();
             $table->text('sustento_cierre')->nullable();
             $table->string('imagen_sustento')->nullable();
             $table->timestamps();

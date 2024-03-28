@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('Cabecera_id')->constrained();
             $table->foreignId('produccione_id')->constrained();
             $table->integer('cantidad_confirmada');
-            $table->string('Observacion');
+            $table->string('empaque');
             $table->timestamps();
         });
     }

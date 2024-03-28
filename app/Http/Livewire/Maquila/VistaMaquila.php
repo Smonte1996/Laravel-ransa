@@ -50,6 +50,7 @@ class VistaMaquila extends Component
     public $observacion;
     public $imagenes;
     public $imagenkey;
+    public $total;
 
 
     public $Inf;
@@ -277,6 +278,20 @@ class VistaMaquila extends Component
 
     public function render()
     {
+        // dd($this->Programacion);
+        if (isset($this->Programacion)) {
+        $ValorPrevio = Avance_produccione::where('cabecera_id', $this->Inf->id)->where('programacione_id', $this->Programacion)->get();
+        foreach ($ValorPrevio as $value) {
+         $dias = $value->Avanceactividad->cantidad;
+         $valor[] = $value->Cantidad_avance;
+        }
+        // dd($valor);
+        $this->total = (array_sum($valor) - $dias);
+        // dd($this->total);
+        } else {
+            # code...
+        }
+
         return view('livewire.maquila.vista-maquila');
     }
 }

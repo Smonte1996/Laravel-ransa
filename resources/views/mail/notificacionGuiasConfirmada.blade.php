@@ -42,8 +42,8 @@
     <body>
     <p class="negro">Estimado/a,</p>
 
-    <p class="negro">Se confirma la entrega de mercadera de la operación de la orden <strong>{{ $consultar->codigo }}</strong>.</p>
-    <h3 class="negro">Guia"#"-{{ $consultar->GuiaMaquilas->n_guia }} cliente-{{ $consultar->Clientes->social_reason }} </h3>
+    <p class="negro">Se confirma la entrega de mercadera de la operación de la orden <strong>{{ $consultas->codigo }}</strong>.</p>
+    <h3 class="negro">Guia"#"-{{ $consultas->GuiaMaquilas->n_guia }} cliente-{{ $consultas->Clientes->social_reason }} </h3>
     <p class="negro">Cualquier duda, quedo atento.</p>
     <p class="tamaño_letra">Ahora puedes ingresar tus reclamos en nuestro Portal de Clientes o ingresando <a class="naranja" href="https://ransa-reclamo.com/Reclamo">Aquí</a></p>
     <p class="cuerpo negrita">Ransa Ecuador</p>
